@@ -4,7 +4,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+Make sure you are in the nix shell, then navigate to this directory and run `npm i` (you only need to do this once).
+
+You can now run the development server:
 
 ```bash
 npm run dev

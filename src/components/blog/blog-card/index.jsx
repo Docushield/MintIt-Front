@@ -35,12 +35,12 @@ const BlogCard = ({
                             {category.title}
                         </Anchor>
                     </div>
-                    <div className="meta">
+                    {/* <div className="meta">
                         <span>
                             <i className="feather-clock" /> {timeToRead} min
                             read
                         </span>
-                    </div>
+                    </div> */}
                 </div>
                 <h4 className="title">
                     <Anchor path={`${rootPage}/${slug}`}>

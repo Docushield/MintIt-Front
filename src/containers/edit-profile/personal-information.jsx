@@ -4,7 +4,7 @@ import NiceSelect from "@ui/nice-select";
 const PersonalInformation = () => (
     <div className="Doc-information">
         <div className="profile-form-wrapper">
-            <div className="input-two-wrapper mb--15">
+            {/* <div className="input-two-wrapper mb--15">
                 <div className="first-name half-wid">
                     <label htmlFor="contact-name" className="form-label">
                         First Name
@@ -29,7 +29,7 @@ const PersonalInformation = () => (
                         onChange={(e) => e}
                     />
                 </div>
-            </div>
+            </div> */}
             <div className="email-area">
                 <label htmlFor="Email" className="form-label">
                     Edit Your Email
@@ -56,7 +56,7 @@ const PersonalInformation = () => (
             </textarea>
         </div>
 
-        <div className="input-two-wrapper mt--15">
+        {/* <div className="input-two-wrapper mt--15">
             <div className="half-wid role-area">
                 <label htmlFor="Role" className="form-label mb--10">
                     Your Role
@@ -133,7 +133,7 @@ const PersonalInformation = () => (
                     onChange={(e) => e}
                 />
             </div>
-        </div>
+        </div> */}
         <div className="button-area save-btn-edit">
             <Button className="mr--15" color="primary-alta" size="medium">
                 Cancel

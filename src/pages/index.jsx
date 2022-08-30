@@ -46,12 +46,12 @@ const Home = () => {
                         products: liveAuctionData,
                     }}
                 />
-                <TopSellerArea
+                {/* <TopSellerArea
                     data={{
                         ...content["top-sller-section"],
                         sellers: sellerData,
                     }}
-                />
+                /> */}
                 <ExploreProductArea
                     data={{
                         ...content["explore-product-section"],

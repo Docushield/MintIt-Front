@@ -8,33 +8,27 @@
     "socials": [
         {
             "id": 1,
-            "icon": "feather-facebook",
-            "link": "https://facebook.com",
-            "title": "Facebook"
+            "icon": "feather-circle",
+            "link": "https://medium.com/@MINT-IT/introducing-mint-it-by-docushield-6274457db406",
+            "title": "Medium"
         },
         {
             "id": 2,
             "icon": "feather-twitter",
-            "link": "https://twitter.com",
+            "link": "https://twitter.com/MintItOnKadena",
             "title": "Twitter"
         },
         {
             "id": 3,
             "icon": "feather-instagram",
-            "link": "https://instagram.com",
+            "link": "https://instagram.com/mintitonkadena",
             "title": "Instagram"
         },
         {
             "id": 4,
-            "icon": "feather-linkedin",
-            "link": "https://linkedin.com",
+            "icon": "feather-message-square",
+            "link": "https://discord.gg/ryaGrJsne3",
             "title": "linkedin"
-        },
-        {
-            "id": 5,
-            "icon": "feather-mail",
-            "link": "https://mail.com",
-            "title": "mail"
         }
     ]
 }

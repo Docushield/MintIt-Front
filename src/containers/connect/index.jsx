@@ -20,7 +20,7 @@ const ConnectArea = ({ className, space }) => (
                     data-sal-delay="150"
                     data-sal-duration="800"
                 >
-                    <h3 className="connect-title">Connect your wallet</h3>
+                    <h3 className="connect-title">Getting Started With Mint It</h3>
                     <p className="connect-td">
                         Connect with one of available wallet providers or create
                         a new wallet.{" "}
@@ -66,7 +66,7 @@ const ConnectArea = ({ className, space }) => (
                             data-sal-duration="800"
                         >
                             <Wallet
-                                title="Bitcollet"
+                                title="Zelcore"
                                 description="I throw myself down among the tall."
                                 path="/collection"
                                 icon="feather-cast"
@@ -79,7 +79,7 @@ const ConnectArea = ({ className, space }) => (
                             data-sal-duration="800"
                         >
                             <Wallet
-                                title="GrasCash"
+                                title="X-Wallet"
                                 description="This is a great deals For cash transfer"
                                 path="/collection"
                                 icon="feather-box"
@@ -93,14 +93,14 @@ const ConnectArea = ({ className, space }) => (
                             data-sal-duration="800"
                         >
                             <Wallet
-                                title="Import"
+                                title="Chainweaver"
                                 description="Great oppertunity to reach them."
                                 path="/collection"
                                 icon="feather-award"
                                 color="pink"
                             />
                         </div>
-                        <div
+                        {/* <div
                             className="col-xxl-4 col-lg-6 col-md-4 col-12 col-sm-6 col-12"
                             data-sal="slide-up"
                             data-sal-delay="150"
@@ -141,20 +141,24 @@ const ConnectArea = ({ className, space }) => (
                                 icon="feather-cpu"
                                 color="blue"
                             />
-                        </div>
+                        </div> */}
                         <div
                             className="col-12"
                             data-sal="slide-up"
                             data-sal-delay="150"
                             data-sal-duration="800"
                         >
-                            <Wallet
+                            {/* <Wallet
                                 title="YesCash"
                                 description="Biggest Bank transfer for best oppertunity"
                                 path="/collection"
                                 icon="feather-gitlab"
                                 color="red"
-                            />
+                            /> */}
+
+                            <p className="wallet-bootm-disc">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse consequat vel diam ut eleifend. Morbi rhoncus eros tortor, id finibus velit dignissim nec. Ut tellus purus, euismod ut laoreet ac, condimentum a lorem. Ut tempus justo urna, nec molestie dui suscipit feugiat. Cras porta nulla non magna elementum blandit.
+                            </p>
                         </div>
                     </div>
                 </div>

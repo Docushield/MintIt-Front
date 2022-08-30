@@ -35,7 +35,7 @@ const AuthorIntroArea = ({ className, space, data }) => {
             >
                 <div className="container">
                     <div className="row padding-tb-50 align-items-center d-flex">
-                        <div className="col-lg-12">
+                        <div className="col-lg-3">
                             <div className="author-wrapper">
                                 <div className="author-inner">
                                     {data?.image?.src && (
@@ -118,6 +118,13 @@ const AuthorIntroArea = ({ className, space, data }) => {
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div className="col-lg-9">
+                            
+                            <div className="mb-5 col_textbox">
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse consequat vel diam ut eleifend. Morbi rhoncus eros tortor, id finibus velit dignissim nec. Ut tellus purus, euismod ut laoreet ac, condimentum a lorem. Ut tempus justo urna, nec molestie dui suscipit feugiat. Cras porta nulla non magna elementum blandit.</p>
                             </div>
                         </div>
                     </div>

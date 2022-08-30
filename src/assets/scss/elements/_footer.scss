@@ -126,7 +126,9 @@
     }
 
     .widget-bottom {
-        border-top: 1px solid var(--background-color-2);
+        // border-top: 1px solid var(--background-color-2);
+        margin-top: 0!important;
+        padding-top: 0!important;
     }
 }
 

@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "title": "Cubic Trad",
+        "title": "Collection Name",
         "slug": "/collection",
         "total_item": 27,
         "image": {
@@ -24,7 +24,7 @@
     },
     {
         "id": 2,
-        "title": "Diamond Dog",
+        "title": "Collection Name",
         "slug": "/collection",
         "total_item": 20,
         "image": {
@@ -47,7 +47,7 @@
     },
     {
         "id": 3,
-        "title": "Morgan11",
+        "title": "Collection Name",
         "slug": "/collection",
         "total_item": 15,
         "image": {
@@ -70,7 +70,7 @@
     },
     {
         "id": 4,
-        "title": "Orthogon#720",
+        "title": "Collection Name",
         "slug": "/collection",
         "total_item": 27,
         "image": {
@@ -93,7 +93,7 @@
     },
     {
         "id": 5,
-        "title": "Trad Mard",
+        "title": "Collection Name",
         "slug": "/collection",
         "total_item": 35,
         "image": {
@@ -116,7 +116,7 @@
     },
     {
         "id": 6,
-        "title": "Dog Eligator",
+        "title": "Collection Name",
         "slug": "/collection",
         "total_item": 82,
         "image": {
@@ -139,7 +139,7 @@
     },
     {
         "id": 7,
-        "title": "Dog Eligator",
+        "title": "Collection Name",
         "slug": "/collection",
         "total_item": 10,
         "image": {
@@ -162,7 +162,7 @@
     },
     {
         "id": 8,
-        "title": "Thememove",
+        "title": "Collection Name",
         "slug": "/collection",
         "total_item": 82,
         "image": {
@@ -185,7 +185,7 @@
     },
     {
         "id": 9,
-        "title": "Quarter Trad",
+        "title": "Collection Name",
         "slug": "/collection",
         "total_item": 15,
         "image": {
@@ -208,7 +208,7 @@
     },
     {
         "id": 10,
-        "title": "Cat Eligator",
+        "title": "Collection Name",
         "slug": "/collection",
         "total_item": 56,
         "image": {
@@ -231,7 +231,7 @@
     },
     {
         "id": 11,
-        "title": "Monas Nine",
+        "title": "Collection Name",
         "slug": "/collection",
         "total_item": 56,
         "image": {
@@ -254,7 +254,7 @@
     },
     {
         "id": 12,
-        "title": "Golden dog",
+        "title": "Collection Name",
         "slug": "/collection",
         "total_item": 40,
         "image": {
@@ -277,7 +277,7 @@
     },
     {
         "id": 13,
-        "title": "Golden Cat",
+        "title": "Collection Name",
         "slug": "/collection",
         "total_item": 35,
         "image": {

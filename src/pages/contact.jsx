@@ -22,7 +22,7 @@ const Contact = () => (
             />
             <ContactTopArea />
             <ContactFormArea />
-            <GoogleMapArea />
+            {/* <GoogleMapArea /> */}
         </main>
         <Footer />
     </Wrapper>

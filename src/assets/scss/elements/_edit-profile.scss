@@ -85,6 +85,7 @@
 
             .profile-left {
                 border-right: 1px dashed var(--color-border);
+                margin-bottom: 20px;
 
                 @media #{$sm-layout} {
                     border: none;

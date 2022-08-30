@@ -32,16 +32,6 @@
                 "path": "/stats"
             },
             {
-                "id": 4,
-                "text": "Categories",
-                "path": "/categories"
-            },
-            {
-                "id": 5,
-                "text": "Live Auction",
-                "path": "/live-auction"
-            },
-            {
                 "id": 6,
                 "text": "Hall of Fame",
                 "path": "/hall-of-fame"
@@ -77,11 +67,6 @@
                 "path": "/help-center"
             },
             {
-                "id": 5,
-                "text": "Dapp Status",
-                "path": "/dapp-status"
-            },
-            {
                 "id": 6,
                 "text": "Blog Articles",
                 "path": "/blog-articles"
@@ -94,7 +79,7 @@
         ]
     },
     "soldout-widget": {
-        "title": "Popular Collections",
+        "title": "Featured Collections",
         "products": [
             {
                 "id": 1,
