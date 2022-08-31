@@ -26,13 +26,13 @@ const EditProfile = () => (
                         <Sticky>
                             <nav className="left-nav rbt-sticky-top-adjust-five">
                                 <Nav className="nav nav-tabs">
-                                    <Nav.Link eventKey="nav-home" as="button">
+                                    {/* <Nav.Link eventKey="nav-home" as="button">
                                         <i className="feather-edit" />
                                         Edit Profile Image
-                                    </Nav.Link>
+                                    </Nav.Link> */}
                                     <Nav.Link eventKey="nav-homes" as="button">
                                         <i className="feather-user" />
-                                        Personal Information
+                                        Manage Profile
                                     </Nav.Link>
                                     <Nav.Link
                                         eventKey="nav-profile"
@@ -54,10 +54,11 @@ const EditProfile = () => (
                     </div>
                     <div className="col-lg-9 col-md-9 col-sm-12 mt_sm--30">
                         <TabContent className="tab-content-edit-wrapepr">
-                            <TabPane eventKey="nav-home">
+                            {/* <TabPane eventKey="nav-home">
                                 <EditProfileImage />
-                            </TabPane>
+                            </TabPane> */}
                             <TabPane eventKey="nav-homes">
+                                <EditProfileImage />
                                 <PersonalInformation />
                             </TabPane>
                             <TabPane eventKey="nav-profile">

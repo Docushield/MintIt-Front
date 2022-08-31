@@ -22,8 +22,8 @@ const About = ({ posts }) => {
             <Header />
             <main id="main-content">
                 <AboutArea data={content["about-section"]} />
-                <QuoteArea data={content["quote-section"]} />
-                <FunfactArea data={content["funfact-section"]} />
+                {/* <QuoteArea data={content["quote-section"]} /> */}
+                {/* <FunfactArea data={content["funfact-section"]} /> */}
                 <CTAArea data={content["cta-section"]} />
                 <BlogArea data={{ ...content["blog-section"], posts }} />
             </main>

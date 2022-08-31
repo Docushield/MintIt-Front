@@ -9,7 +9,7 @@
             "buttons": [
                 {
                     "id": 1,
-                    "path": "/login",
+                    "path": "/getting-started",
                     "content": "Get Started"
                 },
                 {
@@ -135,7 +135,7 @@
         {
             "section": "collection-section",
             "section_title": {
-                "title": "Top Collection"
+                "title": "Newest Collection"
             }
         }
     ]

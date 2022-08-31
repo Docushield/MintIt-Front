@@ -2,6 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import Anchor from "@ui/anchor";
+import Image from "next/image";
 
 const Breadcrumb = ({
     pageTitle,
@@ -47,15 +48,6 @@ const Breadcrumb = ({
                             >
                                 {pageTitle1}
                             </h5>
-                        </div>
-                    ) : (
-                        <div className="col-lg-6 col-md-6 col-12">
-                            <h5 className="pageTitle text-center text-md-start">
-                                {pageTitle}
-                            </h5>
-                        </div>
-                    )}
-                    <div className="col-lg-6 col-md-6 col-12">
                         <ul className="breadcrumb-list">
                             <li className="item">
                                 <Anchor path="/">Home</Anchor>
@@ -67,6 +59,18 @@ const Breadcrumb = ({
                                 {currentPage || pageTitle}
                             </li>
                         </ul>
+                        </div>
+                    ) : (
+                        <div className="col-lg-6 col-md-6 col-12">
+                            <h5 className="pageTitle text-center text-md-start">
+                                {pageTitle}
+                            </h5>
+                        </div>
+                    )}
+                    <div className="col-lg-6 col-md-6 col-12">
+                        <div className="col_banner">
+                            <p>Banner Required</p>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -36,7 +36,7 @@ const ContactFormArea = ({ space, className }) => (
                     data-sal-delay="200"
                     data-sal-duration="800"
                 >
-                    <ContactForm />
+                    {/* <ContactForm /> */}
                 </div>
             </div>
         </div>

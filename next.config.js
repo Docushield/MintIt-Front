@@ -1,6 +1,11 @@
 const path = require("path");
 
 module.exports = {
+ 
+    //reactStrictMode: true,
+    eslint: {
+      ignoreDuringBuilds: true,
+    },
     reactStrictMode: true,
     sassOptions: {
         includePaths: [path.join(__dirname, "./src/assets/scss")],

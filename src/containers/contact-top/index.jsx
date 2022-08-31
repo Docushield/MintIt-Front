@@ -10,7 +10,7 @@ const ContactTopArea = ({ space, className }) => (
             className
         )}
     >
-        <div className="container">
+        {/* <div className="container">
             <div className="row g-5">
                 <div
                     className="col-lg-12"
@@ -66,7 +66,7 @@ const ContactTopArea = ({ space, className }) => (
                     />
                 </div>
             </div>
-        </div>
+        </div> */}
     </div>
 );
 
