@@ -49,7 +49,7 @@ const Product = ({
                             />
                         </Anchor>
                     )}
-                    {auction_date && <CountdownTimer date={auction_date} />}
+                    {/* {auction_date && <CountdownTimer date={auction_date} />} */}
                     {placeBid && (
                         <Button onClick={handleBidModal} size="small">
                             Place Bid
@@ -57,7 +57,7 @@ const Product = ({
                     )}
                 </div>
                 <div className="product-share-wrapper">
-                    <div className="profile-share">
+                    {/* <div className="profile-share">
                         {authors?.map((client) => (
                             <ClientAvatar
                                 key={client.name}
@@ -72,13 +72,16 @@ const Product = ({
                         >
                             {bitCount}+ Place Bit.
                         </Anchor>
-                    </div>
+                    </div> */}
+                    <span className="product-name">{title}</span>
                     {!disableShareDropdown && <ShareDropdown />}
                 </div>
                 <Anchor path={`/product/${slug}`}>
                     <span className="product-name">{title}</span>
                 </Anchor>
-                <span className="latest-bid">Highest bid {latestBid}</span>
+                {/* <span className="latest-bid">Highest bid {latestBid}</span> */}
+
+                <span className="product-name">{title}</span>
                 <ProductBid price={price} likeCount={likeCount} />
             </div>
             <PlaceBidModal show={showBidModal} handleModal={handleBidModal} />

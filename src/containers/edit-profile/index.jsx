@@ -56,7 +56,7 @@ const EditProfile = () => (
                         <TabContent className="tab-content-edit-wrapepr">
                             {/* <TabPane eventKey="nav-home">
                                 <EditProfileImage />
-                            </TabPane> */}
+                            </TabPane>  */}
                             <TabPane eventKey="nav-homes">
                                 <EditProfileImage />
                                 <PersonalInformation />
