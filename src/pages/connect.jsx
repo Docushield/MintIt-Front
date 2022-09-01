@@ -15,8 +15,8 @@ const Connect = () => (
         <Header />
         <main id="main-content">
             <Breadcrumb
-                pageTitle="Make your payment easier"
-                currentPage="Make your payment easier"
+                pageTitle="Getting Started"
+                currentPage="Getting Started"
             />
             <ConnectArea />
         </main>

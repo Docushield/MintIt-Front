@@ -59,6 +59,7 @@ const Footer = ({ space, className, data }) => (
                             <NewsletterWidget
                                 data={footerData["newsletter-widget"]}
                             />
+                            <div class="f-banner"><p>Banner Required</p></div>
                         </div>
                     </div>
 

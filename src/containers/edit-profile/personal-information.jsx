@@ -12,7 +12,7 @@ const PersonalInformation = () => (
                     name="email"
                     id="Email"
                     type="email"
-                    value="example@gmail.com"
+                    placeholder="example@gmail.com"
                     onChange={(e) => e}
                 />
             </div>
@@ -23,10 +23,9 @@ const PersonalInformation = () => (
             </label>
             <textarea
                 id="Discription"
-                value="Hello, I am Alamin, A Front-end Developer..."
+                placeholder="Hello, I am Alamin, A Front-end Developer..."
                 onChange={(e) => e}
             >
-                Hello, I am Alamin, A Front-end Developer...
             </textarea>
         </div>
             <div className="input-two-wrapper mb--15">
@@ -38,7 +37,7 @@ const PersonalInformation = () => (
                         name="contact-name"
                         id="contact-name"
                         type="text"
-                        value="https://facebook.com"
+                        placeholder="https://facebook.com"
                         onChange={(e) => e}
                     />
                 </div>
@@ -50,7 +49,7 @@ const PersonalInformation = () => (
                         name="contact-name"
                         id="contact-name-last"
                         type="text"
-                        value="https://twitter.com"
+                        placeholder="https://twitter.com"
                         onChange={(e) => e}
                     />
                 </div>
@@ -62,7 +61,7 @@ const PersonalInformation = () => (
                         name="contact-name"
                         id="contact-name-last"
                         type="text"
-                        value="https://instagram.com"
+                        placeholder="https://instagram.com"
                         onChange={(e) => e}
                     />
                 </div>

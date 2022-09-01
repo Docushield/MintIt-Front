@@ -11,10 +11,10 @@ export async function getStaticProps() {
 
 const EditProfile = () => (
     <Wrapper>
-        <SEO pageTitle="Edit Profile" />
+        <SEO pageTitle="Manage Profile" />
         <Header />
         <main id="main-content">
-            <Breadcrumb pageTitle="Edit Profile" currentPage="Edit Profile" />
+            <Breadcrumb pageTitle="Manage Profile" currentPage="Manage Profile" />
             <EditProfileArea />
         </main>
         <Footer />

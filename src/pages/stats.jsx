@@ -29,7 +29,7 @@ const Product = () => {
             <Header />
             <main id="main-content">
                 <Breadcrumb
-                    pageTitle="Rankings"
+                    pageTitle="Stats"
                     pageTitle1="Activity"
                     currentPage="Stats"
                     onPageChageHandler={onPageChageHandler}

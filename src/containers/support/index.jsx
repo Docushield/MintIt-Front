@@ -64,7 +64,7 @@ const SupportArea = ({ className, space }) => (
                         <Button path="/create" className="mr--15">
                             Create
                         </Button>
-                        <Button href="/contact" color="primary-alta">
+                        <Button path="/contact" className="btn-primary-alta">
                             Contact Us
                         </Button>
                     </div>

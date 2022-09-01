@@ -8,14 +8,14 @@ import Product from "@components/product/layout-01";
 import { ProductType } from "@utils/types";
 import { shuffleArray } from "@utils/methods";
 
-const DublicateCollectionArea = ({ className, data }) => {
+const AuthorProfileArea = ({ className, data }) => {
     const onSaleProducts = shuffleArray(data.products).slice(0, 10);
     const ownedProducts = shuffleArray(data.products).slice(0, 10);
     const createdProducts = shuffleArray(data.products).slice(0, 10);
     const likedProducts = shuffleArray(data.products).slice(0, 10);
 
     return (
-        <div className={clsx("rn-dublicate-collection-area", className)}>
+        <div className={clsx("rn-authore-profile-area", className)}>
             <TabContainer defaultActiveKey="nav-profile">
                 <div className="container">
                     <div className="row">
@@ -162,10 +162,10 @@ const DublicateCollectionArea = ({ className, data }) => {
     );
 };
 
-DublicateCollectionArea.propTypes = {
+AuthorProfileArea.propTypes = {
     className: PropTypes.string,
     data: PropTypes.shape({
         products: PropTypes.arrayOf(ProductType),
     }),
 };
-export default DublicateCollectionArea;
+export default AuthorProfileArea;

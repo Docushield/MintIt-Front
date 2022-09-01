@@ -82,7 +82,7 @@ const ContactForm = () => {
                         <ErrorText>{errors.contactEmail?.message}</ErrorText>
                     )}
                 </div>
-                <div className="mb-5">
+                {/* <div className="mb-5">
                     <label htmlFor="subject" className="form-label">
                         Subject
                     </label>
@@ -96,7 +96,7 @@ const ContactForm = () => {
                     {errors.subject && (
                         <ErrorText>{errors.subject?.message}</ErrorText>
                     )}
-                </div>
+                </div> */}
                 <div className="mb-5">
                     <label htmlFor="contact-message" className="form-label">
                         Write Message
