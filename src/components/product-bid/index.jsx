@@ -7,7 +7,7 @@ const ProductBid = ({ price, likeCount }) => (
             {price.currency}
         </div>
         <div className="react-area">
-            <svg
+            {/* <svg
                 viewBox="0 0 17 16"
                 fill="none"
                 width="16"
@@ -20,7 +20,7 @@ const ProductBid = ({ price, likeCount }) => (
                     strokeWidth="2"
                 />
             </svg>
-            <span className="number">{likeCount}</span>
+            <span className="number">{likeCount}</span> */}
         </div>
     </div>
 );

@@ -125,3 +125,20 @@
 @import "elements/video";
 @import "elements/subscribe";
 @import "elements/white-version";
+
+.viewbtn {
+    float: right;
+    margin-top: -30px;
+    background-color: #FF0000;
+    padding: 5px 15px;
+    border-radius: 4px;
+    font-weight: 600;
+    border: 1px solid #FF0000;
+}
+.viewbtn:hover{
+    background-color: transparent;
+    border: 1px solid var(--color-primary);
+}
+.react-area {
+    display: none!important;
+}

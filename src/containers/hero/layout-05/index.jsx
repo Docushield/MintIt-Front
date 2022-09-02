@@ -63,7 +63,7 @@ const HeroArea = ({ data }) => (
                                     slug={prod.slug}
                                     latestBid={prod.latestBid}
                                     price={prod.price}
-                                    likeCount={prod.likeCount}
+                                    // likeCount={prod.likeCount}
                                     auction_date={prod.auction_date}
                                     image={prod.images?.[0]}
                                     authors={prod.authors}

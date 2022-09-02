@@ -82,7 +82,9 @@ const Product = ({
                 {/* <span className="latest-bid">Highest bid {latestBid}</span> */}
 
                 <span className="product-name">{title}</span>
-                <ProductBid price={price} likeCount={likeCount} />
+                <ProductBid price={price} />
+                <a href="" className="viewbtn">View</a>
+                {/* likeCount={likeCount} */}
             </div>
             <PlaceBidModal show={showBidModal} handleModal={handleBidModal} />
         </>
