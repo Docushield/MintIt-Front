@@ -9,19 +9,29 @@ export async function getStaticProps() {
     return { props: { className: "template-color-1" } };
 }
 
-const PrivacyPolicy = () => (
+const PrivacyPolicy = () => {
+    const [pageNumber, setPageNumber] = useState(1);
+
+    const onPageChageHandler = (page) => {
+        console.log("Contact page: ", page);
+        setPageNumber(page);
+    };
+
+    return (
     <Wrapper>
         <SEO pageTitle="Privacy Policy" />
         <Header />
         <main id="main-content">
             <Breadcrumb
                 pageTitle="Follow Privacy Policy"
-                currentPage="Follow Privacy Policy"
+                pageTitle1="Follow Privacy Policy"
+                currentPage="Contact"
+                onPageChageHandler={onPageChageHandler}
             />
             <PrivacyPolicyArea />
         </main>
         <Footer />
     </Wrapper>
 );
-
+}
 export default PrivacyPolicy;

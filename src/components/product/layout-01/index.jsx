@@ -83,7 +83,7 @@ const Product = ({
 
                 <span className="product-name">{title}</span>
                 <ProductBid price={price} />
-                <a href="" className="viewbtn">View</a>
+                <a href="" className="viewbtn connectBtn btn btn-small btn-primary-alta">View</a>
                 {/* likeCount={likeCount} */}
             </div>
             <PlaceBidModal show={showBidModal} handleModal={handleBidModal} />

@@ -4,37 +4,36 @@ import Wrapper from "@layout/wrapper";
 import Header from "@layout/header/header-01";
 import Footer from "@layout/footer/footer-01";
 import Breadcrumb from "@components/breadcrumb";
-import ServiceArea from "@containers/services/layout-01";
-import SupportArea from "@containers/support";
+import AddManagerArea from "@containers/add-manager";
 
 export async function getStaticProps() {
     return { props: { className: "template-color-1" } };
 }
 
-const HelpCenter = () => {
+const AddManager = () => {
     const [pageNumber, setPageNumber] = useState(1);
 
     const onPageChageHandler = (page) => {
-        console.log("Help Center page: ", page);
+        console.log("Add Manager page: ", page);
         setPageNumber(page);
     };
 
     return (
     <Wrapper>
-        <SEO pageTitle="Help Center" />
+        <SEO pageTitle="Add Manager" />
         <Header />
         <main id="main-content">
             <Breadcrumb
-                pageTitle="Help Center"
+                pageTitle="Ad Manage"
                 pageTitle1="Activity"
-                currentPage="Help Center"
+                currentPage="Ad Manage"
                 onPageChageHandler={onPageChageHandler}
             />
-            <ServiceArea />
-            <SupportArea />
+            <AddManagerArea />
         </main>
         <Footer />
     </Wrapper>
 );
-}
-export default HelpCenter;
+};
+
+export default AddManager;

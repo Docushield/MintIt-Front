@@ -1,3 +1,4 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
 import SEO from "@components/seo";
 import Wrapper from "@layout/wrapper";
@@ -9,17 +10,32 @@ import { getAllPosts } from "../../lib/api";
 
 const POSTS_PER_PAGE = 8;
 
-const BlogArticles = ({ posts, pagiData }) => (
+    
+const BlogArticles = ({ posts, pagiData }) => {
+    const [pageNumber, setPageNumber] = useState(1);
+
+    const onPageChageHandler = (page) => {
+        console.log("Mint page: ", page);
+        setPageNumber(page);
+    };
+
+    return (
     <Wrapper>
         <SEO pageTitle="Blog Articles" />
         <Header />
         <main id="main-content">
-            <Breadcrumb pageTitle="Blog Articles" currentPage="Blog Articles" />
+            <Breadcrumb
+                pageTitle="Blog Articles"
+                pageTitle1="Activity"
+                currentPage="Blog Articles"
+                onPageChageHandler={onPageChageHandler}
+            />
             <BlogArea data={{ posts, pagiData }} rootPage="/blog-articles" />
         </main>
         <Footer />
     </Wrapper>
 );
+    }
 export async function getStaticProps() {
     const posts = getAllPosts([
         "title",

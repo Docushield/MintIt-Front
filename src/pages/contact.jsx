@@ -1,3 +1,4 @@
+import { useState } from "react";
 import SEO from "@components/seo";
 import Wrapper from "@layout/wrapper";
 import Header from "@layout/header/header-01";
@@ -11,14 +12,24 @@ export async function getStaticProps() {
     return { props: { className: "template-color-1" } };
 }
 
-const Contact = () => (
+const Contact = () => {
+    const [pageNumber, setPageNumber] = useState(1);
+
+    const onPageChageHandler = (page) => {
+        console.log("Contact page: ", page);
+        setPageNumber(page);
+    };
+
+    return (
     <Wrapper>
         <SEO pageTitle="Contact" />
         <Header />
         <main id="main-content">
             <Breadcrumb
-                pageTitle="Contact With Us"
-                currentPage="Contact With Us"
+                pageTitle="Contact"
+                pageTitle1="Activity"
+                currentPage="Contact"
+                onPageChageHandler={onPageChageHandler}
             />
             <ContactTopArea />
             <ContactFormArea />
@@ -27,5 +38,5 @@ const Contact = () => (
         <Footer />
     </Wrapper>
 );
-
+}
 export default Contact;

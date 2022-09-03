@@ -1,3 +1,4 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
 import SEO from "@components/seo";
 import Wrapper from "@layout/wrapper";
@@ -10,17 +11,33 @@ import CTAArea from "@containers/cta";
 import BlogArea from "@containers/blog/layout-01";
 import { normalizedData } from "@utils/methods";
 import { getAllPosts } from "../lib/api";
+import Breadcrumb from "@components/breadcrumb";
 
 // Demo data
 import aboutData from "../data/innerpages/about.json";
 
 const About = ({ posts }) => {
     const content = normalizedData(aboutData?.content || []);
+    
+    
+    const [pageNumber, setPageNumber] = useState(1);
+
+    const onPageChageHandler = (page) => {
+        console.log("Mint page: ", page);
+        setPageNumber(page);
+    };
+
     return (
         <Wrapper>
             <SEO pageTitle="About" />
             <Header />
             <main id="main-content">
+                <Breadcrumb
+                    pageTitle="About"
+                    pageTitle1="Activity"
+                    currentPage="About"
+                    onPageChageHandler={onPageChageHandler}
+                />
                 <AboutArea data={content["about-section"]} />
                 {/* <QuoteArea data={content["quote-section"]} /> */}
                 {/* <FunfactArea data={content["funfact-section"]} /> */}
@@ -53,5 +70,4 @@ export async function getStaticProps() {
 About.propTypes = {
     posts: PropTypes.arrayOf(PropTypes.shape({})),
 };
-
 export default About;
