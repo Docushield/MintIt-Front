@@ -28,10 +28,10 @@ const Header = ({ className }) => {
     };
 
     // TODO: Set in environment
-    const apiUrl = "http://localhost:3000/api/";
+    // const apiUrl = "http://localhost:4000/api/";
 
     const apiPost = async (route, payload) =>
-        fetch(apiUrl + route, {
+        fetch(`http://localhost:4000/api/${route}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -134,10 +134,12 @@ const Header = ({ className }) => {
 
     const apiLogin = async (loginSignature) => {
         const { cmd, sigs } = loginSignature;
+        const account = localStorage.getItem("userAccount");
 
         return apiPost("auth", {
-            cmd,
-            sigs,
+            account,
+            command: cmd,
+            signature: sigs[0].sig,
         });
     };
 
@@ -148,9 +150,10 @@ const Header = ({ className }) => {
 
         const loginSignature = await getLoginSignature();
 
-        const loginResponse = await apiLogin(loginSignature);
+        const { token } = await apiLogin(loginSignature);
 
-        return loginResponse;
+        // TODO: Save token and use it in auth
+        return token;
     };
 
     return (
