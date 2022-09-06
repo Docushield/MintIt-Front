@@ -9,6 +9,7 @@ import ExploreProductArea from "@containers/explore-product/layout-03";
 import ServiceArea from "@containers/services/layout-01";
 import CollectionArea from "@containers/collection/layout-01";
 import { normalizedData } from "@utils/methods";
+import { SSRProvider } from 'react-bootstrap';
 
 // Demo data
 import homepageData from "../data/homepages/homepage.json";
@@ -35,6 +36,7 @@ const Home = () => {
         .slice(0, 2);
 
     return (
+        <SSRProvider>
         <Wrapper>
             <SEO pageTitle="Home five" />
             <Header />
@@ -68,6 +70,7 @@ const Home = () => {
             </main>
             <Footer />
         </Wrapper>
+        </SSRProvider>
     );
 };
 
