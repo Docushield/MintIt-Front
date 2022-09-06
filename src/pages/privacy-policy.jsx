@@ -1,3 +1,4 @@
+import { useState } from "react";
 import SEO from "@components/seo";
 import Wrapper from "@layout/wrapper";
 import Header from "@layout/header/header-01";
@@ -13,7 +14,7 @@ const PrivacyPolicy = () => {
     const [pageNumber, setPageNumber] = useState(1);
 
     const onPageChageHandler = (page) => {
-        console.log("Contact page: ", page);
+        console.log("Privacy Policy page: ", page);
         setPageNumber(page);
     };
 
@@ -24,8 +25,8 @@ const PrivacyPolicy = () => {
         <main id="main-content">
             <Breadcrumb
                 pageTitle="Follow Privacy Policy"
-                pageTitle1="Follow Privacy Policy"
-                currentPage="Contact"
+                pageTitle1="Activity"
+                currentPage="Follow Privacy Policy"
                 onPageChageHandler={onPageChageHandler}
             />
             <PrivacyPolicyArea />
