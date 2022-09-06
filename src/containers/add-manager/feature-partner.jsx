@@ -18,6 +18,7 @@ const FeaturePartner = () => {
     };
 
     return (
+        
         <div className="Doc-information">
             <div className="profile-change row g-5">
                 {/* <div className="profile-left col-lg-4">
@@ -59,12 +60,12 @@ const FeaturePartner = () => {
                     </div>
                 </div> */}
 
-                <div className="profile-left col-lg-12">
-                    <div className="profile-image mb--30">
+                <div className="profile-left right col-lg-12">
+                    <div className="profile-image mb--15">
                         <h6 className="title">Change Your Cover Photo</h6>
                         <div className="img-wrap ">
                             <div className="admangrimg">
-                                <p>75 X 75</p>
+                                <p>1920 X 1080</p>
                             </div>
                         </div>
                     </div>
@@ -83,15 +84,12 @@ const FeaturePartner = () => {
                             </label>
                         </div>
                     </div>
-                    <div className="first-name half-wid admngr">
-                        <label htmlFor="contact-name" className="form-label">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </label>
-                        <label htmlFor="contact-name" className="form-label">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </label>
+                    <div className="edit-bio-area mb--15">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     </div>
-                    
+                    <div className="edit-bio-area mb--15">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
                 </div>
             </div>
         </div>
