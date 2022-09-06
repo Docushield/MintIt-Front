@@ -18,6 +18,7 @@ const FooterBanner = () => {
     };
 
     return (
+        
         <div className="Doc-information">
             <div className="profile-change row g-5">
                 {/* <div className="profile-left col-lg-4">
@@ -59,16 +60,16 @@ const FooterBanner = () => {
                     </div>
                 </div> */}
 
-                <div className="profile-left col-lg-12">
-                    <div className="profile-image mb--30">
+                <div className="profile-left right col-lg-12">
+                    <div className="profile-image mb--15">
                         <h6 className="title">Change Your Cover Photo</h6>
                         <div className="img-wrap ">
                             <div className="admangrimg">
-                                <p>1300 X 445</p>
+                                <p>325 X 80</p>
                             </div>
                         </div>
                     </div>
-                    <div className="button-area">
+                    <div className="button-area mb--15">
                         <div className="brows-file-wrapper">
                             <input
                                 name="cover"
@@ -83,16 +84,14 @@ const FooterBanner = () => {
                             </label>
                         </div>
                     </div>
-                    <div className="first-name half-wid admngr">
-                        <input
-                            name="contact-name"
-                            id="contact-name"
-                            type="text"
-                            placeholder="https://facebook.com"
-                            onChange={(e) => e}
-                        />
+                    <div className="edit-bio-area mb--15">
+                        <a href="#" className="right">Destination Link</a>
                     </div>
-                    
+                    <div className="input-two-wrapper mb--15">
+                        <div className="last-name onequator-wid">
+                            <Button size="medium">Save</Button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

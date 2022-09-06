@@ -189,6 +189,21 @@
                         width: 100%;
                     }
                 }
+
+                .threequator-wid {
+                    width: 75%;
+
+                    @media #{$sm-layout} {
+                        width: 100%;
+                    }
+                }
+                .onequator-wid {
+                    width: 25%;
+
+                    @media #{$sm-layout} {
+                        width: 100%;
+                    }
+                }
             }
 
             input {
@@ -324,7 +339,7 @@
 
 .input-two-wrapper {
     display: flex;
-    align-items: flex-end;
+    align-items: normal;
     justify-content: space-between;
     gap: 30px;
 
@@ -444,7 +459,7 @@
         margin-bottom: 15px;
     }
     label {
-        margin: 0;
+        margin: 10px;
 
         &::before {
             display: none;

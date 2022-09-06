@@ -59,8 +59,8 @@ const FrontPage = () => {
                     </div>
                 </div> */}
 
-                <div className="profile-left col-lg-12">
-                    <div className="profile-image mb--30">
+                <div className="profile-left right col-lg-12">
+                    <div className="profile-image mb--15">
                         <h6 className="title">Change Your Cover Photo</h6>
                         <div className="img-wrap ">
                             <div className="admangrimg">
@@ -83,25 +83,23 @@ const FrontPage = () => {
                             </label>
                         </div>
                     </div>
-                    <div className="first-name half-wid admngr">
-                        <label htmlFor="contact-name" className="form-label">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </label>
-                        <label htmlFor="contact-name" className="form-label">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </label>
-                        <input
-                            name="contact-name"
-                            id="contact-name"
-                            type="text"
-                            placeholder="https://facebook.com"
-                            onChange={(e) => e}
-                        />
+                    <div className="edit-bio-area mt--15">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     </div>
-                    <div className="button-area save-btn-edit">
-                        <Button size="medium">Save</Button>
+                    <div className="edit-bio-area mt--15">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     </div>
-                    
+                    <div className="edit-bio-area mt--15">
+                        <a href="#" className="right">Destination Link</a>
+                    </div>
+                    <div className="input-two-wrapper mb--15">
+                        <div className="first-name threequator-wid">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                        <div className="last-name onequator-wid">
+                            <Button size="medium">Save</Button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
