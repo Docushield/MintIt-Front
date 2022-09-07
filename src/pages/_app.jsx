@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 import { MoralisProvider } from "react-moralis";
+import { SSRProvider } from "react-bootstrap";
 import sal from "sal.js";
 import { ThemeProvider } from "next-themes";
 import "../assets/css/bootstrap.min.css";
@@ -26,11 +27,13 @@ const MyApp = ({ Component, pageProps }) => {
         document.body.className = `${pageProps.className}`;
     });
     return (
-        <MoralisProvider appId={moralisAppId} serverUrl={moralisServerURL}>
-            <ThemeProvider defaultTheme="dark">
-                <Component {...pageProps} />
-            </ThemeProvider>
-        </MoralisProvider>
+        <SSRProvider>
+            <MoralisProvider appId={moralisAppId} serverUrl={moralisServerURL}>
+                <ThemeProvider defaultTheme="dark">
+                    <Component {...pageProps} />
+                </ThemeProvider>
+            </MoralisProvider>
+        </SSRProvider>
     );
 };
 
