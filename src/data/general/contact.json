@@ -28,7 +28,13 @@
             "id": 4,
             "icon": "feather-message-square",
             "link": "https://discord.gg/ryaGrJsne3",
-            "title": "linkedin"
+            "title": "Discord"
+        },
+        {
+            "id": 5,
+            "icon": "feather-message-circle",
+            "link": "https://t.me/MINTITKDA",
+            "title": "Telegram"
         }
     ]
 }
