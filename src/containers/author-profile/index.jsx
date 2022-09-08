@@ -11,12 +11,12 @@ import { shuffleArray } from "@utils/methods";
 const DublicateCollectionArea = ({ className, data }) => {
     const onSaleProducts = shuffleArray(data.products).slice(0, 10);
     const ownedProducts = shuffleArray(data.products).slice(0, 10);
-    const createdProducts = shuffleArray(data.products).slice(0, 10);
+    const myCollectionProducts = shuffleArray(data.products).slice(0, 10);
     const likedProducts = shuffleArray(data.products).slice(0, 10);
 
     return (
         <div className={clsx("rn-dublicate-collection-area", className)}>
-            <TabContainer defaultActiveKey="nav-profile">
+            <TabContainer defaultActiveKey="nav-contact">
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
@@ -35,15 +35,15 @@ const DublicateCollectionArea = ({ className, data }) => {
                                         </Nav.Link> */}
                                         <Nav.Link
                                             as="button"
-                                            eventKey="nav-profile"
-                                        >
-                                            Owned
-                                        </Nav.Link>
-                                        <Nav.Link
-                                            as="button"
                                             eventKey="nav-contact"
                                         >
                                             My Collections
+                                        </Nav.Link>
+                                        <Nav.Link
+                                            as="button"
+                                            eventKey="nav-profile"
+                                        >
+                                            Owned
                                         </Nav.Link>
                                         {/* <Nav.Link
                                             as="button"
@@ -82,6 +82,31 @@ const DublicateCollectionArea = ({ className, data }) => {
                         </TabPane> */}
                         <TabPane
                             className="row g-5 d-flex"
+                            eventKey="nav-contact"
+                        >
+                            {myCollectionProducts?.map((prod) => (
+                                <div
+                                    key={prod.id}
+                                    className="col-5 col-lg-4 col-md-6 col-sm-6 col-12"
+                                >
+                                    <Product
+                                        overlay
+                                        placeBid
+                                        title={prod.title}
+                                        slug={prod.slug}
+                                        latestBid={prod.latestBid}
+                                        price={prod.price}
+                                        likeCount={prod.likeCount}
+                                        auction_date={prod.auction_date}
+                                        image={prod.images?.[0]}
+                                        authors={prod.authors}
+                                        bitCount={prod.bitCount}
+                                    />
+                                </div>
+                            ))}
+                        </TabPane>
+                        <TabPane
+                            className="row g-5 d-flex"
                             eventKey="nav-profile"
                         >
                             {ownedProducts?.map((prod) => (
@@ -109,7 +134,7 @@ const DublicateCollectionArea = ({ className, data }) => {
                             className="row g-5 d-flex"
                             eventKey="nav-contact"
                         >
-                            {createdProducts?.map((prod) => (
+                            {myCollectionProducts?.map((prod) => (
                                 <div
                                     key={prod.id}
                                     className="col-5 col-lg-4 col-md-6 col-sm-6 col-12"

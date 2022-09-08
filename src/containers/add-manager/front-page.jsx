@@ -59,7 +59,7 @@ const FrontPage = () => {
                     </div>
                 </div> */}
 
-                <div className="profile-left right col-lg-12">
+                <div className="profile-left right admngr_form col-lg-12">
                     <div className="profile-image mb--15">
                         <h6 className="title">Change Your Cover Photo</h6>
                         <div className="img-wrap ">
@@ -83,22 +83,45 @@ const FrontPage = () => {
                             </label>
                         </div>
                     </div>
-                    <div className="edit-bio-area mt--15">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <div className="email-area mt--15">
+                        <input
+                            name="Lorem ipsum..."
+                            id=""
+                            type="Lorem ipsum..."
+                            placeholder="Lorem ipsum..."
+                            onChange={(e) => e}
+                        />
                     </div>
-                    <div className="edit-bio-area mt--15">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <div className="email-area">
+                        <input
+                            name="Lorem ipsum..."
+                            id="Email"
+                            type="Lorem ipsum..."
+                            placeholder="Lorem ipsum..."
+                            onChange={(e) => e}
+                        />
                     </div>
-                    <div className="edit-bio-area mt--15">
-                        <a href="#" className="right">Destination Link</a>
+                    <div className="edit-bio-area">
+                        <a href="#" className="right-link">Destination Link</a>
+                        <input
+                            name="Lorem ipsum..."
+                            id=""
+                            type="Lorem ipsum..."
+                            placeholder="Lorem ipsum..."
+                            onChange={(e) => e}
+                        />
                     </div>
-                    <div className="input-two-wrapper mb--15">
-                        <div className="first-name threequator-wid">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        </div>
-                        <div className="last-name onequator-wid">
-                            <Button size="medium">Save</Button>
-                        </div>
+                    <div className="email-area">
+                        <input
+                            name="Lorem ipsum..."
+                            id=""
+                            type="Lorem ipsum..."
+                            placeholder="Lorem ipsum..."
+                            onChange={(e) => e}
+                        />
+                    </div>
+                    <div className="last-name onequator-wid">
+                        <Button size="medium">Save</Button>
                     </div>
                 </div>
             </div>

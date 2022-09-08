@@ -60,7 +60,7 @@ const FeaturePartner = () => {
                     </div>
                 </div> */}
 
-                <div className="profile-left right col-lg-12">
+                <div className="profile-left right admngr_form col-lg-12">
                     <div className="profile-image mb--15">
                         <h6 className="title">Change Your Cover Photo</h6>
                         <div className="img-wrap ">
@@ -84,11 +84,23 @@ const FeaturePartner = () => {
                             </label>
                         </div>
                     </div>
-                    <div className="edit-bio-area mb--15">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <div className="email-area">
+                        <input
+                            name="Lorem ipsum..."
+                            id="Email"
+                            type="Lorem ipsum..."
+                            placeholder="Lorem ipsum..."
+                            onChange={(e) => e}
+                        />
                     </div>
-                    <div className="edit-bio-area mb--15">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <div className="email-area">
+                        <input
+                            name="Lorem ipsum..."
+                            id="Email"
+                            type="Lorem ipsum..."
+                            placeholder="Lorem ipsum..."
+                            onChange={(e) => e}
+                        />
                     </div>
                 </div>
             </div>

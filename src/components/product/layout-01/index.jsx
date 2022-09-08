@@ -50,11 +50,11 @@ const Product = ({
                         </Anchor>
                     )}
                     {/* {auction_date && <CountdownTimer date={auction_date} />} */}
-                    {placeBid && (
+                    {/* {placeBid && (
                         <Button onClick={handleBidModal} size="small">
                             Place Bid
                         </Button>
-                    )}
+                    )} */}
                 </div>
                 <div className="product-share-wrapper">
                     {/* <div className="profile-share">

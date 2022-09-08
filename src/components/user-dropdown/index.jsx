@@ -84,7 +84,10 @@ const UserDropdown = () => {
                         <Anchor path="/manage-profile">Manage Profile</Anchor>
                     </li>
                     <li>
-                        <Anchor path="/connect">Manage Collections</Anchor>
+                        <Anchor path="/mycollection">Manage Collections</Anchor>
+                    </li>
+                    <li>
+                        <Anchor path="/admanager">Ad Manager</Anchor>
                     </li>
                     <li>
                         <button type="button" onClick={logout}>

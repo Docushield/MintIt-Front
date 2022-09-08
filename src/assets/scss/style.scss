@@ -151,7 +151,12 @@
 .react-area {
     display: none!important;
 }
-.right{
+.right-link{
     display: block;
+    color: var(--color-primary);
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
+.admngr_form input{
     margin-bottom: 20px;
 }

@@ -85,7 +85,7 @@ const TitleBanner = () => {
                         </div>
                     </div>
                     <div className="edit-bio-area  mb--15">
-                        <a href="#" className="right">Destination Link</a>
+                        <a href="#" className="right-link">Destination Link</a>
                     </div>
                     <div className="input-two-wrapper mb--15">
                         <div className="last-name onequator-wid">
