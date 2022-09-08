@@ -35,21 +35,21 @@ const ProductModal = ({ show, handleModal, data }) => (
                 authors={[
                     {
                         name: "Mark Jordan",
-                        slug: "/author",
+                        slug: "/myprofile",
                         image: {
                             src: "/images/client/client-2.png",
                         },
                     },
                     {
                         name: "Farik Shaikh",
-                        slug: "/author",
+                        slug: "/myprofile",
                         image: {
                             src: "/images/client/client-3.png",
                         },
                     },
                     {
                         name: "John Doe",
-                        slug: "/author",
+                        slug: "/myprofile",
                         image: {
                             src: "/images/client/client-5.png",
                         },

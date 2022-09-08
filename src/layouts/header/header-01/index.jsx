@@ -62,7 +62,7 @@ const Header = ({ className }) => {
                                 <div className="setting-option header-btn">
                                     <div className="icon-box">
                                         <Button
-                                            color="primary-alta"
+                                            color="primary-outline"
                                             className="connectBtn"
                                             size="small"
                                             onClick={() => authenticate()}

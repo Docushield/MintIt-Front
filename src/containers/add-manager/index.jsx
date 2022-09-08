@@ -21,7 +21,13 @@ const AddManager = () => (
             <div className="row plr--70 padding-control-edit-wrapper pl_md--0 pr_md--0 pl_sm--0 pr_sm--0">
                 <div className="col-12 d-flex justify-content-between mb--30 align-items-center">
                     <h4 className="title-left">Ad Manager</h4>
-                    <Anchor path="/author" className="btn btn-primary ml--10">
+                    <Anchor
+                        path="/myprofile"
+                        className="btn btn-gray align-items-right"
+                    >
+                        <i className="feather-eye mr--5" /> Spec Sheet
+                    </Anchor>
+                    <Anchor path="/myprofile" className="btn btn-primary ">
                         <i className="feather-eye mr--5" /> Preview
                     </Anchor>
                 </div>
@@ -36,7 +42,10 @@ const AddManager = () => (
                                         <i className="feather-edit" />
                                         Front Page
                                     </Nav.Link>
-                                    <Nav.Link eventKey="nav-standard" as="button">
+                                    <Nav.Link
+                                        eventKey="nav-standard"
+                                        as="button"
+                                    >
                                         <i className="feather-user" />
                                         Standard Feature
                                     </Nav.Link>

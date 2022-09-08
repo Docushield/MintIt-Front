@@ -109,7 +109,7 @@ const HeroArea = ({
 
                                         <Anchor
                                             className="more-author-text"
-                                            path="/author"
+                                            path="/myprofile"
                                             tabIndex="0"
                                         >
                                             More Then 25K
