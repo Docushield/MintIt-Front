@@ -19,8 +19,10 @@ const AddManager = () => (
     <div className="edit-profile-area rn-section-gapTop">
         <div className="container">
             <div className="row plr--70 padding-control-edit-wrapper pl_md--0 pr_md--0 pl_sm--0 pr_sm--0">
-                <div className="col-12 d-flex justify-content-between mb--30 align-items-center">
+                <div className="col-8 d-flex justify-content-between mb--30 align-items-center">
                     <h4 className="title-left">Ad Manager</h4>
+                </div>
+                <div className="col-4 d-flex justify-content-between mb--30 align-items-center">
                     <Anchor
                         path="/myprofile"
                         className="btn btn-gray align-items-right"
