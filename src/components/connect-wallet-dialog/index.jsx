@@ -2,11 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { data } from "autoprefixer";
-import Anchor from "@ui/anchor";
-import { useMoralis } from "react-moralis";
 
-const ConnectWalletDialog = ({ show, setShow, setAccount, setConnected }) => {
+const ConnectWalletDialog = ({
+    show,
+    setShow,
+    setAccount,
+    setConnected,
+    setWalletName,
+}) => {
     const handleClose = () => {
         setShow(!show);
     };
@@ -137,6 +140,7 @@ const ConnectWalletDialog = ({ show, setShow, setAccount, setConnected }) => {
             const loginSignature = await getLoginSignature();
 
             setConnected(true);
+            setWalletName("X-Wallet");
             handleClose();
 
             const { token } = await apiLogin(loginSignature);
@@ -170,6 +174,7 @@ ConnectWalletDialog.propTypes = {
     setShow: PropTypes.func,
     setAccount: PropTypes.func,
     setConnected: PropTypes.func,
+    setWalletName: PropTypes.func,
 };
 
 export default ConnectWalletDialog;

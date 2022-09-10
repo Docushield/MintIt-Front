@@ -26,3 +26,24 @@
         justify-content: space-between;
     }
 }
+
+.account-dialog {
+    .modal-body {
+        display: flex;
+        flex-direction: column;
+
+        h5 {
+            color: black;
+        }
+        .account-address {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .account-footer {
+            display: flex;
+            margin-top: 20px;
+            justify-content: space-between;
+        }
+    }
+}

@@ -9,6 +9,7 @@ import FlyoutSearchForm from "@components/search-form/layout-02";
 import UserDropdown from "@components/user-dropdown";
 import ColorSwitcher from "@components/color-switcher";
 import ConnectWalletDialog from "@components/connect-wallet-dialog";
+import WalletAccoungDialog from "@components/wallet-account-dialog";
 import BurgerButton from "@ui/burger-button";
 import Button from "@ui/button";
 import { useOffcanvas, useSticky, useFlyoutSearch } from "@hooks";
@@ -21,8 +22,15 @@ const Header = ({ className }) => {
     const { search, searchHandler } = useFlyoutSearch();
     const isAuthenticated = false; // TODO: Update to state hook
     const [isShowConnect, setIsShowConnect] = useState(false);
+    const [isShowAccount, setIsShowAccount] = useState(false);
     const [account, setAccount] = useState("");
     const [connected, setConnected] = useState(false);
+    const [walletName, setWalletName] = useState("");
+
+    const onChangeWallet = () => {
+        setIsShowAccount(false);
+        setIsShowConnect(true);
+    };
 
     return (
         <>
@@ -81,6 +89,9 @@ const Header = ({ className }) => {
                                                 color="primary-alta"
                                                 className="connectBtn"
                                                 size="small"
+                                                onClick={() =>
+                                                    setIsShowAccount(true)
+                                                }
                                             >
                                                 {account.slice(0, 10)}...
                                             </Button>
@@ -121,6 +132,15 @@ const Header = ({ className }) => {
                 setShow={setIsShowConnect}
                 setAccount={setAccount}
                 setConnected={setConnected}
+                setWalletName={setWalletName}
+            />
+            <WalletAccoungDialog
+                show={isShowAccount}
+                setShow={setIsShowAccount}
+                account={account}
+                walletName={walletName}
+                setConnected={setConnected}
+                onChangeWallet={onChangeWallet}
             />
             <MobileMenu
                 isOpen={offcanvas}
