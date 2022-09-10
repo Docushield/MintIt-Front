@@ -1,0 +1,28 @@
+.modal-dialog {
+    .modal-header {
+        border: none;
+        display: flex;
+        align-items: center;
+        padding: 20px;
+
+        .modal-title {
+            color: black;
+            margin: 0;
+        }
+    }
+
+    .modal-body {
+        padding: 20px;
+    }
+
+    .modal-footer {
+        padding: 20px;
+    }
+}
+
+.wallet-dialog {
+    .modal-body {
+        display: flex;
+        justify-content: space-between;
+    }
+}

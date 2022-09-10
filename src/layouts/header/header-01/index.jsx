@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-indent */
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { useMoralis } from "react-moralis";
@@ -9,6 +10,7 @@ import SearchForm from "@components/search-form/layout-01";
 import FlyoutSearchForm from "@components/search-form/layout-02";
 import UserDropdown from "@components/user-dropdown";
 import ColorSwitcher from "@components/color-switcher";
+import ConnectWalletDialog from "@components/connect-wallet-dialog";
 import BurgerButton from "@ui/burger-button";
 import Anchor from "@ui/anchor";
 import Button from "@ui/button";
@@ -21,6 +23,7 @@ const Header = ({ className }) => {
     const { offcanvas, offcanvasHandler } = useOffcanvas();
     const { search, searchHandler } = useFlyoutSearch();
     const isAuthenticated = false; // TODO: Update to state hook
+    const [isShowConnect, setIsShowConnect] = useState(false);
 
     const kdaEnvironment = {
         networkId: "testnet04",
@@ -201,9 +204,11 @@ const Header = ({ className }) => {
                                             color="primary-alta"
                                             className="connectBtn"
                                             size="small"
-                                            onClick={() => authenticate()}
+                                            onClick={() =>
+                                                setIsShowConnect(true)
+                                            }
                                         >
-                                            Wallet connect
+                                            Connect Wallet
                                         </Button>
                                     </div>
                                 </div>
@@ -236,6 +241,10 @@ const Header = ({ className }) => {
                     </div>
                 </div>
             </header>
+            <ConnectWalletDialog
+                show={isShowConnect}
+                setShow={setIsShowConnect}
+            />
             <MobileMenu
                 isOpen={offcanvas}
                 onClick={offcanvasHandler}
