@@ -1,0 +1,49 @@
+.modal-dialog {
+    .modal-header {
+        border: none;
+        display: flex;
+        align-items: center;
+        padding: 20px;
+
+        .modal-title {
+            color: black;
+            margin: 0;
+        }
+    }
+
+    .modal-body {
+        padding: 20px;
+    }
+
+    .modal-footer {
+        padding: 20px;
+    }
+}
+
+.wallet-dialog {
+    .modal-body {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.account-dialog {
+    .modal-body {
+        display: flex;
+        flex-direction: column;
+
+        h5 {
+            color: black;
+        }
+        .account-address {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .account-footer {
+            display: flex;
+            margin-top: 20px;
+            justify-content: space-between;
+        }
+    }
+}

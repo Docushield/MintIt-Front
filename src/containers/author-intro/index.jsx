@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ImageType } from "@utils/types";
 import ShareDropdown from "@components/share-dropdown";
 import ShareModal from "@components/modals/share-modal";
+import Button from "react-bootstrap/Button";
 import Anchor from "@ui/anchor";
 
 const AuthorIntroArea = ({ className, space, data }) => {
@@ -121,10 +122,59 @@ const AuthorIntroArea = ({ className, space, data }) => {
                             </div>
                         </div>
                         <div className="col-lg-9">
-                            
-                            <div className="mb-5 col_textbox">
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse consequat vel diam ut eleifend. Morbi rhoncus eros tortor, id finibus velit dignissim nec. Ut tellus purus, euismod ut laoreet ac, condimentum a lorem. Ut tempus justo urna, nec molestie dui suscipit feugiat. Cras porta nulla non magna elementum blandit.</p>
+                            <div className="row mb-5 col_textbox d-flex align-items-center">
+                                <div className="col-md-6 col-lg-6">
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur
+                                        adipiscing elit. Suspendisse consequat
+                                        vel diam ut eleifend. Morbi rhoncus eros
+                                        tortor, id finibus velit dignissim nec.
+                                        Ut tellus purus,
+                                    </p>
+                                </div>
+                                <div className="col-md-6 col-lg-6">
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <div className="status-box">
+                                                <div>FLOOR</div>
+                                                <div>18.3</div>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <div className="status-box">
+                                                <div>LISTED</div>
+                                                <div>1,007</div>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <div className="status-box">
+                                                <div>TOTAL VOL</div>
+                                                <div>375.8K</div>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <div className="status-box">
+                                                <div>AVG SALE (24h)</div>
+                                                <div>20.40</div>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <div className="status-box">
+                                                <div>OWNERs</div>
+                                                <div>4,788</div>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <div className="status-box">
+                                                <div>TOTAL SUPPLY</div>
+                                                <div>10K</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="d-flex justify-content-center">
+                                <Button>Mint Now</Button>
                             </div>
                         </div>
                     </div>

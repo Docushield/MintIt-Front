@@ -11,6 +11,11 @@
     },
     {
         "id": 4,
+        "text": "Create",
+        "path": "/create"
+    },
+    {
+        "id": 5,
         "text": "Mint",
         "path": "/mint"
     }

@@ -78,6 +78,7 @@
 @import "header/mobilemenu";
 @import "header/one-page";
 @import "header/notification";
+@import "header/wallet-dialog";
 
 /* Blog  */
 
@@ -130,28 +131,28 @@
     float: right;
     margin-top: -30px;
 }
-.admangrimg{
+.admangrimg {
     display: block;
     width: 100%;
     background-color: #fff;
     padding: 100px 0px;
 }
-.admangrimg p{
+.admangrimg p {
     font-size: 32px;
     color: #000;
     font-weight: 600;
     text-align: center;
 }
-.admngr label{
+.admngr label {
     margin: 10px 0;
 }
-.admngr input{
+.admngr input {
     margin-top: 10px;
 }
 .react-area {
-    display: none!important;
+    display: none !important;
 }
-.right{
+.right {
     display: block;
     margin-bottom: 20px;
 }

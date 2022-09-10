@@ -5,6 +5,7 @@ import TabContainer from "react-bootstrap/TabContainer";
 import TabPane from "react-bootstrap/TabPane";
 import Nav from "react-bootstrap/Nav";
 import Product from "@components/product/layout-01";
+import ProductFilter from "@components/product-filter/layout-02";
 import { ProductType } from "@utils/types";
 import { shuffleArray } from "@utils/methods";
 
@@ -13,6 +14,24 @@ const DublicateCollectionArea = ({ className, data }) => {
     const ownedProducts = shuffleArray(data.products).slice(0, 10);
     const createdProducts = shuffleArray(data.products).slice(0, 10);
     const likedProducts = shuffleArray(data.products).slice(0, 10);
+
+    const slectHandler = ({ value }, name) => {
+        // dispatch({ type: "SET_INPUTS", payload: { [name]: value } });
+    };
+
+    const priceHandler = (value) => {
+        // dispatch({ type: "SET_INPUTS", payload: { price: value } });
+    };
+
+    const sortHandler = ({ value }) => {
+        // const sortedProducts = state.products.sort((a, b) => {
+        //     if (value === "most-liked") {
+        //         return a.likeCount < b.likeCount ? 1 : -1;
+        //     }
+        //     return a.likeCount > b.likeCount ? 1 : -1;
+        // });
+        // dispatch({ type: "SET_PRODUCTS", payload: sortedProducts });
+    };
 
     return (
         <div className={clsx("rn-dublicate-collection-area", className)}>
@@ -57,6 +76,14 @@ const DublicateCollectionArea = ({ className, data }) => {
                         </div>
                     </div>
 
+                    <ProductFilter
+                        slectHandler={slectHandler}
+                        sortHandler={sortHandler}
+                        priceHandler={priceHandler}
+                        inputs={{
+                            price: [0, 100],
+                        }}
+                    />
                     <TabContent className="tab-content rn-bid-content">
                         {/* <TabPane className="row d-flex g-5" eventKey="nav-home">
                             {onSaleProducts?.map((prod) => (
