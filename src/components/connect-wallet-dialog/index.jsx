@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import Pact from "pact-lang-api";
 
 const ConnectWalletDialog = ({
     show,
@@ -9,6 +10,7 @@ const ConnectWalletDialog = ({
     setAccount,
     setConnected,
     setWalletName,
+    walletName,
 }) => {
     const handleClose = () => {
         setShow(!show);
@@ -29,56 +31,102 @@ const ConnectWalletDialog = ({
         });
 
     const connectXWallet = async () => {
-        console.log("Start connectXWallet");
-
-        const pactNetworkId = kdaEnvironment.networkId;
-        const pactChainId = kdaEnvironment.chainId;
+        const { networkId, chainId } = kdaEnvironment;
 
         if (!window.kadena || !window.kadena.isKadena) {
-            throw new Error("No XWallet installed");
+            console.log("No xwallet instaled");
+            return;
         }
 
         const { kadena } = window;
 
         await kadena.request({
             method: "kda_connect",
-            networkId: pactNetworkId,
+            networkId,
         });
 
         const xwalletResp = await window.kadena.request({
             method: "kda_getSelectedAccount",
-            networkId: pactNetworkId,
+            networkId,
         });
-
-        setAccount(xwalletResp.account);
 
         if (!xwalletResp) {
             throw new Error("Invalid xwallet response");
         }
 
-        if (xwalletResp.chainId !== pactChainId) {
+        if (xwalletResp.chainId !== chainId) {
             throw new Error(
-                `Wrong chain ${xwalletResp.chainId}, please open chain ${pactChainId}`
+                `Wrong chain ${xwalletResp.chainId}, please open chain ${chainId}`
             );
         }
 
-        localStorage.setItem("userAccount", xwalletResp.account);
-
-        // TODO:
-        // Update isAuthenticated hook and
-        // Display connected wallet
+        setAccount(xwalletResp.account);
     };
+
+    const connectZelcore = async () => {
+        const { networkId, chainId } = kdaEnvironment;
+
+        const getAccounts = await fetch("http://127.0.0.1:9467/v1/accounts", {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            method: "POST",
+            body: JSON.stringify({ asset: "kadena" }),
+        });
+
+        const getAccountsJson = await getAccounts.json();
+
+        if (getAccountsJson.error) {
+            console.log("Error getting accounts");
+            return;
+        }
+
+        if (getAccountsJson.data.length === 0) {
+            console.log("No accounts found");
+            return;
+        }
+
+        setAccount(getAccountsJson.data[0]);
+    };
+
+    const connect = async (provider) => {
+        if (provider === "X-Wallet") {
+            return connectXWallet();
+        } else if (provider === "Zelcore") {
+            return connectZelcore();
+        }
+    };
+
+    // const signXWallet = async (cmd) =>
+    //     window.kadena.request({
+    //         networkId: kdaEnvironment.networkId,
+    //         method: "kda_requestSign",
+    //         data: {
+    //             networkId: kdaEnvironment.networkId,
+    //             signingCmd: {
+    //                 networkId: kdaEnvironment.networkId,
+    //                 sender: "k:99e94e2df18e41917d755558c9809926fb1c7c51397ba351d4863e59220d3578",
+    //                 chainId: kdaEnvironment.chainId,
+    //                 gasPrice: 0.0000001,
+    //                 gasLimit: 3000,
+    //                 ttl: 28800,
+    //                 caps: [],
+    //                 pactCode: cmd.pactCode,
+    //                 envData: cmd.envData,
+    //             },
+    //         },
+    //     });
 
     const signXWallet = async (cmd) =>
         window.kadena.request({
-            networkId: kdaEnvironment.networkId,
+            networkId: cmd.networkId,
             method: "kda_requestSign",
             data: {
-                networkId: kdaEnvironment.networkId,
+                networkId: cmd.networkId,
                 signingCmd: {
-                    networkId: kdaEnvironment.networkId,
-                    sender: "k:99e94e2df18e41917d755558c9809926fb1c7c51397ba351d4863e59220d3578",
-                    chainId: kdaEnvironment.chainId,
+                    networkId: cmd.networkId,
+                    sender: cmd.sender,
+                    chainId: cmd.chainId,
                     gasPrice: 0.0000001,
                     gasLimit: 3000,
                     ttl: 28800,
@@ -89,30 +137,64 @@ const ConnectWalletDialog = ({
             },
         });
 
-    const sign = async (cmd) => {
-        // TODO: Add check for Zelcore
+    const signZelcore = async (cmd) => {
+        console.log(`Signing...`);
+        console.log(cmd);
+
+        return Pact.wallet.sign(cmd);
+
+        // {
+        //   "reqs": [
+        //     {
+        //       "sigs": {
+        //         "acbe76b30ccaf57e269a0cd5eeeb7293e7e84c7d68e6244a64c4adf4d2df6ea1": null
+        //       },
+        //       "cmd": "<cmd here>"
+        //     }
+        //   ]
+        // }
+
+        // fetch("http://127.0.0.1:9467/v1/sign", {
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        //     method: "POST",
+        //     body: JSON.stringify(cmd),
+        // });
+    };
+
+    const sign = async (provider, cmd) => {
         console.log("Signing tx...");
 
-        return signXWallet({
+        const { chainId, networkId } = kdaEnvironment;
+
+        const signingObject = {
             sender: cmd.account,
-            chainId: kdaEnvironment.chainId,
+            chainId,
             gasPrice: 0.00000001,
             gasLimit: 3000,
             ttl: 28800,
             caps: cmd.caps,
             pactCode: cmd.pactCode,
             envData: cmd.envData,
-            networkId: kdaEnvironment.networkId,
-        });
+            networkId,
+        };
+
+        if (provider === "X-Wallet") {
+            return signXWallet(signingObject);
+        } else if (provider === "Zelcore") {
+            return signZelcore(signingObject);
+        }
     };
 
-    const getLoginSignature = async () => {
+    const getLoginSignature = async (provider) => {
         const account = localStorage.getItem("userAccount");
 
-        const { signedCmd } = await sign({
+        const { signedCmd } = await sign(provider, {
             account,
-            pactCode: "",
+            pactCode: `(coin.details ${account})`,
             envData: {},
+            caps: [],
         });
 
         console.log(signedCmd);
@@ -131,16 +213,16 @@ const ConnectWalletDialog = ({
         });
     };
 
-    const authenticate = async () => {
-        // TODO: Add modal window with x-wallet or zelcore buttons
+    const authenticate = async (provider) => {
         try {
-            await connectXWallet();
-            // connectZelcore();
+            setWalletName(provider);
 
-            const loginSignature = await getLoginSignature();
+            await connect(provider);
+
+            const loginSignature = await getLoginSignature(provider);
 
             setConnected(true);
-            setWalletName("X-Wallet");
+
             handleClose();
 
             const { token } = await apiLogin(loginSignature);
@@ -159,11 +241,12 @@ const ConnectWalletDialog = ({
                 <Modal.Title>Connect Wallet</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Button variant="dark" onClick={authenticate}>
+                <Button variant="dark" onClick={() => authenticate("X-Wallet")}>
                     X-WALLET
                 </Button>
-                <Button variant="dark">ZELCORE</Button>
-                <Button variant="dark">CHAINWEAVER</Button>
+                <Button variant="dark" onClick={() => authenticate("Zelcore")}>
+                    ZELCORE
+                </Button>
             </Modal.Body>
         </Modal>
     );
