@@ -142,25 +142,6 @@ const ConnectWalletDialog = ({
         console.log(cmd);
 
         return Pact.wallet.sign(cmd);
-
-        // {
-        //   "reqs": [
-        //     {
-        //       "sigs": {
-        //         "acbe76b30ccaf57e269a0cd5eeeb7293e7e84c7d68e6244a64c4adf4d2df6ea1": null
-        //       },
-        //       "cmd": "<cmd here>"
-        //     }
-        //   ]
-        // }
-
-        // fetch("http://127.0.0.1:9467/v1/sign", {
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        //     method: "POST",
-        //     body: JSON.stringify(cmd),
-        // });
     };
 
     const sign = async (provider, cmd) => {
