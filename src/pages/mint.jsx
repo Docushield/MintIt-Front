@@ -4,38 +4,46 @@ import Wrapper from "@layout/wrapper";
 import Header from "@layout/header/header-01";
 import Footer from "@layout/footer/footer-01";
 import Breadcrumb from "@components/breadcrumb";
-import UploadVariants from "@containers/upload-variants";
+import ProductArea from "@containers/product/layout-05";
 
+// Demo data
+import exploreData from "../data/explore.json";
 
 export async function getStaticProps() {
     return { props: { className: "template-color-1" } };
 }
 
-const Home = () => {
+const Mint = () => {
     const [pageNumber, setPageNumber] = useState(1);
 
     const onPageChageHandler = (page) => {
-        console.log("Mint page: ", page);
+        console.log("Discover page: ", page);
         setPageNumber(page);
     };
 
     return (
-    <Wrapper>
-        <SEO pageTitle="Mint" />
-        <Header />
-        <main id="main-content">
-            <Breadcrumb
-                pageTitle="Mint"
-                pageTitle1="Activity"
-                currentPage="Mint"
-                onPageChageHandler={onPageChageHandler}
-            />
-            <UploadVariants />
-        </main>
-        <Footer />
-    </Wrapper>
-
-);
+        <Wrapper>
+            <SEO pageTitle="Explore" />
+            <Header />
+            <main id="main-content">
+                <Breadcrumb
+                    pageTitle="Explore"
+                    pageTitle1="Activity"
+                    currentPage="Explore"
+                    onPageChageHandler={onPageChageHandler}
+                />
+                <ProductArea
+                    data={{
+                        section_title: {
+                            title: "Projects Launching",
+                        },
+                        products: exploreData,
+                    }}
+                />
+            </main>
+            <Footer />
+        </Wrapper>
+    );
 };
 
-export default Home;
+export default Mint;
