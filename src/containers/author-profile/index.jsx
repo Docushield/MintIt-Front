@@ -8,6 +8,7 @@ import Product from "@components/product/layout-01";
 import ProductFilter from "@components/product-filter/layout-02";
 import { ProductType } from "@utils/types";
 import { shuffleArray } from "@utils/methods";
+import { Button } from "react-bootstrap";
 
 const DublicateCollectionArea = ({ className, data }) => {
     const onSaleProducts = shuffleArray(data.products).slice(0, 10);
@@ -35,6 +36,12 @@ const DublicateCollectionArea = ({ className, data }) => {
 
     return (
         <div className={clsx("rn-dublicate-collection-area", className)}>
+            <div className="d-flex m-4">
+                <div className="mint-status-box">Public Round</div>
+                <div className="mint-status-box">Mint: 20 KDA</div>
+                <div className="mint-status-box">Remaining: 1029</div>
+                <Button className="ms-4">Mint Now</Button>
+            </div>
             <TabContainer defaultActiveKey="nav-profile">
                 <div className="container">
                     <div className="row">
