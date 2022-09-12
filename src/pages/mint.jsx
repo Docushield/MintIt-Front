@@ -23,7 +23,7 @@ const Mint = () => {
 
     return (
         <Wrapper>
-            <SEO pageTitle="Explore" />
+            <SEO pageTitle="Mint" />
             <Header />
             <main id="main-content">
                 <Breadcrumb
