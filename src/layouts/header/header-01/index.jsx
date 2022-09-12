@@ -133,6 +133,7 @@ const Header = ({ className }) => {
                 setAccount={setAccount}
                 setConnected={setConnected}
                 setWalletName={setWalletName}
+                walletName={walletName}
             />
             <WalletAccoungDialog
                 show={isShowAccount}
