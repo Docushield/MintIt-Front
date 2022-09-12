@@ -56,7 +56,7 @@ const UploadVariants = ({ className, space }) => (
                             />
                         </div>
                         <Button
-                            path="/create-single"
+                            path="/create-multiple"
                             size="medium"
                             fullwidth
                             className="mt--20"

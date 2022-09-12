@@ -9,7 +9,7 @@ export async function getStaticProps() {
     return { props: { className: "template-color-1" } };
 }
 
-const Home = () => (
+const Create = () => (
     <Wrapper>
         <SEO pageTitle="Create New" />
         <Header />
@@ -21,4 +21,4 @@ const Home = () => (
     </Wrapper>
 );
 
-export default Home;
+export default Create;
