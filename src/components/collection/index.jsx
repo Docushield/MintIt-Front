@@ -12,7 +12,6 @@ const Collection = ({
     profile_image,
     path,
     live_date,
-    onClick,
 }) => {
     const [left, setLeft] = React.useState("");
 
@@ -98,7 +97,6 @@ Collection.propTypes = {
         alt: PropTypes.string,
     }).isRequired,
     live_date: PropTypes.string,
-    onClick: PropTypes.func,
 };
 
 export default Collection;

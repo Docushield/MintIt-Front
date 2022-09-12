@@ -47,7 +47,7 @@ const categories = [
 
 const POSTS_PER_PAGE = 8;
 
-const CollectionArea = ({ className, space, id, data, onClick }) => {
+const CollectionArea = ({ className, space, id, data }) => {
     const [collections, setCollections] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const numberOfPages = Math.ceil(data.collections.length / POSTS_PER_PAGE);
@@ -138,7 +138,6 @@ CollectionArea.propTypes = {
         collections: PropTypes.arrayOf(CollectionType),
         section_title: SectionTitleType,
     }),
-    onClick: PropTypes.func,
 };
 CollectionArea.defaultProps = {
     space: 1,
