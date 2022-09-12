@@ -7,6 +7,8 @@ import Button from "@ui/button";
 import ProductModal from "@components/modals/product-modal";
 import ErrorText from "@ui/error-text";
 import { toast } from "react-toastify";
+import stepsData from "../../data/steps.json";
+import Steps from "@components/steps";
 
 const CreateNewArea = ({ className, space }) => {
     const [showProductModal, setShowProductModal] = useState(false);
@@ -83,6 +85,7 @@ const CreateNewArea = ({ className, space }) => {
                 <form action="#" onSubmit={handleSubmit(onSubmit)}>
                     <div className="container">
                         <div className="row g-5">
+                            <Steps steps={stepsData} />
                             <div className="col-lg-5 mx-auto">
                                 <div className="upload-area">
                                     <div className="upload-formate mb--30">
