@@ -139,6 +139,13 @@
                 transition: var(--transition);
             }
         }
+        .collection-until-live {
+            position: absolute;
+            top: 18px;
+            padding: 10px 20px;
+            background-color: green;
+            width: calc(100% - 36px);
+        }
         .collenction-small-thumbnail {
             display: flex;
             justify-content: space-between;

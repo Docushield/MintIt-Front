@@ -69,6 +69,7 @@ const ProductArea = ({ space, className, data }) => (
                                 {categories.map((category) => (
                                     <Nav.Link
                                         as="button"
+                                        key={category.key}
                                         eventKey={category.key}
                                     >
                                         {category.name}
