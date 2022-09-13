@@ -49,9 +49,9 @@ const categories = [
     },
 ];
 
-const CategoryFilter = ({ onClick }) => (
+const CategoryFilter = ({ total, onClick }) => (
     <Nav className="product-tab-nav">
-        <div className="nav">
+        <div className="nav align-items-center">
             {categories.map((category) => (
                 <Nav.Link
                     as="button"
@@ -64,11 +64,13 @@ const CategoryFilter = ({ onClick }) => (
                     {category.name}
                 </Nav.Link>
             ))}
+            <div>{total || 0} Items</div>
         </div>
     </Nav>
 );
 
 CategoryFilter.propTypes = {
+    total: PropTypes.number,
     onClick: PropTypes.func,
 };
 

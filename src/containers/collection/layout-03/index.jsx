@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 import Collection from "@components/collection";
 import Pagination from "@components/pagination-02";
+import ProductFilter from "@components/product-filter/layout-01";
+import CategoryFilter from "@components/category-filter";
 import { CollectionType, SectionTitleType } from "@utils/types";
 
 const categories = [
@@ -56,6 +58,24 @@ const CollectionArea = ({ className, space, id, data }) => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
+    const slectHandler = ({ value }, name) => {
+        // dispatch({ type: "SET_INPUTS", payload: { [name]: value } });
+    };
+
+    const priceHandler = (value) => {
+        // dispatch({ type: "SET_INPUTS", payload: { price: value } });
+    };
+
+    const sortHandler = ({ value }) => {
+        // const sortedProducts = state.products.sort((a, b) => {
+        //     if (value === "most-liked") {
+        //         return a.likeCount < b.likeCount ? 1 : -1;
+        //     }
+        //     return a.likeCount > b.likeCount ? 1 : -1;
+        // });
+        // dispatch({ type: "SET_PRODUCTS", payload: sortedProducts });
+    };
+
     const creatorHandler = useCallback(() => {
         const start = (currentPage - 1) * POSTS_PER_PAGE;
         setCollections(data.collections.slice(start, start + POSTS_PER_PAGE));
@@ -80,19 +100,15 @@ const CollectionArea = ({ className, space, id, data }) => {
                         {data.section_title.title}
                     </h2>
                 )}
-                <Nav className="product-tab-nav">
-                    <div className="nav">
-                        {categories.map((category) => (
-                            <Nav.Link
-                                as="button"
-                                key={category.key}
-                                eventKey={category.key}
-                            >
-                                {category.name}
-                            </Nav.Link>
-                        ))}
-                    </div>
-                </Nav>
+                <CategoryFilter total={12393102} />
+                <ProductFilter
+                    slectHandler={slectHandler}
+                    priceHandler={priceHandler}
+                    sortHandler={sortHandler}
+                    inputs={{
+                        price: [0, 100],
+                    }}
+                />
                 <div className="row g-5">
                     {collections.map((collection) => (
                         <div

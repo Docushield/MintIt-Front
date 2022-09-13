@@ -124,7 +124,7 @@ const ExploreProductArea = ({ className, space, data }) => {
                 </div>
 
                 <div ref={filterRef}>
-                    <CategoryFilter onClick={slectHandler} />
+                    <CategoryFilter total={12393102} onClick={slectHandler} />
                     <ProductFilter
                         slectHandler={slectHandler}
                         sortHandler={sortHandler}

@@ -15,18 +15,18 @@ export async function getStaticProps() {
 const Collection = () => {
     return (
         <Wrapper>
-            <SEO pageTitle="Collection" />
+            <SEO pageTitle="Discover Collections" />
             <Header />
             <main id="main-content">
                 <Breadcrumb
-                    pageTitle="Our Collection"
+                    pageTitle="Discover Collections"
                     currentPage="Collection"
                 />
                 <CollectionArea
                     data={{
                         collections: collectionsData,
                         section_title: {
-                            title: "Projects Launching",
+                            title: "Discover Collections",
                         },
                     }}
                 />
