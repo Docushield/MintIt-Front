@@ -73,6 +73,10 @@ const CreateNewArea = ({ className, space }) => {
         }
     };
 
+    const onContinue = () => {
+        setIsPreview(true);
+    };
+
     return (
         <>
             <div
@@ -228,35 +232,17 @@ const CreateNewArea = ({ className, space }) => {
                                     </span>
                                 </div>
                                 {!isPreview && (
-                                    <>
-                                        <div className="col-md-12 mt--20">
-                                            <div className="input-box">
-                                                <Button
-                                                    color="primary-alta"
-                                                    fullwidth
-                                                    type="submit"
-                                                    data-btn="preview"
-                                                    onClick={handleSubmit(
-                                                        onSubmit
-                                                    )}
-                                                >
-                                                    Preview
-                                                </Button>
-                                            </div>
+                                    <div className="col-md-12 mt--20">
+                                        <div className="input-box">
+                                            <Button
+                                                onClick={onContinue}
+                                                fullwidth
+                                                data-btn="submit"
+                                            >
+                                                Continue
+                                            </Button>
                                         </div>
-
-                                        <div className="col-md-12 mt--20">
-                                            <div className="input-box">
-                                                <Button
-                                                    type="submit"
-                                                    fullwidth
-                                                    data-btn="submit"
-                                                >
-                                                    Submit Item
-                                                </Button>
-                                            </div>
-                                        </div>
-                                    </>
+                                    </div>
                                 )}
                             </div>
                             {isPreview && (
@@ -268,19 +254,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="name"
                                                         placeholder="Collection Name: Random"
-                                                        {...register("name", {
-                                                            required:
-                                                                "Name is required",
-                                                        })}
                                                     />
-                                                    {errors.name && (
-                                                        <ErrorText>
-                                                            {
-                                                                errors.name
-                                                                    ?.message
-                                                            }
-                                                        </ErrorText>
-                                                    )}
                                                 </div>
                                             </div>
                                             <div className="col-md-6">
@@ -288,19 +262,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="price"
                                                         placeholder="Mint Price: 20 $KDA"
-                                                        {...register("price", {
-                                                            required:
-                                                                "price is required",
-                                                        })}
                                                     />
-                                                    {errors.price && (
-                                                        <ErrorText>
-                                                            {
-                                                                errors.price
-                                                                    ?.message
-                                                            }
-                                                        </ErrorText>
-                                                    )}
                                                 </div>
                                             </div>
                                             <div className="col-md-6">
@@ -308,19 +270,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="size"
                                                         placeholder="Collection Size: 10000"
-                                                        {...register("size", {
-                                                            required:
-                                                                "size is required",
-                                                        })}
                                                     />
-                                                    {errors.size && (
-                                                        <ErrorText>
-                                                            {
-                                                                errors.size
-                                                                    ?.message
-                                                            }
-                                                        </ErrorText>
-                                                    )}
                                                 </div>
                                             </div>
                                             <div className="col-md-6">
@@ -328,19 +278,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="start"
                                                         placeholder="Start Mint: yyyy/mm/dd/time"
-                                                        {...register("start", {
-                                                            required:
-                                                                "start is required",
-                                                        })}
                                                     />
-                                                    {errors.start && (
-                                                        <ErrorText>
-                                                            {
-                                                                errors.start
-                                                                    ?.message
-                                                            }
-                                                        </ErrorText>
-                                                    )}
                                                 </div>
                                             </div>
                                             <div className="col-md-6">
@@ -348,23 +286,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="description"
                                                         placeholder="Description: This is the collection..."
-                                                        {...register(
-                                                            "description",
-                                                            {
-                                                                required:
-                                                                    "Description is required",
-                                                            }
-                                                        )}
                                                     />
-                                                    {errors.description && (
-                                                        <ErrorText>
-                                                            {
-                                                                errors
-                                                                    .description
-                                                                    ?.message
-                                                            }
-                                                        </ErrorText>
-                                                    )}
                                                 </div>
                                             </div>
                                             <div className="col-md-6">
@@ -372,19 +294,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="type"
                                                         placeholder="Mint Type: Public"
-                                                        {...register("type", {
-                                                            required:
-                                                                "type is required",
-                                                        })}
                                                     />
-                                                    {errors.type && (
-                                                        <ErrorText>
-                                                            {
-                                                                errors.type
-                                                                    ?.message
-                                                            }
-                                                        </ErrorText>
-                                                    )}
                                                 </div>
                                             </div>
                                             <div className="col-md-6">
@@ -392,22 +302,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="royalties"
                                                         placeholder="Royalties: 2.5%"
-                                                        {...register(
-                                                            "royalties",
-                                                            {
-                                                                required:
-                                                                    "Royalties is required",
-                                                            }
-                                                        )}
                                                     />
-                                                    {errors.royalties && (
-                                                        <ErrorText>
-                                                            {
-                                                                errors.royalties
-                                                                    ?.message
-                                                            }
-                                                        </ErrorText>
-                                                    )}
                                                 </div>
                                             </div>
                                             <div className="col-md-3">
@@ -415,22 +310,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="whitelist"
                                                         placeholder="Whitelist: Yes"
-                                                        {...register(
-                                                            "whitelist",
-                                                            {
-                                                                required:
-                                                                    "whitelist is required",
-                                                            }
-                                                        )}
                                                     />
-                                                    {errors.whitelist && (
-                                                        <ErrorText>
-                                                            {
-                                                                errors.whitelist
-                                                                    ?.message
-                                                            }
-                                                        </ErrorText>
-                                                    )}
                                                 </div>
                                             </div>
                                             <div className="col-md-3">
@@ -438,19 +318,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="end"
                                                         placeholder="End: yyyy/mm/dd/time"
-                                                        {...register("end", {
-                                                            required:
-                                                                "end is required",
-                                                        })}
                                                     />
-                                                    {errors.end && (
-                                                        <ErrorText>
-                                                            {
-                                                                errors.end
-                                                                    ?.message
-                                                            }
-                                                        </ErrorText>
-                                                    )}
                                                 </div>
                                             </div>
                                             <div className="col-md-6">
@@ -458,22 +326,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="creator"
                                                         placeholder="Creator: k:add24brj44b2jb44..."
-                                                        {...register(
-                                                            "creator",
-                                                            {
-                                                                required:
-                                                                    "creator is required",
-                                                            }
-                                                        )}
                                                     />
-                                                    {errors.creator && (
-                                                        <ErrorText>
-                                                            {
-                                                                errors.creator
-                                                                    ?.message
-                                                            }
-                                                        </ErrorText>
-                                                    )}
                                                 </div>
                                             </div>
 
