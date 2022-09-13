@@ -254,6 +254,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="name"
                                                         placeholder="Collection Name: Random"
+                                                        readOnly
                                                     />
                                                 </div>
                                             </div>
@@ -262,6 +263,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="price"
                                                         placeholder="Mint Price: 20 $KDA"
+                                                        readOnly
                                                     />
                                                 </div>
                                             </div>
@@ -270,6 +272,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="size"
                                                         placeholder="Collection Size: 10000"
+                                                        readOnly
                                                     />
                                                 </div>
                                             </div>
@@ -278,6 +281,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="start"
                                                         placeholder="Start Mint: yyyy/mm/dd/time"
+                                                        readOnly
                                                     />
                                                 </div>
                                             </div>
@@ -286,6 +290,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="description"
                                                         placeholder="Description: This is the collection..."
+                                                        readOnly
                                                     />
                                                 </div>
                                             </div>
@@ -294,6 +299,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="type"
                                                         placeholder="Mint Type: Public"
+                                                        readOnly
                                                     />
                                                 </div>
                                             </div>
@@ -302,6 +308,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="royalties"
                                                         placeholder="Royalties: 2.5%"
+                                                        readOnly
                                                     />
                                                 </div>
                                             </div>
@@ -310,6 +317,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="whitelist"
                                                         placeholder="Whitelist: Yes"
+                                                        readOnly
                                                     />
                                                 </div>
                                             </div>
@@ -318,6 +326,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="end"
                                                         placeholder="End: yyyy/mm/dd/time"
+                                                        readOnly
                                                     />
                                                 </div>
                                             </div>
@@ -326,6 +335,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="creator"
                                                         placeholder="Creator: k:add24brj44b2jb44..."
+                                                        readOnly
                                                     />
                                                 </div>
                                             </div>
