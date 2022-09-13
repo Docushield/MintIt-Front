@@ -7,45 +7,7 @@ import Nav from "react-bootstrap/Nav";
 import Product from "@components/product/layout-03";
 import { ProductType, SectionTitleType } from "@utils/types";
 import { shuffleArray } from "@utils/methods";
-
-const categories = [
-    {
-        name: "All",
-        key: "nav-home",
-    },
-    {
-        name: "Trending",
-        key: "nav-trending",
-    },
-    {
-        name: "Art",
-        key: "nav-art",
-    },
-    {
-        name: "Collectables",
-        key: "nav-collectables",
-    },
-    {
-        name: "Music",
-        key: "nav-music",
-    },
-    {
-        name: "Gaming",
-        key: "nav-gaming",
-    },
-    {
-        name: "Utility",
-        key: "nav-utility",
-    },
-    {
-        name: "Sports",
-        key: "nav-sports",
-    },
-    {
-        name: "Photography",
-        key: "nav-photography",
-    },
-];
+import CategoryFilter from "@components/category-filter";
 
 const ProductArea = ({ space, className, data }) => (
     <div
@@ -64,19 +26,7 @@ const ProductArea = ({ space, className, data }) => (
                         </h2>
                     )}
                     <TabContainer defaultActiveKey="nav-home">
-                        <Nav className="product-tab-nav">
-                            <div className="nav">
-                                {categories.map((category) => (
-                                    <Nav.Link
-                                        as="button"
-                                        key={category.key}
-                                        eventKey={category.key}
-                                    >
-                                        {category.name}
-                                    </Nav.Link>
-                                ))}
-                            </div>
-                        </Nav>
+                        <CategoryFilter />
                         <TabContent>
                             <TabPane
                                 eventKey="nav-home"

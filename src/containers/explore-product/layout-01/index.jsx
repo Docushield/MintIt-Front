@@ -7,6 +7,7 @@ import ProductFilter from "@components/product-filter/layout-01";
 import FilterButton from "@ui/filter-button";
 import { slideToggle } from "@utils/methods";
 import { SectionTitleType, ProductType } from "@utils/types";
+import CategoryFilter from "@components/category-filter";
 
 function reducer(state, action) {
     switch (action.type) {
@@ -95,6 +96,7 @@ const ExploreProductArea = ({ className, space, data }) => {
     useEffect(() => {
         itemFilterHandler();
     }, [itemFilterHandler]);
+
     return (
         <div
             className={clsx(
@@ -121,13 +123,15 @@ const ExploreProductArea = ({ className, space, data }) => {
                     </div>
                 </div>
 
-                <ProductFilter
-                    ref={filterRef}
-                    slectHandler={slectHandler}
-                    sortHandler={sortHandler}
-                    priceHandler={priceHandler}
-                    inputs={state.inputs}
-                />
+                <div ref={filterRef}>
+                    <CategoryFilter onClick={slectHandler} />
+                    <ProductFilter
+                        slectHandler={slectHandler}
+                        sortHandler={sortHandler}
+                        priceHandler={priceHandler}
+                        inputs={state.inputs}
+                    />
+                </div>
                 <div className="row g-5">
                     {state.products.length > 0 ? (
                         <>

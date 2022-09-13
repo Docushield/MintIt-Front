@@ -5,7 +5,7 @@ import InputRange from "@ui/input-range";
 
 const ProductFilter = forwardRef(
     ({ slectHandler, sortHandler, priceHandler, inputs }, ref) => (
-        <div className="default-exp-wrapper default-exp-expand" ref={ref}>
+        <div className="default-exp-wrapper" ref={ref}>
             <div className="inner">
                 <div className="filter-select-option">
                     <h6 className="filter-leble">LIKES</h6>
