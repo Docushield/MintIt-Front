@@ -5,22 +5,23 @@
         "slug": "/collection",
         "total_item": 27,
         "image": {
-            "src": "/images/collection/collection-lg-01.jpg"
+            "src": "/images/collection/collection-xl.jpg"
         },
         "thumbnails": [
             {
-                "src": "/images/collection/collection-sm-01.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             },
             {
-                "src": "/images/collection/collection-sm-02.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             },
             {
-                "src": "/images/collection/collection-sm-03.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             }
         ],
         "profile_image": {
-            "src": "/images/client/client-15.png"
-        }
+            "src": "/images/client/client-16.jpg"
+        },
+        "live_date": "2022-09-14T13:00:00"
     },
     {
         "id": 2,
@@ -28,21 +29,21 @@
         "slug": "/collection",
         "total_item": 20,
         "image": {
-            "src": "/images/collection/collection-lg-02.jpg"
+            "src": "/images/collection/collection-xl.jpg"
         },
         "thumbnails": [
             {
-                "src": "/images/collection/collection-sm-04.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             },
             {
-                "src": "/images/collection/collection-sm-05.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             },
             {
-                "src": "/images/collection/collection-sm-06.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             }
         ],
         "profile_image": {
-            "src": "/images/client/client-12.png"
+            "src": "/images/client/client-16.jpg"
         }
     },
     {
@@ -51,21 +52,21 @@
         "slug": "/collection",
         "total_item": 15,
         "image": {
-            "src": "/images/collection/collection-lg-03.jpg"
+            "src": "/images/collection/collection-xl.jpg"
         },
         "thumbnails": [
             {
-                "src": "/images/collection/collection-sm-07.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             },
             {
-                "src": "/images/collection/collection-sm-08.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             },
             {
-                "src": "/images/collection/collection-sm-09.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             }
         ],
         "profile_image": {
-            "src": "/images/client/client-13.png"
+            "src": "/images/client/client-16.jpg"
         }
     },
     {
@@ -74,21 +75,21 @@
         "slug": "/collection",
         "total_item": 27,
         "image": {
-            "src": "/images/collection/collection-lg-04.jpg"
+            "src": "/images/collection/collection-xl.jpg"
         },
         "thumbnails": [
             {
-                "src": "/images/collection/collection-sm-10.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             },
             {
-                "src": "/images/collection/collection-sm-11.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             },
             {
-                "src": "/images/collection/collection-sm-12.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             }
         ],
         "profile_image": {
-            "src": "/images/client/client-14.png"
+            "src": "/images/client/client-16.jpg"
         }
     },
     {
@@ -97,21 +98,21 @@
         "slug": "/collection",
         "total_item": 35,
         "image": {
-            "src": "/images/collection/collection-lg-02.jpg"
+            "src": "/images/collection/collection-xl.jpg"
         },
         "thumbnails": [
             {
-                "src": "/images/collection/collection-sm-01.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             },
             {
-                "src": "/images/collection/collection-sm-02.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             },
             {
-                "src": "/images/collection/collection-sm-03.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             }
         ],
         "profile_image": {
-            "src": "/images/client/client-15.png"
+            "src": "/images/client/client-16.jpg"
         }
     },
     {
@@ -120,21 +121,21 @@
         "slug": "/collection",
         "total_item": 82,
         "image": {
-            "src": "/images/collection/collection-lg-04.jpg"
+            "src": "/images/collection/collection-xl.jpg"
         },
         "thumbnails": [
             {
-                "src": "/images/collection/collection-sm-04.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             },
             {
-                "src": "/images/collection/collection-sm-05.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             },
             {
-                "src": "/images/collection/collection-sm-06.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             }
         ],
         "profile_image": {
-            "src": "/images/client/client-12.png"
+            "src": "/images/client/client-16.jpg"
         }
     },
     {
@@ -143,21 +144,21 @@
         "slug": "/collection",
         "total_item": 10,
         "image": {
-            "src": "/images/collection/collection-lg-05.jpg"
+            "src": "/images/collection/collection-xl.jpg"
         },
         "thumbnails": [
             {
-                "src": "/images/collection/collection-sm-07.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             },
             {
-                "src": "/images/collection/collection-sm-08.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             },
             {
-                "src": "/images/collection/collection-sm-09.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             }
         ],
         "profile_image": {
-            "src": "/images/client/client-13.png"
+            "src": "/images/client/client-16.jpg"
         }
     },
     {
@@ -166,21 +167,21 @@
         "slug": "/collection",
         "total_item": 82,
         "image": {
-            "src": "/images/collection/collection-lg-01.jpg"
+            "src": "/images/collection/collection-xl.jpg"
         },
         "thumbnails": [
             {
-                "src": "/images/collection/collection-sm-10.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             },
             {
-                "src": "/images/collection/collection-sm-11.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             },
             {
-                "src": "/images/collection/collection-sm-12.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             }
         ],
         "profile_image": {
-            "src": "/images/client/client-14.png"
+            "src": "/images/client/client-16.jpg"
         }
     },
     {
@@ -189,21 +190,21 @@
         "slug": "/collection",
         "total_item": 15,
         "image": {
-            "src": "/images/collection/collection-lg-02.jpg"
+            "src": "/images/collection/collection-xl.jpg"
         },
         "thumbnails": [
             {
-                "src": "/images/collection/collection-sm-02.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             },
             {
-                "src": "/images/collection/collection-sm-04.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             },
             {
-                "src": "/images/collection/collection-sm-07.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             }
         ],
         "profile_image": {
-            "src": "/images/client/client-11.png"
+            "src": "/images/client/client-16.jpg"
         }
     },
     {
@@ -212,21 +213,21 @@
         "slug": "/collection",
         "total_item": 56,
         "image": {
-            "src": "/images/collection/collection-lg-04.jpg"
+            "src": "/images/collection/collection-xl.jpg"
         },
         "thumbnails": [
             {
-                "src": "/images/collection/collection-sm-01.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             },
             {
-                "src": "/images/collection/collection-sm-02.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             },
             {
-                "src": "/images/collection/collection-sm-05.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             }
         ],
         "profile_image": {
-            "src": "/images/client/client-12.png"
+            "src": "/images/client/client-16.jpg"
         }
     },
     {
@@ -235,21 +236,21 @@
         "slug": "/collection",
         "total_item": 56,
         "image": {
-            "src": "/images/collection/collection-lg-03.jpg"
+            "src": "/images/collection/collection-xl.jpg"
         },
         "thumbnails": [
             {
-                "src": "/images/collection/collection-sm-03.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             },
             {
-                "src": "/images/collection/collection-sm-05.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             },
             {
-                "src": "/images/collection/collection-sm-06.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             }
         ],
         "profile_image": {
-            "src": "/images/client/client-13.png"
+            "src": "/images/client/client-16.jpg"
         }
     },
     {
@@ -258,21 +259,21 @@
         "slug": "/collection",
         "total_item": 40,
         "image": {
-            "src": "/images/collection/collection-lg-02.jpg"
+            "src": "/images/collection/collection-xl.jpg"
         },
         "thumbnails": [
             {
-                "src": "/images/collection/collection-sm-04.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             },
             {
-                "src": "/images/collection/collection-sm-08.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             },
             {
-                "src": "/images/collection/collection-sm-10.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             }
         ],
         "profile_image": {
-            "src": "/images/client/client-14.png"
+            "src": "/images/client/client-16.jpg"
         }
     },
     {
@@ -281,21 +282,21 @@
         "slug": "/collection",
         "total_item": 35,
         "image": {
-            "src": "/images/collection/collection-lg-04.jpg"
+            "src": "/images/collection/collection-xl.jpg"
         },
         "thumbnails": [
             {
-                "src": "/images/collection/collection-sm-02.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             },
             {
-                "src": "/images/collection/collection-sm-09.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             },
             {
-                "src": "/images/collection/collection-sm-06.jpg"
+                "src": "/images/collection/collection-xl.jpg"
             }
         ],
         "profile_image": {
-            "src": "/images/client/client-12.png"
+            "src": "/images/client/client-16.jpg"
         }
     }
 ]

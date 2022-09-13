@@ -173,9 +173,6 @@ const AuthorIntroArea = ({ className, space, data }) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="d-flex justify-content-center">
-                                <Button>Mint Now</Button>
-                            </div>
                         </div>
                     </div>
                 </div>

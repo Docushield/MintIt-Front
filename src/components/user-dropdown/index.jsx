@@ -77,9 +77,9 @@ const UserDropdown = () => {
                     </Anchor>
                 </div> */}
                 <ul className="list-inner">
-                    {/* <li>
-                        <Anchor path="/author">My Profile</Anchor>
-                    </li> */}
+                    <li>
+                        <Anchor path="/admanager">Ad Manager</Anchor>
+                    </li>
                     <li>
                         <Anchor path="/manage-profile">Manage Profile</Anchor>
                     </li>

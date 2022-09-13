@@ -1,0 +1,17 @@
+.steps {
+    display: flex;
+    flex-direction: column;
+    margin: 0px 10px;
+    color: white;
+    padding: 20px;
+    width: 300px;
+    background-color: #21212c;
+
+    .step-name {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+    .step-description {
+        margin-bottom: 20px;
+    }
+}

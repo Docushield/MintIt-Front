@@ -9,7 +9,7 @@ import ExploreProductArea from "@containers/explore-product/layout-03";
 import ServiceArea from "@containers/services/layout-01";
 import CollectionArea from "@containers/collection/layout-01";
 import { normalizedData } from "@utils/methods";
-import { SSRProvider } from 'react-bootstrap';
+import { SSRProvider } from "react-bootstrap";
 
 // Demo data
 import homepageData from "../data/homepages/homepage.json";
@@ -37,39 +37,39 @@ const Home = () => {
 
     return (
         <SSRProvider>
-        <Wrapper>
-            <SEO pageTitle="Home five" />
-            <Header />
-            <main id="main-content">
-                <Particles />
-                <HeroArea
-                    data={{
-                        ...content["hero-section"],
-                        products: liveAuctionData,
-                    }}
-                />
-                {/* <TopSellerArea
+            <Wrapper>
+                <SEO pageTitle="Home five" />
+                <Header />
+                <main id="main-content">
+                    <Particles />
+                    <HeroArea
+                        data={{
+                            ...content["hero-section"],
+                            products: liveAuctionData,
+                        }}
+                    />
+                    {/* <TopSellerArea
                     data={{
                         ...content["top-sller-section"],
                         sellers: sellerData,
                     }}
                 /> */}
-                <ExploreProductArea
-                    data={{
-                        ...content["explore-product-section"],
-                        products: productData,
-                    }}
-                />
-                <ServiceArea data={content["service-section"]} />
-                <CollectionArea
-                    data={{
-                        ...content["collection-section"],
-                        collections: collectionsData.slice(0, 4),
-                    }}
-                />
-            </main>
-            <Footer />
-        </Wrapper>
+                    <ServiceArea data={content["service-section"]} />
+                    <CollectionArea
+                        data={{
+                            ...content["collection-section"],
+                            collections: collectionsData.slice(0, 4),
+                        }}
+                    />
+                    <ExploreProductArea
+                        data={{
+                            ...content["explore-product-section"],
+                            products: productData,
+                        }}
+                    />
+                </main>
+                <Footer />
+            </Wrapper>
         </SSRProvider>
     );
 };

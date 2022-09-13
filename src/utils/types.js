@@ -96,6 +96,7 @@ export const CollectionType = PropTypes.shape({
     image: ImageType.isRequired,
     thumbnails: PropTypes.arrayOf(ImageType).isRequired,
     profile_image: ImageType.isRequired,
+    live_date: PropTypes.string,
 });
 
 export const FeatureProductsType = PropTypes.shape({

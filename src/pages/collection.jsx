@@ -12,16 +12,28 @@ export async function getStaticProps() {
     return { props: { className: "template-color-1" } };
 }
 
-const Collection = () => (
-    <Wrapper>
-        <SEO pageTitle="Collection" />
-        <Header />
-        <main id="main-content">
-            <Breadcrumb pageTitle="Our Collection" currentPage="Collection" />
-            <CollectionArea data={{ collections: collectionsData }} />
-        </main>
-        <Footer />
-    </Wrapper>
-);
+const Collection = () => {
+    return (
+        <Wrapper>
+            <SEO pageTitle="Discover Collections" />
+            <Header />
+            <main id="main-content">
+                <Breadcrumb
+                    pageTitle="Discover Collections"
+                    currentPage="Collection"
+                />
+                <CollectionArea
+                    data={{
+                        collections: collectionsData,
+                        section_title: {
+                            title: "Discover Collections",
+                        },
+                    }}
+                />
+            </main>
+            <Footer />
+        </Wrapper>
+    );
+};
 
 export default Collection;

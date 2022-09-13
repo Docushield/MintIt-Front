@@ -1,3 +1,4 @@
+import React from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import TabContent from "react-bootstrap/TabContent";
@@ -8,8 +9,11 @@ import Product from "@components/product/layout-01";
 import ProductFilter from "@components/product-filter/layout-02";
 import { ProductType } from "@utils/types";
 import { shuffleArray } from "@utils/methods";
+import { Button } from "react-bootstrap";
+import MintConfirmDialog from "@components/mint-confirm-dialog";
 
 const DublicateCollectionArea = ({ className, data }) => {
+    const [isConfirm, setIsConfirm] = React.useState(false);
     const onSaleProducts = shuffleArray(data.products).slice(0, 10);
     const ownedProducts = shuffleArray(data.products).slice(0, 10);
     const createdProducts = shuffleArray(data.products).slice(0, 10);
@@ -33,8 +37,20 @@ const DublicateCollectionArea = ({ className, data }) => {
         // dispatch({ type: "SET_PRODUCTS", payload: sortedProducts });
     };
 
+    const onMint = () => {
+        setIsConfirm(true);
+    };
+
     return (
         <div className={clsx("rn-dublicate-collection-area", className)}>
+            <div className="d-flex m-4">
+                <div className="mint-status-box">Public Round</div>
+                <div className="mint-status-box">Mint: 20 KDA</div>
+                <div className="mint-status-box">Remaining: 1029</div>
+                <Button className="ms-4" onClick={onMint}>
+                    Mint Now
+                </Button>
+            </div>
             <TabContainer defaultActiveKey="nav-profile">
                 <div className="container">
                     <div className="row">
@@ -185,6 +201,7 @@ const DublicateCollectionArea = ({ className, data }) => {
                     </TabContent>
                 </div>
             </TabContainer>
+            <MintConfirmDialog show={isConfirm} setShow={setIsConfirm} />
         </div>
     );
 };
