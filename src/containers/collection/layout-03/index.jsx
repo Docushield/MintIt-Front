@@ -119,6 +119,7 @@ const CollectionArea = ({ className, space, id, data }) => {
                                 title={collection.title}
                                 total_item={collection.total_item}
                                 path="/mycollection"
+                                minted={collection.minted}
                                 image={collection.image}
                                 thumbnails={collection.thumbnails}
                                 profile_image={collection.profile_image}
