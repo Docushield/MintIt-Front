@@ -54,19 +54,26 @@ const AuthorIntroArea = ({ className, space, data }) => {
                                     )}
 
                                     <div className="rn-author-info-content">
-                                        <h4 className="title">{data.name}</h4>
-                                        <a
-                                            href="https://twitter.com"
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            className="social-follw"
-                                        >
-                                            <i className="feather-twitter" />
-                                            <span className="user-name">
-                                                {data.twitter}
-                                            </span>
-                                        </a>
-                                        <div className="follow-area">
+                                        <h4 className="title">Name</h4>
+                                        <div className="d-flex align-items-center">
+                                            <a
+                                                href="https://twitter.com"
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                className="social-follw mb--0"
+                                            >
+                                                <i className="feather-twitter" />
+                                                <span className="user-name">
+                                                    {data.twitter}
+                                                </span>
+                                            </a>
+                                            <div className="author-button-area mt--0 ml--10">
+                                                <div className="count at-follw">
+                                                    <ShareDropdown />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {/* <div className="follow-area">
                                             <div className="follow followers">
                                                 <span>
                                                     {data.followers}{" "}
@@ -116,7 +123,7 @@ const AuthorIntroArea = ({ className, space, data }) => {
                                             >
                                                 <i className="feather feather-edit" />
                                             </Anchor>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>
