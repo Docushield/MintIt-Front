@@ -101,14 +101,14 @@ const CollectionArea = ({ className, space, id, data }) => {
                     </h2>
                 )}
                 <CategoryFilter total={12393102} />
-                <ProductFilter
+                {/* <ProductFilter
                     slectHandler={slectHandler}
                     priceHandler={priceHandler}
                     sortHandler={sortHandler}
                     inputs={{
                         price: [0, 100],
                     }}
-                />
+                /> */}
                 <div className="row g-5">
                     {collections.map((collection) => (
                         <div
