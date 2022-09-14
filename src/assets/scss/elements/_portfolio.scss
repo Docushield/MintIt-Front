@@ -105,6 +105,10 @@
         }
     }
 
+    .product-name {
+        font-size: 18px;
+    }
+
     a {
         .product-name {
             display: block;
@@ -130,6 +134,7 @@
         margin-top: 10px;
 
         .last-bid {
+            font-size: 18px;
             font-weight: 500;
             color: var(--color-primary);
         }

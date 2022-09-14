@@ -73,17 +73,20 @@ const Product = ({
                             {bitCount}+ Place Bit.
                         </Anchor>
                     </div> */}
-                    <span className="product-name">{title}</span>
+                    <span className="product-name">Collection Name</span>
                     {!disableShareDropdown && <ShareDropdown />}
                 </div>
                 <Anchor path={`/product/${slug}`}>
                     <span className="product-name">{title}</span>
                 </Anchor>
                 {/* <span className="latest-bid">Highest bid {latestBid}</span> */}
-
-                <span className="product-name">{title}</span>
                 <ProductBid price={price} />
-                <a href="" className="viewbtn connectBtn btn btn-small btn-primary-alta">View</a>
+                <a
+                    href=""
+                    className="viewbtn connectBtn btn btn-small btn-primary-alta"
+                >
+                    View
+                </a>
                 {/* likeCount={likeCount} */}
             </div>
             <PlaceBidModal show={showBidModal} handleModal={handleBidModal} />
