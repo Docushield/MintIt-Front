@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { useState } from "react";
+import { useRef, useState } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { useForm } from "react-hook-form";
@@ -18,6 +18,8 @@ const CreateNewArea = ({ className, space }) => {
     const [hasImageError, setHasImageError] = useState(false);
     const [previewData, setPreviewData] = useState({});
     const [isPreview, setIsPreview] = useState(false);
+    const [selectedJson, setSelectedJson] = useState(null);
+    const jsonRef = useRef(null);
 
     const {
         register,
@@ -35,23 +37,35 @@ const CreateNewArea = ({ className, space }) => {
 
     // This function will be triggered when the file field change
     const imageChange = (e) => {
-        console.log("image change");
         if (e.target.files && e.target.files.length > 0) {
             setSelectedImage(e.target.files[0]);
         }
     };
 
     const logoChange = (e) => {
-        console.log("logo change");
         if (e.target.files && e.target.files.length > 0) {
             setSelectedLogo(e.target.files[0]);
         }
     };
 
     const bannerChange = (e) => {
-        console.log("banner change");
         if (e.target.files && e.target.files.length > 0) {
             setSelectedBanner(e.target.files[0]);
+        }
+    };
+
+    const jsonChange = (e) => {
+        if (e.target.files && e.target.files.length > 0) {
+            const file = e.target.files[0];
+            if (file.type !== "application/json") {
+                toast("File type is mismatched for JSON files.");
+                return;
+            }
+            const reader = new FileReader();
+            reader.addEventListener("load", (event) => {
+                setSelectedJson(JSON.parse(event.target.result));
+            });
+            reader.readAsText(file);
         }
     };
 
@@ -59,7 +73,6 @@ const CreateNewArea = ({ className, space }) => {
         const { target } = e;
         const submitBtn =
             target.localName === "span" ? target.parentElement : target;
-        setIsPreview(true);
         const isPreviewBtn = submitBtn.dataset?.btn;
         setHasImageError(!selectedImage);
         if (isPreviewBtn && selectedImage) {
@@ -73,7 +86,20 @@ const CreateNewArea = ({ className, space }) => {
         }
     };
 
+    const onUploadJSON = () => {
+        jsonRef.current.click();
+    };
+
     const onContinue = () => {
+        if (
+            !selectedImage ||
+            !selectedBanner ||
+            !selectedLogo ||
+            !selectedJson
+        ) {
+            toast("Please upload images and JSON");
+            return;
+        }
         setIsPreview(true);
     };
 
@@ -218,6 +244,20 @@ const CreateNewArea = ({ className, space }) => {
                                     )}
                                 </div>
 
+                                <div className="col-md-12 mt--20">
+                                    <input
+                                        type="file"
+                                        ref={jsonRef}
+                                        name="file"
+                                        accept="application/json"
+                                        className="d-none"
+                                        onChange={jsonChange}
+                                    />
+                                    <Button onClick={onUploadJSON}>
+                                        Upload JSON
+                                    </Button>
+                                </div>
+
                                 <div className="mt--100 mt_sm--30 mt_md--30 d-none d-lg-block">
                                     <h5> Note: </h5>
                                     <span>
@@ -254,6 +294,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="name"
                                                         placeholder="Collection Name: Random"
+                                                        value={`Collection Name: ${selectedJson.name}`}
                                                         readOnly
                                                     />
                                                 </div>
@@ -263,6 +304,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="price"
                                                         placeholder="Mint Price: 20 $KDA"
+                                                        value={`Mint Price: ${selectedJson.price} $KDA`}
                                                         readOnly
                                                     />
                                                 </div>
@@ -272,6 +314,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="size"
                                                         placeholder="Collection Size: 10000"
+                                                        value={`Collection Size: ${selectedJson.size}`}
                                                         readOnly
                                                     />
                                                 </div>
@@ -281,6 +324,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="start"
                                                         placeholder="Start Mint: yyyy/mm/dd/time"
+                                                        value={`Start Mint: ${selectedJson.startDate}`}
                                                         readOnly
                                                     />
                                                 </div>
@@ -290,6 +334,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="description"
                                                         placeholder="Description: This is the collection..."
+                                                        value={`Description: ${selectedJson.description}`}
                                                         readOnly
                                                     />
                                                 </div>
@@ -299,6 +344,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="type"
                                                         placeholder="Mint Type: Public"
+                                                        value={`Mint Type: ${selectedJson.type}`}
                                                         readOnly
                                                     />
                                                 </div>
@@ -308,6 +354,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="royalties"
                                                         placeholder="Royalties: 2.5%"
+                                                        value={`Royalties: ${selectedJson.royalties}%`}
                                                         readOnly
                                                     />
                                                 </div>
@@ -317,6 +364,11 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="whitelist"
                                                         placeholder="Whitelist: Yes"
+                                                        value={`Whitelist: ${
+                                                            selectedJson.whitelist
+                                                                ? "Yes"
+                                                                : "No"
+                                                        }`}
                                                         readOnly
                                                     />
                                                 </div>
@@ -326,6 +378,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="end"
                                                         placeholder="End: yyyy/mm/dd/time"
+                                                        value={`End: ${selectedJson.endDate}`}
                                                         readOnly
                                                     />
                                                 </div>
@@ -335,6 +388,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="creator"
                                                         placeholder="Creator: k:add24brj44b2jb44..."
+                                                        value={`Creator: ${selectedJson.creator}`}
                                                         readOnly
                                                     />
                                                 </div>
