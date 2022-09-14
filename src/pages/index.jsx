@@ -8,6 +8,7 @@ import TopSellerArea from "@containers/top-seller/layout-01";
 import ExploreProductArea from "@containers/explore-product/layout-03";
 import ServiceArea from "@containers/services/layout-01";
 import CollectionArea from "@containers/collection/layout-01";
+import CreatorArea from "@containers/creator/layout-03";
 import { normalizedData } from "@utils/methods";
 import { SSRProvider } from "react-bootstrap";
 
@@ -16,6 +17,7 @@ import homepageData from "../data/homepages/homepage.json";
 import sellerData from "../data/sellers.json";
 import productData from "../data/categories.json";
 import collectionsData from "../data/collections.json";
+import creatorData from "../data/sellers.json";
 
 export async function getStaticProps() {
     return { props: { className: "template-color-1 with-particles" } };
@@ -61,6 +63,7 @@ const Home = () => {
                         }}
                     />
                     <ServiceArea data={content["service-section"]} />
+                    <CreatorArea data={{ creators: creatorData }} />
                     <ExploreProductArea
                         data={{
                             ...content["explore-product-section"],
