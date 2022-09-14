@@ -44,7 +44,8 @@
         ],
         "profile_image": {
             "src": "/images/client/client-16.jpg"
-        }
+        },
+        "minted": 20
     },
     {
         "id": 3,

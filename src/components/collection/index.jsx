@@ -12,6 +12,7 @@ const Collection = ({
     profile_image,
     path,
     live_date,
+    minted,
 }) => {
     const [left, setLeft] = React.useState("");
 
@@ -41,7 +42,9 @@ const Collection = ({
                         />
                     </div>
                 )}
-                {left && <div className="collection-until-live">{left}</div>}
+                {left && (!minted || total_item > minted) && (
+                    <div className="collection-until-live">{left}</div>
+                )}
                 <div className="collenction-small-thumbnail">
                     {thumbnails?.map((thumb, i) => (
                         // eslint-disable-next-line react/no-array-index-key
