@@ -54,13 +54,13 @@ const Home = () => {
                         sellers: sellerData,
                     }}
                 /> */}
-                    <ServiceArea data={content["service-section"]} />
                     <CollectionArea
                         data={{
                             ...content["collection-section"],
                             collections: collectionsData.slice(0, 4),
                         }}
                     />
+                    <ServiceArea data={content["service-section"]} />
                     <ExploreProductArea
                         data={{
                             ...content["explore-product-section"],
