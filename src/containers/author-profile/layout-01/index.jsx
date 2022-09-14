@@ -43,7 +43,7 @@ const DublicateCollectionArea = ({ className, data }) => {
 
     return (
         <div className={clsx("rn-dublicate-collection-area", className)}>
-            <div className="d-flex m-4">
+            <div className="container d-flex my-4">
                 <div className="mint-status-box">Public Round</div>
                 <div className="mint-status-box">Mint: 20 KDA</div>
                 <div className="mint-status-box">Remaining: 1029</div>
