@@ -149,7 +149,7 @@ const DublicateCollectionArea = ({ className, data }) => {
                             ))}
                         </TabPane>
                         <TabPane
-                            className="row g-5 d-flex"
+                            className="row g-5 d-flex mt--0"
                             eventKey="nav-contact"
                         >
                             {createdProducts?.map((prod) => (
