@@ -4,10 +4,10 @@ import Wrapper from "@layout/wrapper";
 import Header from "@layout/header/header-01";
 import Footer from "@layout/footer/footer-01";
 import Breadcrumb from "@components/breadcrumb";
-import ProductArea from "@containers/product/layout-05";
+import CollectionArea from "@containers/collection/layout-03";
 
 // Demo data
-import exploreData from "../data/explore.json";
+import collectionsData from "../data/collections.json";
 
 export async function getStaticProps() {
     return { props: { className: "template-color-1" } };
@@ -32,12 +32,12 @@ const Mint = () => {
                     currentPage="Explore"
                     onPageChageHandler={onPageChageHandler}
                 />
-                <ProductArea
+                <CollectionArea
                     data={{
+                        collections: collectionsData,
                         section_title: {
                             title: "Projects Launching",
                         },
-                        products: exploreData,
                     }}
                 />
             </main>
