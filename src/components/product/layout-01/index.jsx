@@ -52,7 +52,7 @@ const Product = ({
                     {/* {auction_date && <CountdownTimer date={auction_date} />} */}
                     {placeBid && (
                         <Button onClick={handleBidModal} size="small">
-                            Place Bid
+                            Buy
                         </Button>
                     )}
                 </div>
@@ -83,7 +83,7 @@ const Product = ({
                 <ProductBid price={price} />
                 <a
                     href=""
-                    className="viewbtn connectBtn btn btn-small btn-primary-alta"
+                    className="viewbtn connectBtn btn btn-small btn-primary"
                 >
                     View
                 </a>
