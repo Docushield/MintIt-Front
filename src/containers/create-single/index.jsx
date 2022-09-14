@@ -65,7 +65,7 @@ const CreateNewArea = ({ className, space }) => {
                 <form action="#" onSubmit={handleSubmit(onSubmit)}>
                     <div className="container">
                         <div className="row g-5">
-                            <div className="col-lg-5 mx-auto">
+                            <div className="col-lg-3 offset-1 ml_md--0 ml_sm--0">
                                 <div className="upload-area">
                                     <div className="upload-formate mb--30">
                                         <h6 className="title">Upload file</h6>
@@ -127,15 +127,242 @@ const CreateNewArea = ({ className, space }) => {
                                         <strong>25.00 KDA $50,000</strong>
                                     </span>
                                 </div>
-                                <div className="col-md-12 mt--20">
-                                    <div className="input-box">
-                                        <Button
-                                            type="submit"
-                                            fullwidth
-                                            data-btn="submit"
-                                        >
-                                            Submit Item
-                                        </Button>
+                            </div>
+                            <div className="col-lg-7">
+                                <div className="form-wrapper-one">
+                                    <div className="row">
+                                        <div className="col-md-12">
+                                            <div className="input-box pb--20">
+                                                <label
+                                                    htmlFor="name"
+                                                    className="form-label"
+                                                >
+                                                    Product Name
+                                                </label>
+                                                <input
+                                                    id="name"
+                                                    placeholder="e. g. `Digital Awesome Game`"
+                                                    {...register("name", {
+                                                        required:
+                                                            "Name is required",
+                                                    })}
+                                                />
+                                                {errors.name && (
+                                                    <ErrorText>
+                                                        {errors.name?.message}
+                                                    </ErrorText>
+                                                )}
+                                            </div>
+                                        </div>
+
+                                        <div className="col-md-12">
+                                            <div className="input-box pb--20">
+                                                <label
+                                                    htmlFor="Discription"
+                                                    className="form-label"
+                                                >
+                                                    Discription
+                                                </label>
+                                                <textarea
+                                                    id="discription"
+                                                    rows="3"
+                                                    placeholder="e. g. “After purchasing the product you can get item...”"
+                                                    {...register(
+                                                        "discription",
+                                                        {
+                                                            required:
+                                                                "Discription is required",
+                                                        }
+                                                    )}
+                                                />
+                                                {errors.discription && (
+                                                    <ErrorText>
+                                                        {
+                                                            errors.discription
+                                                                ?.message
+                                                        }
+                                                    </ErrorText>
+                                                )}
+                                            </div>
+                                        </div>
+
+                                        <div className="col-md-4">
+                                            <div className="input-box pb--20">
+                                                <label
+                                                    htmlFor="price"
+                                                    className="form-label"
+                                                >
+                                                    Item Price in $
+                                                </label>
+                                                <input
+                                                    id="price"
+                                                    placeholder="e. g. `20$`"
+                                                    {...register("price", {
+                                                        pattern: {
+                                                            value: /^[0-9]+$/,
+                                                            message:
+                                                                "Please enter a number",
+                                                        },
+                                                        required:
+                                                            "Price is required",
+                                                    })}
+                                                />
+                                                {errors.price && (
+                                                    <ErrorText>
+                                                        {errors.price?.message}
+                                                    </ErrorText>
+                                                )}
+                                            </div>
+                                        </div>
+
+                                        <div className="col-md-4">
+                                            <div className="input-box pb--20">
+                                                <label
+                                                    htmlFor="Size"
+                                                    className="form-label"
+                                                >
+                                                    Size
+                                                </label>
+                                                <input
+                                                    id="size"
+                                                    placeholder="e. g. `Size`"
+                                                    {...register("size", {
+                                                        required:
+                                                            "Size is required",
+                                                    })}
+                                                />
+                                                {errors.size && (
+                                                    <ErrorText>
+                                                        {errors.size?.message}
+                                                    </ErrorText>
+                                                )}
+                                            </div>
+                                        </div>
+
+                                        <div className="col-md-4">
+                                            <div className="input-box pb--20">
+                                                <label
+                                                    htmlFor="Propertie"
+                                                    className="form-label"
+                                                >
+                                                    Properties
+                                                </label>
+                                                <input
+                                                    id="propertiy"
+                                                    placeholder="e. g. `Propertie`"
+                                                    {...register("propertiy", {
+                                                        required:
+                                                            "Propertiy is required",
+                                                    })}
+                                                />
+                                                {errors.propertiy && (
+                                                    <ErrorText>
+                                                        {
+                                                            errors.propertiy
+                                                                ?.message
+                                                        }
+                                                    </ErrorText>
+                                                )}
+                                            </div>
+                                        </div>
+
+                                        <div className="col-md-12">
+                                            <div className="input-box pb--20">
+                                                <label
+                                                    htmlFor="Royality"
+                                                    className="form-label"
+                                                >
+                                                    Royality
+                                                </label>
+                                                <input
+                                                    id="royality"
+                                                    placeholder="e. g. `20%`"
+                                                    {...register("royality", {
+                                                        required:
+                                                            "Royality is required",
+                                                    })}
+                                                />
+                                                {errors.royality && (
+                                                    <ErrorText>
+                                                        {
+                                                            errors.royality
+                                                                ?.message
+                                                        }
+                                                    </ErrorText>
+                                                )}
+                                            </div>
+                                        </div>
+
+                                        <div className="col-md-4 col-sm-4">
+                                            <div className="input-box pb--20 rn-check-box">
+                                                <input
+                                                    className="rn-check-box-input"
+                                                    type="checkbox"
+                                                    id="putonsale"
+                                                />
+                                                <label
+                                                    className="rn-check-box-label"
+                                                    htmlFor="putonsale"
+                                                >
+                                                    Put on Sale
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div className="col-md-4 col-sm-4">
+                                            <div className="input-box pb--20 rn-check-box">
+                                                <input
+                                                    className="rn-check-box-input"
+                                                    type="checkbox"
+                                                    id="instantsaleprice"
+                                                />
+                                                <label
+                                                    className="rn-check-box-label"
+                                                    htmlFor="instantsaleprice"
+                                                >
+                                                    Instant Sale Price
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div className="col-md-4 col-sm-4">
+                                            <div className="input-box pb--20 rn-check-box">
+                                                <input
+                                                    className="rn-check-box-input"
+                                                    type="checkbox"
+                                                    id="unlockpurchased"
+                                                />
+                                                <label
+                                                    className="rn-check-box-label"
+                                                    htmlFor="unlockpurchased"
+                                                >
+                                                    Unlock Purchased
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div className="col-md-12 col-xl-4">
+                                            <div className="input-box">
+                                                <Button
+                                                    color="primary-alta"
+                                                    fullwidth
+                                                    type="submit"
+                                                    data-btn="preview"
+                                                    onClick={handleSubmit(
+                                                        onSubmit
+                                                    )}
+                                                >
+                                                    Preview
+                                                </Button>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-12 col-xl-8 mt_lg--15 mt_md--15 mt_sm--15">
+                                            <div className="input-box">
+                                                <Button type="submit" fullwidth>
+                                                    Submit Item
+                                                </Button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
