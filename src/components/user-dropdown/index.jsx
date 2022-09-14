@@ -18,11 +18,8 @@ const UserDropdown = () => {
             <div className="rn-dropdown">
                 <div className="rn-inner-top">
                     <h4 className="title">
-                        <Anchor path="/product">User Name</Anchor>
+                        <Anchor path="/myprofile">My Profile</Anchor>
                     </h4>
-                    <span>
-                        <Anchor path="/product">Set Display Name</Anchor>
-                    </span>
                 </div>
                 {/* <div className="rn-product-inner">
                     <ul className="product-list">
@@ -78,10 +75,10 @@ const UserDropdown = () => {
                 </div> */}
                 <ul className="list-inner">
                     <li>
-                        <Anchor path="/admanager">Ad Manager</Anchor>
+                        <Anchor path="/manage-profile">Manage Profile</Anchor>
                     </li>
                     <li>
-                        <Anchor path="/manage-profile">Manage Profile</Anchor>
+                        <Anchor path="/admanager">Ad Manager</Anchor>
                     </li>
                     <li>
                         <Anchor path="/connect">Manage Collections</Anchor>
