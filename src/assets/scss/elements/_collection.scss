@@ -143,7 +143,8 @@
             position: absolute;
             top: 18px;
             padding: 10px 20px;
-            background-color: #20ec8d;
+            color: var(--color-primary-alta);
+            background-color: var(--color-primary);
             width: calc(100% - 36px);
         }
         .collenction-small-thumbnail {

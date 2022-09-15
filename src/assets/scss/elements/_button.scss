@@ -29,6 +29,7 @@ button {
 
         &.btn-primary {
             background: var(--color-primary);
+            color: var(--color-primary-alta);
 
             &:hover {
                 background: var(--color-primary-alta);
@@ -49,7 +50,7 @@ button {
 
             &:hover {
                 background: var(--color-primary);
-                color: var(--color-white) !important;
+                color: var(--color-primary-alta) !important;
             }
         }
 
