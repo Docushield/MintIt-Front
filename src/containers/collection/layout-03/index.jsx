@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useReducer } from "react";
 import Nav from "react-bootstrap/Nav";
 import PropTypes from "prop-types";
 import clsx from "clsx";
@@ -8,48 +8,23 @@ import ProductFilter from "@components/product-filter/layout-01";
 import CategoryFilter from "@components/category-filter";
 import { CollectionType, SectionTitleType } from "@utils/types";
 
-const categories = [
-    {
-        name: "All",
-        key: "nav-home",
-    },
-    {
-        name: "Trending",
-        key: "nav-trending",
-    },
-    {
-        name: "Art",
-        key: "nav-art",
-    },
-    {
-        name: "Collectables",
-        key: "nav-collectables",
-    },
-    {
-        name: "Music",
-        key: "nav-music",
-    },
-    {
-        name: "Gaming",
-        key: "nav-gaming",
-    },
-    {
-        name: "Utility",
-        key: "nav-utility",
-    },
-    {
-        name: "Sports",
-        key: "nav-sports",
-    },
-    {
-        name: "Photography",
-        key: "nav-photography",
-    },
-];
-
 const POSTS_PER_PAGE = 8;
 
+function reducer(state, action) {
+    switch (action.type) {
+        case "FILTER_TOGGLE":
+            return { ...state, filterToggle: !state.filterToggle };
+        case "SET_INPUTS":
+            return { ...state, inputs: { ...state.inputs, ...action.payload } };
+        case "SET_COLLETIONS":
+            return { ...state, collections: action.payload };
+        default:
+            return state;
+    }
+}
+
 const CollectionArea = ({ className, space, id, data }) => {
+    const itemsToFilter = [...(data.collections || [])];
     const [collections, setCollections] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const numberOfPages = Math.ceil(data.collections.length / POSTS_PER_PAGE);
@@ -57,9 +32,14 @@ const CollectionArea = ({ className, space, id, data }) => {
         setCurrentPage(page);
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
+    const [state, dispatch] = useReducer(reducer, {
+        filterToggle: false,
+        collections: data.collections || [],
+        inputs: { price: [0, 100] },
+    });
 
     const slectHandler = ({ value }, name) => {
-        // dispatch({ type: "SET_INPUTS", payload: { [name]: value } });
+        dispatch({ type: "SET_INPUTS", payload: { [name]: value } });
     };
 
     const priceHandler = (value) => {
@@ -75,6 +55,39 @@ const CollectionArea = ({ className, space, id, data }) => {
         // });
         // dispatch({ type: "SET_PRODUCTS", payload: sortedProducts });
     };
+
+    const filterMethods = (item, filterKey, value) => {
+        if (value === "all") return false;
+        let itemKey = filterKey;
+        if (filterKey === "category") {
+            itemKey = "categories";
+        }
+        if (Array.isArray(item[itemKey])) {
+            return !item[itemKey].includes(value);
+        }
+        if (filterKey === "collection") {
+            return item[itemKey].name !== value;
+        }
+        return item[itemKey] !== value;
+    };
+
+    const itemFilterHandler = useCallback(() => {
+        let filteredItems = [];
+
+        filteredItems = itemsToFilter.filter((item) => {
+            // eslint-disable-next-line no-restricted-syntax
+            for (const key in state.inputs) {
+                if (filterMethods(item, key, state.inputs[key])) return false;
+            }
+            return true;
+        });
+        dispatch({ type: "SET_COLLECTIONS", payload: filteredItems });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [state.inputs]);
+
+    useEffect(() => {
+        itemFilterHandler();
+    }, [itemFilterHandler]);
 
     const creatorHandler = useCallback(() => {
         const start = (currentPage - 1) * POSTS_PER_PAGE;
@@ -100,7 +113,7 @@ const CollectionArea = ({ className, space, id, data }) => {
                         {data.section_title.title}
                     </h2>
                 )}
-                <CategoryFilter total={12393102} />
+                <CategoryFilter total={12393102} onClick={slectHandler} />
                 {/* <ProductFilter
                     slectHandler={slectHandler}
                     priceHandler={priceHandler}
@@ -110,7 +123,7 @@ const CollectionArea = ({ className, space, id, data }) => {
                     }}
                 /> */}
                 <div className="row g-5">
-                    {collections.map((collection) => (
+                    {state.collections.map((collection) => (
                         <div
                             key={collection.id}
                             className="col-lg-6 col-xl-3 col-md-6 col-sm-6 col-12"
