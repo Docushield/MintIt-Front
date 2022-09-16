@@ -69,7 +69,17 @@ const CreateNewArea = ({ className, space }) => {
         }
     };
 
-    const onSubmit = (data, e) => {
+    const apiPost = async (route, payload, headers) =>
+        fetch(`https://the-backend.fly.dev/api/${route}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                ...headers,
+            },
+            body: JSON.stringify(payload),
+        });
+
+    const onSubmit = async (data, e) => {
         const { target } = e;
         const submitBtn =
             target.localName === "span" ? target.parentElement : target;
@@ -80,23 +90,22 @@ const CreateNewArea = ({ className, space }) => {
             setShowProductModal(true);
         }
         if (!isPreviewBtn) {
-            notify();
-            reset();
-            setSelectedImage();
+            try {
+                const token = localStorage.getItem("token");
+                await apiPost("collections", selectedJson, {
+                    "x-auth-token": token,
+                });
+                notify();
+                reset();
+                setSelectedImage();
+            } catch (error) {
+                toast("Error occurred in submission");
+            }
         }
     };
 
-    const onUploadJSON = () => {
-        jsonRef.current.click();
-    };
-
     const onContinue = () => {
-        if (
-            !selectedImage ||
-            !selectedBanner ||
-            !selectedLogo ||
-            !selectedJson
-        ) {
+        if (!selectedJson) {
             toast("Please upload images and JSON");
             return;
         }
@@ -131,20 +140,9 @@ const CreateNewArea = ({ className, space }) => {
                                             id="file"
                                             type="file"
                                             className="inputfile"
-                                            data-multiple-caption="{count} files selected"
-                                            multiple
-                                            onChange={imageChange}
+                                            accept="application/json"
+                                            onChange={jsonChange}
                                         />
-                                        {selectedImage && (
-                                            <img
-                                                id="createfileImage"
-                                                src={URL.createObjectURL(
-                                                    selectedImage
-                                                )}
-                                                alt=""
-                                                data-black-overlay="6"
-                                            />
-                                        )}
 
                                         <label
                                             htmlFor="file"
@@ -155,107 +153,13 @@ const CreateNewArea = ({ className, space }) => {
                                                 Choose a File
                                             </span>
                                             <p className="text-center mt--10">
-                                                PNG, GIF, WEBP, MP4 or MP3.{" "}
-                                                <br /> Max 1Gb.
+                                                JSON. <br /> .
                                             </p>
                                         </label>
                                     </div>
-                                    {hasImageError && !selectedImage && (
-                                        <ErrorText>Image is required</ErrorText>
+                                    {!selectedJson && (
+                                        <ErrorText>Json is required</ErrorText>
                                     )}
-                                </div>
-
-                                <div className="col-md-12 mt--20 upload-area">
-                                    <div className="brows-file-wrapper">
-                                        <input
-                                            name="logo"
-                                            id="logo"
-                                            type="file"
-                                            className="inputlogo"
-                                            onChange={logoChange}
-                                        />
-                                        {selectedLogo && (
-                                            <img
-                                                id="createfileImage"
-                                                src={URL.createObjectURL(
-                                                    selectedLogo
-                                                )}
-                                                alt=""
-                                                data-black-overlay="6"
-                                            />
-                                        )}
-
-                                        <label
-                                            htmlFor="logo"
-                                            title="No File Choosen"
-                                        >
-                                            <i className="feather-upload" />
-                                            <span className="text-center">
-                                                Upload a logo
-                                            </span>
-                                            <p className="text-center mt--10">
-                                                PNG, GIF, JPEG. <br /> Size:
-                                                1000x1000 or 500x500
-                                            </p>
-                                        </label>
-                                    </div>
-                                    {hasImageError && !selectedLogo && (
-                                        <ErrorText>Logo is required</ErrorText>
-                                    )}
-                                </div>
-
-                                <div className="col-md-12 mt--20 upload-area">
-                                    <div className="brows-file-wrapper">
-                                        <input
-                                            name="banner"
-                                            id="banner"
-                                            type="file"
-                                            className="inputfile"
-                                            onChange={bannerChange}
-                                        />
-                                        {selectedBanner && (
-                                            <img
-                                                id="createfileImage"
-                                                src={URL.createObjectURL(
-                                                    selectedBanner
-                                                )}
-                                                alt=""
-                                                data-black-overlay="6"
-                                            />
-                                        )}
-
-                                        <label
-                                            htmlFor="banner"
-                                            title="No File Choosen"
-                                        >
-                                            <i className="feather-upload" />
-                                            <span className="text-center">
-                                                Upload a banner
-                                            </span>
-                                            <p className="text-center mt--10">
-                                                PNG, GIT, JPEG. <br /> Max 1Gb.
-                                            </p>
-                                        </label>
-                                    </div>
-                                    {hasImageError && !selectedBanner && (
-                                        <ErrorText>
-                                            Banner is required
-                                        </ErrorText>
-                                    )}
-                                </div>
-
-                                <div className="col-md-12 mt--20">
-                                    <input
-                                        type="file"
-                                        ref={jsonRef}
-                                        name="file"
-                                        accept="application/json"
-                                        className="d-none"
-                                        onChange={jsonChange}
-                                    />
-                                    <Button onClick={onUploadJSON}>
-                                        Upload JSON
-                                    </Button>
                                 </div>
 
                                 <div className="mt--100 mt_sm--30 mt_md--30 d-none d-lg-block">
@@ -304,7 +208,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="price"
                                                         placeholder="Mint Price: 20 $KDA"
-                                                        value={`Mint Price: ${selectedJson.price} $KDA`}
+                                                        value={`Mint Price: ${selectedJson["mint-price"]} $KDA`}
                                                         readOnly
                                                     />
                                                 </div>
@@ -324,7 +228,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="start"
                                                         placeholder="Start Mint: yyyy/mm/dd/time"
-                                                        value={`Start Mint: ${selectedJson.startDate}`}
+                                                        value={`Start Mint: ${selectedJson["mint-starts"]}`}
                                                         readOnly
                                                     />
                                                 </div>
@@ -354,7 +258,14 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="royalties"
                                                         placeholder="Royalties: 2.5%"
-                                                        value={`Royalties: ${selectedJson.royalties}%`}
+                                                        value={`Royalties: ${selectedJson[
+                                                            "mint-royalties"
+                                                        ].rates
+                                                            .map(
+                                                                (royalty) =>
+                                                                    royalty.rate
+                                                            )
+                                                            .join(", ")}%`}
                                                         readOnly
                                                     />
                                                 </div>
@@ -378,7 +289,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="end"
                                                         placeholder="End: yyyy/mm/dd/time"
-                                                        value={`End: ${selectedJson.endDate}`}
+                                                        value={`End: ${selectedJson["premint-ends"]}`}
                                                         readOnly
                                                     />
                                                 </div>

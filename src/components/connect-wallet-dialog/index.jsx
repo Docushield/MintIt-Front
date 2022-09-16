@@ -204,7 +204,8 @@ const ConnectWalletDialog = ({
 
             handleClose();
 
-            const { token } = await apiLogin(loginSignature);
+            const response = await apiLogin(loginSignature);
+            const { token } = await response.json();
 
             localStorage.setItem("token", token);
 
