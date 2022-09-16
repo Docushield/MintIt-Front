@@ -104,6 +104,10 @@ const CreateNewArea = ({ className, space }) => {
         }
     };
 
+    const onUploadJSON = () => {
+        jsonRef.current.click();
+    };
+
     const onContinue = () => {
         if (!selectedJson) {
             toast("Please upload images and JSON");
@@ -160,6 +164,20 @@ const CreateNewArea = ({ className, space }) => {
                                     {!selectedJson && (
                                         <ErrorText>Json is required</ErrorText>
                                     )}
+                                </div>
+
+                                <div className="col-md-12 mt--20">
+                                    <input
+                                        type="file"
+                                        ref={jsonRef}
+                                        name="file"
+                                        accept="application/json"
+                                        className="d-none"
+                                        onChange={jsonChange}
+                                    />
+                                    <Button onClick={onUploadJSON}>
+                                        Upload JSON
+                                    </Button>
                                 </div>
 
                                 <div className="mt--100 mt_sm--30 mt_md--30 d-none d-lg-block">
