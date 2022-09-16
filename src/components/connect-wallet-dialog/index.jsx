@@ -22,7 +22,7 @@ const ConnectWalletDialog = ({
     };
 
     const apiPost = async (route, payload) =>
-        fetch(`http://localhost:4000/api/${route}`, {
+        fetch(`https://the-backend.fly.dev/api/${route}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -178,8 +178,6 @@ const ConnectWalletDialog = ({
             caps: [],
         });
 
-        console.log(signedCmd);
-
         return signedCmd;
     };
 
@@ -206,7 +204,10 @@ const ConnectWalletDialog = ({
 
             handleClose();
 
-            const { token } = await apiLogin(loginSignature);
+            const response = await apiLogin(loginSignature);
+            const { token } = await response.json();
+
+            localStorage.setItem("token", token);
 
             // TODO: Save token and use it in auth
             return token;
