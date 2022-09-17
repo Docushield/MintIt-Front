@@ -5,7 +5,7 @@ import Image from "next/image";
 import { ImageType } from "@utils/types";
 import ShareDropdown from "@components/share-dropdown";
 import ShareModal from "@components/modals/share-modal";
-import Button from "react-bootstrap/Button";
+import Button from "@components/ui/button";
 import Anchor from "@ui/anchor";
 
 const AuthorIntroArea = ({ className, space, data }) => {
@@ -73,6 +73,12 @@ const AuthorIntroArea = ({ className, space, data }) => {
                                                 </div>
                                             </div>
                                         </div>
+                                        <Button
+                                            path="provenance-hash"
+                                            className="mt--15"
+                                        >
+                                            View Provenance
+                                        </Button>
                                         {/* <div className="follow-area">
                                             <div className="follow followers">
                                                 <span>
