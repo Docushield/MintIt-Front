@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { useRef, useState } from "react";
+import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { useForm } from "react-hook-form";
@@ -20,6 +21,7 @@ const CreateNewArea = ({ className, space }) => {
     const [isPreview, setIsPreview] = useState(false);
     const [selectedJson, setSelectedJson] = useState(null);
     const jsonRef = useRef(null);
+    const router = useRouter();
 
     const {
         register,
@@ -95,6 +97,9 @@ const CreateNewArea = ({ className, space }) => {
                 await apiPost("collections", selectedJson, {
                     "x-auth-token": token,
                 });
+                router.push({
+                    pathname: "/create-collection-progress",
+                });
                 notify();
                 reset();
                 setSelectedImage();
@@ -157,7 +162,7 @@ const CreateNewArea = ({ className, space }) => {
                                                 Choose a File
                                             </span>
                                             <p className="text-center mt--10">
-                                                JSON. <br /> .
+                                                Only accept JSON files. <br />
                                             </p>
                                         </label>
                                     </div>
