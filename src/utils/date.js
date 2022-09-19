@@ -9,3 +9,7 @@ export const formatUntilLive = (until) => {
         diff % 60
     }`;
 };
+
+export const formatDate = (date, formatter) => {
+    return moment(date).format(formatter);
+};

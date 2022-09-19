@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { useForm } from "react-hook-form";
+import Table from "react-bootstrap/Table";
 import Button from "@ui/button";
 import ProductModal from "@components/modals/product-modal";
 import ErrorText from "@ui/error-text";
@@ -11,6 +12,7 @@ import { toast } from "react-toastify";
 import stepsData from "../../data/steps.json";
 import Steps from "@components/steps";
 import { toSlug } from "@utils/methods";
+import { formatDate } from "@utils/date";
 
 const CreateNewArea = ({ className, space }) => {
     const [showProductModal, setShowProductModal] = useState(false);
@@ -106,9 +108,13 @@ const CreateNewArea = ({ className, space }) => {
             form.append("image", selectedImage);
             form.append("banner", selectedBanner);
             console.log(form.entries(), form.get("slug"));
-            await apiPost("collections", form, {
-                "x-auth-token": token,
-            });
+            await apiPost(
+                "collections",
+                { ...selectedJson, slug },
+                {
+                    "x-auth-token": token,
+                }
+            );
             router.push({
                 pathname: "/create-collection-progress",
             });
@@ -333,7 +339,12 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="start"
                                                         placeholder="Start Mint: yyyy/mm/dd/time"
-                                                        value={`Start Mint: ${selectedJson["mint-starts"]}`}
+                                                        value={`Start Mint: ${formatDate(
+                                                            selectedJson[
+                                                                "mint-starts"
+                                                            ],
+                                                            "YYYY-MM-DD"
+                                                        )}`}
                                                         readOnly
                                                     />
                                                 </div>
@@ -361,32 +372,103 @@ const CreateNewArea = ({ className, space }) => {
                                             <div className="col-md-6">
                                                 <div className="input-box pb--20">
                                                     <input
-                                                        id="royalties"
-                                                        placeholder="Royalties: 2.5%"
-                                                        value={`Royalties: ${selectedJson[
-                                                            "mint-royalties"
-                                                        ].rates
-                                                            .map(
-                                                                (royalty) =>
-                                                                    royalty.rate
-                                                            )
-                                                            .join(", ")}%`}
+                                                        id="creator"
+                                                        placeholder="Creator: k:add24brj44b2jb44..."
+                                                        value={`Creator: ${selectedJson.creator}`}
                                                         readOnly
                                                     />
                                                 </div>
                                             </div>
-                                            <div className="col-md-3">
+                                            <div className="col-md-12">
                                                 <div className="input-box pb--20">
                                                     <input
-                                                        id="whitelist"
-                                                        placeholder="Whitelist: Yes"
-                                                        value={`Whitelist: ${
-                                                            selectedJson.whitelist
-                                                                ? "Yes"
-                                                                : "No"
-                                                        }`}
-                                                        readOnly
+                                                        id="royalties"
+                                                        placeholder="Royalties: 2.5%"
+                                                        value={`Royalties: ${(
+                                                            selectedJson[
+                                                                "mint-royalties"
+                                                            ].rates || []
+                                                        ).reduce(
+                                                            (prev, current) =>
+                                                                prev.rate +
+                                                                current.rate
+                                                        )}%`}
                                                     />
+                                                    <Table
+                                                        responsive
+                                                        className="mt--20 text-white"
+                                                    >
+                                                        <thead>
+                                                            <tr>
+                                                                <th>
+                                                                    Description
+                                                                </th>
+                                                                <th>Rate</th>
+                                                                <th>
+                                                                    Stakeholder
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {(
+                                                                selectedJson[
+                                                                    "mint-royalties"
+                                                                ].rates || []
+                                                            ).map((royalty) => (
+                                                                <tr>
+                                                                    <td>
+                                                                        {
+                                                                            royalty.description
+                                                                        }
+                                                                    </td>
+                                                                    <td>
+                                                                        {
+                                                                            royalty.rate
+                                                                        }
+                                                                    </td>
+                                                                    <td>
+                                                                        {
+                                                                            royalty.stakeholder
+                                                                        }
+                                                                    </td>
+                                                                </tr>
+                                                            ))}
+                                                        </tbody>
+                                                    </Table>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-3">
+                                                <div className="input-box">
+                                                    <Table
+                                                        responsive
+                                                        className="text-white"
+                                                    >
+                                                        <thead>
+                                                            <tr>
+                                                                <th>
+                                                                    WhiteList
+                                                                    Address
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {(
+                                                                selectedJson[
+                                                                    "premint-whitelist"
+                                                                ].rates || []
+                                                            ).map(
+                                                                (whiteItem) => (
+                                                                    <tr>
+                                                                        <td>
+                                                                            {
+                                                                                whiteItem
+                                                                            }
+                                                                        </td>
+                                                                    </tr>
+                                                                )
+                                                            )}
+                                                        </tbody>
+                                                    </Table>
                                                 </div>
                                             </div>
                                             <div className="col-md-3">
@@ -394,17 +476,12 @@ const CreateNewArea = ({ className, space }) => {
                                                     <input
                                                         id="end"
                                                         placeholder="End: yyyy/mm/dd/time"
-                                                        value={`End: ${selectedJson["premint-ends"]}`}
-                                                        readOnly
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="col-md-6">
-                                                <div className="input-box pb--20">
-                                                    <input
-                                                        id="creator"
-                                                        placeholder="Creator: k:add24brj44b2jb44..."
-                                                        value={`Creator: ${selectedJson.creator}`}
+                                                        value={`End: ${formatDate(
+                                                            selectedJson[
+                                                                "premint-ends"
+                                                            ],
+                                                            "YYYY-MM-DD"
+                                                        )}`}
                                                         readOnly
                                                     />
                                                 </div>
