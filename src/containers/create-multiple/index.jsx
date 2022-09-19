@@ -77,23 +77,28 @@ const CreateNewArea = ({ className, space }) => {
         }
     };
 
-    const apiPost = async (route, payload, headers) =>
-        fetch(`https://the-backend.fly.dev/api/${route}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                ...headers,
-            },
-            body: JSON.stringify(payload),
-        });
+    const apiPost = async (route, payload, headers) => {
+        const response = await fetch(
+            `https://the-backend.fly.dev/api/${route}`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    ...headers,
+                },
+                body: JSON.stringify(payload),
+            }
+        );
+        return response;
+    };
 
     const onSubmit = async (data, e) => {
         if (!selectedImage) {
-            toast("Please select the image to upload");
+            toast.error("Please select the image to upload");
             return;
         }
         if (!selectedBanner) {
-            toast("Please select the banner to upload");
+            toast.error("Please select the banner to upload");
             return;
         }
         try {
@@ -107,14 +112,17 @@ const CreateNewArea = ({ className, space }) => {
             form.append("slug", slug);
             form.append("image", selectedImage);
             form.append("banner", selectedBanner);
-            console.log(form.entries(), form.get("slug"));
-            await apiPost(
+            const response = await apiPost(
                 "collections",
                 { ...selectedJson, slug },
                 {
                     "x-auth-token": token,
                 }
             );
+            if (response.status !== 200) {
+                const result = await response.json();
+                throw new Error(result.error);
+            }
             router.push({
                 pathname: "/create-collection-progress",
             });
@@ -122,7 +130,7 @@ const CreateNewArea = ({ className, space }) => {
             reset();
             setSelectedImage();
         } catch (error) {
-            toast("Error occurred in submission");
+            toast.error(`Error: ${error.message}`);
         }
     };
 
