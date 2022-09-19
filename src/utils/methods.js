@@ -163,6 +163,8 @@ const isEmpty = (obj) => {
     return true;
 };
 
+const toSlug = (name) => (name || "").trim().toLowerCase().replaceAll(" ", "-");
+
 module.exports = {
     slideUp,
     slideDown,
@@ -175,4 +177,5 @@ module.exports = {
     shuffleArray,
     hasKey,
     isEmpty,
+    toSlug,
 };

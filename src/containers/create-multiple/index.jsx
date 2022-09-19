@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import clsx from "clsx";
@@ -10,18 +10,21 @@ import ErrorText from "@ui/error-text";
 import { toast } from "react-toastify";
 import stepsData from "../../data/steps.json";
 import Steps from "@components/steps";
+import { toSlug } from "@utils/methods";
 
 const CreateNewArea = ({ className, space }) => {
     const [showProductModal, setShowProductModal] = useState(false);
     const [selectedImage, setSelectedImage] = useState();
-    const [selectedLogo, setSelectedLogo] = useState();
     const [selectedBanner, setSelectedBanner] = useState();
     const [hasImageError, setHasImageError] = useState(false);
     const [previewData, setPreviewData] = useState({});
     const [isPreview, setIsPreview] = useState(false);
     const [selectedJson, setSelectedJson] = useState(null);
-    const jsonRef = useRef(null);
     const router = useRouter();
+
+    const slug = useMemo(() => {
+        return selectedJson ? toSlug(selectedJson["name"]) : "";
+    }, [selectedJson]);
 
     const {
         register,
@@ -66,6 +69,7 @@ const CreateNewArea = ({ className, space }) => {
             const reader = new FileReader();
             reader.addEventListener("load", (event) => {
                 setSelectedJson(JSON.parse(event.target.result));
+                setIsPreview(true);
             });
             reader.readAsText(file);
         }
@@ -82,43 +86,38 @@ const CreateNewArea = ({ className, space }) => {
         });
 
     const onSubmit = async (data, e) => {
-        const { target } = e;
-        const submitBtn =
-            target.localName === "span" ? target.parentElement : target;
-        const isPreviewBtn = submitBtn.dataset?.btn;
-        setHasImageError(!selectedImage);
-        if (isPreviewBtn && selectedImage) {
-            setPreviewData({ ...data, image: selectedImage });
-            setShowProductModal(true);
-        }
-        if (!isPreviewBtn) {
-            try {
-                const token = localStorage.getItem("token");
-                await apiPost("collections", selectedJson, {
-                    "x-auth-token": token,
-                });
-                router.push({
-                    pathname: "/create-collection-progress",
-                });
-                notify();
-                reset();
-                setSelectedImage();
-            } catch (error) {
-                toast("Error occurred in submission");
-            }
-        }
-    };
-
-    const onUploadJSON = () => {
-        jsonRef.current.click();
-    };
-
-    const onContinue = () => {
-        if (!selectedJson) {
-            toast("Please upload JSON");
+        if (!selectedImage) {
+            toast("Please select the image to upload");
             return;
         }
-        setIsPreview(true);
+        if (!selectedBanner) {
+            toast("Please select the banner to upload");
+            return;
+        }
+        try {
+            const token = localStorage.getItem("token");
+            const form = new FormData();
+            form.append("data", "data");
+            Object.keys(selectedJson).map((key) => {
+                const value = selectedJson[key];
+                form.append(key, value);
+            });
+            form.append("slug", slug);
+            form.append("image", selectedImage);
+            form.append("banner", selectedBanner);
+            console.log(form.entries(), form.get("slug"));
+            await apiPost("collections", form, {
+                "x-auth-token": token,
+            });
+            router.push({
+                pathname: "/create-collection-progress",
+            });
+            notify();
+            reset();
+            setSelectedImage();
+        } catch (error) {
+            toast("Error occurred in submission");
+        }
     };
 
     return (
@@ -184,23 +183,110 @@ const CreateNewArea = ({ className, space }) => {
                                         <strong>25.00 KDA $50,000</strong>
                                     </span>
                                 </div>
-                                {!isPreview && (
-                                    <div className="col-md-12 mt--20">
-                                        <div className="input-box">
-                                            <Button
-                                                onClick={onContinue}
-                                                fullwidth
-                                                data-btn="submit"
-                                            >
-                                                Continue
-                                            </Button>
-                                        </div>
-                                    </div>
-                                )}
                             </div>
                             {isPreview && (
                                 <div className="col-lg-8 mx-auto">
                                     <div className="form-wrapper-one">
+                                        <div className="upload-area mb--20">
+                                            <div className="upload-formate mb--30">
+                                                <h6 className="title">
+                                                    Upload image
+                                                </h6>
+                                                <p className="formate">
+                                                    Drag or choose your iimage
+                                                    to upload
+                                                </p>
+                                            </div>
+
+                                            <div className="brows-file-wrapper">
+                                                <input
+                                                    name="image"
+                                                    id="image"
+                                                    type="file"
+                                                    className="inputfile"
+                                                    onChange={imageChange}
+                                                />
+                                                {selectedImage && (
+                                                    <img
+                                                        id="createfileImage"
+                                                        src={URL.createObjectURL(
+                                                            selectedImage
+                                                        )}
+                                                        alt=""
+                                                        data-black-overlay="6"
+                                                    />
+                                                )}
+
+                                                <label
+                                                    htmlFor="image"
+                                                    title="No File Choosen"
+                                                >
+                                                    <i className="feather-upload" />
+                                                    <span className="text-center">
+                                                        Choose an image
+                                                    </span>
+                                                    <p className="text-center mt--10">
+                                                        Only accept image files.{" "}
+                                                        <br />
+                                                    </p>
+                                                </label>
+                                            </div>
+                                            {!selectedImage && (
+                                                <ErrorText>
+                                                    Image is required
+                                                </ErrorText>
+                                            )}
+                                        </div>
+                                        <div className="upload-area mb--20">
+                                            <div className="upload-formate mb--30">
+                                                <h6 className="title">
+                                                    Upload banner
+                                                </h6>
+                                                <p className="formate">
+                                                    Drag or choose your banner
+                                                    to upload
+                                                </p>
+                                            </div>
+
+                                            <div className="brows-file-wrapper">
+                                                <input
+                                                    name="banner"
+                                                    id="banner"
+                                                    type="file"
+                                                    className="inputfile"
+                                                    onChange={bannerChange}
+                                                />
+                                                {selectedBanner && (
+                                                    <img
+                                                        id="createfileImage"
+                                                        src={URL.createObjectURL(
+                                                            selectedBanner
+                                                        )}
+                                                        alt=""
+                                                        data-black-overlay="6"
+                                                    />
+                                                )}
+
+                                                <label
+                                                    htmlFor="banner"
+                                                    title="No File Choosen"
+                                                >
+                                                    <i className="feather-upload" />
+                                                    <span className="text-center">
+                                                        Choose a banner file
+                                                    </span>
+                                                    <p className="text-center mt--10">
+                                                        Only accept image files.{" "}
+                                                        <br />
+                                                    </p>
+                                                </label>
+                                            </div>
+                                            {!selectedBanner && (
+                                                <ErrorText>
+                                                    Banner is required
+                                                </ErrorText>
+                                            )}
+                                        </div>
                                         <div className="row">
                                             <div className="col-md-6">
                                                 <div className="input-box pb--20">
@@ -228,6 +314,16 @@ const CreateNewArea = ({ className, space }) => {
                                                         id="size"
                                                         placeholder="Collection Size: 10000"
                                                         value={`Collection Size: ${selectedJson.size}`}
+                                                        readOnly
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <div className="input-box pb--20">
+                                                    <input
+                                                        id="size"
+                                                        placeholder="Collection Slug: "
+                                                        value={`Collection Slug: ${slug}`}
                                                         readOnly
                                                     />
                                                 </div>
