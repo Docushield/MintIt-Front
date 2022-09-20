@@ -11,10 +11,11 @@ import ErrorText from "@ui/error-text";
 import { toast } from "react-toastify";
 import stepsData from "../../data/steps.json";
 import Steps from "@components/steps";
+import CreateCollectionArea from "@containers/create-collection";
 import { toSlug } from "@utils/methods";
 import { formatDate } from "@utils/date";
 
-const CreateNewArea = ({ className, space }) => {
+const CreateNewArea = ({ className, space, handleSend }) => {
     const [showProductModal, setShowProductModal] = useState(false);
     const [selectedImage, setSelectedImage] = useState();
     const [selectedBanner, setSelectedBanner] = useState();
@@ -77,61 +78,8 @@ const CreateNewArea = ({ className, space }) => {
         }
     };
 
-    const apiPost = async (route, payload, headers) => {
-        const response = await fetch(
-            `https://the-backend.fly.dev/api/${route}`,
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    ...headers,
-                },
-                body: JSON.stringify(payload),
-            }
-        );
-        return response;
-    };
-
-    const onSubmit = async (data, e) => {
-        if (!selectedImage) {
-            toast.error("Please select the image to upload");
-            return;
-        }
-        if (!selectedBanner) {
-            toast.error("Please select the banner to upload");
-            return;
-        }
-        try {
-            const token = localStorage.getItem("token");
-            const form = new FormData();
-            form.append("data", "data");
-            Object.keys(selectedJson).map((key) => {
-                const value = selectedJson[key];
-                form.append(key, value);
-            });
-            form.append("slug", slug);
-            form.append("image", selectedImage);
-            form.append("banner", selectedBanner);
-            const response = await apiPost(
-                "collections",
-                { ...selectedJson, slug },
-                {
-                    "x-auth-token": token,
-                }
-            );
-            if (response.status !== 200) {
-                const result = await response.json();
-                throw new Error(result.error);
-            }
-            router.push({
-                pathname: "/create-collection-progress",
-            });
-            notify();
-            reset();
-            setSelectedImage();
-        } catch (error) {
-            toast.error(`Error: ${error.message}`);
-        }
+    const onSubmit = async () => {
+        await handleSend(selectedImage, selectedBanner, selectedJson, slug);
     };
 
     return (
@@ -541,6 +489,7 @@ const CreateNewArea = ({ className, space }) => {
 CreateNewArea.propTypes = {
     className: PropTypes.string,
     space: PropTypes.oneOf([1]),
+    handleSend: PropTypes.func,
 };
 
 CreateNewArea.defaultProps = {
