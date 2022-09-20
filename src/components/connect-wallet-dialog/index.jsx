@@ -1,19 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useSelector, useDispatch } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Pact from "pact-lang-api";
-
-const ConnectWalletDialog = ({
-    show,
-    setShow,
-    setAccount,
+import {
+    toggleConnectWalletDialog,
     setConnected,
-    setWalletName,
-    walletName,
-}) => {
+} from "../../store/wallet.module";
+
+const ConnectWalletDialog = () => {
+    const dispatch = useDispatch();
+    const show = useSelector((state) => state.wallet.isConnectWalletDialog);
+
     const handleClose = () => {
-        setShow(!show);
+        dispatch(toggleConnectWalletDialog());
     };
 
     const kdaEnvironment = {
@@ -62,7 +63,12 @@ const ConnectWalletDialog = ({
 
         localStorage.setItem("userAccount", xwalletResp.account);
         localStorage.setItem("walletName", "X-Wallet");
-        setAccount(xwalletResp.account);
+        dispatch(
+            setConnected({
+                account: xwalletResp.account,
+                walletName: "X-Wallet",
+            })
+        );
     };
 
     const connectZelcore = async () => {
@@ -88,7 +94,12 @@ const ConnectWalletDialog = ({
             return;
         }
 
-        setAccount(getAccountsJson.data[0]);
+        dispatch(
+            setConnected({
+                account: getAccountsJson.data[0],
+                walletName: "Zelcore",
+            })
+        );
     };
 
     const connect = async (provider) => {
@@ -196,13 +207,9 @@ const ConnectWalletDialog = ({
 
     const authenticate = async (provider) => {
         try {
-            setWalletName(provider);
-
             await connect(provider);
 
             const loginSignature = await getLoginSignature(provider);
-
-            setConnected(true);
 
             handleClose();
 
@@ -234,14 +241,6 @@ const ConnectWalletDialog = ({
             </Modal.Body>
         </Modal>
     );
-};
-
-ConnectWalletDialog.propTypes = {
-    show: PropTypes.bool,
-    setShow: PropTypes.func,
-    setAccount: PropTypes.func,
-    setConnected: PropTypes.func,
-    setWalletName: PropTypes.func,
 };
 
 export default ConnectWalletDialog;

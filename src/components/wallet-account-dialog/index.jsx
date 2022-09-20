@@ -2,17 +2,20 @@ import React from "react";
 import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { useSelector, useDispatch } from "react-redux";
+import {
+    setDisconnected,
+    toggleWalletAccountDialog,
+} from "../../store/wallet.module";
 
-const WalletAccountDialog = ({
-    show,
-    setShow,
-    account,
-    walletName,
-    setConnected,
-    onChangeWallet,
-}) => {
+const WalletAccountDialog = ({ onChangeWallet }) => {
+    const dispatch = useDispatch();
+    const show = useSelector((state) => state.wallet.isWalletAccountDialog);
+    const account = useSelector((state) => state.wallet.account);
+    const walletName = useSelector((state) => state.wallet.walletName);
+
     const handleClose = () => {
-        setShow(!show);
+        dispatch(toggleWalletAccountDialog());
     };
 
     const kdaEnvironment = {
@@ -22,7 +25,7 @@ const WalletAccountDialog = ({
 
     const disconnectWallet = async () => {
         console.log("Disconnect Wallet.");
-        setConnected(false);
+        dispatch(setDisconnected());
         await window.kadena.request({
             method: "kda_disconnect",
             networkId: kdaEnvironment.networkId,
@@ -53,11 +56,6 @@ const WalletAccountDialog = ({
 };
 
 WalletAccountDialog.propTypes = {
-    show: PropTypes.bool,
-    setShow: PropTypes.func,
-    account: PropTypes.string,
-    walletName: PropTypes.string,
-    setConnected: PropTypes.func,
     onChangeWallet: PropTypes.func,
 };
 
