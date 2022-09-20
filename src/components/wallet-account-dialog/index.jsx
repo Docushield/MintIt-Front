@@ -27,6 +27,8 @@ const WalletAccountDialog = ({
             method: "kda_disconnect",
             networkId: kdaEnvironment.networkId,
         });
+        localStorage.removeItem("userAccount");
+        localStorage.removeItem("walletName");
         handleClose();
     };
 
