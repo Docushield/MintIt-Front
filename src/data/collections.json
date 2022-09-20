@@ -2,7 +2,7 @@
     {
         "id": 1,
         "title": "Collection Name",
-        "slug": "/collection",
+        "slug": "collection-1",
         "total_item": 27,
         "image": {
             "src": "/images/collection/collection-xl.jpg"
@@ -26,7 +26,7 @@
     {
         "id": 2,
         "title": "Collection Name",
-        "slug": "/collection",
+        "slug": "collection-2",
         "total_item": 20,
         "image": {
             "src": "/images/collection/collection-xl.jpg"
@@ -50,7 +50,7 @@
     {
         "id": 3,
         "title": "Collection Name",
-        "slug": "/collection",
+        "slug": "collection-3",
         "total_item": 15,
         "image": {
             "src": "/images/collection/collection-xl.jpg"
