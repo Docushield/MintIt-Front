@@ -10,9 +10,14 @@ import ProductFilter from "@components/product-filter/layout-02";
 import { ProductType } from "@utils/types";
 import { shuffleArray } from "@utils/methods";
 import { Button } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
 import MintConfirmDialog from "@components/mint-confirm-dialog";
+import { toggleConnectWalletDialog } from "src/store/wallet.module";
 
 const DublicateCollectionArea = ({ className, data }) => {
+    const dispatch = useDispatch();
+    const connected = useSelector((state) => state.wallet.connected);
+
     const [isConfirm, setIsConfirm] = React.useState(false);
     const onSaleProducts = shuffleArray(data.products).slice(0, 10);
     const ownedProducts = shuffleArray(data.products).slice(0, 10);
@@ -38,7 +43,11 @@ const DublicateCollectionArea = ({ className, data }) => {
     };
 
     const onMint = () => {
-        setIsConfirm(true);
+        if (connected) {
+            setIsConfirm(true);
+        } else {
+            dispatch(toggleConnectWalletDialog());
+        }
     };
 
     return (

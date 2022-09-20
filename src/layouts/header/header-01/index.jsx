@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import Logo from "@components/logo";
@@ -15,30 +16,40 @@ import Button from "@ui/button";
 import { useOffcanvas, useSticky, useFlyoutSearch } from "@hooks";
 import headerData from "../../../data/general/header-01.json";
 import menuData from "../../../data/general/menu-01.json";
+import {
+    setConnected,
+    toggleConnectWalletDialog,
+    toggleWalletAccountDialog,
+} from "../../../store/wallet.module";
 
 const Header = ({ className }) => {
+    const dispatch = useDispatch();
+    const connected = useSelector((state) => state.wallet.connected);
+    const account = useSelector((state) => state.wallet.account);
+
     const sticky = useSticky();
     const { offcanvas, offcanvasHandler } = useOffcanvas();
     const { search, searchHandler } = useFlyoutSearch();
-    const isAuthenticated = false; // TODO: Update to state hook
-    const [isShowConnect, setIsShowConnect] = useState(false);
-    const [isShowAccount, setIsShowAccount] = useState(false);
-    const [account, setAccount] = useState("");
-    const [connected, setConnected] = useState(false);
-    const [walletName, setWalletName] = useState("");
 
     useEffect(() => {
         if (localStorage.getItem("userAccount")) {
-            setAccount(localStorage.getItem("userAccount"));
-            setWalletName(localStorage.getItem("walletName"));
-            setConnected(true);
+            dispatch(
+                setConnected({
+                    account: localStorage.getItem("userAccount"),
+                    walletName: localStorage.getItem("walletName"),
+                })
+            );
         }
     }, []);
 
     const onChangeWallet = () => {
-        setIsShowAccount(false);
-        setIsShowConnect(true);
+        dispatch(toggleWalletAccountDialog());
+        dispatch(toggleConnectWalletDialog());
     };
+
+    const onConnect = () => dispatch(toggleConnectWalletDialog());
+
+    const onShowAccount = () => dispatch(toggleWalletAccountDialog());
 
     return (
         <>
@@ -78,40 +89,32 @@ const Header = ({ className }) => {
                                 </div>
                                 <FlyoutSearchForm isOpen={search} />
                             </div>
-                            {!isAuthenticated && (
-                                <div className="setting-option header-btn">
-                                    <div className="icon-box">
-                                        {!connected ? (
-                                            <Button
-                                                color="primary-alta"
-                                                className="connectBtn"
-                                                size="small"
-                                                onClick={() =>
-                                                    setIsShowConnect(true)
-                                                }
-                                            >
-                                                Connect Wallet
-                                            </Button>
-                                        ) : (
-                                            <Button
-                                                color="primary-alta"
-                                                className="connectBtn"
-                                                size="small"
-                                                onClick={() =>
-                                                    setIsShowAccount(true)
-                                                }
-                                            >
-                                                {account.slice(0, 10)}...
-                                            </Button>
-                                        )}
-                                    </div>
+                            <div className="setting-option header-btn">
+                                <div className="icon-box">
+                                    {!connected ? (
+                                        <Button
+                                            color="primary-alta"
+                                            className="connectBtn"
+                                            size="small"
+                                            onClick={onConnect}
+                                        >
+                                            Connect Wallet
+                                        </Button>
+                                    ) : (
+                                        <Button
+                                            color="primary-alta"
+                                            className="connectBtn"
+                                            size="small"
+                                            onClick={onShowAccount}
+                                        >
+                                            {account.slice(0, 10)}...
+                                        </Button>
+                                    )}
                                 </div>
-                            )}
-                            {!isAuthenticated && (
-                                <div className="setting-option rn-icon-list user-account">
-                                    <UserDropdown />
-                                </div>
-                            )}
+                            </div>
+                            <div className="setting-option rn-icon-list user-account">
+                                <UserDropdown />
+                            </div>
                             {/* <div className="setting-option rn-icon-list notification-badge">
                                 <div className="icon-box">
                                     <Anchor path={headerData.notification_link}>
@@ -135,22 +138,8 @@ const Header = ({ className }) => {
                     </div>
                 </div>
             </header>
-            <ConnectWalletDialog
-                show={isShowConnect}
-                setShow={setIsShowConnect}
-                setAccount={setAccount}
-                setConnected={setConnected}
-                setWalletName={setWalletName}
-                walletName={walletName}
-            />
-            <WalletAccountDialog
-                show={isShowAccount}
-                setShow={setIsShowAccount}
-                account={account}
-                walletName={walletName}
-                setConnected={setConnected}
-                onChangeWallet={onChangeWallet}
-            />
+            <ConnectWalletDialog />
+            <WalletAccountDialog onChangeWallet={onChangeWallet} />
             <MobileMenu
                 isOpen={offcanvas}
                 onClick={offcanvasHandler}

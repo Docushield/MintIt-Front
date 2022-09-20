@@ -5,6 +5,8 @@ import { MoralisProvider } from "react-moralis";
 import { SSRProvider } from "react-bootstrap";
 import sal from "sal.js";
 import { ThemeProvider } from "next-themes";
+import { Provider } from "react-redux";
+import store from "../store";
 import "../assets/css/bootstrap.min.css";
 import "../assets/css/feather.css";
 import "../assets/css/modal-video.css";
@@ -27,13 +29,18 @@ const MyApp = ({ Component, pageProps }) => {
         document.body.className = `${pageProps.className}`;
     });
     return (
-        <SSRProvider>
-            <MoralisProvider appId={moralisAppId} serverUrl={moralisServerURL}>
-                <ThemeProvider defaultTheme="dark">
-                    <Component {...pageProps} />
-                </ThemeProvider>
-            </MoralisProvider>
-        </SSRProvider>
+        <Provider store={store}>
+            <SSRProvider>
+                <MoralisProvider
+                    appId={moralisAppId}
+                    serverUrl={moralisServerURL}
+                >
+                    <ThemeProvider defaultTheme="dark">
+                        <Component {...pageProps} />
+                    </ThemeProvider>
+                </MoralisProvider>
+            </SSRProvider>
+        </Provider>
     );
 };
 
