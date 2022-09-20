@@ -3,8 +3,8 @@ import Anchor from "@ui/anchor";
 
 const SubMenu = ({ menu }) => (
     <ul className="submenu">
-        {menu.map((nav) => (
-            <li key={nav.id}>
+        {menu.map((nav, index) => (
+            <li key={nav.id || index}>
                 <Anchor
                     path={nav.path}
                     className={nav.isLive ? "live-expo" : ""}
