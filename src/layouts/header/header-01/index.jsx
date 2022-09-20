@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import Logo from "@components/logo";
@@ -9,7 +9,7 @@ import FlyoutSearchForm from "@components/search-form/layout-02";
 import UserDropdown from "@components/user-dropdown";
 import ColorSwitcher from "@components/color-switcher";
 import ConnectWalletDialog from "@components/connect-wallet-dialog";
-import WalletAccoungDialog from "@components/wallet-account-dialog";
+import WalletAccountDialog from "@components/wallet-account-dialog";
 import BurgerButton from "@ui/burger-button";
 import Button from "@ui/button";
 import { useOffcanvas, useSticky, useFlyoutSearch } from "@hooks";
@@ -26,6 +26,14 @@ const Header = ({ className }) => {
     const [account, setAccount] = useState("");
     const [connected, setConnected] = useState(false);
     const [walletName, setWalletName] = useState("");
+
+    useEffect(() => {
+        if (localStorage.getItem("userAccount")) {
+            setAccount(localStorage.getItem("userAccount"));
+            setWalletName(localStorage.getItem("walletName"));
+            setConnected(true);
+        }
+    }, []);
 
     const onChangeWallet = () => {
         setIsShowAccount(false);
@@ -135,7 +143,7 @@ const Header = ({ className }) => {
                 setWalletName={setWalletName}
                 walletName={walletName}
             />
-            <WalletAccoungDialog
+            <WalletAccountDialog
                 show={isShowAccount}
                 setShow={setIsShowAccount}
                 account={account}

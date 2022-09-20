@@ -60,6 +60,8 @@ const ConnectWalletDialog = ({
             );
         }
 
+        localStorage.setItem("userAccount", xwalletResp.account);
+        localStorage.setItem("walletName", "X-Wallet");
         setAccount(xwalletResp.account);
     };
 
