@@ -14,6 +14,7 @@ import WalletAccountDialog from "@components/wallet-account-dialog";
 import BurgerButton from "@ui/burger-button";
 import Button from "@ui/button";
 import { useOffcanvas, useSticky, useFlyoutSearch } from "@hooks";
+import { parseCookies, setCookie } from "nookies";
 import headerData from "../../../data/general/header-01.json";
 import menuData from "../../../data/general/menu-01.json";
 import {
@@ -32,11 +33,12 @@ const Header = ({ className }) => {
     const { search, searchHandler } = useFlyoutSearch();
 
     useEffect(() => {
-        if (localStorage.getItem("userAccount")) {
+        const cookies = parseCookies();
+        if (cookies["userAccount"]) {
             dispatch(
                 setConnected({
-                    account: localStorage.getItem("userAccount"),
-                    walletName: localStorage.getItem("walletName"),
+                    account: cookies["userAccount"],
+                    walletName: cookies["walletName"],
                 })
             );
         }

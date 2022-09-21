@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Pact from "pact-lang-api";
+import { setCookie, parseCookies } from "nookies";
 import {
     toggleConnectWalletDialog,
     setConnected,
@@ -61,8 +62,8 @@ const ConnectWalletDialog = () => {
             );
         }
 
-        localStorage.setItem("userAccount", xwalletResp.account);
-        localStorage.setItem("walletName", "X-Wallet");
+        setCookie(null, "userAccount", xwalletResp.account);
+        setCookie(null, "walletName", "X-Wallet");
         dispatch(
             setConnected({
                 account: xwalletResp.account,
@@ -182,7 +183,8 @@ const ConnectWalletDialog = () => {
     };
 
     const getLoginSignature = async (provider) => {
-        const account = localStorage.getItem("userAccount");
+        const cookies = parseCookies();
+        const account = cookies["userAccount"];
 
         const { signedCmd } = await sign(provider, {
             account,
@@ -196,7 +198,8 @@ const ConnectWalletDialog = () => {
 
     const apiLogin = async (loginSignature) => {
         const { cmd, sigs } = loginSignature;
-        const account = localStorage.getItem("userAccount");
+        const cookies = parseCookies();
+        const account = cookies["userAccount"];
 
         return apiPost("auth", {
             account,
@@ -216,7 +219,9 @@ const ConnectWalletDialog = () => {
             const response = await apiLogin(loginSignature);
             const { token } = await response.json();
 
-            localStorage.setItem("token", token);
+            setCookie(null, "token", token, {
+                maxAge: 30 * 24 * 60 * 60,
+            });
 
             // TODO: Save token and use it in auth
             return token;

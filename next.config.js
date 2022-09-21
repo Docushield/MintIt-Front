@@ -1,10 +1,9 @@
 const path = require("path");
 
 module.exports = {
- 
     //reactStrictMode: true,
     eslint: {
-      ignoreDuringBuilds: true,
+        ignoreDuringBuilds: true,
     },
     reactStrictMode: true,
     sassOptions: {
@@ -19,5 +18,8 @@ module.exports = {
             },
         ];
         return config;
+    },
+    images: {
+        domains: ["the-backend.fly.dev"],
     },
 };

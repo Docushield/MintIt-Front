@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
+import { parseCookies } from "nookies";
 import SEO from "@components/seo";
 import Wrapper from "@layout/wrapper";
 import Header from "@layout/header/header-01";
@@ -13,10 +15,12 @@ export async function getStaticProps() {
 }
 
 const CreateMultiple = () => {
+    const router = useRouter();
     const [uploading, setUploading] = useState(false);
     const [json, setJson] = useState({});
     const [isError, setIsError] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+    const cookies = parseCookies();
 
     const apiGet = async (route, headers) => {
         const response = await fetch(
@@ -63,7 +67,7 @@ const CreateMultiple = () => {
         setJson(selectedJson);
         setUploading(true);
         try {
-            const token = localStorage.getItem("token");
+            const token = cookies["token"];
             // Check slug availability
             const collection = await apiGet(`collections/${slug}`, {
                 "x-auth-token": token,
@@ -92,7 +96,7 @@ const CreateMultiple = () => {
                 throw new Error(result.error);
             }
             router.push({
-                pathname: "/create-collection-progress",
+                pathname: `/collections/${slug}`,
             });
             notify();
             reset();

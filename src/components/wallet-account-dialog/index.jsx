@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useSelector, useDispatch } from "react-redux";
+import { destroyCookie } from "nookies";
 import {
     setDisconnected,
     toggleWalletAccountDialog,
@@ -30,8 +31,8 @@ const WalletAccountDialog = ({ onChangeWallet }) => {
             method: "kda_disconnect",
             networkId: kdaEnvironment.networkId,
         });
-        localStorage.removeItem("userAccount");
-        localStorage.removeItem("walletName");
+        destroyCookie(null, "userAccount");
+        destroyCookie(null, "walletName");
         handleClose();
     };
 

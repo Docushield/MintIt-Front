@@ -10,6 +10,6 @@ export const formatUntilLive = (until) => {
     }`;
 };
 
-export const formatDate = (date, formatter) => {
+export const formatDate = (date, formatter = "YYYY-MM-DD") => {
     return moment(date).format(formatter);
 };
