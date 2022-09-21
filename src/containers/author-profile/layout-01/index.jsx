@@ -11,8 +11,8 @@ import { ProductType } from "@utils/types";
 import { shuffleArray } from "@utils/methods";
 import { Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import MintConfirmDialog from "@components/mint-confirm-dialog";
 import { toggleConnectWalletDialog } from "src/store/wallet.module";
+import { toggleMintConfirmDialog } from "src/store/collection.module";
 
 const DublicateCollectionArea = ({ className, data }) => {
     const dispatch = useDispatch();
@@ -44,7 +44,7 @@ const DublicateCollectionArea = ({ className, data }) => {
 
     const onMint = () => {
         if (connected) {
-            setIsConfirm(true);
+            dispatch(toggleMintConfirmDialog());
         } else {
             dispatch(toggleConnectWalletDialog());
         }
@@ -210,7 +210,6 @@ const DublicateCollectionArea = ({ className, data }) => {
                     </TabContent>
                 </div>
             </TabContainer>
-            <MintConfirmDialog show={isConfirm} setShow={setIsConfirm} />
         </div>
     );
 };

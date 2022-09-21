@@ -1,14 +1,16 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleMintConfirmDialog } from "../../store/collection.module";
 
-const MintConfirmDialog = ({ show, setShow }) => {
+const MintConfirmDialog = () => {
+    const dispatch = useDispatch();
+    const show = useSelector((state) => state.collection.isMintConfirmDialog);
     const account = useSelector((state) => state.wallet.account);
 
     const handleClose = () => {
-        setShow(!show);
+        dispatch(toggleMintConfirmDialog());
     };
 
     return (
@@ -55,11 +57,6 @@ const MintConfirmDialog = ({ show, setShow }) => {
             </Modal.Body>
         </Modal>
     );
-};
-
-MintConfirmDialog.propTypes = {
-    show: PropTypes.bool,
-    setShow: PropTypes.func,
 };
 
 export default MintConfirmDialog;
