@@ -28,6 +28,7 @@
         "next": "12.1.0",
         "next-themes": "^0.1.1",
         "nextjs": "^0.0.3",
+        "nookies": "^2.5.2",
         "pact-lang-api": "^4.3.5",
         "prop-types": "^15.7.2",
         "react": "17.0.2",
