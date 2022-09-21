@@ -21,7 +21,7 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
             />
             <div className="rn-author-bg-area position-relative ptb--150">
                 <Image
-                    src={`https://the-backend.fly.dev/${data.bannerImageUrl}`}
+                    src={data.bannerImageUrl}
                     alt={data.name}
                     layout="fill"
                     objectFit="cover"
@@ -44,7 +44,7 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                                     {data.imageUrl && (
                                         <div className="user-thumbnail">
                                             <Image
-                                                src={`https://the-backend.fly.dev/${data.imageUrl}`}
+                                                src={data.imageUrl}
                                                 alt={data.name}
                                                 width={140}
                                                 height={140}
