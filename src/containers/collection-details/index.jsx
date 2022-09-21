@@ -2,16 +2,27 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import Image from "next/image";
-import { ImageType } from "@utils/types";
 import ShareDropdown from "@components/share-dropdown";
 import ShareModal from "@components/modals/share-modal";
 import Button from "@components/ui/button";
-import Anchor from "@ui/anchor";
 import { formatDate } from "@utils/date";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleMintConfirmDialog } from "src/store/collection.module";
+import { toggleConnectWalletDialog } from "src/store/wallet.module";
 
 const CollectionDetailsIntroArea = ({ className, space, data }) => {
+    const dispatch = useDispatch();
+    const connected = useSelector((state) => state.wallet.connected);
     const [isShareModalOpen, setIsShareModalOpen] = useState(false);
     const shareModalHandler = () => setIsShareModalOpen((prev) => !prev);
+
+    const onMint = () => {
+        if (connected) {
+            dispatch(toggleMintConfirmDialog());
+        } else {
+            dispatch(toggleConnectWalletDialog());
+        }
+    };
 
     return (
         <>
@@ -20,14 +31,17 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                 handleModal={shareModalHandler}
             />
             <div className="rn-author-bg-area position-relative ptb--150">
-                <Image
-                    src={data.bannerImageUrl}
-                    alt={data.name}
-                    layout="fill"
-                    objectFit="cover"
-                    quality={100}
-                    priority
-                />
+                <img src={data.bannerImageUrl} />
+                {data.bannerImageUrl && (
+                    <Image
+                        src={data.bannerImageUrl}
+                        alt={data.name}
+                        layout="fill"
+                        objectFit="cover"
+                        quality={100}
+                        priority
+                    />
+                )}
             </div>
             <div
                 className={clsx(
@@ -190,6 +204,15 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div className="container d-flex my-4">
+                <div className="mint-status-box">Public Round</div>
+                <div className="mint-status-box">Mint: 20 KDA</div>
+                <div className="mint-status-box">Remaining: 1029</div>
+                <Button className="ms-4" onClick={onMint}>
+                    Mint Now
+                </Button>
             </div>
         </>
     );

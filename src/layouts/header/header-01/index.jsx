@@ -11,6 +11,7 @@ import UserDropdown from "@components/user-dropdown";
 import ColorSwitcher from "@components/color-switcher";
 import ConnectWalletDialog from "@components/connect-wallet-dialog";
 import WalletAccountDialog from "@components/wallet-account-dialog";
+import MintConfirmDialog from "@components/mint-confirm-dialog";
 import BurgerButton from "@ui/burger-button";
 import Button from "@ui/button";
 import { useOffcanvas, useSticky, useFlyoutSearch } from "@hooks";
@@ -142,6 +143,7 @@ const Header = ({ className }) => {
             </header>
             <ConnectWalletDialog />
             <WalletAccountDialog onChangeWallet={onChangeWallet} />
+            <MintConfirmDialog />
             <MobileMenu
                 isOpen={offcanvas}
                 onClick={offcanvasHandler}

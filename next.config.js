@@ -20,6 +20,6 @@ module.exports = {
         return config;
     },
     images: {
-        domains: ["the-backend.fly.dev"],
+        domains: ["mintit-files.s3.us-east-2.amazonaws.com"],
     },
 };
