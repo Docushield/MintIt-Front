@@ -21,29 +21,24 @@ const CreateMultiple = () => {
     const [isError, setIsError] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const cookies = parseCookies();
+    const baseURL = process.env.API_URL || "https://the-backend.fly.dev";
 
     const apiGet = async (route, headers) => {
-        const response = await fetch(
-            `https://the-backend.fly.dev/api/${route}`,
-            {
-                method: "GET",
-                headers,
-            }
-        );
+        const response = await fetch(`${baseURL}/api/${route}`, {
+            method: "GET",
+            headers,
+        });
         return response;
     };
 
     const apiPost = async (route, payload, headers) => {
-        const response = await fetch(
-            `https://the-backend.fly.dev/api/${route}`,
-            {
-                method: "POST",
-                headers: {
-                    ...headers,
-                },
-                body: payload,
-            }
-        );
+        const response = await fetch(`${baseURL}/api/${route}`, {
+            method: "POST",
+            headers: {
+                ...headers,
+            },
+            body: payload,
+        });
         return response;
     };
 

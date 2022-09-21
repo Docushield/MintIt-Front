@@ -13,6 +13,7 @@ import {
 const ConnectWalletDialog = () => {
     const dispatch = useDispatch();
     const show = useSelector((state) => state.wallet.isConnectWalletDialog);
+    const baseURL = process.env.API_URL || "https://the-backend.fly.dev";
 
     const handleClose = () => {
         dispatch(toggleConnectWalletDialog());
@@ -24,7 +25,7 @@ const ConnectWalletDialog = () => {
     };
 
     const apiPost = async (route, payload) =>
-        fetch(`https://the-backend.fly.dev/api/${route}`, {
+        fetch(`${baseURL}/api/${route}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
