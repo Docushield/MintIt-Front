@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Pact from "pact-lang-api";
 import { useDispatch, useSelector } from "react-redux";
+import { signXWallet } from "@utils/kadena";
 import { toggleMintConfirmDialog } from "../../store/collection.module";
 
 const MintConfirmDialog = () => {
@@ -69,26 +70,6 @@ const MintConfirmDialog = () => {
             envData: cmd.envData,
             networkId,
         };
-
-        const signXWallet = async (cmd) =>
-            window.kadena.request({
-                networkId: cmd.networkId,
-                method: "kda_requestSign",
-                data: {
-                    networkId: cmd.networkId,
-                    signingCmd: {
-                        networkId: cmd.networkId,
-                        sender: cmd.sender,
-                        chainId: cmd.chainId,
-                        gasPrice: 0.0000001,
-                        gasLimit: 3000,
-                        ttl: 28800,
-                        caps: cmd.caps,
-                        pactCode: cmd.pactCode,
-                        envData: cmd.envData,
-                    },
-                },
-            });
 
         // Sign in xwallet (we can use our sign functions)
 
