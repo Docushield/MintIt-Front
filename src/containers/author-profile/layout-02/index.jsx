@@ -12,8 +12,6 @@ import { shuffleArray } from "@utils/methods";
 import { Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import FilterButton from "@ui/filter-button";
-import MintConfirmDialog from "@components/mint-confirm-dialog";
-import { toggleConnectWalletDialog } from "src/store/wallet.module";
 import { slideToggle } from "@utils/methods";
 
 function reducer(state, action) {
@@ -33,7 +31,6 @@ const DublicateCollectionArea = ({ className, data }) => {
     const appDispatch = useDispatch();
     const connected = useSelector((state) => state.wallet.connected);
 
-    const [isConfirm, setIsConfirm] = React.useState(false);
     const onSaleProducts = shuffleArray(data.products).slice(0, 10);
     const ownedProducts = shuffleArray(data.products).slice(0, 10);
     const createdProducts = shuffleArray(data.products).slice(0, 10);
@@ -71,14 +68,6 @@ const DublicateCollectionArea = ({ className, data }) => {
         //     return a.likeCount > b.likeCount ? 1 : -1;
         // });
         // dispatch({ type: "SET_PRODUCTS", payload: sortedProducts });
-    };
-
-    const onMint = () => {
-        if (connected) {
-            setIsConfirm(true);
-        } else {
-            appDispatch(toggleConnectWalletDialog());
-        }
     };
 
     return (
@@ -215,7 +204,6 @@ const DublicateCollectionArea = ({ className, data }) => {
                     </TabContent>
                 </div>
             </TabContainer>
-            <MintConfirmDialog show={isConfirm} setShow={setIsConfirm} />
         </div>
     );
 };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import Image from "next/image";
@@ -7,7 +7,10 @@ import ShareModal from "@components/modals/share-modal";
 import Button from "@components/ui/button";
 import { formatDate } from "@utils/date";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleMintConfirmDialog } from "src/store/collection.module";
+import {
+    setCurrentCollection,
+    toggleMintConfirmDialog,
+} from "src/store/collection.module";
 import { toggleConnectWalletDialog } from "src/store/wallet.module";
 
 const CollectionDetailsIntroArea = ({ className, space, data }) => {
@@ -15,6 +18,10 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
     const connected = useSelector((state) => state.wallet.connected);
     const [isShareModalOpen, setIsShareModalOpen] = useState(false);
     const shareModalHandler = () => setIsShareModalOpen((prev) => !prev);
+
+    useEffect(() => {
+        dispatch(setCurrentCollection(data));
+    }, [data]);
 
     const onMint = () => {
         if (connected) {
