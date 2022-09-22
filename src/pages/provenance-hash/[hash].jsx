@@ -3,9 +3,14 @@ import Wrapper from "@layout/wrapper";
 import Header from "@layout/header/header-01";
 import Footer from "@layout/footer/footer-01";
 import Breadcrumb from "@components/breadcrumb";
+import { parseCookies } from "nookies";
 import ProvenanceHashArea from "@containers/provenance-hash";
 
-export async function getStaticProps() {
+export async function getServerSideProps(context) {
+    const cookies = parseCookies(context);
+    const hash = context.params.hash;
+    const baseURL = process.env.API_URL || "https://the-backend.fly.dev";
+
     return { props: { className: "template-color-1" } };
 }
 
