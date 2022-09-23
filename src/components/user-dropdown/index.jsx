@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Anchor from "@ui/anchor";
-import { useMoralis } from "react-moralis";
-
 const UserDropdown = () => {
-    const { logout } = useMoralis();
+    const logout = () => {
+        console.log("logout clicked");
+    };
     return (
         <div className="icon-box">
             <Anchor path="/myprofile">
