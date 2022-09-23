@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Pact from "pact-lang-api";
 import { setCookie, parseCookies } from "nookies";
+import { signXWallet, connectXWallet as connectToXWallet } from "@utils/kadena";
 import {
     toggleConnectWalletDialog,
     setConnected,
@@ -34,34 +35,7 @@ const ConnectWalletDialog = () => {
         });
 
     const connectXWallet = async () => {
-        const { networkId, chainId } = kdaEnvironment;
-
-        if (!window.kadena || !window.kadena.isKadena) {
-            console.log("No xwallet instaled");
-            return;
-        }
-
-        const { kadena } = window;
-
-        await kadena.request({
-            method: "kda_connect",
-            networkId,
-        });
-
-        const xwalletResp = await window.kadena.request({
-            method: "kda_getSelectedAccount",
-            networkId,
-        });
-
-        if (!xwalletResp) {
-            throw new Error("Invalid xwallet response");
-        }
-
-        if (xwalletResp.chainId !== chainId) {
-            throw new Error(
-                `Wrong chain ${xwalletResp.chainId}, please open chain ${chainId}`
-            );
-        }
+        const xwalletResp = await connectToXWallet();
 
         setCookie(null, "userAccount", xwalletResp.account);
         setCookie(null, "walletName", "X-Wallet");
@@ -112,46 +86,6 @@ const ConnectWalletDialog = () => {
         }
     };
 
-    // const signXWallet = async (cmd) =>
-    //     window.kadena.request({
-    //         networkId: kdaEnvironment.networkId,
-    //         method: "kda_requestSign",
-    //         data: {
-    //             networkId: kdaEnvironment.networkId,
-    //             signingCmd: {
-    //                 networkId: kdaEnvironment.networkId,
-    //                 sender: "k:99e94e2df18e41917d755558c9809926fb1c7c51397ba351d4863e59220d3578",
-    //                 chainId: kdaEnvironment.chainId,
-    //                 gasPrice: 0.0000001,
-    //                 gasLimit: 3000,
-    //                 ttl: 28800,
-    //                 caps: [],
-    //                 pactCode: cmd.pactCode,
-    //                 envData: cmd.envData,
-    //             },
-    //         },
-    //     });
-
-    const signXWallet = async (cmd) =>
-        window.kadena.request({
-            networkId: cmd.networkId,
-            method: "kda_requestSign",
-            data: {
-                networkId: cmd.networkId,
-                signingCmd: {
-                    networkId: cmd.networkId,
-                    sender: cmd.sender,
-                    chainId: cmd.chainId,
-                    gasPrice: 0.0000001,
-                    gasLimit: 3000,
-                    ttl: 28800,
-                    caps: [],
-                    pactCode: cmd.pactCode,
-                    envData: cmd.envData,
-                },
-            },
-        });
-
     const signZelcore = async (cmd) => {
         console.log(`Signing...`);
         console.log(cmd);
@@ -170,7 +104,7 @@ const ConnectWalletDialog = () => {
             gasPrice: 0.00000001,
             gasLimit: 3000,
             ttl: 28800,
-            caps: cmd.caps,
+            caps: [],
             pactCode: cmd.pactCode,
             envData: cmd.envData,
             networkId,

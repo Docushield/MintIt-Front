@@ -4,9 +4,13 @@ import { createSlice } from "@reduxjs/toolkit";
 export const collectionSlice = createSlice({
     name: "collection",
     initialState: {
+        current: null,
         isMintConfirmDialog: false,
     },
     reducers: {
+        setCurrentCollection: (state, action) => {
+            state.current = action.payload;
+        },
         toggleMintConfirmDialog: (state) => {
             state.isMintConfirmDialog = !state.isMintConfirmDialog;
         },
@@ -17,4 +21,5 @@ export const collectionSlice = createSlice({
 export default collectionSlice.reducer;
 
 // export the action
-export const { toggleMintConfirmDialog } = collectionSlice.actions;
+export const { setCurrentCollection, toggleMintConfirmDialog } =
+    collectionSlice.actions;
