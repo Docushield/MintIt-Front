@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useRouter } from "next/router";
-import { MoralisProvider } from "react-moralis";
 import { SSRProvider } from "react-bootstrap";
 import sal from "sal.js";
 import { ThemeProvider } from "next-themes";
@@ -12,9 +11,6 @@ import "../assets/css/feather.css";
 import "../assets/css/modal-video.css";
 import "react-toastify/dist/ReactToastify.css";
 import "../assets/scss/style.scss";
-
-const moralisAppId = "Zgi9h3xvYrvXHJZmYjgzbfxlTPnDq6H3RytmW0qt";
-const moralisServerURL = "https://mrnuat16od8z.usemoralis.com:2053/server";
 
 const MyApp = ({ Component, pageProps }) => {
     const router = useRouter();
@@ -31,14 +27,9 @@ const MyApp = ({ Component, pageProps }) => {
     return (
         <Provider store={store}>
             <SSRProvider>
-                <MoralisProvider
-                    appId={moralisAppId}
-                    serverUrl={moralisServerURL}
-                >
-                    <ThemeProvider defaultTheme="dark">
-                        <Component {...pageProps} />
-                    </ThemeProvider>
-                </MoralisProvider>
+                <ThemeProvider defaultTheme="dark">
+                    <Component {...pageProps} />
+                </ThemeProvider>
             </SSRProvider>
         </Provider>
     );
