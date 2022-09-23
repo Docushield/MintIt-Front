@@ -3,7 +3,6 @@ import TopSeller from "@components/top-seller/layout-01";
 import { IDType, ImageType } from "@utils/types";
 
 const DetailsTabContent = ({ owner, properties, specs }) => {
-    console.log("APOLLO:1305", specs);
     return (
         <div className="rn-pd-bd-wrapper mt--20">
             <TopSeller
@@ -14,7 +13,7 @@ const DetailsTabContent = ({ owner, properties, specs }) => {
             />
             {properties && (
                 <div className="rn-pd-sm-property-wrapper">
-                    <h6 className="pd-property-title">Property</h6>
+                    <h6 className="pd-property-title">Properties</h6>
                     <div className="property-wrapper">
                         {properties.map((property) => (
                             <div
@@ -33,7 +32,7 @@ const DetailsTabContent = ({ owner, properties, specs }) => {
                 </div>
             )}
             <div className="rn-pd-sm-property-wrapper">
-                <h6 className="pd-property-title">Spec Fields</h6>
+                <h6 className="pd-property-title">More Information</h6>
                 <div className="pd-property-spec">Creator: {specs.creator}</div>
                 <div className="pd-property-spec">
                     Creator Roaylties: {specs.creator_royalties}

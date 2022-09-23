@@ -923,6 +923,11 @@ html[data-theme="light"] body {
         background: var(--color-white);
     }
 
+    .product-descsription-wrapper {
+        background: var(--color-white);
+        color: var(--color-dark);
+    }
+
     // small slick pd
     .rn-pd-sm-slick {
         .pd-slide-wrapper {

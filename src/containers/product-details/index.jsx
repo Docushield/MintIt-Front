@@ -9,6 +9,8 @@ import ProductCollection from "@components/product-details/collection";
 import BidTab from "@components/product-details/bid-tab";
 import PlaceBet from "@components/product-details/place-bet";
 import { ImageType } from "@utils/types";
+import ShareDropdown from "@components/share-dropdown";
+import DescriptionDropdown from "@components/product-details/DescriptionDropdown";
 
 // Demo Image
 
@@ -25,12 +27,13 @@ const ProductDetailsArea = ({ space, className, product }) => (
                 <div className="col-lg-7 col-md-12 col-sm-12">
                     <Sticky>
                         <GalleryTab images={product.images} />
+                        <DescriptionDropdown />
                     </Sticky>
                 </div>
                 <div className="col-lg-5 col-md-12 col-sm-12 mt_md--50 mt_sm--60">
                     <div className="rn-pd-content-area">
-                        <ProductTitle id={product.id} />
-                        <h6 className="title-name">k:account</h6>
+                        <ProductTitle id={product.nft_id} />
+                        <h6 className="title-name">{product.owner.address}</h6>
                         <div className="catagory-collection items-center">
                             <div className="mx-2">
                                 <Button
@@ -50,9 +53,6 @@ const ProductDetailsArea = ({ space, className, product }) => (
                                     Price: 20 $KDA
                                 </Button>
                             </div>
-                            <ProductCollection
-                                collection={product.collection}
-                            />
                         </div>
                         <Button color="primary" path="#">
                             Buy Now
