@@ -10,24 +10,6 @@ const GalleryTab = ({ images }) => (
     <div className="product-tab-wrapper">
         <TabContainer defaultActiveKey="nav-0">
             <div className="pd-tab-inner">
-                <Nav className="rn-pd-nav rn-pd-rt-content nav-pills">
-                    {images?.map((image, index) => (
-                        <Nav.Link
-                            key={image.src}
-                            as="button"
-                            eventKey={`nav-${index}`}
-                        >
-                            <span className="rn-pd-sm-thumbnail">
-                                <Image
-                                    src={image.src}
-                                    alt={image?.alt || "Product"}
-                                    width={167}
-                                    height={167}
-                                />
-                            </span>
-                        </Nav.Link>
-                    ))}
-                </Nav>
                 <TabContent className="rn-pd-content">
                     {images?.map((image, index) => (
                         <TabPane key={image.src} eventKey={`nav-${index}`}>
@@ -35,8 +17,8 @@ const GalleryTab = ({ images }) => (
                                 <Image
                                     src={image.src}
                                     alt={image?.alt || "Product"}
-                                    width={560}
-                                    height={560}
+                                    width={800}
+                                    height={800}
                                 />
                             </div>
                         </TabPane>

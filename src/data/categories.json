@@ -282,6 +282,12 @@
                 }
             }
         },
+        "specs": {
+            "creator": "k:aalskjdflakjdsflkj",
+            "creator_royalties": "5%",
+            "mintit_royalties": "2.5%",
+            "nft_type": "jpeg"
+        },
         "sale_type": "fixed-price",
         "level": "Intermediate",
         "language": "English",
@@ -569,6 +575,12 @@
                     "src": "/images/client/client-1.png"
                 }
             }
+        },
+        "specs": {
+            "creator": "k:aalskjdflakjdsflkj",
+            "creator_royalties": "5%",
+            "mintit_royalties": "2.5%",
+            "nft_type": "jpeg"
         },
         "sale_type": "timed-auction",
         "level": "Beginner",
@@ -858,6 +870,12 @@
                 }
             }
         },
+        "specs": {
+            "creator": "k:aalskjdflakjdsflkj",
+            "creator_royalties": "5%",
+            "mintit_royalties": "2.5%",
+            "nft_type": "jpeg"
+        },
         "sale_type": "fixed-price",
         "level": "High",
         "language": "English",
@@ -1145,6 +1163,12 @@
                     "src": "/images/client/client-1.png"
                 }
             }
+        },
+        "specs": {
+            "creator": "k:aalskjdflakjdsflkj",
+            "creator_royalties": "5%",
+            "mintit_royalties": "2.5%",
+            "nft_type": "jpeg"
         },
         "sale_type": "not-for-sale",
         "level": "Intermediate",
@@ -1434,6 +1458,12 @@
                 }
             }
         },
+        "specs": {
+            "creator": "k:aalskjdflakjdsflkj",
+            "creator_royalties": "5%",
+            "mintit_royalties": "2.5%",
+            "nft_type": "jpeg"
+        },
         "sale_type": "timed-auction",
         "level": "Intermediate",
         "language": "English",
@@ -1722,6 +1752,12 @@
                 }
             }
         },
+        "specs": {
+            "creator": "k:aalskjdflakjdsflkj",
+            "creator_royalties": "5%",
+            "mintit_royalties": "2.5%",
+            "nft_type": "jpeg"
+        },
         "sale_type": "not-for-sale",
         "level": "Beginner",
         "language": "Russian",
@@ -2008,6 +2044,12 @@
                     "src": "/images/client/client-1.png"
                 }
             }
+        },
+        "specs": {
+            "creator": "k:aalskjdflakjdsflkj",
+            "creator_royalties": "5%",
+            "mintit_royalties": "2.5%",
+            "nft_type": "jpeg"
         },
         "sale_type": "not-for-sale",
         "level": "Intermediate",
@@ -2296,6 +2338,12 @@
                 }
             }
         },
+        "specs": {
+            "creator": "k:aalskjdflakjdsflkj",
+            "creator_royalties": "5%",
+            "mintit_royalties": "2.5%",
+            "nft_type": "jpeg"
+        },
         "sale_type": "not-for-sale",
         "level": "Intermediate",
         "language": "English",
@@ -2582,6 +2630,12 @@
                     "src": "/images/client/client-1.png"
                 }
             }
+        },
+        "specs": {
+            "creator": "k:aalskjdflakjdsflkj",
+            "creator_royalties": "5%",
+            "mintit_royalties": "2.5%",
+            "nft_type": "jpeg"
         },
         "sale_type": "open-for-offers",
         "level": "Beginner",
@@ -2870,6 +2924,12 @@
                 }
             }
         },
+        "specs": {
+            "creator": "k:aalskjdflakjdsflkj",
+            "creator_royalties": "5%",
+            "mintit_royalties": "2.5%",
+            "nft_type": "jpeg"
+        },
         "sale_type": "fixed-price",
         "level": "Intermediate",
         "language": "Russian",
@@ -3156,6 +3216,12 @@
                     "src": "/images/client/client-1.png"
                 }
             }
+        },
+        "specs": {
+            "creator": "k:aalskjdflakjdsflkj",
+            "creator_royalties": "5%",
+            "mintit_royalties": "2.5%",
+            "nft_type": "jpeg"
         },
         "sale_type": "timed-auction",
         "level": "High",
@@ -3444,6 +3510,12 @@
                 }
             }
         },
+        "specs": {
+            "creator": "k:aalskjdflakjdsflkj",
+            "creator_royalties": "5%",
+            "mintit_royalties": "2.5%",
+            "nft_type": "jpeg"
+        },
         "sale_type": "open-for-offers",
         "level": "High",
         "language": "Russian",
@@ -3730,6 +3802,12 @@
                     "src": "/images/client/client-1.png"
                 }
             }
+        },
+        "specs": {
+            "creator": "k:aalskjdflakjdsflkj",
+            "creator_royalties": "5%",
+            "mintit_royalties": "2.5%",
+            "nft_type": "jpeg"
         },
         "sale_type": "open-for-offers",
         "level": "Intermediate",
@@ -4018,6 +4096,12 @@
                 }
             }
         },
+        "specs": {
+            "creator": "k:aalskjdflakjdsflkj",
+            "creator_royalties": "5%",
+            "mintit_royalties": "2.5%",
+            "nft_type": "jpeg"
+        },
         "sale_type": "fixed-price",
         "level": "Beginner",
         "language": "Russian",
@@ -4304,6 +4388,12 @@
                     "src": "/images/client/client-1.png"
                 }
             }
+        },
+        "specs": {
+            "creator": "k:aalskjdflakjdsflkj",
+            "creator_royalties": "5%",
+            "mintit_royalties": "2.5%",
+            "nft_type": "jpeg"
         },
         "sale_type": "not-for-sale",
         "level": "Intermediate",

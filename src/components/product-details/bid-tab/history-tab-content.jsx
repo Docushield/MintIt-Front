@@ -7,7 +7,7 @@ const HistoryTabContent = ({ history }) => (
         {history?.map((item) => (
             <TopSeller
                 key={item.id}
-                name={item.user.name}
+                name="k:account"
                 eth={item.amount}
                 path={item.user.slug}
                 time={item.bidAt}

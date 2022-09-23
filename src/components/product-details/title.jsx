@@ -2,14 +2,10 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 import ShareDropdown from "../share-dropdown";
 
-const ProductTitle = ({ className, title, likeCount }) => (
+const ProductTitle = ({ className, id }) => (
     <div className={clsx("pd-title-area", className)}>
-        <h4 className="title">{title}</h4>
+        <h4 className="title">{id}</h4>
         <div className="pd-react-area">
-            <div className="heart-count">
-                <i className="feather-heart" />
-                <span>{likeCount}</span>
-            </div>
             <div className="count">
                 <ShareDropdown />
             </div>

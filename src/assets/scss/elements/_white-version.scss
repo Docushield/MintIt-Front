@@ -879,6 +879,10 @@ html[data-theme="light"] body {
                 }
             }
         }
+        .pd-property-spec {
+            background: var(--color-white);
+            color: var(--color-dark) !important;
+        }
     }
 
     .rn-pd-content-area {

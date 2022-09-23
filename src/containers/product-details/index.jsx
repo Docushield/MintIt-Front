@@ -29,33 +29,40 @@ const ProductDetailsArea = ({ space, className, product }) => (
                 </div>
                 <div className="col-lg-5 col-md-12 col-sm-12 mt_md--50 mt_sm--60">
                     <div className="rn-pd-content-area">
-                        <ProductTitle
-                            title={product.title}
-                            likeCount={product.likeCount}
-                        />
-                        <span className="bid">
-                            Height bid{" "}
-                            <span className="price">
-                                {product.price.amount}
-                                {product.price.currency}
-                            </span>
-                        </span>
-                        <h6 className="title-name">#22 Portal , Info bellow</h6>
-                        <div className="catagory-collection">
-                            <ProductCategory owner={product.owner} />
+                        <ProductTitle id={product.id} />
+                        <h6 className="title-name">k:account</h6>
+                        <div className="catagory-collection items-center">
+                            <div className="mx-2">
+                                <Button
+                                    size="small"
+                                    color="primary-alta"
+                                    path="#"
+                                >
+                                    Listed: Yes/No
+                                </Button>
+                            </div>
+                            <div className="mx-2">
+                                <Button
+                                    size="small"
+                                    color="primary-alta"
+                                    path="#"
+                                >
+                                    Price: 20 $KDA
+                                </Button>
+                            </div>
                             <ProductCollection
                                 collection={product.collection}
                             />
                         </div>
-                        <Button color="primary-alta" path="#">
-                            Unlockable content included
+                        <Button color="primary" path="#">
+                            Buy Now
                         </Button>
                         <div className="rn-bid-details">
                             <BidTab
                                 bids={product?.bids}
                                 owner={product.owner}
                                 properties={product?.properties}
-                                tags={product?.tags}
+                                specs={product.specs}
                                 history={product?.history}
                             />
                             <PlaceBet

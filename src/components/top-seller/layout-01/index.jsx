@@ -30,7 +30,7 @@ const TopSeller = ({
             </div>
             <div className="top-seller-content">
                 <Anchor path={slug}>
-                    <h6 className="name">{name}</h6>
+                    <h6 className="name">Attributes</h6>
                 </Anchor>
                 {total_sale && (
                     <span className="count-number">
