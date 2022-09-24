@@ -93,7 +93,7 @@ const CreateMultiple = () => {
             router.push({
                 pathname: `/collections/${slug}`,
             });
-            notify();
+            toast.success("Successfully created an NFT");
             reset();
             setSelectedImage();
             setIsSuccess(true);

@@ -1,7 +1,7 @@
-const ProvenanceHashArea = () => {
+const ProvenanceHashArea = ({ collection }) => {
     return (
         <div className="container mt-5">
-            <h2 className="fst-italic">Collection Name Provenance Record</h2>
+            <h2 className="fst-italic">{collection.name} Provenance Record</h2>
             <p>
                 This page presents the provenance record of each Bored Ape that
                 will ever exist. Each Bored Ape image is firstly hashed using
