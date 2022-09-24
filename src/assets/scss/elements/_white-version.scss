@@ -879,6 +879,10 @@ html[data-theme="light"] body {
                 }
             }
         }
+        .pd-property-spec {
+            background: var(--color-white);
+            color: var(--color-dark) !important;
+        }
     }
 
     .rn-pd-content-area {
@@ -917,6 +921,11 @@ html[data-theme="light"] body {
     // place bet area
     .place-bet-area {
         background: var(--color-white);
+    }
+
+    .product-descsription-wrapper {
+        background: var(--color-white);
+        color: var(--color-dark);
     }
 
     // small slick pd

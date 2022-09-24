@@ -15,7 +15,7 @@ const TopSeller = ({
 }) => (
     <div className={clsx("top-seller-inner-one", className)}>
         <div className="top-seller-wrapper">
-            <div className={clsx("thumbnail", isVarified && "varified")}>
+            {/* <div className={clsx("thumbnail", isVarified && "varified")}>
                 {image?.src && (
                     <Anchor path={slug}>
                         <Image
@@ -27,10 +27,10 @@ const TopSeller = ({
                         />
                     </Anchor>
                 )}
-            </div>
+            </div> */}
             <div className="top-seller-content">
                 <Anchor path={slug}>
-                    <h6 className="name">{name}</h6>
+                    <h5 className="name">Attributes</h5>
                 </Anchor>
                 {total_sale && (
                     <span className="count-number">

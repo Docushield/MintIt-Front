@@ -737,18 +737,12 @@
 
     .rn-pd-sm-property-wrapper {
         @media #{$lg-layout} {
-            margin-top: 30px;
-            flex-basis: 100%;
             margin-left: 0 !important;
         }
         @media #{$md-layout} {
-            margin-top: 30px;
-            flex-basis: 100%;
             margin-left: 0 !important;
         }
         @media #{$sm-layout} {
-            margin-top: 30px;
-            flex-basis: 100%;
             margin-left: 0 !important;
         }
     }

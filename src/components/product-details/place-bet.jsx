@@ -8,7 +8,7 @@ import PlaceBidModal from "@components/modals/placebid-modal";
 import Countdown from "@ui/countdown/layout-02";
 import { ImageType } from "@utils/types";
 
-const PlaceBet = ({ highest_bid, auction_date, btnColor, className }) => {
+const PlaceBet = ({ auction_date, btnColor, className }) => {
     const [showBidModal, setShowBidModal] = useState(false);
     const handleBidModal = () => {
         setShowBidModal((prev) => !prev);
@@ -17,7 +17,7 @@ const PlaceBet = ({ highest_bid, auction_date, btnColor, className }) => {
         <>
             <div className={clsx("place-bet-area", className)}>
                 <div className="rn-bet-create">
-                    <div className="bid-list winning-bid">
+                    {/* <div className="bid-list winning-bid">
                         <h6 className="title">Winning bit</h6>
                         <div className="top-seller-inner-one">
                             <div className="top-seller-wrapper">
@@ -50,7 +50,7 @@ const PlaceBet = ({ highest_bid, auction_date, btnColor, className }) => {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                     {auction_date && (
                         <div className="bid-list left-bid">
                             <h6 className="title">Auction has ended</h6>

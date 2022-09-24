@@ -9,6 +9,8 @@ import ProductCollection from "@components/product-details/collection";
 import BidTab from "@components/product-details/bid-tab";
 import PlaceBet from "@components/product-details/place-bet";
 import { ImageType } from "@utils/types";
+import ShareDropdown from "@components/share-dropdown";
+import DescriptionDropdown from "@components/product-details/DescriptionDropdown";
 
 // Demo Image
 
@@ -25,37 +27,51 @@ const ProductDetailsArea = ({ space, className, product }) => (
                 <div className="col-lg-7 col-md-12 col-sm-12">
                     <Sticky>
                         <GalleryTab images={product.images} />
+                        <DescriptionDropdown />
                     </Sticky>
                 </div>
                 <div className="col-lg-5 col-md-12 col-sm-12 mt_md--50 mt_sm--60">
                     <div className="rn-pd-content-area">
-                        <ProductTitle
-                            title={product.title}
-                            likeCount={product.likeCount}
-                        />
-                        <span className="bid">
-                            Height bid{" "}
-                            <span className="price">
-                                {product.price.amount}
-                                {product.price.currency}
-                            </span>
-                        </span>
-                        <h6 className="title-name">#22 Portal , Info bellow</h6>
-                        <div className="catagory-collection">
-                            <ProductCategory owner={product.owner} />
-                            <ProductCollection
-                                collection={product.collection}
-                            />
+                        <ProductTitle id={product.nft_id} />
+                        <h6 className="title-name">
+                            Owner:{" "}
+                            <Button
+                                size="small"
+                                color="primary-alta"
+                                path="/myprofile"
+                            >
+                                {product.owner.address}
+                            </Button>
+                        </h6>
+                        <div className="catagory-collection items-center">
+                            <div className="mx-2">
+                                <Button
+                                    size="small"
+                                    color="primary-alta"
+                                    path="#"
+                                >
+                                    Listed: Yes/No
+                                </Button>
+                            </div>
+                            <div className="mx-2">
+                                <Button
+                                    size="small"
+                                    color="primary-alta"
+                                    path="#"
+                                >
+                                    Price: 20 $KDA
+                                </Button>
+                            </div>
                         </div>
-                        <Button color="primary-alta" path="#">
-                            Unlockable content included
+                        <Button color="primary" path="#">
+                            Buy Now
                         </Button>
                         <div className="rn-bid-details">
                             <BidTab
                                 bids={product?.bids}
                                 owner={product.owner}
                                 properties={product?.properties}
-                                tags={product?.tags}
+                                specs={product.specs}
                                 history={product?.history}
                             />
                             <PlaceBet
