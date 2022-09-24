@@ -11,16 +11,16 @@ export async function getServerSideProps(context) {
     const hash = context.params.hash;
     const baseURL = process.env.API_URL || "https://the-backend.fly.dev";
 
-    return { props: { className: "template-color-1" } };
+    return { props: { className: "template-color-1", collectionName: hash } };
 }
 
-const ProvenanceHash = () => (
+const ProvenanceHash = ({ collectionName }) => (
     <Wrapper>
         <SEO pageTitle="Provenance Hash" />
         <Header />
         <main id="main-content">
             <Breadcrumb pageTitle="Provenance Hash" />
-            <ProvenanceHashArea />
+            <ProvenanceHashArea collectionName={collectionName} />
         </main>
         <Footer />
     </Wrapper>
