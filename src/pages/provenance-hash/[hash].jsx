@@ -6,16 +6,12 @@ import Breadcrumb from "@components/breadcrumb";
 import { parseCookies } from "nookies";
 import ProvenanceHashArea from "@containers/provenance-hash";
 
-const mockAPIhashToCollections = (hash) => `Collection Name for ${hash}`;
-
 export async function getServerSideProps(context) {
     const cookies = parseCookies(context);
     const hash = context.params.hash;
     const baseURL = process.env.API_URL || "https://the-backend.fly.dev";
 
-    const collectionName = mockAPIhashToCollections(hash);
-
-    return { props: { className: "template-color-1", collectionName } };
+    return { props: { className: "template-color-1", collectionName: hash } };
 }
 
 const ProvenanceHash = ({ collectionName }) => (
