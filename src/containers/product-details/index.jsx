@@ -34,7 +34,14 @@ const ProductDetailsArea = ({ space, className, product }) => (
                     <div className="rn-pd-content-area">
                         <ProductTitle id={product.nft_id} />
                         <h6 className="title-name">
-                            Owner: {product.owner.address}
+                            Owner:{" "}
+                            <Button
+                                size="small"
+                                color="primary-alta"
+                                path="/myprofile"
+                            >
+                                {product.owner.address}
+                            </Button>
                         </h6>
                         <div className="catagory-collection items-center">
                             <div className="mx-2">
