@@ -55,7 +55,7 @@ const CreatorArea = ({ className, space, data }) => {
             <div className="container">
                 <div className="row align-items-center">
                     <div className="col-lg-6 col-md-6 col-sm-6 col-12">
-                        <h2 className="title mb--0">Our Best Creators</h2>
+                        <h2 className="title mb--0">Most Talented Creators</h2>
                     </div>
                     <div className="col-lg-6 col-md-6 col-sm-6 col-12 mt_mobile--15">
                         <div className="shortby-default text-start text-sm-end">
