@@ -20,21 +20,21 @@ const GettingStarted = () => {
     };
 
     return (
-    <Wrapper>
-        <SEO pageTitle="Getting Started" />
-        <Header />
-        <main id="main-content">
-            <Breadcrumb
-                pageTitle="Getting Started"
-                pageTitle1="Activity"
-                currentPage="Getting Started"
-                onPageChageHandler={onPageChageHandler}
-            />
-            <ServiceArea />
-            <SupportArea />
-        </main>
-        <Footer />
-    </Wrapper>
-);
-}
+        <Wrapper>
+            <SEO pageTitle="Getting Started" />
+            <Header />
+            <main id="main-content">
+                <Breadcrumb
+                    pageTitle="Getting Started"
+                    pageTitle1="Activity"
+                    currentPage="Getting Started"
+                    onPageChageHandler={onPageChageHandler}
+                />
+                <ServiceArea />
+                <SupportArea />
+            </main>
+            <Footer />
+        </Wrapper>
+    );
+};
 export default GettingStarted;

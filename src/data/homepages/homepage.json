@@ -3,8 +3,8 @@
     "content": [
         {
             "section": "hero-section",
-            "title": "Search your rare NFT's by world  <br/>  class artists",
-            "description": "Where Bitcoin was hailed as the digital answer to currency, NFTs <br/> are now being touted as the digital answer to collectables.",
+            "title": "Explore the world of digital art and utility  <br/>  on Kadena",
+            "description": "Create, Trade, and Collect your Favorite NFTs from JPEGs, to Sports, Mutating Characters, Music, and much more!",
             "buttons": [
                 {
                     "id": 1,
@@ -66,7 +66,7 @@
         {
             "section": "explore-product-section",
             "section_title": {
-                "title": "Explore Product"
+                "title": "Explore NFTs on our Marketplace"
             }
         },
         {
@@ -78,15 +78,15 @@
         {
             "section": "service-section",
             "section_title": {
-                "title": "Create and sell your NFTs"
+                "title": "Seamlessly Create an NFT Collection"
             },
             "items": [
                 {
                     "id": 1,
-                    "title": "Set up your wallet",
+                    "title": "Setup your Wallet",
                     "path": "/connect",
                     "subtitle": "Step-01",
-                    "description": "Powerful features and inclusions, which makes Doc standout, easily customizable and scalable.",
+                    "description": "Our platform is compatible with X-Wallet, Chaiweaver, and Zelcore. Once you’ve set up your wallet, click connect on the navigation bar.",
                     "images": [
                         {
                             "src": "/images/icons/shape-7.png"
@@ -95,10 +95,10 @@
                 },
                 {
                     "id": 2,
-                    "title": "Create your collection",
+                    "title": "Create your Collection",
                     "path": "/collection",
                     "subtitle": "Step-02",
-                    "description": "A great collection of beautiful website templates for your need. Choose the best suitable template.",
+                    "description": "We’ve created an NFT Generator that you can use to generate your collection. Make sure to have your layers and attributes ready.",
                     "images": [
                         {
                             "src": "/images/icons/shape-1.png"
@@ -107,10 +107,10 @@
                 },
                 {
                     "id": 3,
-                    "title": "Add your NFT's",
+                    "title": "Upload your Collection",
                     "path": "/connect",
                     "subtitle": "Step-03",
-                    "description": "We've made the template fully responsive, so it looks great on all devices: desktop, tablets and.",
+                    "description": "The output JSON file from the NFT-Generator, your Collection Logo, and Banner must be uploaded to the Create Section.",
                     "images": [
                         {
                             "src": "/images/icons/shape-5.png"
@@ -119,10 +119,10 @@
                 },
                 {
                     "id": 4,
-                    "title": "Sell Your NFT's",
+                    "title": "Sell Your NFTs",
                     "path": "/creator",
                     "subtitle": "Step-04",
-                    "description": "I throw myself down among the tall grass by the stream as I lie close to the earth NFT's.",
+                    "description": "Once you’ve completed all the steps and submitted your NFT Collection, a new collection page will be generated where your community can mint. It’s that simple!",
                     "images": [
                         {
                             "src": "/images/icons/shape-6.png"
@@ -134,7 +134,7 @@
         {
             "section": "collection-section",
             "section_title": {
-                "title": "Newest Collections"
+                "title": "Newest Collections Minting"
             }
         }
     ]
