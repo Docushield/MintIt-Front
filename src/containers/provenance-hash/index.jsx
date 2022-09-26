@@ -4,10 +4,10 @@ const ProvenanceHashArea = ({ collection }) => {
             <h2 className="fst-italic">{collection.name} Provenance Record</h2>
             <p>
                 This page presents the provenance record of each{" "}
-                {collectionName} NFT that will ever exist. Firstly, each piece
+                {collection.name} NFT that will ever exist. Firstly, each piece
                 of content from the collection is hashed used Blake2b algorithm.
                 Then a string is obtained by concatenating Blake2b of each{" "}
-                {collectionName} content piece in the specific order as listed
+                {collection.name} content piece in the specific order as listed
                 below. The final proof or provenance hash is obtained by hashing
                 the the concatenated string. This is the final provenance
                 record.
@@ -45,7 +45,7 @@ const ProvenanceHashArea = ({ collection }) => {
             <p>
                 The table below lists the Original Index at Creation, Assigned
                 Token ID, Blake2b Hash, and the IPFS link of each{" "}
-                {collectionName} content piece.
+                {collection.name} content piece.
             </p>
             <table className="my-5 text-center">
                 <tr>
