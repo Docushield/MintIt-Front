@@ -7,7 +7,7 @@ import { parseCookies } from "nookies";
 import Breadcrumb from "@components/breadcrumb";
 import CollectionDetailsIntroArea from "@containers/collection-details";
 
-const CollectionDetails = ({ collection, slug, token }) => {
+const CollectionDetails = ({ collection, slug, tokens }) => {
     return (
         <Wrapper>
             <SEO pageTitle="Collection Details" />
@@ -17,7 +17,7 @@ const CollectionDetails = ({ collection, slug, token }) => {
                     pageTitle="Collection Details"
                     currentPage="Collection Details"
                 />
-                <CollectionDetailsIntroArea data={collection} />
+                <CollectionDetailsIntroArea data={collection} tokens={tokens} />
             </main>
             <Footer />
         </Wrapper>
@@ -38,13 +38,29 @@ export async function getServerSideProps(context) {
             },
         }).then((res) => res.json());
 
+        const tokens = await fetch(
+            `${baseURL}/api/collections/${slug}/tokens`,
+            {
+                method: "GET",
+                headers: {
+                    "x-auth-token": token,
+                },
+            }
+        ).then((res) => res.json());
+        console.log(tokens);
+
         return {
-            props: { collection: response, className: "template-color-1" },
+            props: {
+                collection: response,
+                tokens: tokens,
+                className: "template-color-1",
+            },
         };
     } catch (error) {
         return {
             props: {
                 error: error.message,
+                tokens: [],
                 className: "template-color-1",
             },
         };
