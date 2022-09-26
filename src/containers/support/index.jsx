@@ -40,19 +40,21 @@ const SupportArea = ({ className, space }) => (
                                     We offer the tools and support for users to
                                     easily launch an NFT or Collection. Once
                                     you’ve set up and connected your wallet,
-                                    purchase a Creator Pass to get access to all
-                                    our tools.
+                                    purchase a <a href="/">Creator Pass</a> to
+                                    get access to all our tools.
                                 </p>
                                 <p>
-                                    Then, you can use our NFT-Generator WebApp
-                                    to create your collection using layers and
-                                    attributes. Once done, upload, verify, and
-                                    submit the required information here.
+                                    Then, you can use our{" "}
+                                    <a href="/nft-generator">NFT-Generator</a>{" "}
+                                    WebApp to create your collection using
+                                    layers and attributes. Once done, upload,
+                                    verify, and submit the required information{" "}
+                                    <a href="/create-multiple">here</a>.
                                 </p>
                             </div>
                         </div>
                         <div className="read-card">
-                            <h4>Why are Access-Level NFTs?</h4>
+                            <h4>What are Access-Level NFTs?</h4>
                             <div className="content">
                                 <p>
                                     Our platform seamlessly integrates
@@ -60,11 +62,12 @@ const SupportArea = ({ className, space }) => (
                                     pass has a different use case on our
                                     interface. Purchasing and owning one of
                                     these passes will unlock its utility. Users
-                                    require a Creator Pass to create and launch
-                                    NFT collections. Our limited collection of
-                                    Ads Pass offers advertising placeholders
-                                    across the Docushield ecosystem with a
-                                    365-day rotation.
+                                    require a <a href="/">Creator Pass</a> to
+                                    create and launch NFT collections. Our
+                                    limited collection of Ads Pass offers
+                                    advertising placeholders across the
+                                    Docushield ecosystem with a 365-day
+                                    rotation.
                                 </p>
                             </div>
                         </div>
@@ -101,7 +104,7 @@ const SupportArea = ({ className, space }) => (
                                 },
                                 {
                                     id: 3,
-                                    title: "I’m a creator who wants to get started. Can I get support from MINT-IT?",
+                                    title: "Can I get support from MINT-IT?",
                                     description:
                                         "<strong>Absolutely!</strong> NFT creators who are having any challenges can reach out to MINT-IT support on Discord, Telegram, or through our website. Our team will be happy to assist you.",
                                 },
@@ -115,7 +118,7 @@ const SupportArea = ({ className, space }) => (
                                     id: 5,
                                     title: "Are NFTs on MINT-IT utilizing Kadena’s Marmalade Standard?",
                                     description:
-                                        "Our platform is the first to make full use of Marmalade, offering a seamless user experience! What’s really cool is that royalties are enforced on-chain across multiple marketplaces. NFT collectors can use MINT-IT to trade NFTs launched on Marmalade but not through MINT-IT!",
+                                        "Our platform is the first to make full use of <a href=''https://marmalade.art/>Marmalade</a>, offering a seamless user experience! What’s really cool is that royalties are enforced on-chain across multiple marketplaces. NFT collectors can use MINT-IT to trade NFTs launched on Marmalade but not through MINT-IT!",
                                 },
                             ]}
                         />
