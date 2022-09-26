@@ -1,18 +1,18 @@
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import Anchor from "@ui/anchor";
+import Image from "next/image";
 
-const Wallet = ({ className, title, description, path, icon, color }) => (
+const Wallet = ({ className, title, path, imgSrc }) => (
     <div className={clsx("wallet-wrapper", className)}>
+        <div>
+            <Image src={imgSrc} width={150} height={150} alt="wallet" />
+        </div>
         <div className="inner">
-            <div className="icon">
-                <i className={clsx("feather", icon, `color-${color}`)} />
-            </div>
             <div className="content">
-                <h4 className="title">
+                <h3 className="title">
                     <Anchor path={path}>{title}</Anchor>
-                </h4>
-                <p className="description">{description}</p>
+                </h3>
             </div>
         </div>
         <Anchor className="over-link visually-hidden" path={path}>

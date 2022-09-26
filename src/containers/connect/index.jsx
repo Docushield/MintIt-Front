@@ -20,11 +20,12 @@ const ConnectArea = ({ className, space }) => (
                     data-sal-delay="150"
                     data-sal-duration="800"
                 >
-                    <h3 className="connect-title">Getting Started With Mint It</h3>
+                    <h3 className="connect-title">
+                        Getting Started with a Kadena Wallet
+                    </h3>
                     <p className="connect-td">
-                        Connect with one of available wallet providers or create
-                        a new wallet.{" "}
-                        <Anchor path="/collection">What is a wallet?</Anchor>
+                        Create a Wallet, Deposit Funds, and Connect it to the
+                        MINT-IT Website.{" "}
                     </p>
                 </div>
                 <div
@@ -34,8 +35,8 @@ const ConnectArea = ({ className, space }) => (
                     data-sal-duration="800"
                 >
                     <p className="wallet-bootm-disc">
-                        We do not own your private keys and cannot access your
-                        funds without your confirmation.
+                        Currently our platform supports X-Wallet and Zelcore
+                        Kadena wallet providers.
                     </p>
                 </div>
             </div>
@@ -49,7 +50,7 @@ const ConnectArea = ({ className, space }) => (
                     <div className="connect-thumbnail">
                         <div className="left-image">
                             <Image
-                                src="/images/connect/connect-01.jpg"
+                                src="/images/wallet/wallet-connect.png"
                                 alt="Nft_Profile"
                                 width={670}
                                 height={576}
@@ -66,8 +67,8 @@ const ConnectArea = ({ className, space }) => (
                             data-sal-duration="800"
                         >
                             <Wallet
+                                imgSrc="/images/wallet/zelcore.png"
                                 title="Zelcore"
-                                description="I throw myself down among the tall."
                                 path="/collection"
                                 icon="feather-cast"
                             />
@@ -79,14 +80,13 @@ const ConnectArea = ({ className, space }) => (
                             data-sal-duration="800"
                         >
                             <Wallet
+                                imgSrc="/images/wallet/x-wallet.png"
                                 title="X-Wallet"
-                                description="This is a great deals For cash transfer"
                                 path="/collection"
                                 icon="feather-box"
-                                color="purple"
                             />
                         </div>
-                        <div
+                        {/* <div
                             className="col-xxl-4 col-lg-6 col-md-4 col-12 col-sm-6 col-12"
                             data-sal="slide-up"
                             data-sal-delay="150"
@@ -99,7 +99,7 @@ const ConnectArea = ({ className, space }) => (
                                 icon="feather-award"
                                 color="pink"
                             />
-                        </div>
+                        </div> */}
                         {/* <div
                             className="col-xxl-4 col-lg-6 col-md-4 col-12 col-sm-6 col-12"
                             data-sal="slide-up"
@@ -157,7 +157,12 @@ const ConnectArea = ({ className, space }) => (
                             /> */}
 
                             <p className="wallet-bootm-disc">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse consequat vel diam ut eleifend. Morbi rhoncus eros tortor, id finibus velit dignissim nec. Ut tellus purus, euismod ut laoreet ac, condimentum a lorem. Ut tempus justo urna, nec molestie dui suscipit feugiat. Cras porta nulla non magna elementum blandit.
+                                Once you’ve created a wallet and connected to
+                                the MINT-IT website, if you want to mint, or
+                                trade an NFT on the secondary marketplace you
+                                will need $KDA funds on chain-8. Feel free to
+                                reach out to our team for support, we’re happy
+                                to help.
                             </p>
                         </div>
                     </div>
