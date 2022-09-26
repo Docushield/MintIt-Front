@@ -30,6 +30,10 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
         dispatch(setCurrentCollection(data));
     }, [data]);
 
+    useEffect(() => {
+        dispatch(setCurrentCollection(data));
+    }, [data]);
+
     const onMint = () => {
         if (connected) {
             dispatch(toggleMintConfirmDialog());

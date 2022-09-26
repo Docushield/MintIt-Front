@@ -14,13 +14,13 @@ export async function getServerSideProps(context) {
     return { props: { className: "template-color-1" } };
 }
 
-const ProvenanceHash = () => (
+const ProvenanceHash = ({ collectionName }) => (
     <Wrapper>
         <SEO pageTitle="Provenance Hash" />
         <Header />
         <main id="main-content">
             <Breadcrumb pageTitle="Provenance Hash" />
-            <ProvenanceHashArea />
+            <ProvenanceHashArea collectionName={collectionName} />
         </main>
         <Footer />
     </Wrapper>

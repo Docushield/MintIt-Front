@@ -2,6 +2,7 @@
     {
         "id": 1,
         "title": "Preatent",
+        "nft_id": "Funky Bears #1122",
         "slug": "preatent",
         "published_at": "20-JUN-2021 08:03:00",
         "latestBid": "6/30",
@@ -49,6 +50,7 @@
         "bitCount": 15,
         "owner": {
             "name": "Brodband",
+            "address": "k:adkjalksjdfasdfasdf",
             "slug": "/author",
             "image": {
                 "src": "/images/client/client-1.png"
@@ -282,6 +284,12 @@
                 }
             }
         },
+        "specs": {
+            "creator": "k:aalskjdflakjdsflkj",
+            "creator_royalties": "5%",
+            "mintit_royalties": "2.5%",
+            "nft_type": "jpeg"
+        },
         "sale_type": "fixed-price",
         "level": "Intermediate",
         "language": "English",
@@ -290,6 +298,7 @@
     {
         "id": 2,
         "title": "#21 The Wonder",
+        "nft_id": "Funky Cats #343",
         "slug": "21-the-wonder",
         "published_at": "21-JUN-2021 08:03:00",
         "latestBid": "1/20",
@@ -337,6 +346,7 @@
         "bitCount": 13,
         "owner": {
             "name": "Brodband",
+            "address": "k:adkjalksjdfasdfasdf",
             "slug": "/author",
             "image": {
                 "src": "/images/client/client-1.png"
@@ -570,6 +580,12 @@
                 }
             }
         },
+        "specs": {
+            "creator": "k:aalskjdflakjdsflkj",
+            "creator_royalties": "5%",
+            "mintit_royalties": "2.5%",
+            "nft_type": "jpeg"
+        },
         "sale_type": "timed-auction",
         "level": "Beginner",
         "language": "Arabic",
@@ -578,6 +594,7 @@
     {
         "id": 3,
         "title": "OrBid6",
+        "nft_id": "Funky Rabbit #234",
         "slug": "orbid6",
         "published_at": "25-JAN-2022 10:55:00",
         "latestBid": "2/31",
@@ -625,6 +642,7 @@
         "bitCount": 30,
         "owner": {
             "name": "Brodband",
+            "address": "k:adkjalksjdfasdfasdf",
             "slug": "/author",
             "image": {
                 "src": "/images/client/client-1.png"
@@ -858,6 +876,12 @@
                 }
             }
         },
+        "specs": {
+            "creator": "k:aalskjdflakjdsflkj",
+            "creator_royalties": "5%",
+            "mintit_royalties": "2.5%",
+            "nft_type": "jpeg"
+        },
         "sale_type": "fixed-price",
         "level": "High",
         "language": "English",
@@ -866,6 +890,7 @@
     {
         "id": 4,
         "title": "Morgan11",
+        "nft_id": "Funky Dog #33",
         "slug": "morgan11",
         "published_at": "23-JUN-2021 08:03:00",
         "latestBid": "3/16",
@@ -913,6 +938,7 @@
         "bitCount": 25,
         "owner": {
             "name": "Brodband",
+            "address": "k:adkjalksjdfasdfasdf",
             "slug": "/author",
             "image": {
                 "src": "/images/client/client-1.png"
@@ -1146,6 +1172,12 @@
                 }
             }
         },
+        "specs": {
+            "creator": "k:aalskjdflakjdsflkj",
+            "creator_royalties": "5%",
+            "mintit_royalties": "2.5%",
+            "nft_type": "jpeg"
+        },
         "sale_type": "not-for-sale",
         "level": "Intermediate",
         "language": "Arabic",
@@ -1154,6 +1186,7 @@
     {
         "id": 5,
         "title": "mAtal8",
+        "nft_id": "Pig #234",
         "slug": "matal8",
         "published_at": "24-JUN-2021 08:03:00",
         "latestBid": "6/50",
@@ -1201,6 +1234,7 @@
         "bitCount": 12,
         "owner": {
             "name": "Brodband",
+            "address": "k:adkjalksjdfasdfasdf",
             "slug": "/author",
             "image": {
                 "src": "/images/client/client-1.png"
@@ -1434,6 +1468,12 @@
                 }
             }
         },
+        "specs": {
+            "creator": "k:aalskjdflakjdsflkj",
+            "creator_royalties": "5%",
+            "mintit_royalties": "2.5%",
+            "nft_type": "jpeg"
+        },
         "sale_type": "timed-auction",
         "level": "Intermediate",
         "language": "English",
@@ -1442,6 +1482,7 @@
     {
         "id": 6,
         "title": "Delta25",
+        "nft_id": "Dogs #23",
         "slug": "delta25",
         "published_at": "24-JUN-2021 08:05:00",
         "latestBid": "6/30",
@@ -1489,6 +1530,7 @@
         "bitCount": 17,
         "owner": {
             "name": "Brodband",
+            "address": "k:adkjalksjdfasdfasdf",
             "slug": "/author",
             "image": {
                 "src": "/images/client/client-1.png"
@@ -1722,6 +1764,12 @@
                 }
             }
         },
+        "specs": {
+            "creator": "k:aalskjdflakjdsflkj",
+            "creator_royalties": "5%",
+            "mintit_royalties": "2.5%",
+            "nft_type": "jpeg"
+        },
         "sale_type": "not-for-sale",
         "level": "Beginner",
         "language": "Russian",
@@ -1730,6 +1778,7 @@
     {
         "id": 7,
         "title": "Preasent",
+        "nft_id": "Funky Bears #1122",
         "slug": "preasent",
         "published_at": "24-JAN-2022 09:05:00",
         "latestBid": "1/20",
@@ -1776,6 +1825,7 @@
         "bitCount": 9,
         "owner": {
             "name": "Brodband",
+            "address": "k:adkjalksjdfasdfasdf",
             "slug": "/author",
             "image": {
                 "src": "/images/client/client-1.png"
@@ -2009,6 +2059,12 @@
                 }
             }
         },
+        "specs": {
+            "creator": "k:aalskjdflakjdsflkj",
+            "creator_royalties": "5%",
+            "mintit_royalties": "2.5%",
+            "nft_type": "jpeg"
+        },
         "sale_type": "not-for-sale",
         "level": "Intermediate",
         "language": "Arabic",
@@ -2017,6 +2073,7 @@
     {
         "id": 8,
         "title": "Diamond Dog",
+        "nft_id": "Funky Bears #1122",
         "slug": "diamond-dog",
         "published_at": "25-JAN-2022 09:55:00",
         "latestBid": "5/11",
@@ -2063,6 +2120,7 @@
         "bitCount": 10,
         "owner": {
             "name": "Brodband",
+            "address": "k:adkjalksjdfasdfasdf",
             "slug": "/author",
             "image": {
                 "src": "/images/client/client-1.png"
@@ -2296,6 +2354,12 @@
                 }
             }
         },
+        "specs": {
+            "creator": "k:aalskjdflakjdsflkj",
+            "creator_royalties": "5%",
+            "mintit_royalties": "2.5%",
+            "nft_type": "jpeg"
+        },
         "sale_type": "not-for-sale",
         "level": "Intermediate",
         "language": "English",
@@ -2304,6 +2368,7 @@
     {
         "id": 9,
         "title": "Norgan12",
+        "nft_id": "Funky Bears #1122",
         "slug": "norgan12",
         "published_at": "25-JAN-2022 07:55:00",
         "latestBid": "3/16",
@@ -2350,6 +2415,7 @@
         "bitCount": 8,
         "owner": {
             "name": "Brodband",
+            "address": "k:adkjalksjdfasdfasdf",
             "slug": "/author",
             "image": {
                 "src": "/images/client/client-1.png"
@@ -2583,6 +2649,12 @@
                 }
             }
         },
+        "specs": {
+            "creator": "k:aalskjdflakjdsflkj",
+            "creator_royalties": "5%",
+            "mintit_royalties": "2.5%",
+            "nft_type": "jpeg"
+        },
         "sale_type": "open-for-offers",
         "level": "Beginner",
         "language": "Russian",
@@ -2591,6 +2663,7 @@
     {
         "id": 10,
         "title": "cAtal7",
+        "nft_id": "Funky Bears #1122",
         "slug": "catal7",
         "published_at": "24-JAN-2022 07:55:00",
         "latestBid": "6/50",
@@ -2637,6 +2710,7 @@
         "bitCount": 15,
         "owner": {
             "name": "Brodband",
+            "address": "k:adkjalksjdfasdfasdf",
             "slug": "/author",
             "image": {
                 "src": "/images/client/client-1.png"
@@ -2870,6 +2944,12 @@
                 }
             }
         },
+        "specs": {
+            "creator": "k:aalskjdflakjdsflkj",
+            "creator_royalties": "5%",
+            "mintit_royalties": "2.5%",
+            "nft_type": "jpeg"
+        },
         "sale_type": "fixed-price",
         "level": "Intermediate",
         "language": "Russian",
@@ -2878,6 +2958,7 @@
     {
         "id": 11,
         "title": "Sun Afford",
+        "nft_id": "Funky Bears #1122",
         "slug": "sun-afford",
         "published_at": "24-FEB-2022 07:55:00",
         "latestBid": "1/1",
@@ -2924,6 +3005,7 @@
         "bitCount": 12,
         "owner": {
             "name": "Brodband",
+            "address": "k:adkjalksjdfasdfasdf",
             "slug": "/author",
             "image": {
                 "src": "/images/client/client-1.png"
@@ -3157,6 +3239,12 @@
                 }
             }
         },
+        "specs": {
+            "creator": "k:aalskjdflakjdsflkj",
+            "creator_royalties": "5%",
+            "mintit_royalties": "2.5%",
+            "nft_type": "jpeg"
+        },
         "sale_type": "timed-auction",
         "level": "High",
         "language": "Arabic",
@@ -3165,6 +3253,7 @@
     {
         "id": 12,
         "title": "Orthogon#720",
+        "nft_id": "Funky Bears #1122",
         "slug": "orthogon720",
         "published_at": "25-FEB-2022 07:55:00",
         "latestBid": "1/1",
@@ -3211,6 +3300,7 @@
         "bitCount": 5,
         "owner": {
             "name": "Brodband",
+            "address": "k:adkjalksjdfasdfasdf",
             "slug": "/author",
             "image": {
                 "src": "/images/client/client-1.png"
@@ -3444,6 +3534,12 @@
                 }
             }
         },
+        "specs": {
+            "creator": "k:aalskjdflakjdsflkj",
+            "creator_royalties": "5%",
+            "mintit_royalties": "2.5%",
+            "nft_type": "jpeg"
+        },
         "sale_type": "open-for-offers",
         "level": "High",
         "language": "Russian",
@@ -3452,6 +3548,7 @@
     {
         "id": 13,
         "title": "Orthogon#721",
+        "nft_id": "Funky Bears #1122",
         "slug": "orthogon721",
         "published_at": "26-FEB-2022 07:55:00",
         "latestBid": "1/5",
@@ -3498,6 +3595,7 @@
         "bitCount": 10,
         "owner": {
             "name": "Brodband",
+            "address": "k:adkjalksjdfasdfasdf",
             "slug": "/author",
             "image": {
                 "src": "/images/client/client-1.png"
@@ -3731,6 +3829,12 @@
                 }
             }
         },
+        "specs": {
+            "creator": "k:aalskjdflakjdsflkj",
+            "creator_royalties": "5%",
+            "mintit_royalties": "2.5%",
+            "nft_type": "jpeg"
+        },
         "sale_type": "open-for-offers",
         "level": "Intermediate",
         "language": "Arabic",
@@ -3739,6 +3843,7 @@
     {
         "id": 14,
         "title": "Orthogon#722",
+        "nft_id": "Funky Bears #1122",
         "slug": "orthogon722",
         "published_at": "26-FEB-2022 07:55:00",
         "latestBid": "3/5",
@@ -3785,6 +3890,7 @@
         "bitCount": 7,
         "owner": {
             "name": "Brodband",
+            "address": "k:adkjalksjdfasdfasdf",
             "slug": "/author",
             "image": {
                 "src": "/images/client/client-1.png"
@@ -4018,6 +4124,12 @@
                 }
             }
         },
+        "specs": {
+            "creator": "k:aalskjdflakjdsflkj",
+            "creator_royalties": "5%",
+            "mintit_royalties": "2.5%",
+            "nft_type": "jpeg"
+        },
         "sale_type": "fixed-price",
         "level": "Beginner",
         "language": "Russian",
@@ -4026,6 +4138,7 @@
     {
         "id": 15,
         "title": "Orthogon#723",
+        "nft_id": "Funky Bears #1122",
         "slug": "orthogon723",
         "published_at": "27-FEB-2022 07:55:00",
         "latestBid": "3/10",
@@ -4072,6 +4185,7 @@
         "bitCount": 6,
         "owner": {
             "name": "Brodband",
+            "address": "k:adkjalksjdfasdfasdf",
             "slug": "/author",
             "image": {
                 "src": "/images/client/client-1.png"
@@ -4304,6 +4418,12 @@
                     "src": "/images/client/client-1.png"
                 }
             }
+        },
+        "specs": {
+            "creator": "k:aalskjdflakjdsflkj",
+            "creator_royalties": "5%",
+            "mintit_royalties": "2.5%",
+            "nft_type": "jpeg"
         },
         "sale_type": "not-for-sale",
         "level": "Intermediate",
