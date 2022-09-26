@@ -94,7 +94,6 @@ const CreateMultiple = () => {
                 pathname: `/collections/${slug}`,
             });
             toast.success("Successfully created an NFT");
-            reset();
             setSelectedImage();
             setIsSuccess(true);
         } catch (error) {
