@@ -9,6 +9,7 @@ const Accordion = ({ items, defaultActiveKey }) => (
                     {item.title} <i className="feather-chevron-up" />
                 </Acc.Header>
                 <Acc.Body
+                    className="getting-started-accordion-item"
                     dangerouslySetInnerHTML={{ __html: item.description }}
                 />
             </Acc.Item>
