@@ -88,7 +88,8 @@ const MintConfirmDialog = () => {
             },
         });
 
-        console.log(requestKeys);
+        const result = Pact.fetch.poll({ requestKeys }, host);
+        console.log(result);
     };
 
     return (

@@ -11,7 +11,7 @@ export async function getServerSideProps(context) {
     const hash = context.params.hash;
     const baseURL = process.env.API_URL || "https://the-backend.fly.dev";
 
-    return { props: { className: "template-color-1", collectionName: hash } };
+    return { props: { className: "template-color-1" } };
 }
 
 const ProvenanceHash = ({ collectionName }) => (

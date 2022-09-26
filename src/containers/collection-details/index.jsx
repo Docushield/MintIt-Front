@@ -3,8 +3,14 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 import Image from "next/image";
 import ShareDropdown from "@components/share-dropdown";
+import TabContent from "react-bootstrap/TabContent";
+import TabContainer from "react-bootstrap/TabContainer";
+import TabPane from "react-bootstrap/TabPane";
+import Nav from "react-bootstrap/Nav";
 import ShareModal from "@components/modals/share-modal";
 import Button from "@components/ui/button";
+import Product from "@components/product/layout-01";
+import ProductFilter from "@components/product-filter/layout-02";
 import { formatDate } from "@utils/date";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -13,11 +19,16 @@ import {
 } from "src/store/collection.module";
 import { toggleConnectWalletDialog } from "src/store/wallet.module";
 
-const CollectionDetailsIntroArea = ({ className, space, data }) => {
+const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
     const dispatch = useDispatch();
     const connected = useSelector((state) => state.wallet.connected);
     const [isShareModalOpen, setIsShareModalOpen] = useState(false);
     const shareModalHandler = () => setIsShareModalOpen((prev) => !prev);
+    console.log(tokens);
+
+    useEffect(() => {
+        dispatch(setCurrentCollection(data));
+    }, [data]);
 
     useEffect(() => {
         dispatch(setCurrentCollection(data));
@@ -100,54 +111,6 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                                         >
                                             View Provenance
                                         </Button>
-                                        {/* <div className="follow-area">
-                                            <div className="follow followers">
-                                                <span>
-                                                    {data.followers}{" "}
-                                                    <a
-                                                        href="https://twitter.com"
-                                                        target="_blank"
-                                                        rel="noreferrer"
-                                                        className="color-body"
-                                                    >
-                                                        followers
-                                                    </a>
-                                                </span>
-                                            </div>
-                                            <div className="follow following">
-                                                <span>
-                                                    {data.following}{" "}
-                                                    <a
-                                                        href="https://twitter.com"
-                                                        target="_blank"
-                                                        rel="noreferrer"
-                                                        className="color-body"
-                                                    >
-                                                        following
-                                                    </a>
-                                                </span>
-                                            </div>
-                                        </div> */}
-                                        {/* <div className="author-button-area">
-                                            <span className="btn at-follw follow-button">
-                                                <i className="feather-user-plus" />
-                                                Follow
-                                            </span>
-                                            <button
-                                                type="button"
-                                                className="btn at-follw share-button"
-                                                onClick={shareModalHandler}
-                                            >
-                                                <i className="feather-share-2" />
-                                            </button>
-
-                                            <Anchor
-                                                path="/edit-profile"
-                                                className="btn at-follw follow-button edit-btn"
-                                            >
-                                                <i className="feather feather-edit" />
-                                            </Anchor>
-                                        </div> */}
                                     </div>
                                 </div>
                             </div>
@@ -213,13 +176,42 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                 </div>
             </div>
 
-            <div className="container d-flex my-4">
+            <div className="container d-flex my-4 align-items-center">
                 <div className="mint-status-box">Public Round</div>
                 <div className="mint-status-box">Mint: 20 KDA</div>
                 <div className="mint-status-box">Remaining: 1029</div>
                 <Button className="ms-4" onClick={onMint}>
                     Mint Now
                 </Button>
+            </div>
+            <div className="container my-4">
+                <div className="row">
+                    {tokens.length > 0 ? (
+                        <>
+                            {tokens.map((prod) => (
+                                <div
+                                    key={prod.id}
+                                    className="col-5 col-lg-4 col-md-3 col-sm-4 col-6 my-3"
+                                >
+                                    <Product
+                                        overlay
+                                        title={data.name}
+                                        slug={data.slug}
+                                        image={{
+                                            src: "/images/portfolio/lg/portfolio-01.jpg",
+                                        }}
+                                        price={{
+                                            amount: data.price,
+                                            currency: "$KDA",
+                                        }}
+                                    />
+                                </div>
+                            ))}
+                        </>
+                    ) : (
+                        <p>No tokens to show</p>
+                    )}
+                </div>
             </div>
         </>
     );

@@ -1,9 +1,7 @@
-const ProvenanceHashArea = ({ collectionName }) => {
+const ProvenanceHashArea = ({ collection }) => {
     return (
         <div className="container mt-5">
-            <h2 className="provenance-headline">
-                Collection Name Provenance Record
-            </h2>
+            <h2 className="fst-italic">{collection.name} Provenance Record</h2>
             <p>
                 This page presents the provenance record of each{" "}
                 {collectionName} NFT that will ever exist. Firstly, each piece
