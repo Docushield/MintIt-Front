@@ -19,7 +19,11 @@ const Service = ({ title, subtitle, path, description, image }) => (
             <div className="subtitle">{subtitle}</div>
             <div className="content">
                 <h4 className="title">
-                    <Anchor path={path}>{title}</Anchor>
+                    {path ? (
+                        <Anchor path={path}>{title}</Anchor>
+                    ) : (
+                        <div>{title}</div>
+                    )}
                 </h4>
                 <p
                     className="description"

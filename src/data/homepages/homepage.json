@@ -108,7 +108,7 @@
                 {
                     "id": 3,
                     "title": "Upload your Collection",
-                    "path": "/connect",
+                    "path": "/create",
                     "subtitle": "Step-03",
                     "description": "The output JSON file from the NFT-Generator, your Collection Logo, and Banner must be uploaded to the <a href='/create-multiple'>Create Section</a>.",
                     "images": [
@@ -120,7 +120,6 @@
                 {
                     "id": 4,
                     "title": "Sell Your NFTs",
-                    "path": "/creator",
                     "subtitle": "Step-04",
                     "description": "Once you’ve completed all the steps and submitted your NFT Collection, a new collection page will be generated where your community can mint. It’s that simple!",
                     "images": [
