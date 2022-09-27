@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Pact from "pact-lang-api";
+import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { signXWallet } from "@utils/kadena";
 import { toggleMintConfirmDialog } from "../../store/collection.module";
@@ -11,6 +12,8 @@ const MintConfirmDialog = () => {
     const show = useSelector((state) => state.collection.isMintConfirmDialog);
     const current = useSelector((state) => state.collection.current);
     const account = useSelector((state) => state.wallet.account);
+    const [isMinting, setIsMinting] = useState(false);
+    const [error, setError] = useState("");
 
     const handleClose = () => {
         dispatch(toggleMintConfirmDialog());
@@ -73,23 +76,31 @@ const MintConfirmDialog = () => {
 
         // Sign in xwallet (we can use our sign functions)
 
-        const signedCmd = await signXWallet(signingObject);
+        setIsMinting(true);
+        try {
+            const signedCmd = await signXWallet(signingObject);
 
-        // Send TX
+            // Send TX
 
-        const host =
-            "https://api.testnet.chainweb.com/chainweb/0.0/testnet04/chain/1/pact";
+            const host =
+                "https://api.testnet.chainweb.com/chainweb/0.0/testnet04/chain/1/pact";
 
-        const requestKeys = await fetch(`${host}/api/v1/send`, {
-            body: JSON.stringify({ cmds: [signedCmd.signedCmd] }),
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
+            const { requestKeys } = await fetch(`${host}/api/v1/send`, {
+                body: JSON.stringify({ cmds: [signedCmd.signedCmd] }),
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }).then((res) => res.json());
 
-        const result = Pact.fetch.poll({ requestKeys }, host);
-        console.log(result);
+            const result = await Pact.fetch.poll({ requestKeys }, host);
+            toast("Successfully minted a new token.");
+        } catch (error) {
+            setError(error);
+            toast("Error occurred in minting a new token", error);
+        } finally {
+            setIsMinting(false);
+        }
     };
 
     return (
@@ -98,47 +109,53 @@ const MintConfirmDialog = () => {
                 <Modal.Title>Mint New</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <div className="row">
-                    <div className="col-md-6">
-                        <div className="input-box pb--20">
-                            <input
-                                id="name"
-                                placeholder="Collection Name"
-                                value={current && current.name}
-                                readOnly
-                            />
+                {isMinting ? (
+                    <div className="row text-center">
+                        <p>Minting...</p>
+                    </div>
+                ) : (
+                    <div className="row">
+                        <div className="col-md-6">
+                            <div className="input-box pb--20">
+                                <input
+                                    id="name"
+                                    placeholder="Collection Name"
+                                    value={current && current.name}
+                                    readOnly
+                                />
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="input-box pb--20">
+                                <input
+                                    id="price"
+                                    placeholder="Total Mint Price: 20 $KDA"
+                                    value={`${
+                                        current && current["mint-price"]
+                                    } $KDA`}
+                                    readOnly
+                                />
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="input-box pb--20">
+                                <input
+                                    id="account"
+                                    placeholder="Currently connected wallet"
+                                    value={account}
+                                    readOnly
+                                />
+                            </div>
+                        </div>
+                        <div className="col-md-6 col-xl-6 mt_lg--15 mt_md--15 mt_sm--15">
+                            <div className="input-box">
+                                <Button fullwidth onClick={onMint}>
+                                    Mint
+                                </Button>
+                            </div>
                         </div>
                     </div>
-                    <div className="col-md-6">
-                        <div className="input-box pb--20">
-                            <input
-                                id="price"
-                                placeholder="Total Mint Price: 20 $KDA"
-                                value={`${
-                                    current && current["mint-price"]
-                                } $KDA`}
-                                readOnly
-                            />
-                        </div>
-                    </div>
-                    <div className="col-md-6">
-                        <div className="input-box pb--20">
-                            <input
-                                id="account"
-                                placeholder="Currently connected wallet"
-                                value={account}
-                                readOnly
-                            />
-                        </div>
-                    </div>
-                    <div className="col-md-6 col-xl-6 mt_lg--15 mt_md--15 mt_sm--15">
-                        <div className="input-box">
-                            <Button fullwidth onClick={onMint}>
-                                Mint
-                            </Button>
-                        </div>
-                    </div>
-                </div>
+                )}
             </Modal.Body>
         </Modal>
     );
