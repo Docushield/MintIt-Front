@@ -28,17 +28,6 @@ const ConnectArea = ({ className, space }) => (
                         MINT-IT Website.{" "}
                     </p>
                 </div>
-                <div
-                    className="col-lg-6"
-                    data-sal="slide-up"
-                    data-sal-delay="200"
-                    data-sal-duration="800"
-                >
-                    <p className="wallet-bootm-disc">
-                        Currently our platform supports X-Wallet and Zelcore
-                        Kadena wallet providers.
-                    </p>
-                </div>
             </div>
             <div className="row g-5">
                 <div
@@ -59,6 +48,10 @@ const ConnectArea = ({ className, space }) => (
                     </div>
                 </div>
                 <div className="col-lg-6">
+                    <p className="wallet-top-disc">
+                        Currently our platform supports X-Wallet and Zelcore
+                        Kadena wallet providers.
+                    </p>
                     <div className="row g-5">
                         <div
                             className="col-xxl-4 col-lg-6 col-md-4 col-12 col-sm-6 col-12"
