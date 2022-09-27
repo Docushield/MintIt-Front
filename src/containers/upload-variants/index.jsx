@@ -33,8 +33,8 @@ const UploadVariants = ({ className, space }) => (
                             <Image
                                 src="/images/upload-variants/single.png"
                                 alt="Doc-single"
-                                width={495}
-                                height={417}
+                                width={500}
+                                height={500}
                                 layout="responsive"
                             />
                         </div>
@@ -54,8 +54,8 @@ const UploadVariants = ({ className, space }) => (
                             <Image
                                 src="/images/upload-variants/multiple.png"
                                 alt="Doc-single"
-                                width={495}
-                                height={417}
+                                width={500}
+                                height={500}
                                 layout="responsive"
                             />
                         </div>
