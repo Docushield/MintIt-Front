@@ -97,6 +97,7 @@ const MintConfirmDialog = () => {
             toast("Successfully minted a new token.");
         } catch (error) {
             setError(error);
+            toast("Error occurred in minting a new token", error);
         } finally {
             setIsMinting(false);
         }
