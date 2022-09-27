@@ -137,13 +137,9 @@ const CreateNewArea = ({ className, space, handleSend }) => {
                                     <span>
                                         {" "}
                                         Service fee : <strong>2.5%</strong>{" "}
+                                        royalties
                                     </span>{" "}
                                     <br />
-                                    <span>
-                                        {" "}
-                                        You will receive :{" "}
-                                        <strong>25.00 KDA $50,000</strong>
-                                    </span>
                                 </div>
                             </div>
                             {isPreview && (
@@ -463,13 +459,9 @@ const CreateNewArea = ({ className, space, handleSend }) => {
                                 <span>
                                     {" "}
                                     Service fee : <strong>2.5%</strong>{" "}
+                                    royalties
                                 </span>{" "}
                                 <br />
-                                <span>
-                                    {" "}
-                                    You will receive :{" "}
-                                    <strong>25.00 KDA $50,000</strong>
-                                </span>
                             </div>
                         </div>
                     </div>
