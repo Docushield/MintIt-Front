@@ -44,7 +44,7 @@ const AboutArea = ({ space, className, data }) => (
         </div>
         <div className="container">
             <div className="row g-5">
-                {data?.items?.[0] && (
+                {/* {data?.items?.[0] && (
                     <div className="col-lg-6">
                         <div className="h--100">
                             <Sticky>
@@ -57,8 +57,8 @@ const AboutArea = ({ space, className, data }) => (
                             </Sticky>
                         </div>
                     </div>
-                )}
-                {data?.items?.[1] && (
+                )} */}
+                {/* {data?.items?.[1] && (
                     <div className="col-lg-6">
                         <AboutCard
                             className="transparent-bg"
@@ -67,7 +67,7 @@ const AboutArea = ({ space, className, data }) => (
                             path={data.items[1].path}
                         />
                     </div>
-                )}
+                )} */}
             </div>
         </div>
     </div>

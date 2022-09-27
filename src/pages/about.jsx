@@ -6,6 +6,7 @@ import Header from "@layout/header/header-01";
 import Footer from "@layout/footer/footer-01";
 import AboutArea from "@containers/about/layout-02";
 import QuoteArea from "@containers/quote-area";
+import Image from "next/image";
 import FunfactArea from "@containers/funfact";
 import CTAArea from "@containers/cta";
 import BlogArea from "@containers/blog/layout-01";
@@ -18,8 +19,7 @@ import aboutData from "../data/innerpages/about.json";
 
 const About = ({ posts }) => {
     const content = normalizedData(aboutData?.content || []);
-    
-    
+
     const [pageNumber, setPageNumber] = useState(1);
 
     const onPageChageHandler = (page) => {
@@ -34,15 +34,22 @@ const About = ({ posts }) => {
             <main id="main-content">
                 <Breadcrumb
                     pageTitle="About"
-                    pageTitle1="Activity"
+                    pageTitle1=""
                     currentPage="About"
                     onPageChageHandler={onPageChageHandler}
                 />
                 <AboutArea data={content["about-section"]} />
-                {/* <QuoteArea data={content["quote-section"]} /> */}
+                <QuoteArea data={content["quote-section"]} />
                 {/* <FunfactArea data={content["funfact-section"]} /> */}
-                <CTAArea data={content["cta-section"]} />
-                <BlogArea data={{ ...content["blog-section"], posts }} />
+                {/* <CTAArea data={content["cta-section"]} /> */}
+                {/* <BlogArea data={{ ...content["blog-section"], posts }} /> */}
+                <div className="container logo-wrapper">
+                    <Image
+                        src="/images/logo/logos.png"
+                        layout="fill"
+                        alt="logos"
+                    />
+                </div>
             </main>
             <Footer />
         </Wrapper>
