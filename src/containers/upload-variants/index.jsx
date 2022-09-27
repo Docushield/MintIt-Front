@@ -14,11 +14,15 @@ const UploadVariants = ({ className, space }) => (
         <div className="container">
             <div className="row">
                 <div className="upload-variant-title-wrapper">
-                    <h3 className="title text-center">Upload Variants</h3>
+                    <h3 className="title text-center">
+                        Create and Upload Metadata
+                    </h3>
                     <p className="text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit. Ducimus inventore, officiis. Alias aspernatur
-                        laboriosam ratione! Doloremque ipsa nesciunt sed!
+                        Once the NFT collection has been generated using the
+                        MINT-IT WebApp, download the output file and upload it
+                        to <strong>Create Collection</strong>. Want to create a
+                        single NFT? Click on <strong>Create Single</strong> and
+                        follow the steps.
                     </p>
                 </div>
             </div>
@@ -27,10 +31,10 @@ const UploadVariants = ({ className, space }) => (
                     <div className="upload-variant-wrapper">
                         <div className="variant-preview">
                             <Image
-                                src="/images/upload-variants/single.jpg"
+                                src="/images/upload-variants/single.png"
                                 alt="Doc-single"
-                                width={495}
-                                height={417}
+                                width={500}
+                                height={500}
                                 layout="responsive"
                             />
                         </div>
@@ -48,10 +52,10 @@ const UploadVariants = ({ className, space }) => (
                     <div className="upload-variant-wrapper">
                         <div className="variant-preview">
                             <Image
-                                src="/images/upload-variants/multiple.jpg"
+                                src="/images/upload-variants/multiple.png"
                                 alt="Doc-single"
-                                width={495}
-                                height={417}
+                                width={500}
+                                height={500}
                                 layout="responsive"
                             />
                         </div>
@@ -61,7 +65,7 @@ const UploadVariants = ({ className, space }) => (
                             fullwidth
                             className="mt--20"
                         >
-                            Create Multiple
+                            Create Collection
                         </Button>
                     </div>
                 </div>
