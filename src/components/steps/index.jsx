@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import Anchor from "@ui/anchor";
 
 const Steps = ({ steps }) => {
     return (
@@ -7,7 +8,9 @@ const Steps = ({ steps }) => {
                 <div className="steps" key={index}>
                     <div className="step-name">{step.name}</div>
                     <div className="step-description">{step.description}</div>
-                    <i className="feather-arrow-right" />
+                    <Anchor className="read-more-button" path={step.path}>
+                        <i className="feather-arrow-right" />
+                    </Anchor>
                 </div>
             ))}
         </div>

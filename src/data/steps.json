@@ -1,11 +1,13 @@
 [
     {
         "name": "Create your collection",
-        "description": "A great collection of beautiful website templates for your need. Choose the best suitable template"
+        "description": "A great collection of beautiful website templates for your need. Choose the best suitable template",
+        "path": "/collection"
     },
     {
         "name": "Add Your NFTs",
-        "description": "We've made the template fully responsive, so it looks great on all devices, desktop, tablets and mobile."
+        "description": "We've made the template fully responsive, so it looks great on all devices, desktop, tablets and mobile.",
+        "path": "/create"
     },
     {
         "name": "Sell Your NFTs",
