@@ -30,10 +30,10 @@ const BlogArea = ({ space, className, data }) => (
                         data-sal="slide-up"
                         data-sal-duration="800"
                     >
-                        <Anchor className="btn-transparent" path="/blog">
+                        {/* <Anchor className="btn-transparent" path="/blog">
                             VIEW ALL
                             <i className="feather-arrow-right" />
-                        </Anchor>
+                        </Anchor> */}
                     </div>
                 </div>
             </div>
