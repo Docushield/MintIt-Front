@@ -69,7 +69,7 @@ const ConnectArea = ({ className, space }) => (
                             <Wallet
                                 imgSrc="/images/wallet/zelcore.png"
                                 title="Zelcore"
-                                path="/collection"
+                                path="https://zelcore.io/"
                                 icon="feather-cast"
                             />
                         </div>
@@ -82,7 +82,7 @@ const ConnectArea = ({ className, space }) => (
                             <Wallet
                                 imgSrc="/images/wallet/x-wallet.png"
                                 title="X-Wallet"
-                                path="/collection"
+                                path="https://xwallet.kaddex.com/"
                                 icon="feather-box"
                             />
                         </div>
