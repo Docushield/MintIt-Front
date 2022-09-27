@@ -24,7 +24,6 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
     const connected = useSelector((state) => state.wallet.connected);
     const [isShareModalOpen, setIsShareModalOpen] = useState(false);
     const shareModalHandler = () => setIsShareModalOpen((prev) => !prev);
-    console.log(tokens);
 
     useEffect(() => {
         dispatch(setCurrentCollection(data));
@@ -198,7 +197,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                         title={data.name}
                                         slug={data.slug}
                                         image={{
-                                            src: "/images/portfolio/lg/portfolio-01.jpg",
+                                            src: "/images/collection/placeholder.png",
                                         }}
                                         price={{
                                             amount: data.price,
