@@ -1,9 +1,11 @@
 {
     "name": "Mint It Studios",
     "twitter": "@mintitonkadena",
+    "address": "k:adlkjalkjs",
     "followers": "5000",
     "following": "10",
     "image": {
         "src": "/images/slider/banner-06.png"
-    }
+    },
+    "description": "This is the test description. This is the test description. This is the test description. This is the test description. This is the test description. This is the test description. This is the test description. This is the test description. "
 }

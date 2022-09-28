@@ -35,7 +35,7 @@ const AuthorIntroArea = ({ className, space, data }) => {
                 )}
             >
                 <div className="container">
-                    <div className="row padding-tb-50 align-items-center d-flex">
+                    <div className="row padding-tb-50 align-items-baseline d-flex">
                         <div className="col-lg-3">
                             <div className="author-wrapper">
                                 <div className="author-inner">
@@ -72,6 +72,9 @@ const AuthorIntroArea = ({ className, space, data }) => {
                                                     <ShareDropdown />
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div className="mt-4 blue-area">
+                                            {data.address}
                                         </div>
                                         {/* <div className="follow-area">
                                             <div className="follow followers">
@@ -127,6 +130,9 @@ const AuthorIntroArea = ({ className, space, data }) => {
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div className="col-lg-6">
+                            <p>{data.description}</p>
                         </div>
                     </div>
                 </div>
