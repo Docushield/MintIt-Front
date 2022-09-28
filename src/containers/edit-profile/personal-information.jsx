@@ -3,7 +3,7 @@ import NiceSelect from "@ui/nice-select";
 
 const PersonalInformation = () => (
     <div className="Doc-information">
-        <div className="profile-form-wrapper">
+        {/* <div className="profile-form-wrapper">
             <div className="email-area">
                 <label htmlFor="Email" className="form-label">
                     Edit Your Email
@@ -16,7 +16,7 @@ const PersonalInformation = () => (
                     onChange={(e) => e}
                 />
             </div>
-        </div>
+        </div> */}
         <div className="edit-bio-area mt--30">
             <label htmlFor="Discription" className="form-label">
                 Edit Your Bio
@@ -25,47 +25,46 @@ const PersonalInformation = () => (
                 id="Discription"
                 placeholder="Hello, I am Alamin, A Front-end Developer..."
                 onChange={(e) => e}
-            >
-            </textarea>
+            ></textarea>
         </div>
-            <div className="input-two-wrapper mb--15">
-                <div className="first-name half-wid">
-                    <label htmlFor="contact-name" className="form-label">
-                        Facebook
-                    </label>
-                    <input
-                        name="contact-name"
-                        id="contact-name"
-                        type="text"
-                        placeholder="https://facebook.com"
-                        onChange={(e) => e}
-                    />
-                </div>
-                <div className="last-name half-wid">
-                    <label htmlFor="contact-name-last" className="form-label">
-                        Twitter
-                    </label>
-                    <input
-                        name="contact-name"
-                        id="contact-name-last"
-                        type="text"
-                        placeholder="https://twitter.com"
-                        onChange={(e) => e}
-                    />
-                </div>
-                <div className="last-name half-wid">
-                    <label htmlFor="contact-name-last" className="form-label">
-                        Instagram
-                    </label>
-                    <input
-                        name="contact-name"
-                        id="contact-name-last"
-                        type="text"
-                        placeholder="https://instagram.com"
-                        onChange={(e) => e}
-                    />
-                </div>
+        <div className="input-two-wrapper mb--15">
+            <div className="first-name half-wid">
+                <label htmlFor="contact-name" className="form-label">
+                    Facebook
+                </label>
+                <input
+                    name="contact-name"
+                    id="contact-name"
+                    type="text"
+                    placeholder="https://facebook.com"
+                    onChange={(e) => e}
+                />
             </div>
+            <div className="last-name half-wid">
+                <label htmlFor="contact-name-last" className="form-label">
+                    Twitter
+                </label>
+                <input
+                    name="contact-name"
+                    id="contact-name-last"
+                    type="text"
+                    placeholder="https://twitter.com"
+                    onChange={(e) => e}
+                />
+            </div>
+            <div className="last-name half-wid">
+                <label htmlFor="contact-name-last" className="form-label">
+                    Instagram
+                </label>
+                <input
+                    name="contact-name"
+                    id="contact-name-last"
+                    type="text"
+                    placeholder="https://instagram.com"
+                    onChange={(e) => e}
+                />
+            </div>
+        </div>
 
         {/* <div className="input-two-wrapper mt--15">
             <div className="half-wid role-area">

@@ -15,9 +15,9 @@ const EditProfile = () => (
             <div className="row plr--70 padding-control-edit-wrapper pl_md--0 pr_md--0 pl_sm--0 pr_sm--0">
                 <div className="col-12 d-flex justify-content-between mb--30 align-items-center">
                     <h4 className="title-left">Edit Your Profile</h4>
-                    <Anchor path="/author" className="btn btn-primary ml--10">
+                    {/* <Anchor path="/author" className="btn btn-primary ml--10">
                         <i className="feather-eye mr--5" /> Preview
-                    </Anchor>
+                    </Anchor> */}
                 </div>
             </div>
             <TabContainer defaultActiveKey="nav-home">
@@ -34,7 +34,7 @@ const EditProfile = () => (
                                         <i className="feather-user" />
                                         Manage Profile
                                     </Nav.Link> */}
-                                    <Nav.Link
+                                    {/* <Nav.Link
                                         eventKey="nav-profile"
                                         as="button"
                                     >
@@ -47,7 +47,7 @@ const EditProfile = () => (
                                     >
                                         <i className="feather-bell" />
                                         Notification Setting
-                                    </Nav.Link>
+                                    </Nav.Link> */}
                                 </Nav>
                             </nav>
                         </Sticky>
@@ -62,12 +62,12 @@ const EditProfile = () => (
                                 <EditProfileImage />
                                 <PersonalInformation />
                             </TabPane> */}
-                            <TabPane eventKey="nav-profile">
+                            {/* <TabPane eventKey="nav-profile">
                                 <ChangePassword />
                             </TabPane>
                             <TabPane eventKey="nav-contact">
                                 <NotificationSetting />
-                            </TabPane>
+                            </TabPane> */}
                         </TabContent>
                     </div>
                 </div>

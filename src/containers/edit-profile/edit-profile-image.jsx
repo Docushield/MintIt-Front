@@ -75,7 +75,8 @@ const EditProfileImage = () => {
                                     id="rbtinput2"
                                     src="/images/profile/cover-01.jpg"
                                     alt="Profile-NFT"
-                                    layout="fill"
+                                    width={1920}
+                                    height={300}
                                 />
                             )}
                         </div>
