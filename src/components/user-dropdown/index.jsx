@@ -1,14 +1,27 @@
 import Image from "next/image";
 import Anchor from "@ui/anchor";
+import { useDispatch } from "react-redux";
+import { setDisconnected } from "src/store/wallet.module";
+import { destroyCookie } from "nookies";
+
 const UserDropdown = () => {
-    const logout = () => {
-        console.log("logout clicked");
+    const dispatch = useDispatch();
+
+    const disconnectWallet = async () => {
+        dispatch(setDisconnected());
+        await window.kadena.request({
+            method: "kda_disconnect",
+            networkId: "testnet04",
+        });
+        destroyCookie(null, "userAccount");
+        destroyCookie(null, "walletName");
     };
+
     return (
         <div className="icon-box">
             <Anchor path="/myprofile">
                 <Image
-                    src="/images/icons/boy-avater.png"
+                    src="/images/icons/profile-image.png"
                     alt="Images"
                     layout="fixed"
                     width={38}
@@ -77,15 +90,15 @@ const UserDropdown = () => {
                     <li>
                         <Anchor path="/manage-profile">Manage Profile</Anchor>
                     </li>
-                    <li>
+                    {/* <li>
                         <Anchor path="/admanager">Ad Manager</Anchor>
-                    </li>
+                    </li> */}
                     <li>
                         <Anchor path="/connect">Manage Collections</Anchor>
                     </li>
                     <li>
-                        <button type="button" onClick={logout}>
-                            Log Out
+                        <button type="button" onClick={disconnectWallet}>
+                            Disconnect Wallet
                         </button>
                     </li>
                 </ul>

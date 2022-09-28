@@ -116,7 +116,7 @@ const Header = ({ className }) => {
                                 </div>
                             </div>
                             <div className="setting-option rn-icon-list user-account">
-                                <UserDropdown />
+                                {connected && <UserDropdown />}
                             </div>
                             {/* <div className="setting-option rn-icon-list notification-badge">
                                 <div className="icon-box">
