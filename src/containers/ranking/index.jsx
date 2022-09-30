@@ -31,7 +31,7 @@ const RankingArea = ({ className, space, data }) => {
                                             <span>SL</span>
                                         </th>
                                         <th>
-                                            <span>Product</span>
+                                            <span>Collection</span>
                                         </th>
                                         <th>
                                             <span>Volume</span>
