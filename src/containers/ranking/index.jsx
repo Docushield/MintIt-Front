@@ -1,31 +1,10 @@
-import { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import Image from "next/image";
 import Anchor from "@ui/anchor";
-import Pagination from "@components/pagination-02";
 import { IDType, ImageType } from "@utils/types";
 
-const POSTS_PER_PAGE = 31;
-
 const RankingArea = ({ className, space, data }) => {
-    const [ranking, setRanking] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const numberOfPages = Math.ceil(data.ranking.length / POSTS_PER_PAGE);
-    const paginationHandler = (page) => {
-        setCurrentPage(page);
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    };
-
-    const rankingHandler = useCallback(() => {
-        const start = (currentPage - 1) * POSTS_PER_PAGE;
-        setRanking(data.ranking.slice(start, start + POSTS_PER_PAGE));
-    }, [currentPage, data.ranking]);
-
-    useEffect(() => {
-        rankingHandler();
-    }, [currentPage, rankingHandler]);
-
     return (
         <div
             className={clsx(
@@ -37,9 +16,12 @@ const RankingArea = ({ className, space, data }) => {
             <div className="container">
                 <div className="row">
                     <div className="col-12">
-                        <div className="table-title-area d-flex">
+                        <div className="table-title-area d-flex align-items-center mb-5">
                             <i className="feather-briefcase" />
-                            <h3>The top NFTs on Doc</h3>
+                            <h2 className="m-0">Live Stats</h2>
+                        </div>
+                        <div className="text-center">
+                            <h3>Top Collections Stats</h3>
                         </div>
                         <div className="box-table table-responsive">
                             <table className="table upcoming-projects">
@@ -72,7 +54,7 @@ const RankingArea = ({ className, space, data }) => {
                                     </tr>
                                 </thead>
                                 <tbody className="ranking">
-                                    {ranking?.map((item, index) => (
+                                    {data.ranking?.map((item, index) => (
                                         <tr
                                             key={item.id}
                                             className={
@@ -157,11 +139,6 @@ const RankingArea = ({ className, space, data }) => {
                                 </tbody>
                             </table>
                         </div>
-                        <Pagination
-                            currentPage={currentPage}
-                            numberOfPages={numberOfPages}
-                            onClick={paginationHandler}
-                        />
                     </div>
                 </div>
             </div>
