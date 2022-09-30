@@ -76,6 +76,7 @@ const EditProfileImage = () => {
                                     src="/images/profile/cover-01.jpg"
                                     alt="Profile-NFT"
                                     layout="fill"
+                                    objectPosition={"center"}
                                 />
                             )}
                         </div>
