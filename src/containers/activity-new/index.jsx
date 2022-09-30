@@ -85,32 +85,37 @@ const ActivityArea = ({ className, space, data }) => {
                                                 </div>
                                             </td>
                                             <td>
-                                                <div className="d-flex">
-                                                    <div className="mx-1">
-                                                        <Image
-                                                            src={item.image.src}
-                                                            width={45}
-                                                            height={45}
-                                                            alt={
-                                                                item.collectionName
-                                                            }
-                                                        />
-                                                    </div>
-                                                    <div>
-                                                        <div>
-                                                            <span>
-                                                                {
+                                                <Anchor path="/author">
+                                                    <div className="d-flex">
+                                                        <div className="mx-1">
+                                                            <Image
+                                                                src={
+                                                                    item.image
+                                                                        .src
+                                                                }
+                                                                width={45}
+                                                                height={45}
+                                                                alt={
                                                                     item.collectionName
                                                                 }
-                                                            </span>
+                                                            />
                                                         </div>
                                                         <div>
-                                                            <span>
-                                                                {item.nftId}
-                                                            </span>
+                                                            <div>
+                                                                <span>
+                                                                    {
+                                                                        item.collectionName
+                                                                    }
+                                                                </span>
+                                                            </div>
+                                                            <div>
+                                                                <span>
+                                                                    {item.nftId}
+                                                                </span>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </Anchor>
                                             </td>
                                             <td>
                                                 <div className="d-flex algin-items-center">
@@ -133,10 +138,14 @@ const ActivityArea = ({ className, space, data }) => {
                                                 <span>{item.quantity}</span>
                                             </td>
                                             <td>
-                                                <span>{item.from}</span>
+                                                <Anchor path="/author">
+                                                    <span>{item.from}</span>
+                                                </Anchor>
                                             </td>
                                             <td>
-                                                <span>{item.to}</span>
+                                                <Anchor path="/author">
+                                                    <span>{item.to}</span>
+                                                </Anchor>
                                             </td>
                                             <td>
                                                 <span>{item.time}</span>
