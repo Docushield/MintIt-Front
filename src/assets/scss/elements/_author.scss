@@ -258,15 +258,18 @@
 }
 .col_textbox {
     display: block;
-    padding: 30px;
     margin-top: 140px;
     text-align: center;
-    padding: 40px 30px;
+    padding: 40px 30px 40px 0px;
     transition: 0.5s all ease-in-out;
     border-radius: 10px;
     position: relative;
     z-index: 1;
     height: 100%;
+    p {
+        text-align: left;
+        margin-right: 20px;
+    }
 }
 .status-box {
     display: flex;
