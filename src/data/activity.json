@@ -1,0 +1,114 @@
+[
+    {
+        "id": 1,
+        "collectionName": "Preatent",
+        "nftId": "Preatent nft",
+        "price": "100",
+        "quantity": 1,
+        "time": "2:00 PM",
+        "image": {
+            "src": "/images/activity/activity-01.jpg"
+        },
+        "from": "k:adfasdfasdfasdfasdfasd",
+        "to": "k:asdlakjsdlkf",
+        "status": "Mint"
+    },
+    {
+        "id": 2,
+        "collectionName": "#21 The Wonder",
+        "nftId": "#21 The nft Wonder",
+        "price": "100",
+        "quantity": 1,
+        "image": {
+            "src": "/images/activity/activity-01.jpg"
+        },
+        "time": "2:30 PM",
+        "from": "k:adfasdfasdfasdfasdfasd",
+        "to": "k:asdlakjsdlkf",
+        "status": "Sale"
+    },
+    {
+        "id": 3,
+        "collectionName": "Morgan11",
+        "nftId": "Morgan11 nft",
+        "price": "100",
+        "quantity": 1,
+        "time": "1:30 PM",
+        "image": {
+            "src": "/images/activity/activity-01.jpg"
+        },
+        "from": "k:adfasdfasdfasdfasdfasd",
+        "to": "k:asdlakjsdlkf",
+        "status": "Mint"
+    },
+    {
+        "id": 4,
+        "collectionName": "Diamond Dog",
+        "nftId": "Diamond nft Dog",
+        "price": "100",
+        "quantity": 1,
+        "time": "9:30 PM",
+        "image": {
+            "src": "/images/activity/activity-01.jpg"
+        },
+        "from": "k:adfasdfasdfasdfasdfasd",
+        "to": "k:asdlakjsdlkf",
+        "status": "Sale"
+    },
+    {
+        "id": 5,
+        "collectionName": "cAtal7",
+        "nftId": "cAtal7 nft",
+        "price": "100",
+        "quantity": 1,
+        "time": "11:30 PM",
+        "image": {
+            "src": "/images/activity/activity-01.jpg"
+        },
+        "from": "k:adfasdfasdfasdfasdfasd",
+        "to": "k:asdlakjsdlkf",
+        "status": "Mint"
+    },
+    {
+        "id": 6,
+        "collectionName": "Norgan12",
+        "nftId": "Norgan12 nft",
+        "price": "100",
+        "quantity": 1,
+        "image": {
+            "src": "/images/activity/activity-01.jpg"
+        },
+        "time": "11:30 PM",
+        "from": "k:adfasdfasdfasdfasdfasd",
+        "to": "k:asdlakjsdlkf",
+        "status": "Sale"
+    },
+    {
+        "id": 7,
+        "collectionName": "Preasent",
+        "nftId": "Preasent nft",
+        "price": "100",
+        "quantity": 1,
+        "time": "11:30 PM",
+        "image": {
+            "src": "/images/activity/activity-01.jpg"
+        },
+        "from": "k:adfasdfasdfasdfasdfasd",
+        "to": "k:asdlakjsdlkf",
+        "status": "Sale"
+    },
+    {
+        "id": 8,
+        "collectionName": "Sun Afford",
+        "nftId": "Sun Afford nft",
+        "price": "100",
+        "quantity": 1,
+        "time": "11:30 PM",
+        "image": {
+            "src": "/images/activity/activity-01.jpg"
+        },
+        "from": "k:adfasdfasdfasdfasdfasd",
+        "to": "k:asdlakjsdlkf",
+        "status": "Sale"
+    }
+]
