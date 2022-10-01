@@ -7,10 +7,21 @@ import ShareDropdown from "@components/share-dropdown";
 import ShareModal from "@components/modals/share-modal";
 import Button from "@components/ui/button";
 import Anchor from "@ui/anchor";
+import { toggleConnectWalletDialog } from "src/store/wallet.module";
+import { toggleMintConfirmDialog } from "src/store/collection.module";
+import { useDispatch } from "react-redux";
 
 const AuthorIntroArea = ({ className, space, data }) => {
+    const dispatch = useDispatch();
     const [isShareModalOpen, setIsShareModalOpen] = useState(false);
     const shareModalHandler = () => setIsShareModalOpen((prev) => !prev);
+    const onMint = () => {
+        if (connected) {
+            dispatch(toggleMintConfirmDialog());
+        } else {
+            dispatch(toggleConnectWalletDialog());
+        }
+    };
     return (
         <>
             <ShareModal
@@ -74,10 +85,10 @@ const AuthorIntroArea = ({ className, space, data }) => {
                                             </div>
                                         </div>
                                         <Button
-                                            path="provenance-hash"
                                             className="mt--15"
+                                            onClick={onMint}
                                         >
-                                            View Provenance
+                                            Mint Now
                                         </Button>
                                         {/* <div className="follow-area">
                                             <div className="follow followers">
@@ -134,7 +145,7 @@ const AuthorIntroArea = ({ className, space, data }) => {
                         <div className="col-lg-9">
                             <div className="row mb-5 col_textbox d-flex align-items-center">
                                 <div className="col-md-6 col-lg-6">
-                                    <p>
+                                    <p className="align-items-left">
                                         Lorem ipsum dolor sit amet, consectetur
                                         adipiscing elit. Suspendisse consequat
                                         vel diam ut eleifend. Morbi rhoncus eros
@@ -178,6 +189,12 @@ const AuthorIntroArea = ({ className, space, data }) => {
                                             <div className="status-box">
                                                 <div>TOTAL SUPPLY</div>
                                                 <div>10K</div>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-12">
+                                            <div className="status-box">
+                                                <div>Creator</div>
+                                                <div>{data.address}</div>
                                             </div>
                                         </div>
                                     </div>
