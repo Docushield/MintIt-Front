@@ -6,6 +6,7 @@ import Modal from "react-bootstrap/Modal";
 import Pact from "pact-lang-api";
 import { setCookie, parseCookies } from "nookies";
 import { signXWallet, connectXWallet as connectToXWallet } from "@utils/kadena";
+import Image from "next/image";
 import {
     toggleConnectWalletDialog,
     setConnected,
@@ -168,16 +169,40 @@ const ConnectWalletDialog = () => {
 
     return (
         <Modal show={show} onHide={handleClose} className="wallet-dialog">
-            <Modal.Header closeButton>
-                <Modal.Title>Connect Wallet</Modal.Title>
-            </Modal.Header>
+            <Modal.Header closeButton></Modal.Header>
             <Modal.Body>
-                <Button variant="dark" onClick={() => authenticate("X-Wallet")}>
-                    X-WALLET
-                </Button>
-                <Button variant="dark" onClick={() => authenticate("Zelcore")}>
-                    ZELCORE
-                </Button>
+                <div
+                    className="wallet-item"
+                    onClick={() => authenticate("X-Wallet")}
+                >
+                    <div>
+                        <Image
+                            src="/images/wallet/x-wallet.png"
+                            width={75}
+                            height={75}
+                        />
+                    </div>
+                    <div>
+                        <h3>X-WALLET</h3>
+                        <p>Connect to your X-wallet</p>
+                    </div>
+                </div>
+                <div
+                    className="wallet-item"
+                    onClick={() => authenticate("Zelcore")}
+                >
+                    <div>
+                        <Image
+                            src="/images/wallet/zelcore.png"
+                            width={75}
+                            height={75}
+                        />
+                    </div>
+                    <div>
+                        <h3>ZELCORE</h3>
+                        <p>Connect to your Zelcore Wallet</p>
+                    </div>
+                </div>
             </Modal.Body>
         </Modal>
     );
