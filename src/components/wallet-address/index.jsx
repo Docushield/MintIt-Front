@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 
-const WalletAddress = ({ address }) => {
+const WalletAddress = ({ address, length = 20 }) => {
     const [isCopied, setIsCopied] = useState(false);
 
     const handleCopy = () => {
@@ -10,7 +10,7 @@ const WalletAddress = ({ address }) => {
     };
     return (
         <div className="wallet-address-wrapper">
-            <div>{address.slice(0, 20)}...</div>
+            <div>{address.slice(0, length)}...</div>
             <div className="copy-icon-wrapper" onClick={handleCopy}>
                 <Image
                     src={

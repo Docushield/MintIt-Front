@@ -195,13 +195,14 @@ const AuthorIntroArea = ({ className, space, data }) => {
                                         <Anchor path={"/profile"}>
                                             <div className="col-md-12">
                                                 <div className="status-box">
-                                                    <div>Creator</div>
+                                                    <div>CREATOR</div>
                                                     <div>
                                                         {
                                                             <WalletAddress
                                                                 address={
                                                                     data.address
                                                                 }
+                                                                length={40}
                                                             />
                                                         }
                                                     </div>
