@@ -1,0 +1,9 @@
+.wallet-address-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    .copy-icon-wrapper {
+        padding-top: 3px;
+    }
+}

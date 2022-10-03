@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ImageType } from "@utils/types";
 import ShareDropdown from "@components/share-dropdown";
 import ShareModal from "@components/modals/share-modal";
+import WalletAddress from "@components/wallet-address";
 import Button from "react-bootstrap/Button";
 import Anchor from "@ui/anchor";
 
@@ -73,8 +74,13 @@ const AuthorIntroArea = ({ className, space, data }) => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="mt-4 blue-area">
+                                        {/* <div className="mt-4 blue-area">
                                             {data.address}
+                                        </div> */}
+                                        <div className="mt-4 blue-area">
+                                            <WalletAddress
+                                                address={data.address}
+                                            />
                                         </div>
                                         {/* <div className="follow-area">
                                             <div className="follow followers">
