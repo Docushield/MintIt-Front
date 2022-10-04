@@ -63,7 +63,7 @@ const Home = () => {
                         }}
                     />
                     <ServiceArea data={content["service-section"]} />
-                    <CreatorArea data={{ creators: creatorData }} />
+                    {/* <CreatorArea data={{ creators: creatorData }} /> */}
                     <ExploreProductArea
                         data={{
                             ...content["explore-product-section"],
