@@ -6,6 +6,7 @@ import { ImageType } from "@utils/types";
 import ShareDropdown from "@components/share-dropdown";
 import ShareModal from "@components/modals/share-modal";
 import Button from "@components/ui/button";
+import WalletAddress from "@components/wallet-address";
 import Anchor from "@ui/anchor";
 import { toggleConnectWalletDialog } from "src/store/wallet.module";
 import { toggleMintConfirmDialog } from "src/store/collection.module";
@@ -191,12 +192,23 @@ const AuthorIntroArea = ({ className, space, data }) => {
                                                 <div>10K</div>
                                             </div>
                                         </div>
-                                        <div className="col-md-12">
-                                            <div className="status-box">
-                                                <div>Creator</div>
-                                                <div>{data.address}</div>
+                                        <Anchor path={"/profile"}>
+                                            <div className="col-md-12">
+                                                <div className="status-box address">
+                                                    <div>CREATOR</div>
+                                                    <div>
+                                                        {
+                                                            <WalletAddress
+                                                                address={
+                                                                    data.address
+                                                                }
+                                                                length={40}
+                                                            />
+                                                        }
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </Anchor>
                                     </div>
                                 </div>
                             </div>

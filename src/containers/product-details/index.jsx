@@ -11,6 +11,7 @@ import PlaceBet from "@components/product-details/place-bet";
 import { ImageType } from "@utils/types";
 import ShareDropdown from "@components/share-dropdown";
 import DescriptionDropdown from "@components/product-details/DescriptionDropdown";
+import WalletAddress from "@components/wallet-address";
 
 // Demo Image
 
@@ -38,9 +39,11 @@ const ProductDetailsArea = ({ space, className, product }) => (
                             <Button
                                 size="small"
                                 color="primary-alta"
-                                path="/myprofile"
+                                path="/profile"
                             >
-                                {product.owner.address}
+                                <WalletAddress
+                                    address={product.owner.address}
+                                />
                             </Button>
                         </h6>
                         <div className="catagory-collection items-center">
