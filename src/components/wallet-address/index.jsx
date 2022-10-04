@@ -4,7 +4,9 @@ import Image from "next/image";
 const WalletAddress = ({ address, length = 20 }) => {
     const [isCopied, setIsCopied] = useState(false);
 
-    const handleCopy = () => {
+    const handleCopy = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         navigator.clipboard.writeText(address);
         setIsCopied(true);
     };
