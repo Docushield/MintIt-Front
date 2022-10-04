@@ -36,7 +36,7 @@ const DetailsTabContent = ({ owner, properties, specs }) => {
             )}
             <div className="rn-pd-sm-property-wrapper mt-5">
                 <h6 className="pd-property-title">More Information</h6>
-                <Anchor path="/profile">
+                <Anchor path="/profile" className="address-wrapper">
                     <div className="pd-property-spec address">
                         <div>Creator:</div>
                         <div>
