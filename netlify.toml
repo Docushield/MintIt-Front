@@ -6,6 +6,8 @@ package = "@netlify/plugin-nextjs"
 
 [context.production.environment]
 API_URL = "staging-mintit-backend.fly.dev"
+base = "production"
 
 [context.staging.environment]
 API_URL = "staging-mintit-backend.fly.dev"
+base = "staging"
