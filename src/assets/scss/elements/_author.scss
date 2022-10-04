@@ -271,6 +271,15 @@
         margin-right: 20px;
     }
 }
+
+.address-wrapper {
+    color: unset;
+    &:active,
+    &:focus {
+        color: unset;
+    }
+}
+
 .status-box {
     display: flex;
     justify-content: space-between;
@@ -283,6 +292,9 @@
     transition: background-color 0.25s ease;
 
     &.address {
+        &:active {
+            color: #fff;
+        }
         &:hover {
             background-color: var(--color-primary);
             color: #fff;
