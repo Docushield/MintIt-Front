@@ -47,7 +47,6 @@ export async function getServerSideProps(context) {
                 },
             }
         ).then((res) => res.json());
-        console.log(tokens);
 
         return {
             props: {
