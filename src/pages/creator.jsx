@@ -12,7 +12,7 @@ const Creator = () => (
         <SEO pageTitle="Creator" />
         <Header />
         <main id="main-content">
-            <CreatorArea data={{ creators: creatorData }} />
+            {/* <CreatorArea data={{ creators: creatorData }} /> */}
         </main>
         <Footer />
     </Wrapper>

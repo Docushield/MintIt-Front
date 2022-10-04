@@ -10,6 +10,7 @@ import ProductFilter from "@components/product-filter/layout-01";
 import { ProductType } from "@utils/types";
 import { shuffleArray } from "@utils/methods";
 import { Button } from "react-bootstrap";
+import Collection from "@components/collection";
 import { useSelector, useDispatch } from "react-redux";
 import FilterButton from "@ui/filter-button";
 import { slideToggle } from "@utils/methods";
@@ -33,7 +34,8 @@ const DublicateCollectionArea = ({ className, data }) => {
 
     const onSaleProducts = shuffleArray(data.products).slice(0, 10);
     const ownedProducts = shuffleArray(data.products).slice(0, 10);
-    const createdProducts = shuffleArray(data.products).slice(0, 10);
+    // const createdProducts = shuffleArray(data.products).slice(0, 10);
+    const collections = shuffleArray(data.collections).slice(0, 10);
     const likedProducts = shuffleArray(data.products).slice(0, 10);
     const filterRef = useRef(null);
     const [state, dispatch] = useReducer(reducer, {
@@ -72,7 +74,7 @@ const DublicateCollectionArea = ({ className, data }) => {
 
     return (
         <div className={clsx("rn-dublicate-collection-area", className)}>
-            <TabContainer defaultActiveKey="nav-profile">
+            <TabContainer defaultActiveKey="nav-owned">
                 <div className="container">
                     <div className="col-12 mt_mobile--15 mb--20">
                         <FilterButton
@@ -107,13 +109,13 @@ const DublicateCollectionArea = ({ className, data }) => {
                                         </Nav.Link> */}
                                         <Nav.Link
                                             as="button"
-                                            eventKey="nav-profile"
+                                            eventKey="nav-owned"
                                         >
                                             Owned
                                         </Nav.Link>
                                         <Nav.Link
                                             as="button"
-                                            eventKey="nav-contact"
+                                            eventKey="nav-created"
                                         >
                                             Created
                                         </Nav.Link>
@@ -151,55 +153,52 @@ const DublicateCollectionArea = ({ className, data }) => {
                                 </div>
                             ))}
                         </TabPane> */}
-                        <TabPane
-                            className="row g-5 d-flex"
-                            eventKey="nav-profile"
-                        >
-                            {ownedProducts?.map((prod) => (
-                                <div
-                                    key={prod.id}
-                                    className="col-5 col-lg-4 col-md-6 col-sm-6 col-12"
-                                >
-                                    <Product
-                                        overlay
-                                        placeBid
-                                        title={prod.title}
-                                        slug={prod.slug}
-                                        latestBid={prod.latestBid}
-                                        price={prod.price}
-                                        likeCount={prod.likeCount}
-                                        auction_date={prod.auction_date}
-                                        image={prod.images?.[0]}
-                                        authors={prod.authors}
-                                        bitCount={prod.bitCount}
-                                    />
-                                </div>
-                            ))}
+                        <TabPane eventKey="nav-owned">
+                            <div className="row g-5 d-flex">
+                                {ownedProducts?.map((prod) => (
+                                    <div
+                                        key={prod.id}
+                                        className="col-5 col-lg-4 col-md-6 col-sm-6 col-12"
+                                    >
+                                        <Product
+                                            overlay
+                                            placeBid
+                                            title={prod.title}
+                                            slug={prod.slug}
+                                            latestBid={prod.latestBid}
+                                            price={prod.price}
+                                            likeCount={prod.likeCount}
+                                            auction_date={prod.auction_date}
+                                            image={prod.images?.[0]}
+                                            authors={prod.authors}
+                                            bitCount={prod.bitCount}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
                         </TabPane>
-                        <TabPane
-                            className="row g-5 d-flex mt--0"
-                            eventKey="nav-contact"
-                        >
-                            {createdProducts?.map((prod) => (
-                                <div
-                                    key={prod.id}
-                                    className="col-5 col-lg-4 col-md-6 col-sm-6 col-12"
-                                >
-                                    <Product
-                                        overlay
-                                        placeBid
-                                        title={prod.title}
-                                        slug={prod.slug}
-                                        latestBid={prod.latestBid}
-                                        price={prod.price}
-                                        likeCount={prod.likeCount}
-                                        auction_date={prod.auction_date}
-                                        image={prod.images?.[0]}
-                                        authors={prod.authors}
-                                        bitCount={prod.bitCount}
-                                    />
-                                </div>
-                            ))}
+                        <TabPane eventKey="nav-created">
+                            <div className="row g-5 mt--0 d-flex">
+                                {collections?.map((collection) => (
+                                    <div
+                                        key={collection.id}
+                                        className="col-5 col-lg-4 col-md-6 col-sm-6 col-12"
+                                    >
+                                        <Collection
+                                            title={collection.title}
+                                            total_item={collection.total_item}
+                                            path="/mycollection"
+                                            minted={collection.minted}
+                                            image={collection.image}
+                                            thumbnails={collection.thumbnails}
+                                            profile_image={
+                                                collection.profile_image
+                                            }
+                                            live_date={collection.live_date}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
                         </TabPane>
                     </TabContent>
                 </div>

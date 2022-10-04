@@ -5,24 +5,17 @@ import Header from "@layout/header/header-01";
 import Footer from "@layout/footer/footer-01";
 import Breadcrumb from "@components/breadcrumb";
 import RankingArea from "@containers/ranking";
-import ActivityArea from "@containers/activity";
+import ActivityArea from "@containers/activity-new";
 
 // Demo data for the ranking page
 import rankingData from "../data/stats-ranking.json";
-import activityData from "../data/stats-activity.json";
+import activityData from "../data/activity.json";
 
 export async function getStaticProps() {
     return { props: { className: "template-color-1" } };
 }
 
 const Product = () => {
-    const [pageNumber, setPageNumber] = useState(1);
-
-    const onPageChageHandler = (page) => {
-        console.log("Discover page: ", page);
-        setPageNumber(page);
-    };
-
     return (
         <Wrapper>
             <SEO pageTitle="Stats" />
@@ -30,16 +23,13 @@ const Product = () => {
             <main id="main-content">
                 <Breadcrumb
                     pageTitle="Stats"
-                    pageTitle1="Activity"
+                    pageTitle1=""
                     currentPage="Stats"
-                    onPageChageHandler={onPageChageHandler}
                 />
-                {pageNumber === 1 && (
-                    <RankingArea data={{ ranking: rankingData }} />
-                )}
-                {pageNumber === 2 && (
-                    <ActivityArea data={{ activities: activityData }} />
-                )}
+                <RankingArea data={{ ranking: rankingData.slice(0, 10) }} />
+                <ActivityArea
+                    data={{ activityData: activityData.slice(0, 10) }}
+                />
             </main>
             <Footer />
         </Wrapper>

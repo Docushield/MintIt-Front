@@ -11,8 +11,6 @@ import { ProductType } from "@utils/types";
 import { shuffleArray } from "@utils/methods";
 import { Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleConnectWalletDialog } from "src/store/wallet.module";
-import { toggleMintConfirmDialog } from "src/store/collection.module";
 
 const DublicateCollectionArea = ({ className, data }) => {
     const dispatch = useDispatch();
@@ -42,65 +40,19 @@ const DublicateCollectionArea = ({ className, data }) => {
         // dispatch({ type: "SET_PRODUCTS", payload: sortedProducts });
     };
 
-    const onMint = () => {
-        if (connected) {
-            dispatch(toggleMintConfirmDialog());
-        } else {
-            dispatch(toggleConnectWalletDialog());
-        }
-    };
-
     return (
         <div className={clsx("rn-dublicate-collection-area", className)}>
             <div className="container d-flex my-4">
                 <div className="mint-status-box">Public Round</div>
                 <div className="mint-status-box">Mint: 20 KDA</div>
                 <div className="mint-status-box">Remaining: 1029</div>
-                <Button className="ms-4" onClick={onMint}>
-                    Mint Now
+
+                <Button className="ms-4" path="provenance-hash">
+                    View Provenance
                 </Button>
             </div>
             <TabContainer defaultActiveKey="nav-profile">
                 <div className="container">
-                    <div className="row">
-                        <div className="col-12">
-                            <div className="tab-wrapper-one">
-                                <nav className="tab-button-one">
-                                    <Nav
-                                        className="nav nav-tabs"
-                                        id="nav-tab"
-                                        role="tablist"
-                                    >
-                                        {/* <Nav.Link
-                                            as="button"
-                                            eventKey="nav-home"
-                                        >
-                                            On Sale
-                                        </Nav.Link> */}
-                                        <Nav.Link
-                                            as="button"
-                                            eventKey="nav-profile"
-                                        >
-                                            Owned
-                                        </Nav.Link>
-                                        <Nav.Link
-                                            as="button"
-                                            eventKey="nav-contact"
-                                        >
-                                            My Collections
-                                        </Nav.Link>
-                                        {/* <Nav.Link
-                                            as="button"
-                                            eventKey="nav-liked"
-                                        >
-                                            Liked
-                                        </Nav.Link> */}
-                                    </Nav>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-
                     <ProductFilter
                         slectHandler={slectHandler}
                         sortHandler={sortHandler}

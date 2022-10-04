@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -14,6 +14,7 @@ const WalletAccountDialog = ({ onChangeWallet }) => {
     const show = useSelector((state) => state.wallet.isWalletAccountDialog);
     const account = useSelector((state) => state.wallet.account);
     const walletName = useSelector((state) => state.wallet.walletName);
+    const [isCopied, setIsCopied] = useState(false);
 
     const handleClose = () => {
         dispatch(toggleWalletAccountDialog());
@@ -36,6 +37,11 @@ const WalletAccountDialog = ({ onChangeWallet }) => {
         handleClose();
     };
 
+    const handleCopy = async () => {
+        setIsCopied(true);
+        navigator.clipboard.writeText(account);
+    };
+
     return (
         <Modal show={show} onHide={handleClose} className="account-dialog">
             <Modal.Header closeButton>
@@ -45,11 +51,17 @@ const WalletAccountDialog = ({ onChangeWallet }) => {
                 <h5>Connected to {walletName}</h5>
                 <div className="account-address">
                     <div>{account.slice(0, 30)}...</div>
-                    <Button color="primary-alta">Copy</Button>
+                    <Button variant="dark" onClick={handleCopy}>
+                        {isCopied ? "Copied" : "Copy"}
+                    </Button>
                 </div>
                 <div className="account-footer">
-                    <Button onClick={disconnectWallet}>Disconnect</Button>
-                    <Button onClick={onChangeWallet}>Change Wallet</Button>
+                    <Button variant="dark" onClick={disconnectWallet}>
+                        Disconnect
+                    </Button>
+                    <Button variant="dark" onClick={onChangeWallet}>
+                        Change Wallet
+                    </Button>
                 </div>
             </Modal.Body>
         </Modal>

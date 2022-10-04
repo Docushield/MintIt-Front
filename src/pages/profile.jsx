@@ -8,6 +8,7 @@ import AuthorProfileArea from "@containers/author-profile/layout-02";
 // Demo data
 import authorData from "../data/author.json";
 import productData from "../data/categories.json";
+import collectionData from "../data/collections.json";
 
 export async function getStaticProps() {
     return { props: { className: "template-color-1" } };
@@ -19,7 +20,9 @@ const Author = () => (
         <Header />
         <main id="main-content">
             <AuthorIntroArea data={authorData} />
-            <AuthorProfileArea data={{ products: productData }} />
+            <AuthorProfileArea
+                data={{ products: productData, collections: collectionData }}
+            />
         </main>
         <Footer />
     </Wrapper>

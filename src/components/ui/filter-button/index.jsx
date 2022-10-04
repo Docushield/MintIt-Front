@@ -11,8 +11,8 @@ const FilterButton = ({ onClick, open }) => (
         <button
             type="button"
             className={clsx(
-                "discover-filter-button discover-filter-activation btn btn-primary",
-                open && "open"
+                "discover-filter-button discover-filter-activation btn btn-primary-alta",
+                !open && "open"
             )}
             onClick={onClick}
         >
