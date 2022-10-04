@@ -24,6 +24,38 @@ const MintConfirmDialog = () => {
             return;
         }
 
+        const numMinted = current?.numMinted || 0;
+        if (current?.size <= numMinted) {
+            toast.error(
+                "Unavailable to mint a new token. All tokens were already minted."
+            );
+            return;
+        }
+
+        const premintEnds = current["premint-ends"]
+            ? new Date(current["premint-ends"])
+            : new Date();
+        const mintStarts = current["mint-starts"]
+            ? new Date(current["mint-starts"])
+            : new Date();
+        const whitelists = current["premint-whitelist"];
+        const current = new Date();
+        if (current < mintStarts) {
+            toast.error(
+                "Premint period was not started yet, and it is impossible to mint a new token."
+            );
+            return;
+        }
+        if (
+            current < premintEnds &&
+            !whitelists.find((whitelist) => whitelist === account)
+        ) {
+            toast.error(
+                "This address is not whitelisted, and it is impossible to mint a new token."
+            );
+            return;
+        }
+
         // Preparation
         const deployedContract = "free.z74plc";
 
@@ -94,6 +126,7 @@ const MintConfirmDialog = () => {
             }).then((res) => res.json());
 
             const result = await Pact.fetch.poll({ requestKeys }, host);
+            console.log(result);
             toast("Successfully minted a new token.");
         } catch (error) {
             setError(error);
