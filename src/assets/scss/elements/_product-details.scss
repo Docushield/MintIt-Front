@@ -536,10 +536,22 @@
     }
 
     .pd-property-spec {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         background: var(--background-color-1);
         border-radius: 6px;
         margin: 5px 5px;
         padding: 5px 5px;
+        transition: background-color color 0.2s ease;
+
+        &.address {
+            &:hover {
+                background-color: var(--color-primary);
+                color: #000;
+            }
+            cursor: pointer;
+        }
     }
 
     .property-wrapper,
