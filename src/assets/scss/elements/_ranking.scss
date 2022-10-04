@@ -1,7 +1,8 @@
 //------ ranking----->
 
 tbody {
-    &.ranking {
+    &.ranking,
+    &.activity {
         tr {
             td {
                 padding: 10px 25px !important;

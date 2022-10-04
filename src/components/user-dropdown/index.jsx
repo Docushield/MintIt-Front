@@ -19,7 +19,7 @@ const UserDropdown = () => {
 
     return (
         <div className="icon-box">
-            <Anchor path="/myprofile">
+            <Anchor path="/profile">
                 <Image
                     src="/images/icons/profile-image.png"
                     alt="Images"
@@ -31,7 +31,7 @@ const UserDropdown = () => {
             <div className="rn-dropdown">
                 <div className="rn-inner-top">
                     <h4 className="title">
-                        <Anchor path="/myprofile">My Profile</Anchor>
+                        <Anchor path="/profile">My Profile</Anchor>
                     </h4>
                 </div>
                 {/* <div className="rn-product-inner">
@@ -93,9 +93,9 @@ const UserDropdown = () => {
                     {/* <li>
                         <Anchor path="/admanager">Ad Manager</Anchor>
                     </li> */}
-                    <li>
+                    {/* <li>
                         <Anchor path="/connect">Manage Collections</Anchor>
-                    </li>
+                    </li> */}
                     <li>
                         <button type="button" onClick={disconnectWallet}>
                             Disconnect Wallet
