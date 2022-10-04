@@ -543,7 +543,8 @@
         border-radius: 6px;
         margin: 5px 5px;
         padding: 5px 5px;
-        transition: background-color color 0.2s ease;
+        color: var(--color-body);
+        transition: background-color, color 0.2s ease;
 
         &.address {
             &:hover {
