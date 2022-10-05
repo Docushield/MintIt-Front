@@ -14,7 +14,7 @@ const Create = () => (
         <SEO pageTitle="Create New" />
         <Header />
         <main id="main-content">
-            <Breadcrumb pageTitle="Create New File" />
+            <Breadcrumb pageTitle="Create New File" pageTitle1="" currentPage="create" />
             <UploadVariants />
         </main>
         <Footer />
