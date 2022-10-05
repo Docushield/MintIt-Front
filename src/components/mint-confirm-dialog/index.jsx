@@ -72,6 +72,14 @@ const MintConfirmDialog = () => {
         );
 
         caps.push(Pact.lang.mkCap("Gas fee", `Gas fee`, "coin.GAS", []));
+        caps.push(
+            Pact.lang.mkCap(
+                "NFT Minting",
+                `NFT Minting`,
+                `${deployedContract}.MINT_NFT_REQUEST`,
+                []
+            )
+        );
 
         const chainId = "1";
         const networkId = "testnet04";
@@ -81,11 +89,11 @@ const MintConfirmDialog = () => {
             caps: caps,
             pactCode: `(${deployedContract}.mint-nft {
                 'account: "${account}",
-                'guard: (read-msg 'user-guard),
+                'guard: (read-msg 'user-ks),
                 'collection-name: "${current.name}"
             })`,
             envData: {
-                "user-guard": {
+                "user-ks": {
                     keys: [userPubKey],
                     pred: "keys-all",
                 },
@@ -98,12 +106,13 @@ const MintConfirmDialog = () => {
             sender: cmd.account,
             chainId,
             gasPrice: 0.00000001,
-            gasLimit: 3000,
+            gasLimit: 100000,
             ttl: 28800,
             caps: cmd.caps,
             pactCode: cmd.pactCode,
             envData: cmd.envData,
             networkId,
+            signingPubKey: userPubKey,
         };
 
         // Sign in xwallet (we can use our sign functions)
@@ -128,9 +137,18 @@ const MintConfirmDialog = () => {
             const interval = setInterval(async () => {
                 const result = await Pact.fetch.poll({ requestKeys }, host);
                 if (Object.keys(result).length > 0) {
-                    clearInterval(interval);
-                    toast.success("Successfully minted a new token");
-                    setIsMinting(false);
+                    if (result[requestKeys[0]].result.data) {
+                        clearInterval(interval);
+                        toast.success("Successfully minted a new token");
+                        setIsMinting(false);
+                    } else if (result[requestKeys[0]].result.error) {
+                        clearInterval(interval);
+                        toast.error(
+                            "Failed to mint a new token: " +
+                                result[requestKeys[0]].result.error.message
+                        );
+                        setIsMinting(false);
+                    }
                 }
             }, 1000);
         } catch (error) {
