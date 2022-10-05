@@ -17,7 +17,7 @@ const RankingArea = ({ className, space, data }) => {
                 <div className="row">
                     <div className="col-12">
                         <div className="table-title-area d-flex align-items-center mb-5">
-                            <i className="feather-briefcase" />
+                            {/* <i className="feather-briefcase" /> */}
                             <h2 className="m-0">Live Stats</h2>
                         </div>
                         <div className="text-center">
