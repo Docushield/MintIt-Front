@@ -44,6 +44,7 @@ const Mint = ({ collections }) => {
             <main id="main-content">
                 <Breadcrumb
                     pageTitle="Mint"
+                    pageTitle1=""
                     currentPage="Mint"
                     onPageChageHandler={onPageChageHandler}
                 />
