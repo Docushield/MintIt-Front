@@ -36,16 +36,16 @@ const AllNFTs = () => {
             <Header />
             <main id="main-content">
                 <Breadcrumb
-                    pageTitle="Explore Filter"
-                    pageTitle1="Live Explore"
-                    currentPage="Discover"
+                    pageTitle="Discover All NFTs"
+                    pageTitle1=""
+                    currentPage="All NFTs"
                     onPageChageHandler={onPageChageHandler}
                 />
                 {pageNumber === 1 && (
                     <ExploreProductArea
                         data={{
                             section_title: {
-                                title: "Discover Product",
+                                title: "Explore All NFTs",
                             },
                             products: filterData,
                         }}
