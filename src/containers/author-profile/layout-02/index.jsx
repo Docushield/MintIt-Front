@@ -185,16 +185,16 @@ const DublicateCollectionArea = ({ className, data }) => {
                                         className="col-5 col-lg-4 col-md-6 col-sm-6 col-12"
                                     >
                                         <Collection
-                                            title={collection.title}
-                                            total_item={collection.total_item}
-                                            path="/mycollection"
-                                            minted={collection.minted}
-                                            image={collection.image}
+                                            title={collection.name}
+                                            total_item={collection.size}
+                                            path={`/collections/${collection.slug}`}
+                                            minted={collection.numMinted}
+                                            image={collection.imageUrl}
                                             thumbnails={collection.thumbnails}
                                             profile_image={
-                                                collection.profile_image
+                                                collection.bannerImageUrl
                                             }
-                                            live_date={collection.live_date}
+                                            live_date={collection["reveal-at"]}
                                         />
                                     </div>
                                 ))}

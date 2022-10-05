@@ -28,7 +28,7 @@ const PersonalInformation = () => (
             ></textarea>
         </div>
         <div className="input-two-wrapper mb--15">
-            <div className="first-name half-wid">
+            {/* <div className="first-name half-wid">
                 <label htmlFor="contact-name" className="form-label">
                     Facebook
                 </label>
@@ -39,7 +39,7 @@ const PersonalInformation = () => (
                     placeholder="https://facebook.com"
                     onChange={(e) => e}
                 />
-            </div>
+            </div> */}
             <div className="last-name half-wid">
                 <label htmlFor="contact-name-last" className="form-label">
                     Twitter
@@ -52,7 +52,7 @@ const PersonalInformation = () => (
                     onChange={(e) => e}
                 />
             </div>
-            <div className="last-name half-wid">
+            {/* <div className="last-name half-wid">
                 <label htmlFor="contact-name-last" className="form-label">
                     Instagram
                 </label>
@@ -63,7 +63,7 @@ const PersonalInformation = () => (
                     placeholder="https://instagram.com"
                     onChange={(e) => e}
                 />
-            </div>
+            </div> */}
         </div>
 
         {/* <div className="input-two-wrapper mt--15">

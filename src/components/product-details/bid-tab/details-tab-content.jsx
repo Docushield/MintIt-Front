@@ -2,6 +2,8 @@ import PropTypes from "prop-types";
 import TopSeller from "@components/top-seller/layout-01";
 import { IDType, ImageType } from "@utils/types";
 import Button from "@ui/button";
+import WalletAddress from "@components/wallet-address";
+import Anchor from "@ui/anchor";
 
 const DetailsTabContent = ({ owner, properties, specs }) => {
     return (
@@ -34,7 +36,17 @@ const DetailsTabContent = ({ owner, properties, specs }) => {
             )}
             <div className="rn-pd-sm-property-wrapper mt-5">
                 <h6 className="pd-property-title">More Information</h6>
-                <div className="pd-property-spec">Creator: {specs.creator}</div>
+                <Anchor path="/profile" className="address-wrapper">
+                    <div className="pd-property-spec address">
+                        <div>Creator:</div>
+                        <div>
+                            <WalletAddress
+                                address={specs.creator}
+                                length={40}
+                            />
+                        </div>
+                    </div>
+                </Anchor>
                 <div className="pd-property-spec">
                     Creator Roaylties: {specs.creator_royalties}
                 </div>

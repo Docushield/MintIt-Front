@@ -192,7 +192,10 @@ const AuthorIntroArea = ({ className, space, data }) => {
                                                 <div>10K</div>
                                             </div>
                                         </div>
-                                        <Anchor path={"/profile"}>
+                                        <Anchor
+                                            path={"/profile"}
+                                            className="address-wrapper"
+                                        >
                                             <div className="col-md-12">
                                                 <div className="status-box address">
                                                     <div>CREATOR</div>

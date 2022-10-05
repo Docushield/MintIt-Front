@@ -6,32 +6,26 @@ import PropTypes from "prop-types";
 import { parseCookies } from "nookies";
 import Breadcrumb from "@components/breadcrumb";
 import ProvenanceHashArea from "@containers/provenance-hash";
+import { fetchAPI } from "@utils/fetchAPI";
 
 export async function getServerSideProps(context) {
     const cookies = parseCookies(context);
     const slug = context.params.slug;
-    const baseURL = process.env.API_URL || "https://the-backend.fly.dev";
 
-    try {
-        const token = cookies["token"];
-        const response = await fetch(`${baseURL}/api/collections/${slug}`, {
-            method: "GET",
-            headers: {
-                "x-auth-token": token,
-            },
-        }).then((res) => res.json());
+    const res = await fetchAPI(`api/collections/${slug}`, cookies);
 
-        return {
-            props: { collection: response, className: "template-color-1" },
-        };
-    } catch (error) {
+    if (res.error) {
         return {
             props: {
-                error: error.message,
+                error: res.error,
                 className: "template-color-1",
             },
         };
     }
+
+    return {
+        props: { collection: res.response, className: "template-color-1" },
+    };
 }
 
 const ProvenanceHash = ({ collection }) => (
