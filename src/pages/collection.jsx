@@ -20,6 +20,7 @@ const Collection = () => {
             <main id="main-content">
                 <Breadcrumb
                     pageTitle="Discover Collections"
+                    pageTitle1=""
                     currentPage="Collection"
                 />
                 <CollectionArea
