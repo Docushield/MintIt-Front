@@ -11,19 +11,37 @@ import CollectionArea from "@containers/collection/layout-01";
 import CreatorArea from "@containers/creator/layout-03";
 import { normalizedData } from "@utils/methods";
 import { SSRProvider } from "react-bootstrap";
+import { parseCookies } from "nookies";
+import { fetchAPI } from "@utils/fetchAPI";
 
 // Demo data
 import homepageData from "../data/homepages/homepage.json";
 import sellerData from "../data/sellers.json";
 import productData from "../data/categories.json";
-import collectionsData from "../data/collections.json";
-import creatorData from "../data/sellers.json";
 
-export async function getStaticProps() {
-    return { props: { className: "template-color-1 with-particles" } };
+export async function getServerSideProps(context) {
+    const cookies = parseCookies(context);
+
+    const res = await fetchAPI("api/collections", cookies);
+
+    if (res.error) {
+        return {
+            props: {
+                error: res.error,
+                className: "template-color-1 with-particles",
+            },
+        };
+    }
+
+    return {
+        props: {
+            collections: res.response,
+            className: "template-color-1 with-particles",
+        },
+    };
 }
 
-const Home = () => {
+const Home = ({ collections }) => {
     const content = normalizedData(homepageData?.content || []);
     const liveAuctionData = productData
         .filter(
@@ -59,7 +77,7 @@ const Home = () => {
                     <CollectionArea
                         data={{
                             ...content["collection-section"],
-                            collections: collectionsData.slice(0, 4),
+                            collections: collections.slice(0, 4),
                         }}
                     />
                     <ServiceArea data={content["service-section"]} />
