@@ -6,7 +6,7 @@ import TopBarArea from "@containers/top-bar";
 import HeroArea from "@containers/hero/layout-08";
 import TopSellerArea from "@containers/top-seller/layout-01";
 import LiveExploreArea from "@containers/live-explore/layout-03";
-import CollectionArea from "@containers/collection/layout-02";
+import CollectionArea from "@containers/collection/layout-03";
 import ExploreProductArea from "@containers/explore-product/layout-09";
 import ServiceArea from "@containers/services/layout-01";
 import { normalizedData } from "@utils/methods";
