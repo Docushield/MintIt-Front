@@ -40,16 +40,18 @@ const SupportArea = ({ className, space }) => (
                                     We offer the tools and support for users to
                                     easily launch an NFT or Collection. Once
                                     you’ve set up and connected your wallet,
-                                    purchase a <a href="/">Creator Pass</a> to
+                                    purchase a Creator Pass to
+                                    {/* purchase a <a href="/">Creator Pass</a> to */}
                                     get access to all our tools.
                                 </p>
                                 <p>
                                     Then, you can use our{" "}
-                                    <a href="/nft-generator">NFT-Generator</a>{" "}
-                                    WebApp to create your collection using
-                                    layers and attributes. Once done, upload,
-                                    verify, and submit the required information{" "}
-                                    <a href="/create-multiple">here</a>.
+                                    {/* <a href="/nft-generator">NFT-Generator</a>{" "} */}
+                                    NFT-Generator WebApp to create your
+                                    collection using layers and attributes. Once
+                                    done, upload, verify, and submit the
+                                    required information.{" "}
+                                    {/* <a href="/create-multiple">here</a>. */}
                                 </p>
                             </div>
                         </div>
@@ -62,7 +64,8 @@ const SupportArea = ({ className, space }) => (
                                     pass has a different use case on our
                                     interface. Purchasing and owning one of
                                     these passes will unlock its utility. Users
-                                    require a <a href="/">Creator Pass</a> to
+                                    {/* require a <a href="/">Creator Pass</a> to */}
+                                    require a Creator Pass to
                                     create and launch NFT collections. Our
                                     limited collection of Ads Pass offers
                                     advertising placeholders across the
