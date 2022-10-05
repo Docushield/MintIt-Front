@@ -2,7 +2,7 @@
     {
         "id": 2,
         "text": "Discover",
-        "path": "/explore",
+        "path": "/all-nfts",
         "submenu": [
             {
                 "text": "All NFTs",

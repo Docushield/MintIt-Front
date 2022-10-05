@@ -47,7 +47,7 @@ const DublicateCollectionArea = ({ className, data }) => {
                 <div className="mint-status-box">Mint: 20 KDA</div>
                 <div className="mint-status-box">Remaining: 1029</div>
 
-                <Button className="ms-4" path="provenance-hash">
+                <Button className="ms-4" href="/provenance-hash">
                     View Provenance
                 </Button>
             </div>

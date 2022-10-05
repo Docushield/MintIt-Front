@@ -82,7 +82,7 @@ const Product = ({
                 {/* <span className="latest-bid">Highest bid {latestBid}</span> */}
                 <ProductBid price={price} />
                 <a
-                    href=""
+                    href={`/product/${slug}`}
                     className="viewbtn connectBtn btn btn-small btn-primary"
                 >
                     View
