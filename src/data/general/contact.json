@@ -9,24 +9,28 @@
         {
             "id": 1,
             "icon": "feather-circle",
-            "link": "https://medium.com/@MINT-IT/introducing-mint-it-by-docushield-6274457db406",
+            "src":"/images/icons/social/medium.png",
+            "link": "https://medium.com/@MINT-IT",
             "title": "Medium"
         },
         {
             "id": 2,
             "icon": "feather-twitter",
+            "src":"/images/icons/social/twitter.png",
             "link": "https://twitter.com/MintItOnKadena",
             "title": "Twitter"
         },
         {
             "id": 3,
             "icon": "feather-instagram",
+            "src":"/images/icons/social/instagram.png",
             "link": "https://instagram.com/mintitonkadena",
             "title": "Instagram"
         },
         {
             "id": 4,
             "icon": "feather-message-square",
+            "src":"/images/icons/social/discord.png",
             "link": "https://discord.gg/ryaGrJsne3",
             "title": "linkedin"
         }
