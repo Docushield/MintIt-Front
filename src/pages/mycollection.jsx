@@ -19,7 +19,9 @@ const Author = () => (
         <Header />
         <main id="main-content">
             <AuthorIntroArea data={authorData} />
-            <AuthorProfileArea data={{ products: productData }} />
+            <AuthorProfileArea
+                data={{ products: productData, author: authorData }}
+            />
         </main>
         <Footer />
     </Wrapper>

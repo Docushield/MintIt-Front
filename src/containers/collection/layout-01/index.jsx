@@ -49,12 +49,12 @@ const TopCollectionArea = ({ className, id, space, data }) => (
                             className="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-12"
                         >
                             <Collection
-                                title={collection.title}
-                                total_item={collection.total_item}
-                                path={collection.slug}
-                                image={collection.image}
+                                title={collection.name}
+                                total_item={collection.size}
+                                path={`/collections/${collection.slug}`}
+                                image={collection.imageUrl}
                                 thumbnails={collection.thumbnails}
-                                profile_image={collection.profile_image}
+                                profile_image={collection.bannerImageUrl}
                             />
                         </div>
                     ))}
