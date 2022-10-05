@@ -113,7 +113,7 @@ const CollectionArea = ({ className, space, id, data }) => {
                         {data.section_title.title}
                     </h2>
                 )}
-                <CategoryFilter total={12393102} onClick={slectHandler} />
+                {/* <CategoryFilter total={12393102} onClick={slectHandler} /> */}
                 {/* <ProductFilter
                     slectHandler={slectHandler}
                     priceHandler={priceHandler}
