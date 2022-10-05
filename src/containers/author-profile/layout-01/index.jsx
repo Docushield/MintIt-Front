@@ -49,7 +49,7 @@ const DublicateCollectionArea = ({ className, data }) => {
 
                 <Button
                     className="ms-4"
-                    href={`/provenance-hash/${data.author.provenance_hash}`}
+                    href={`/collections/${data.collection.slug}/provenance-hash`}
                 >
                     View Provenance
                 </Button>

@@ -5,15 +5,31 @@ import Header from "@layout/header/header-01";
 import Footer from "@layout/footer/footer-01";
 import Breadcrumb from "@components/breadcrumb";
 import CollectionArea from "@containers/collection/layout-03";
+import { parseCookies } from "nookies";
+import { fetchAPI } from "@utils/fetchAPI";
 
-// Demo data
-import collectionsData from "../data/collections.json";
+export async function getServerSideProps(context) {
+    const cookies = parseCookies(context);
 
-export async function getStaticProps() {
-    return { props: { className: "template-color-1" } };
+    const res = await fetchAPI("api/collections", cookies);
+
+    if (res.error) {
+        return {
+            props: {
+                error: res.error,
+                className: "template-color-1 with-particles",
+            },
+        };
+    }
+
+    return {
+        props: {
+            collections: res.response,
+            className: "template-color-1 with-particles",
+        },
+    };
 }
-
-const Mint = () => {
+const Mint = ({ collections }) => {
     const [pageNumber, setPageNumber] = useState(1);
 
     const onPageChageHandler = (page) => {
@@ -34,7 +50,7 @@ const Mint = () => {
                 />
                 <CollectionArea
                     data={{
-                        collections: collectionsData,
+                        collections,
                         section_title: {
                             title: "Projects Launching",
                         },

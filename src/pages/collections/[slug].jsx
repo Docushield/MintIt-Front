@@ -5,7 +5,7 @@ import Footer from "@layout/footer/footer-01";
 import PropTypes from "prop-types";
 import { parseCookies } from "nookies";
 import Breadcrumb from "@components/breadcrumb";
-import CollectionDetailsIntroArea from "@containers/collection-details";
+import CollectionDetailsIntroArea from "@containers/collection-details/collection-details-1";
 
 const CollectionDetails = ({ collection, slug, tokens }) => {
     return (
