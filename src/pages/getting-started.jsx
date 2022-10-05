@@ -26,7 +26,7 @@ const GettingStarted = () => {
             <main id="main-content">
                 <Breadcrumb
                     pageTitle="Getting Started"
-                    pageTitle1="Activity"
+                    pageTitle1=""
                     currentPage="Getting Started"
                     onPageChageHandler={onPageChageHandler}
                 />

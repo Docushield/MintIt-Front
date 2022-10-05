@@ -27,7 +27,7 @@ const Contact = () => {
         <main id="main-content">
             <Breadcrumb
                 pageTitle="Contact"
-                pageTitle1="Activity"
+                pageTitle1=""
                 currentPage="Contact"
                 onPageChageHandler={onPageChageHandler}
             />
