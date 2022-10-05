@@ -1,0 +1,266 @@
+{
+    "id": "ab2419fc-db62-463e-b0b0-be42fddc4e0e",
+    "creator": "k:f6abd552229466ae01216368864b475481d8d222665e3f533825b399653bc41d",
+    "description": "this is a test collectionthis is a test collectionthis is a test collectionthis is a test collectionthis is a test collectionthis is a test collection",
+    "name": "Test Collection",
+    "type": "public",
+    "provenance-hash": "d7c7f1b927702f177e8bafe95e81dec0",
+    "mint-starts": "2022-09-14T16:00:00.000Z",
+    "premint-ends": "2022-09-14T16:00:00.000Z",
+    "reveal-at": "2022-09-14T16:00:00.000Z",
+    "premint-whitelist": [
+        "k:047bc663e6cdaccb268e224765645dd11573091f9ff2ac083508b46a0647ace0",
+        "k:d46967fd03942c50f0d50edc9c35d018fe01166853dc79f62e2fdf72689e0484"
+    ],
+    "size": 5,
+    "mint-price": 10,
+    "token-list": [
+        {
+            "hash": "Rd4o6KntmLJT0YGKWj71OTKTXYe8yoKhMPEbwck1O92=",
+            "spec": {
+                "type": "normal",
+                "value": {
+                    "attributes": [
+                        {
+                            "value": "1",
+                            "trait_type": "Eyes"
+                        },
+                        {
+                            "value": "2",
+                            "trait_type": "Mouths"
+                        },
+                        {
+                            "value": "10",
+                            "trait_type": "BG"
+                        },
+                        {
+                            "value": "7",
+                            "trait_type": "Outfits"
+                        },
+                        {
+                            "value": "2_r",
+                            "trait_type": "Glasses"
+                        },
+                        {
+                            "value": "3",
+                            "trait_type": "body"
+                        },
+                        {
+                            "value": "2",
+                            "trait_type": "beard and mustache"
+                        }
+                    ]
+                }
+            },
+            "content_uri": {
+                "data": "CID",
+                "scheme": "ipfs://"
+            }
+        },
+        {
+            "hash": "GkHvP6/KlM4C5xpnK5Mh5ROIk7D/pUgEbFq9EH2dSVA=",
+            "spec": {
+                "type": "normal",
+                "value": {
+                    "attributes": [
+                        {
+                            "value": "1",
+                            "trait_type": "Eyes"
+                        },
+                        {
+                            "value": "2",
+                            "trait_type": "Mouths"
+                        },
+                        {
+                            "value": "10",
+                            "trait_type": "BG"
+                        },
+                        {
+                            "value": "7",
+                            "trait_type": "Outfits"
+                        },
+                        {
+                            "value": "2_r",
+                            "trait_type": "Glasses"
+                        },
+                        {
+                            "value": "3",
+                            "trait_type": "body"
+                        },
+                        {
+                            "value": "2",
+                            "trait_type": "beard and mustache"
+                        }
+                    ]
+                }
+            },
+            "content_uri": {
+                "data": "CID",
+                "scheme": "ipfs://"
+            }
+        },
+        {
+            "hash": "SklwHELJNbd5VdRuVk2deQc99PYdyZwYz3cUbcm1bpg=",
+            "spec": {
+                "type": "normal",
+                "value": {
+                    "attributes": [
+                        {
+                            "value": "1",
+                            "trait_type": "Eyes"
+                        },
+                        {
+                            "value": "2",
+                            "trait_type": "Mouths"
+                        },
+                        {
+                            "value": "10",
+                            "trait_type": "BG"
+                        },
+                        {
+                            "value": "7",
+                            "trait_type": "Outfits"
+                        },
+                        {
+                            "value": "2_r",
+                            "trait_type": "Glasses"
+                        },
+                        {
+                            "value": "3",
+                            "trait_type": "body"
+                        },
+                        {
+                            "value": "2",
+                            "trait_type": "beard and mustache"
+                        }
+                    ]
+                }
+            },
+            "content_uri": {
+                "data": "CID",
+                "scheme": "ipfs://"
+            }
+        },
+        {
+            "hash": "Ml3k6ZklnEJT0YGKWj71OTKTXYe8yoKhMPEbwck1O98=",
+            "spec": {
+                "type": "normal",
+                "value": {
+                    "attributes": [
+                        {
+                            "value": "1",
+                            "trait_type": "Eyes"
+                        },
+                        {
+                            "value": "2",
+                            "trait_type": "Mouths"
+                        },
+                        {
+                            "value": "10",
+                            "trait_type": "BG"
+                        },
+                        {
+                            "value": "7",
+                            "trait_type": "Outfits"
+                        },
+                        {
+                            "value": "2_r",
+                            "trait_type": "Glasses"
+                        },
+                        {
+                            "value": "3",
+                            "trait_type": "body"
+                        },
+                        {
+                            "value": "2",
+                            "trait_type": "beard and mustache"
+                        }
+                    ]
+                }
+            },
+            "content_uri": {
+                "data": "CID",
+                "scheme": "ipfs://"
+            }
+        },
+        {
+            "hash": "KLfHAq2LZhAlOSqWMtre7ofAcFJbmCBufpbu+sc6NYc=",
+            "spec": {
+                "type": "normal",
+                "value": {
+                    "attributes": [
+                        {
+                            "value": "1",
+                            "trait_type": "Eyes"
+                        },
+                        {
+                            "value": "2",
+                            "trait_type": "Mouths"
+                        },
+                        {
+                            "value": "10",
+                            "trait_type": "BG"
+                        },
+                        {
+                            "value": "7",
+                            "trait_type": "Outfits"
+                        },
+                        {
+                            "value": "2_r",
+                            "trait_type": "Glasses"
+                        },
+                        {
+                            "value": "3",
+                            "trait_type": "body"
+                        },
+                        {
+                            "value": "2",
+                            "trait_type": "beard and mustache"
+                        }
+                    ]
+                }
+            },
+            "content_uri": {
+                "data": "CID",
+                "scheme": "ipfs://"
+            }
+        }
+    ],
+    "createdAt": "2022-10-02T14:18:15.885Z",
+    "mint-royalties": {
+        "rates": [
+            {
+                "rate": 0.975,
+                "description": "creator",
+                "stakeholder": "k:047bc663e6cdaccb268e224765645dd11573091f9ff2ac083508b46a0647ace0",
+                "stakeholder-guard": {
+                    "keys": [
+                        "047bc663e6cdaccb268e224765645dd11573091f9ff2ac083508b46a0647ace0"
+                    ],
+                    "pred": "keys-all"
+                }
+            },
+            {
+                "rate": 0.025,
+                "description": "mintit",
+                "stakeholder": "k:d46967fd03942c50f0d50edc9c35d018fe01166853dc79f62e2fdf72689e0484",
+                "stakeholder-guard": {
+                    "keys": [
+                        "d46967fd03942c50f0d50edc9c35d018fe01166853dc79f62e2fdf72689e0484"
+                    ],
+                    "pred": "keys-all"
+                }
+            }
+        ]
+    },
+    "sale-royalties": {
+        "rates": []
+    },
+    "status": "failure",
+    "statusMessage": "EXC_INVALID_COLLECTION_PROVENANCE_HASH",
+    "imageUrl": "https://mintit-files.s3.us-east-2.amazonaws.com/NO_URL",
+    "bannerImageUrl": "https://mintit-files.s3.us-east-2.amazonaws.com/NO_URL",
+    "slug": "thirteenthh",
+    "numMinted": null,
+    "updatedAt": "2022-10-02T14:19:54.444Z"
+}

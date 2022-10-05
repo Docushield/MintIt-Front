@@ -96,7 +96,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                             </div>
                                         </div>
                                         <Button
-                                            path={`/provenance-hash/${data["provenance-hash"]}`}
+                                            path={`/collections/${data.slug}/provenance-hash`}
                                             className="mt--15"
                                         >
                                             View Provenance
