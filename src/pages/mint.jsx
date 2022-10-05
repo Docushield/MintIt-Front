@@ -27,16 +27,15 @@ const Mint = () => {
             <Header />
             <main id="main-content">
                 <Breadcrumb
-                    pageTitle="Explore"
-                    pageTitle1="Activity"
-                    currentPage="Explore"
+                    pageTitle="Mint"
+                    currentPage="Mint"
                     onPageChageHandler={onPageChageHandler}
                 />
                 <CollectionArea
                     data={{
                         collections: collectionsData,
                         section_title: {
-                            title: "Projects Launching",
+                            title: "Minting Now",
                         },
                     }}
                 />
