@@ -391,6 +391,33 @@ const CreateNewArea = ({ className, space, handleSend }) => {
                                             </div>
                                             <div className="col-md-3">
                                                 <div className="input-box">
+                                                    <input
+                                                        id="end"
+                                                        placeholder="End: yyyy/mm/dd/time"
+                                                        value={`End: ${formatDate(
+                                                            selectedJson[
+                                                                "premint-ends"
+                                                            ],
+                                                            "YYYY-MM-DD"
+                                                        )}`}
+                                                        readOnly
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div className="col-md-6 col-xl-6">
+                                                <div className="input-box">
+                                                    <Button
+                                                        type="submit"
+                                                        fullwidth
+                                                        data-btn="confirm"
+                                                    >
+                                                        Confirm & Submit
+                                                    </Button>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-12 mt--20">
+                                                <div className="input-box">
                                                     <Table
                                                         responsive
                                                         className="text-white"
@@ -407,47 +434,22 @@ const CreateNewArea = ({ className, space, handleSend }) => {
                                                             {(
                                                                 selectedJson[
                                                                     "premint-whitelist"
-                                                                ].rates || []
+                                                                ] || []
                                                             ).map(
                                                                 (whiteItem) => (
                                                                     <tr>
-                                                                        <td>
-                                                                            {
-                                                                                whiteItem
-                                                                            }
+                                                                        <td className="py-2">
+                                                                            <small>
+                                                                                {
+                                                                                    whiteItem
+                                                                                }
+                                                                            </small>
                                                                         </td>
                                                                     </tr>
                                                                 )
                                                             )}
                                                         </tbody>
                                                     </Table>
-                                                </div>
-                                            </div>
-                                            <div className="col-md-3">
-                                                <div className="input-box pb--20">
-                                                    <input
-                                                        id="end"
-                                                        placeholder="End: yyyy/mm/dd/time"
-                                                        value={`End: ${formatDate(
-                                                            selectedJson[
-                                                                "premint-ends"
-                                                            ],
-                                                            "YYYY-MM-DD"
-                                                        )}`}
-                                                        readOnly
-                                                    />
-                                                </div>
-                                            </div>
-
-                                            <div className="col-md-6 col-xl-6 mt_lg--15 mt_md--15 mt_sm--15">
-                                                <div className="input-box">
-                                                    <Button
-                                                        type="submit"
-                                                        fullwidth
-                                                        data-btn="confirm"
-                                                    >
-                                                        Confirm & Submit
-                                                    </Button>
                                                 </div>
                                             </div>
                                         </div>
