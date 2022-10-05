@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import Image from "next/image";
 
 const SocialWidget = ({ socials }) => (
     <ul className="social-copyright">
@@ -10,7 +11,8 @@ const SocialWidget = ({ socials }) => (
                     rel="noreferrer"
                     aria-label={social.title}
                 >
-                    <i className={social.icon} />
+                <Image src={social.src} height={100} width={100}></Image>
+                    {/* <i className={social.icon} /> */}
                 </a>
             </li>
         ))}
