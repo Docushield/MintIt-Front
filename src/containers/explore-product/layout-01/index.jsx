@@ -115,22 +115,22 @@ const ExploreProductArea = ({ className, space, data }) => {
                             />
                         )}
                     </div>
-                    <div className="col-lg-6 col-md-6 col-sm-6 col-12 mt_mobile--15">
+                    {/* <div className="col-lg-6 col-md-6 col-sm-6 col-12 mt_mobile--15">
                         <FilterButton
                             open={state.filterToggle}
                             onClick={filterHandler}
                         />
-                    </div>
+                    </div> */}
                 </div>
 
                 <div ref={filterRef}>
-                    <CategoryFilter total={12393102} onClick={slectHandler} />
+                    {/* <CategoryFilter total={12393102} onClick={slectHandler} />
                     <ProductFilter
                         slectHandler={slectHandler}
                         sortHandler={sortHandler}
                         priceHandler={priceHandler}
                         inputs={state.inputs}
-                    />
+                    /> */}
                 </div>
                 <div className="row g-5">
                     {state.products.length > 0 ? (
