@@ -24,6 +24,38 @@ const MintConfirmDialog = () => {
             return;
         }
 
+        const numMinted = current?.numMinted || 0;
+        if (current?.size <= numMinted) {
+            toast.error(
+                "Unavailable to mint a new token. All tokens were already minted."
+            );
+            return;
+        }
+
+        const premintEnds = current["premint-ends"]
+            ? new Date(current["premint-ends"])
+            : new Date();
+        const mintStarts = current["mint-starts"]
+            ? new Date(current["mint-starts"])
+            : new Date();
+        const whitelists = current["premint-whitelist"];
+        const currentTime = new Date();
+        if (currentTime < mintStarts) {
+            toast.error(
+                "Premint period was not started yet, and it is impossible to mint a new token."
+            );
+            return;
+        }
+        if (
+            currentTime < premintEnds &&
+            !whitelists.find((whitelist) => whitelist === account)
+        ) {
+            toast.error(
+                "This address is not whitelisted, and it is impossible to mint a new token."
+            );
+            return;
+        }
+
         // Preparation
         const deployedContract = "free.z74plc";
 
@@ -93,12 +125,17 @@ const MintConfirmDialog = () => {
                 },
             }).then((res) => res.json());
 
-            const result = await Pact.fetch.poll({ requestKeys }, host);
-            toast("Successfully minted a new token.");
+            const interval = setInterval(async () => {
+                const result = await Pact.fetch.poll({ requestKeys }, host);
+                if (Object.keys(result).length > 0) {
+                    clearInterval(interval);
+                    toast.success("Successfully minted a new token");
+                    setIsMinting(false);
+                }
+            }, 1000);
         } catch (error) {
             setError(error);
             toast("Error occurred in minting a new token", error);
-        } finally {
             setIsMinting(false);
         }
     };
@@ -149,9 +186,7 @@ const MintConfirmDialog = () => {
                         </div>
                         <div className="col-md-6 col-xl-6 mt_lg--15 mt_md--15 mt_sm--15">
                             <div className="input-box">
-                                <Button fullwidth onClick={onMint}>
-                                    Mint
-                                </Button>
+                                <Button onClick={onMint}>Mint</Button>
                             </div>
                         </div>
                     </div>
