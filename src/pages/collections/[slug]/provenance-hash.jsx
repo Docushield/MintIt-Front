@@ -14,7 +14,6 @@ export async function getServerSideProps(context) {
 
     const res = await fetchAPI(`api/collections/${slug}`, cookies);
     const tokens = await fetchAPI(`api/collections/${slug}/tokens`, cookies);
-    console.log(tokens.response);
 
     if (res.error || tokens.error) {
         return {
@@ -37,13 +36,14 @@ export async function getServerSideProps(context) {
     return {
         props: {
             collection: res.response,
+            tokens: tokens.response,
             startIndex,
             className: "template-color-1",
         },
     };
 }
 
-const ProvenanceHash = ({ collection, startIndex }) => (
+const ProvenanceHash = ({ collection, startIndex, tokens }) => (
     <Wrapper>
         <SEO pageTitle="Provenance Hash" />
         <Header />
@@ -51,6 +51,7 @@ const ProvenanceHash = ({ collection, startIndex }) => (
             <Breadcrumb pageTitle="Provenance Hash" />
             <ProvenanceHashArea
                 collection={collection}
+                tokens={tokens}
                 startIndex={startIndex}
             />
         </main>
