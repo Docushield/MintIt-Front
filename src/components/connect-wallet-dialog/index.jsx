@@ -1,166 +1,120 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { useSelector, useDispatch } from "react-redux";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import Pact from "pact-lang-api";
-import { setCookie, parseCookies } from "nookies";
-import { signXWallet, connectXWallet as connectToXWallet } from "@utils/kadena";
 import Image from "next/image";
+import { useSelector, useDispatch } from "react-redux";
+import Modal from "react-bootstrap/Modal";
+import { setCookie, parseCookies } from "nookies";
+import { apiLogin } from "@utils/apiLogin";
+import {
+    ZELCORE,
+    X_WALLET,
+    GAS_PRICE,
+    GAS_LIMIT,
+    TTL,
+} from "src/constants/kadena";
+import {
+    sign,
+    connectXWallet as connectToXWallet,
+    connectZelcore as connectToZelcore,
+} from "@utils/kadena";
 import {
     toggleConnectWalletDialog,
     setConnected,
 } from "../../store/wallet.module";
 
 const ConnectWalletDialog = () => {
+    const kdaEnvironment = {
+        networkId: process.env.NETWORK_ID,
+        chainId: process.env.CHAIN_ID,
+    };
+
     const dispatch = useDispatch();
     const show = useSelector((state) => state.wallet.isConnectWalletDialog);
-    const baseURL = process.env.API_URL || "https://the-backend.fly.dev";
 
     const handleClose = () => {
         dispatch(toggleConnectWalletDialog());
     };
 
-    const kdaEnvironment = {
-        networkId: "testnet04",
-        chainId: "1",
+    const setUserAccountAndWalletNameToCookie = (account, wallet) => {
+        setCookie(null, "userAccount", account);
+        setCookie(null, "walletName", wallet);
     };
 
-    const apiPost = async (route, payload) =>
-        fetch(`${baseURL}/api/${route}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(payload),
-        });
-
-    const connectXWallet = async () => {
-        const xwalletResp = await connectToXWallet();
-
-        setCookie(null, "userAccount", xwalletResp.account);
-        setCookie(null, "walletName", "X-Wallet");
+    const setUserAccountAndWalletNameToReduxStore = (account, wallet) =>
         dispatch(
             setConnected({
-                account: xwalletResp.account,
-                walletName: "X-Wallet",
+                account: account,
+                walletName: wallet,
             })
         );
+
+    const connectXWallet = async () => {
+        const res = await connectToXWallet();
+        return { account: res.account, walletName: X_WALLET };
     };
 
     const connectZelcore = async () => {
-        const { networkId, chainId } = kdaEnvironment;
-
-        const getAccounts = await fetch("http://127.0.0.1:9467/v1/accounts", {
-            headers: {
-                "Content-Type": "application/json",
-            },
-            method: "POST",
-            body: JSON.stringify({ asset: "kadena" }),
-        });
-
-        const getAccountsJson = await getAccounts.json();
-
-        if (getAccountsJson.error) {
-            console.log("Error getting accounts");
-            return;
-        }
-
-        if (getAccountsJson.data.length === 0) {
-            console.log("No accounts found");
-            return;
-        }
-
-        dispatch(
-            setConnected({
-                account: getAccountsJson.data[0],
-                walletName: "Zelcore",
-            })
-        );
+        const res = await connectToZelcore();
+        return { account: res.data[0], walletName: ZELCORE };
     };
 
     const connect = async (provider) => {
-        if (provider === "X-Wallet") {
-            return connectXWallet();
-        } else if (provider === "Zelcore") {
-            return connectZelcore();
+        let res;
+        if (provider === X_WALLET) {
+            res = await connectXWallet();
+        } else if (provider === ZELCORE) {
+            res = await connectZelcore();
         }
-    };
-
-    const signZelcore = async (cmd) => {
-        console.log(`Signing...`);
-        console.log(cmd);
-
-        return Pact.wallet.sign(cmd);
-    };
-
-    const sign = async (provider, cmd) => {
-        console.log("Signing tx...");
-
-        const { chainId, networkId } = kdaEnvironment;
-
-        const signingObject = {
-            sender: cmd.account,
-            chainId,
-            gasPrice: 0.00000001,
-            gasLimit: 3000,
-            ttl: 28800,
-            caps: [],
-            pactCode: cmd.pactCode,
-            envData: cmd.envData,
-            networkId,
-        };
-
-        if (provider === "X-Wallet") {
-            return signXWallet(signingObject);
-        } else if (provider === "Zelcore") {
-            return signZelcore(signingObject);
-        }
+        setUserAccountAndWalletNameToCookie(res.account, res.walletName);
+        setUserAccountAndWalletNameToReduxStore(res.account, res.walletName);
     };
 
     const getLoginSignature = async (provider) => {
+        const { networkId, chainId } = kdaEnvironment;
+
         const cookies = parseCookies();
         const account = cookies["userAccount"];
+        const userPubKey = account.startsWith("k:")
+            ? account.slice(2)
+            : account;
 
-        const { signedCmd } = await sign(provider, {
-            account,
-            pactCode: `(coin.details ${account})`,
-            envData: {},
+        const signingObject = {
+            sender: account,
+            chainId,
+            gasPrice: GAS_PRICE,
+            gasLimit: GAS_LIMIT,
+            ttl: TTL,
             caps: [],
-        });
+            pactCode: `(coin.details ${account})`,
+            envData: {
+                "user-ks": {
+                    keys: [userPubKey],
+                    pred: "keys-all",
+                },
+            },
+            signingPubKey: userPubKey,
+            networkId,
+        };
+
+        const signedCmd = await sign(provider, signingObject);
 
         return signedCmd;
-    };
-
-    const apiLogin = async (loginSignature) => {
-        const { cmd, sigs } = loginSignature;
-        const cookies = parseCookies();
-        const account = cookies["userAccount"];
-
-        return apiPost("auth", {
-            account,
-            command: cmd,
-            signature: sigs[0].sig,
-        });
     };
 
     const authenticate = async (provider) => {
         try {
             await connect(provider);
-
-            // const loginSignature = await getLoginSignature(provider);
-
+            const loginSignature = await getLoginSignature(provider);
             handleClose();
 
-            // const response = await apiLogin(loginSignature);
-            // const { token } = await response.json();
+            const response = await apiLogin(loginSignature);
+            const { token } = await response.json();
 
-            // setCookie(null, "token", token, {
-            //     maxAge: 30 * 24 * 60 * 60,
-            // });
+            setCookie(null, "token", token, {
+                maxAge: 30 * 24 * 60 * 60,
+            });
 
             // TODO: Save token and use it in auth
-            // return token;
+            return token;
         } catch (error) {
             console.log("----Error----", error.message || error);
             return null;
@@ -173,7 +127,7 @@ const ConnectWalletDialog = () => {
             <Modal.Body>
                 <div
                     className="wallet-item"
-                    onClick={() => authenticate("X-Wallet")}
+                    onClick={() => authenticate(X_WALLET)}
                 >
                     <div>
                         <Image
@@ -189,7 +143,7 @@ const ConnectWalletDialog = () => {
                 </div>
                 <div
                     className="wallet-item"
-                    onClick={() => authenticate("Zelcore")}
+                    onClick={() => authenticate(ZELCORE)}
                 >
                     <div>
                         <Image

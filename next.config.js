@@ -9,6 +9,11 @@ module.exports = {
     sassOptions: {
         includePaths: [path.join(__dirname, "./src/assets/scss")],
     },
+    env: {
+        API_URL: process.env.API_URL || "https://the-backend.fly.dev",
+        NETWORK_ID: process.env.NETWORK_ID || "testnet04",
+        CHAIN_ID: process.env.CHAIN_ID || "1",
+    },
     webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
         // eslint-disable-next-line no-param-reassign
         config.ignoreWarnings = [
