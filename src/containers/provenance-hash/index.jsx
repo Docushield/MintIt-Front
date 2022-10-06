@@ -1,4 +1,4 @@
-const ProvenanceHashArea = ({ collection }) => {
+const ProvenanceHashArea = ({ collection, startIndex }) => {
     console.log(collection);
     return (
         <div className="container mt-5">
@@ -62,7 +62,7 @@ const ProvenanceHashArea = ({ collection }) => {
                     {collection["token-list"].map((token, index) => (
                         <tr key={token.hash}>
                             <td>{index}</td>
-                            <td>1147</td>
+                            <td>{(startIndex + index) % collection.size}</td>
                             <td>{token.hash}</td>
                             <td>
                                 <a
