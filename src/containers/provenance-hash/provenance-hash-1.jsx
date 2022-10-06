@@ -1,7 +1,5 @@
 const ProvenanceHashArea = ({ collection, startIndex, tokens }) => {
     console.log(collection);
-    console.log("APOLLO: 1010", tokens);
-    // const tokens = collection["token-list"];
     return (
         <div className="container mt-5">
             <h2 className="fst-italic">{collection.name} Provenance Record</h2>
