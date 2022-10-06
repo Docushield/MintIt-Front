@@ -23,11 +23,12 @@ export async function getServerSideProps(context) {
     const cookies = parseCookies(context);
 
     const res = await fetchAPI("api/collections", cookies);
+    console.log("at res: ", res);
 
-    if (res.response.error) {
+    if (res.response.error || res.error) {
         return {
             props: {
-                error: res.error,
+                error: res.response.error || res.error,
                 className: "template-color-1 with-particles",
                 collections: [],
             },
