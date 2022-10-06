@@ -7,46 +7,46 @@ const categories = [
         key: "nav-home",
         value: "all",
     },
-    {
-        name: "Trending",
-        key: "nav-trending",
-        value: "trending",
-    },
-    {
-        name: "Art",
-        key: "nav-art",
-        value: "art",
-    },
-    {
-        name: "Collectables",
-        key: "nav-collectables",
-        value: "collectables",
-    },
-    {
-        name: "Music",
-        key: "nav-music",
-        value: "music",
-    },
-    {
-        name: "Gaming",
-        key: "nav-gaming",
-        value: "gaming",
-    },
-    {
-        name: "Utility",
-        key: "nav-utility",
-        value: "utility",
-    },
-    {
-        name: "Sports",
-        key: "nav-sports",
-        value: "sports",
-    },
-    {
-        name: "Photography",
-        key: "nav-photography",
-        value: "photography",
-    },
+    // {
+    //     name: "Trending",
+    //     key: "nav-trending",
+    //     value: "trending",
+    // },
+    // {
+    //     name: "Art",
+    //     key: "nav-art",
+    //     value: "art",
+    // },
+    // {
+    //     name: "Collectables",
+    //     key: "nav-collectables",
+    //     value: "collectables",
+    // },
+    // {
+    //     name: "Music",
+    //     key: "nav-music",
+    //     value: "music",
+    // },
+    // {
+    //     name: "Gaming",
+    //     key: "nav-gaming",
+    //     value: "gaming",
+    // },
+    // {
+    //     name: "Utility",
+    //     key: "nav-utility",
+    //     value: "utility",
+    // },
+    // {
+    //     name: "Sports",
+    //     key: "nav-sports",
+    //     value: "sports",
+    // },
+    // {
+    //     name: "Photography",
+    //     key: "nav-photography",
+    //     value: "photography",
+    // },
 ];
 
 const CategoryFilter = ({ total, onClick }) => (
@@ -64,7 +64,7 @@ const CategoryFilter = ({ total, onClick }) => (
                     {category.name}
                 </Nav.Link>
             ))}
-            <div>{total || 0} Items</div>
+            {/* <div>{total || 0} Items</div> */}
         </div>
     </Nav>
 );
