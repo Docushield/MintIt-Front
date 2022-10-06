@@ -15,7 +15,7 @@ import {
 const ConnectWalletDialog = () => {
     const dispatch = useDispatch();
     const show = useSelector((state) => state.wallet.isConnectWalletDialog);
-    const baseURL = process.env.API_URL || "https://the-backend.fly.dev";
+    const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
     const handleClose = () => {
         dispatch(toggleConnectWalletDialog());
