@@ -1,4 +1,5 @@
 const ProvenanceHashArea = ({ collection }) => {
+    console.log(collection);
     return (
         <div className="container mt-5">
             <h2 className="fst-italic">{collection.name} Provenance Record</h2>
@@ -16,11 +17,12 @@ const ProvenanceHashArea = ({ collection }) => {
 
             <h4 className="mb-5">IMPORTANT INFORMATION</h4>
             <p>
-                Each Bored Ape token ID is assigned to an artwork image from the
-                initial sequence with this formula:
+                Each {collection.name} token ID is assigned to an artwork image
+                from the initial sequence with this formula:
             </p>
             <p className="my-5 text-center">
-                (tokenId + startingIndex) % 10000 → Initial Sequence Index
+                (tokenId + startingIndex) % {collection.size} → Initial Sequence
+                Index
             </p>
             <p>Here's the relevant information:</p>
             <table className="my-5 provenance_blue_field_table">
@@ -57,9 +59,9 @@ const ProvenanceHashArea = ({ collection }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {collection["token-list"].map((token) => (
+                    {collection["token-list"].map((token, index) => (
                         <tr key={token.hash}>
-                            <td>0</td>
+                            <td>{index}</td>
                             <td>1147</td>
                             <td>{token.hash}</td>
                             <td>
