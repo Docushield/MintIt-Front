@@ -5,7 +5,7 @@ import Footer from "@layout/footer/footer-01";
 import PropTypes from "prop-types";
 import { parseCookies } from "nookies";
 import Breadcrumb from "@components/breadcrumb";
-import ProvenanceHashArea from "@containers/provenance-hash/provenance-hash-1";
+import ProvenanceHashArea from "@containers/provenance-hash/provenance-hash-2";
 import { fetchAPI } from "@utils/fetchAPI";
 
 export async function getServerSideProps(context) {
@@ -37,8 +37,8 @@ export async function getServerSideProps(context) {
     return {
         props: {
             collection: res.response,
-            tokens: tokens.response,
             startIndex,
+            tokens: tokens.response,
             className: "template-color-1",
         },
     };

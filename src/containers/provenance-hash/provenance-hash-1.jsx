@@ -1,5 +1,7 @@
-const ProvenanceHashArea = ({ collection, startIndex }) => {
+const ProvenanceHashArea = ({ collection, startIndex, tokens }) => {
     console.log(collection);
+    console.log("APOLLO: 1010", tokens);
+    // const tokens = collection["token-list"];
     return (
         <div className="container mt-5">
             <h2 className="fst-italic">{collection.name} Provenance Record</h2>
@@ -59,7 +61,7 @@ const ProvenanceHashArea = ({ collection, startIndex }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {collection["token-list"].map((token, index) => (
+                    {tokens.map((token, index) => (
                         <tr key={token.hash}>
                             <td>{index}</td>
                             <td>{(startIndex + index) % collection.size}</td>
