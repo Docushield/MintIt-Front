@@ -22,8 +22,8 @@ const ConnectWalletDialog = () => {
     };
 
     const kdaEnvironment = {
-        networkId: "testnet04",
-        chainId: "1",
+        networkId: process.env.NEXT_PUBLIC_NETWORK_ID,
+        chainId: process.env.NEXT_PUBLIC_CHAIN_ID,
     };
 
     const apiPost = async (route, payload) =>
