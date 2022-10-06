@@ -59,7 +59,7 @@ const MintConfirmDialog = () => {
         }
 
         // Preparation
-        const deployedContract = "free.z74plc";
+        const deployedContract = "free.z75plc";
 
         const userPubKey = account.slice(2);
 
