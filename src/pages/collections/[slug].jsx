@@ -27,7 +27,7 @@ const CollectionDetails = ({ collection, slug, tokens }) => {
 export async function getServerSideProps(context) {
     const cookies = parseCookies(context);
     const slug = context.params.slug;
-    const baseURL = process.env.NEXT_PUBLIC_API_URL;
+    const baseURL = process.env.API_URL || "https://the-backend.fly.dev";
 
     try {
         const token = cookies["token"];
