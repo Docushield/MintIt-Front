@@ -26,7 +26,7 @@ const HelpCenter = () => {
         <main id="main-content">
             <Breadcrumb
                 pageTitle="Help Center"
-                pageTitle1="Activity"
+                pageTitle1=""
                 currentPage="Help Center"
                 onPageChageHandler={onPageChageHandler}
             />

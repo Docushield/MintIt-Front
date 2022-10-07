@@ -123,7 +123,10 @@ const CollectionArea = ({ className, space, id, data }) => {
                     }}
                 /> */}
                 <div className="row g-5">
-                    {state.collections.map((collection) => (
+                    {/* must be updated when applying status condition at backend server */}
+                    {/* {state.collections.map((collection) => ( */}
+                    {state.collections.filter(collection => collection.status == "success").map((collection) => (
+                    
                         <div
                             key={collection.id}
                             className="col-lg-6 col-xl-3 col-md-6 col-sm-6 col-12"
