@@ -22,6 +22,7 @@ const CreateMultiple = () => {
     const [isSuccess, setIsSuccess] = useState(false);
     const cookies = parseCookies();
     const baseURL = process.env.NEXT_PUBLIC_API_URL;
+    console.log(baseURL);
 
     const apiGet = async (route, headers) => {
         const response = await fetch(`${baseURL}/api/${route}`, {

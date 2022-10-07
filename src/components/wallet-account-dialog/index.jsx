@@ -24,6 +24,9 @@ const WalletAccountDialog = ({ onChangeWallet }) => {
         networkId: process.env.NEXT_PUBLIC_NETWORK_ID,
         chainId: process.env.NEXT_PUBLIC_CHAIN_ID,
     };
+    //console.log();
+    console.log("kdaEnvironment"+kdaEnvironment);
+    //console.log("chain"+chainId);
 
     const disconnectWallet = async () => {
         console.log("Disconnect Wallet.");
