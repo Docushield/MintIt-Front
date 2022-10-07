@@ -95,7 +95,7 @@ const ConnectWalletDialog = () => {
     };
 
     const sign = async (provider, cmd) => {
-        console.log("Signing tx...");
+        console.log("Signing tx....");
 
         const { chainId, networkId } = kdaEnvironment;
 
