@@ -21,7 +21,7 @@ const CreateMultiple = () => {
     const [isError, setIsError] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const cookies = parseCookies();
-    const baseURL = process.env.API_URL || "https://the-backend.fly.dev";
+    const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
     const apiGet = async (route, headers) => {
         const response = await fetch(`${baseURL}/api/${route}`, {
@@ -94,7 +94,7 @@ const CreateMultiple = () => {
                 pathname: `/collections/${slug}`,
             });
             toast.success("Successfully created an NFT");
-            setSelectedImage();
+            // setSelectedImage();
             setIsSuccess(true);
         } catch (error) {
             toast.error(`Error: ${error.message}`);
@@ -107,7 +107,11 @@ const CreateMultiple = () => {
             <SEO pageTitle="Create New" />
             <Header />
             <main id="main-content">
-                <Breadcrumb pageTitle="Create New File" />
+                <Breadcrumb
+                    pageTitle="Create New File"
+                    pageTitle1=""
+                    currentPage="create"
+                />
                 {!uploading ? (
                     <CreateMultipleArea handleSend={handleSend} />
                 ) : (

@@ -24,10 +24,10 @@ export async function getServerSideProps(context) {
 
     const res = await fetchAPI("api/collections", cookies);
 
-    if (res.response.error) {
+    if (res.response.error || res.error) {
         return {
             props: {
-                error: res.error,
+                error: res.response.error || res.error,
                 className: "template-color-1 with-particles",
                 collections: [],
             },

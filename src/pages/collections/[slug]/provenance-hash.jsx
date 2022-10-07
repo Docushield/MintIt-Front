@@ -13,48 +13,28 @@ export async function getServerSideProps(context) {
     const slug = context.params.slug;
 
     const res = await fetchAPI(`api/collections/${slug}`, cookies);
-    const tokens = await fetchAPI(`api/collections/${slug}/tokens`, cookies);
-    console.log(tokens.response);
 
-    if (res.error || tokens.error) {
+    if (res.error) {
         return {
             props: {
-                error: res.error || tokens.error,
+                error: res.error,
                 className: "template-color-1",
             },
         };
     }
 
-    let startIndex = 0;
-    let min = tokens.response[0];
-    for (let i = 0; i < tokens.response.length; i++) {
-        if (new Date(min.mint_at) > new Date(tokens.response[i].mint_at)) {
-            min = tokens.response[i];
-            startIndex = i;
-        }
-    }
-
     return {
-        props: {
-            collection: res.response,
-            tokens: tokens.response,
-            startIndex,
-            className: "template-color-1",
-        },
+        props: { collection: res.response, className: "template-color-1" },
     };
 }
 
-const ProvenanceHash = ({ collection, startIndex, tokens }) => (
+const ProvenanceHash = ({ collection }) => (
     <Wrapper>
         <SEO pageTitle="Provenance Hash" />
         <Header />
         <main id="main-content">
             <Breadcrumb pageTitle="Provenance Hash" />
-            <ProvenanceHashArea
-                collection={collection}
-                startIndex={startIndex}
-                tokens={tokens}
-            />
+            <ProvenanceHashArea collection={collection} />
         </main>
         <Footer />
     </Wrapper>

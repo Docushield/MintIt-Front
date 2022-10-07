@@ -25,8 +25,8 @@ export const signXWallet = async (
 
 export const connectXWallet = async () => {
     const kdaEnvironment = {
-        networkId: "testnet04",
-        chainId: "1",
+        networkId: process.env.NEXT_PUBLIC_NETWORK_ID,
+        chainId: process.env.NEXT_PUBLIC_CHAIN_ID,
     };
 
     const { networkId, chainId } = kdaEnvironment;
@@ -57,6 +57,5 @@ export const connectXWallet = async () => {
             `Wrong chain ${xwalletResp.chainId}, please open chain ${chainId}`
         );
     }
-
     return xwalletResp;
 };

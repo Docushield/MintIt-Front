@@ -27,14 +27,9 @@
                 "path": "/mint"
             },
             {
-                "id": 3,
-                "text": "Activity",
-                "path": "/stats"
-            },
-            {
                 "id": 7,
                 "text": "Collections",
-                "path": "/collections"
+                "path": "/collection"
             }
         ]
     },

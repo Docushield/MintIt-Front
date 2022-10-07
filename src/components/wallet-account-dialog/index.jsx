@@ -21,10 +21,10 @@ const WalletAccountDialog = ({ onChangeWallet }) => {
     };
 
     const kdaEnvironment = {
-        networkId: "testnet04",
-        chainId: "1",
+        networkId: process.env.NEXT_PUBLIC_NETWORK_ID,
+        chainId: process.env.NEXT_PUBLIC_CHAIN_ID,
     };
-
+   
     const disconnectWallet = async () => {
         console.log("Disconnect Wallet.");
         dispatch(setDisconnected());
@@ -34,6 +34,7 @@ const WalletAccountDialog = ({ onChangeWallet }) => {
         });
         destroyCookie(null, "userAccount");
         destroyCookie(null, "walletName");
+        destroyCookie(null, "token");
         handleClose();
     };
 
