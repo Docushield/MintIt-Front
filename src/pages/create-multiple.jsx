@@ -21,8 +21,8 @@ const CreateMultiple = () => {
     const [isError, setIsError] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const cookies = parseCookies();
-    const baseURL = process.env.API_URL || "https://the-backend.fly.dev";
-
+    const baseURL = process.env.NEXT_PUBLIC_API_URL;
+    
     const apiGet = async (route, headers) => {
         const response = await fetch(`${baseURL}/api/${route}`, {
             method: "GET",

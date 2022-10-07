@@ -59,8 +59,7 @@ const MintConfirmDialog = () => {
         }
 
         // Preparation
-        const deployedContract = "free.z75plc";
-
+        const deployedContract = process.env.NEXT_PUBLIC_CONTRACT;
         const userPubKey = account.slice(2);
 
         let caps = current["mint-royalties"].rates.map(
@@ -83,9 +82,8 @@ const MintConfirmDialog = () => {
             )
         );
 
-        const chainId = "1";
-        const networkId = "testnet04";
-
+        const chainId = process.env.NEXT_PUBLIC_CHAIN_ID;
+        const networkId = process.env.NEXT_PUBLIC_NETWORK_ID;
         const cmd = {
             account,
             caps: caps,

@@ -15,15 +15,14 @@ import {
 const ConnectWalletDialog = () => {
     const dispatch = useDispatch();
     const show = useSelector((state) => state.wallet.isConnectWalletDialog);
-    const baseURL = process.env.API_URL || "https://the-backend.fly.dev";
-
+    const baseURL = process.env.NEXT_PUBLIC_API_URL;
     const handleClose = () => {
         dispatch(toggleConnectWalletDialog());
     };
 
     const kdaEnvironment = {
-        networkId: "testnet04",
-        chainId: "1",
+        networkId: process.env.NEXT_PUBLIC_NETWORK_ID,
+        chainId: process.env.NEXT_PUBLIC_CHAIN_ID,
     };
 
     const apiPost = async (route, payload) =>
@@ -95,7 +94,7 @@ const ConnectWalletDialog = () => {
     };
 
     const sign = async (provider, cmd) => {
-        console.log("Signing tx...");
+        console.log("Signing tx....");
 
         const { chainId, networkId } = kdaEnvironment;
 
