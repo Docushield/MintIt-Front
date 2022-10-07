@@ -29,11 +29,7 @@ export const connectXWallet = async () => {
         chainId: process.env.NEXT_PUBLIC_CHAIN_ID,
     };
 
-
-
     const { networkId, chainId } = kdaEnvironment;
-    console.log(networkId);
-    console.log(chainId);
 
     if (!window.kadena || !window.kadena.isKadena) {
         console.log("No xwallet installed");
@@ -61,7 +57,5 @@ export const connectXWallet = async () => {
             `Wrong chain ${xwalletResp.chainId}, please open chain ${chainId}`
         );
     }
-
-    console.log(xwalletResp);
     return xwalletResp;
 };

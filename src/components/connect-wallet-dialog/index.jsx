@@ -16,8 +16,6 @@ const ConnectWalletDialog = () => {
     const dispatch = useDispatch();
     const show = useSelector((state) => state.wallet.isConnectWalletDialog);
     const baseURL = process.env.NEXT_PUBLIC_API_URL;
-    console.log("base-url"+baseURL);
-
     const handleClose = () => {
         dispatch(toggleConnectWalletDialog());
     };
@@ -27,9 +25,6 @@ const ConnectWalletDialog = () => {
         chainId: process.env.NEXT_PUBLIC_CHAIN_ID,
     };
 
-
-    console.log("kdaEnvironment-chainzz:"+kdaEnvironment.chainId);
-    //console.log("chain"+chainId);
     const apiPost = async (route, payload) =>
         fetch(`${baseURL}/api/${route}`, {
             method: "POST",
