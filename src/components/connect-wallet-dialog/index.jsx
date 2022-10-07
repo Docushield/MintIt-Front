@@ -28,7 +28,7 @@ const ConnectWalletDialog = () => {
     };
 
 
-    console.log("kdaEnvironment"+kdaEnvironment);
+    console.log("kdaEnvironment-chain:"+kdaEnvironment.chainId);
     //console.log("chain"+chainId);
     const apiPost = async (route, payload) =>
         fetch(`${baseURL}/api/${route}`, {
