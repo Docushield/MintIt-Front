@@ -91,10 +91,10 @@ const CreateMultiple = () => {
                 throw new Error(result.error);
             }
             router.push({
-                pathname: `/collections/${slug}`,
+                pathname: `/collection/${slug}`,
             });
             toast.success("Successfully created an NFT");
-            setSelectedImage();
+            // setSelectedImage();
             setIsSuccess(true);
         } catch (error) {
             toast.error(`Error: ${error.message}`);
@@ -107,7 +107,11 @@ const CreateMultiple = () => {
             <SEO pageTitle="Create New" />
             <Header />
             <main id="main-content">
-                <Breadcrumb pageTitle="Create New File" />
+                <Breadcrumb
+                    pageTitle="Create New File"
+                    pageTitle1=""
+                    currentPage="create"
+                />
                 {!uploading ? (
                     <CreateMultipleArea handleSend={handleSend} />
                 ) : (

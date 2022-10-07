@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 
 import ProgressBar from "react-bootstrap/ProgressBar";
 import PropTypes from "prop-types";
@@ -46,8 +47,9 @@ const CreateCollectionProgressArea = ({ name, slug, error, success }) => {
                 <tr>
                     <td>Collection Page</td>
                     <td>
-                        https://silly-pithivier-17a081.netlify.app/collection/
-                        {slug}
+                        <Link href={`/collection/${slug}`}>
+                            <a href="">https://testnet.mintit.studio/collection/{slug}</a>
+                        </Link>
                     </td>
                 </tr>
             </table>

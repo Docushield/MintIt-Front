@@ -34,6 +34,7 @@ const WalletAccountDialog = ({ onChangeWallet }) => {
         });
         destroyCookie(null, "userAccount");
         destroyCookie(null, "walletName");
+        destroyCookie(null, "token");
         handleClose();
     };
 

@@ -148,19 +148,19 @@ const ConnectWalletDialog = () => {
         try {
             await connect(provider);
 
-            // const loginSignature = await getLoginSignature(provider);
+            const loginSignature = await getLoginSignature(provider);
 
             handleClose();
 
-            // const response = await apiLogin(loginSignature);
-            // const { token } = await response.json();
+            const response = await apiLogin(loginSignature);
+            const { token } = await response.json();
 
-            // setCookie(null, "token", token, {
-            //     maxAge: 30 * 24 * 60 * 60,
-            // });
+            setCookie(null, "token", token, {
+                maxAge: 30 * 24 * 60 * 60,
+            });
 
             // TODO: Save token and use it in auth
-            // return token;
+            return token;
         } catch (error) {
             console.log("----Error----", error.message || error);
             return null;
