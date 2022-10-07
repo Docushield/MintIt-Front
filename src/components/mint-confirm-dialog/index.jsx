@@ -59,7 +59,7 @@ const MintConfirmDialog = () => {
         }
 
         // Preparation
-        const deployedContract = process.env.NEXT_PUBLIC_CONTRACT;
+        const deployedContract = "free.z75plc";
 
         const userPubKey = account.slice(2);
 
@@ -83,8 +83,8 @@ const MintConfirmDialog = () => {
             )
         );
 
-        const chainId = process.env.NEXT_PUBLIC_CHAIN_ID;
-        const networkId = process.env.NEXT_PUBLIC_NETWORK_ID;
+        const chainId = "1";
+        const networkId = "testnet04";
 
         const cmd = {
             account,

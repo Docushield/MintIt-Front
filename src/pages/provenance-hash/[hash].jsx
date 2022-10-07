@@ -9,7 +9,7 @@ import ProvenanceHashArea from "@containers/provenance-hash";
 export async function getServerSideProps(context) {
     const cookies = parseCookies(context);
     const hash = context.params.hash;
-    const baseURL = process.env.NEXT_PUBLIC_API_URL;
+    const baseURL = process.env.API_URL || "https://the-backend.fly.dev";
 
     const mockCollection = {
         name: "Crypto Kitties",
