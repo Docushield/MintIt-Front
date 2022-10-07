@@ -22,7 +22,7 @@ const CreateMultiple = () => {
     const [isSuccess, setIsSuccess] = useState(false);
     const cookies = parseCookies();
     const baseURL = process.env.NEXT_PUBLIC_API_URL;
-    
+
     const apiGet = async (route, headers) => {
         const response = await fetch(`${baseURL}/api/${route}`, {
             method: "GET",
@@ -91,7 +91,7 @@ const CreateMultiple = () => {
                 throw new Error(result.error);
             }
             router.push({
-                pathname: `/collection/${slug}`,
+                pathname: `/collections/${slug}`,
             });
             toast.success("Successfully created an NFT");
             // setSelectedImage();
