@@ -60,6 +60,7 @@ const MintConfirmDialog = () => {
 
         // Preparation
         const deployedContract = process.env.NEXT_PUBLIC_CONTRACT;
+        console.log(deployedContract);
 
         const userPubKey = account.slice(2);
 
@@ -85,6 +86,8 @@ const MintConfirmDialog = () => {
 
         const chainId = process.env.NEXT_PUBLIC_CHAIN_ID;
         const networkId = process.env.NEXT_PUBLIC_NETWORK_ID;
+        console.log("chainID"+chainId);
+        console.log("networkID"+networkId);
 
         const cmd = {
             account,

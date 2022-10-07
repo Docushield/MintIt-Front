@@ -13,6 +13,7 @@ const UserDropdown = () => {
             method: "kda_disconnect",
             networkId: process.env.NEXT_PUBLIC_NETWORK_ID,
         });
+        console.log("networkId:"+networkId);
         destroyCookie(null, "userAccount");
         destroyCookie(null, "walletName");
     };
