@@ -1,5 +1,5 @@
 export const fetchAPI = async (url, cookies) => {
-    const baseURL = process.env.API_URL || "https://the-backend.fly.dev";
+    const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
     try {
         const token = cookies["token"];

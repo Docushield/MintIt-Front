@@ -11,7 +11,7 @@ const UserDropdown = () => {
         dispatch(setDisconnected());
         await window.kadena.request({
             method: "kda_disconnect",
-            networkId: "testnet04",
+            networkId: process.env.NEXT_PUBLIC_NETWORK_ID,
         });
         destroyCookie(null, "userAccount");
         destroyCookie(null, "walletName");
