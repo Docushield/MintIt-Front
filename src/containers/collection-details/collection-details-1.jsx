@@ -170,9 +170,11 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                 <div className="mint-status-box">Public Round</div>
                 <div className="mint-status-box">Mint: 20 KDA</div>
                 <div className="mint-status-box">Remaining: 1029</div>
-                <Button className="ms-4" onClick={onMint}>
-                    Mint Now
-                </Button>
+                {data.status === "success" && (
+                    <Button className="ms-4" onClick={onMint}>
+                        Mint Now
+                    </Button>
+                )}
             </div>
             <div className="container my-4">
                 <div className="row">
