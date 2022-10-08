@@ -15,8 +15,7 @@ const MintConfirmDialog = () => {
     const [isMinting, setIsMinting] = useState(false);
     const [mintStatus, setMintStatus] = useState("");
 
-    const host = `${process.env.chainAPI}/chainweb/0.0/${process.env.networkId}/${process.env.chainId}/pact`;
-    //console.log(host);
+    const host = `${process.env.chainAPI}/chainweb/0.0/${process.env.networkId}/chain/${process.env.chainId}/pact`;
 
     const handleClose = () => {
         setIsMinting(false);
@@ -165,7 +164,6 @@ const MintConfirmDialog = () => {
                 }
             }, 1000);
         } catch (error) {
-            setError(error);
             toast("Error occurred in minting a new token", error);
             setMintStatus(
                 "Error occurred in minting a new token, Error: " + error
