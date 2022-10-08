@@ -15,6 +15,7 @@ const CollectionDetails = ({ collection, slug, tokens }) => {
             <main id="main-content">
                 <Breadcrumb
                     pageTitle="Collection Details"
+                    pageTitle1=""
                     currentPage="Collection Details"
                 />
                 <CollectionDetailsIntroArea data={collection} tokens={tokens} />

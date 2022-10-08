@@ -175,54 +175,63 @@ const MintConfirmDialog = () => {
     };
 
     return (
-        <Modal show={show} onHide={handleClose} className="mint-confirm-dialog">
-            <Modal.Header closeButton>
-                <Modal.Title>Mint New</Modal.Title>
-            </Modal.Header>
+        <Modal
+            show={show}
+            onHide={handleClose}
+            className="rn-popup-modal2 share-modal-wrapper"
+        >
             <Modal.Body>
+                <h3 className="mb-5">Mint Collections</h3>
                 {isMinting ? (
                     <div className="row text-center">
                         <p>{mintStatus}</p>
                     </div>
                 ) : (
                     <div className="row">
-                        <div className="col-md-6">
-                            <div className="input-box pb--20">
+                        <div className="col-12">
+                            <div className="input-box pb--20" style={{"font-size": "20px"}}>
                                 <input
                                     id="name"
                                     placeholder="Collection Name"
                                     value={current && current.name}
-                                    readOnly
+                                    disabled
                                 />
                             </div>
                         </div>
-                        <div className="col-md-6">
-                            <div className="input-box pb--20">
+                        <div className="col-12">
+                            <div className="input-box pb--20" style={{"font-size": "20px"}}>
                                 <input
                                     id="price"
                                     placeholder="Total Mint Price: 20 $KDA"
                                     value={`${
                                         current && current["mint-price"]
-                                    } $KDA`}
-                                    readOnly
+                                    }   $KDA`}
+                                    disabled
                                 />
                             </div>
                         </div>
-                        <div className="col-md-6">
-                            <div className="input-box pb--20">
+                        <div className="col-12">
+                            <div className="input-box pb--20" style={{"font-size": "20px"}}>
                                 <input
                                     id="account"
                                     placeholder="Currently connected wallet"
-                                    value={account}
-                                    readOnly
+                                    value={`${account.slice(
+                                        0,
+                                        15
+                                    )}..........${account.slice(-12)}`}
+                                    disabled
                                 />
                             </div>
                         </div>
-                        <div className="col-md-6 col-xl-6 mt_lg--15 mt_md--15 mt_sm--15">
-                            <div className="input-box">
-                                <Button onClick={onMint}>Mint</Button>
-                            </div>
-                        </div>
+                        <Modal.Footer>
+                            <Button
+                                size="medium"
+                                onClick={onMint}
+                                className="w-auto"
+                            >
+                                Mint Now
+                            </Button>
+                        </Modal.Footer>
                     </div>
                 )}
             </Modal.Body>
