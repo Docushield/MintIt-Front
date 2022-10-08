@@ -121,6 +121,15 @@ const CreateMultiple = () => {
                             setStatus(
                                 `Successfully created a collection - ${data.name}`
                             );
+                        } else if (data.status === "failure") {
+                            setStatus(
+                                `Failed to create a collection: ${data.statusMessage}`
+                            );
+                            toast.error(
+                                `Failed to create a collection: ${data.statusMessage}`
+                            );
+                            clearInterval(interval);
+                            setIsError(true);
                         }
                     } else {
                         setStatus("Failed to create a collection");
