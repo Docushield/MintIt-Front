@@ -172,11 +172,11 @@ const ConnectWalletDialog = () => {
     };
 
     return (
-        <Modal show={show} onHide={handleClose} className="wallet-dialog">
-            <Modal.Header closeButton></Modal.Header>
+        <Modal show={show} onHide={handleClose} className="wallet-dialog rn-popup-modal2 share-modal-wrapper">
+            {/* <Modal.Header closeButton></Modal.Header> */}
             <Modal.Body>
                 <div
-                    className="wallet-item"
+                    className="wallet-item mb-5"
                     onClick={() => authenticate("X-Wallet")}
                 >
                     <div>
@@ -188,7 +188,7 @@ const ConnectWalletDialog = () => {
                     </div>
                     <div>
                         <h3>X-WALLET</h3>
-                        <p>Connect to your X-wallet</p>
+                        <p className="mb-3">Connect to your X-wallet</p>
                     </div>
                 </div>
                 <div
@@ -204,7 +204,7 @@ const ConnectWalletDialog = () => {
                     </div>
                     <div>
                         <h3>ZELCORE</h3>
-                        <p>Connect to your Zelcore Wallet</p>
+                        <p className="mb-3">Connect to your Zelcore Wallet</p>
                     </div>
                 </div>
             </Modal.Body>
