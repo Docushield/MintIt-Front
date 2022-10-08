@@ -4,9 +4,10 @@ import Header from "@layout/header/header-01";
 import Footer from "@layout/footer/footer-01";
 import AuthorIntroArea from "@containers/author-intro/layout-01";
 import AuthorProfileArea from "@containers/author-profile/layout-01";
+import CollectionDetailsIntroArea from "@containers/collection-details/collection-details-2";
 
 // Demo data
-import authorData from "../data/author.json";
+import collection from "../data/collection.json";
 import productData from "../data/categories.json";
 
 export async function getStaticProps() {
@@ -18,8 +19,10 @@ const Author = () => (
         <SEO pageTitle="MyCollection" />
         <Header />
         <main id="main-content">
-            <AuthorIntroArea data={authorData} />
-            <AuthorProfileArea data={{ products: productData }} />
+            <CollectionDetailsIntroArea collection={collection} />
+            <AuthorProfileArea
+                data={{ products: productData, collection: collection }}
+            />
         </main>
         <Footer />
     </Wrapper>

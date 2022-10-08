@@ -6,41 +6,54 @@ import PropTypes from "prop-types";
 import { parseCookies } from "nookies";
 import Breadcrumb from "@components/breadcrumb";
 import ProvenanceHashArea from "@containers/provenance-hash";
+import { fetchAPI } from "@utils/fetchAPI";
 
 export async function getServerSideProps(context) {
     const cookies = parseCookies(context);
     const slug = context.params.slug;
-    const baseURL = process.env.API_URL || "https://the-backend.fly.dev";
 
-    try {
-        const token = cookies["token"];
-        const response = await fetch(`${baseURL}/api/collections/${slug}`, {
-            method: "GET",
-            headers: {
-                "x-auth-token": token,
-            },
-        }).then((res) => res.json());
+    const res = await fetchAPI(`api/collections/${slug}`, cookies);
+    const tokens = await fetchAPI(`api/collections/${slug}/tokens`, cookies);
 
-        return {
-            props: { collection: response, className: "template-color-1" },
-        };
-    } catch (error) {
+    if (res.error || tokens.error) {
         return {
             props: {
-                error: error.message,
+                error: res.error || tokens.error,
                 className: "template-color-1",
             },
         };
     }
+
+    let startIndex = 0;
+    let min = tokens.response[0];
+    for (let i = 0; i < tokens.response.length; i++) {
+        if (new Date(min.mint_at) > new Date(tokens.response[i].mint_at)) {
+            min = tokens.response[i];
+            startIndex = i;
+        }
+    }
+
+    return {
+        props: {
+            collection: res.response,
+            tokens: tokens.response,
+            startIndex,
+            className: "template-color-1",
+        },
+    };
 }
 
-const ProvenanceHash = ({ collection }) => (
+const ProvenanceHash = ({ collection, startIndex, tokens }) => (
     <Wrapper>
         <SEO pageTitle="Provenance Hash" />
         <Header />
         <main id="main-content">
             <Breadcrumb pageTitle="Provenance Hash" />
-            <ProvenanceHashArea collection={collection} />
+            <ProvenanceHashArea
+                collection={collection}
+                tokens={tokens}
+                startIndex={startIndex}
+            />
         </main>
         <Footer />
     </Wrapper>

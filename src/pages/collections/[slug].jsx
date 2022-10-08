@@ -5,7 +5,7 @@ import Footer from "@layout/footer/footer-01";
 import PropTypes from "prop-types";
 import { parseCookies } from "nookies";
 import Breadcrumb from "@components/breadcrumb";
-import CollectionDetailsIntroArea from "@containers/collection-details";
+import CollectionDetailsIntroArea from "@containers/collection-details/collection-details-1";
 
 const CollectionDetails = ({ collection, slug, tokens }) => {
     return (
@@ -27,7 +27,7 @@ const CollectionDetails = ({ collection, slug, tokens }) => {
 export async function getServerSideProps(context) {
     const cookies = parseCookies(context);
     const slug = context.params.slug;
-    const baseURL = process.env.API_URL || "https://the-backend.fly.dev";
+    const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
     try {
         const token = cookies["token"];
@@ -47,7 +47,6 @@ export async function getServerSideProps(context) {
                 },
             }
         ).then((res) => res.json());
-        console.log(tokens);
 
         return {
             props: {

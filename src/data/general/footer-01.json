@@ -18,28 +18,18 @@
         "menu": [
             {
                 "id": 1,
-                "text": "Explore",
-                "path": "/explore"
+                "text": "Explore NFTs",
+                "path": "/all-nfts"
             },
             {
                 "id": 2,
-                "text": "Popular",
-                "path": "/popular"
-            },
-            {
-                "id": 3,
-                "text": "Activity",
-                "path": "/stats"
-            },
-            {
-                "id": 6,
-                "text": "Hall of Fame",
-                "path": "/hall-of-fame"
+                "text": "Minting Now",
+                "path": "/mint"
             },
             {
                 "id": 7,
-                "text": "New Collections",
-                "path": "/new-collections"
+                "text": "Collections",
+                "path": "/collection"
             }
         ]
     },
@@ -57,11 +47,6 @@
                 "path": "/getting-started"
             },
             {
-                "id": 3,
-                "text": "NFT Gen Dapp",
-                "path": "/nft-gen-dapp"
-            },
-            {
                 "id": 4,
                 "text": "Help Center",
                 "path": "/help-center"
@@ -69,7 +54,7 @@
             {
                 "id": 6,
                 "text": "Blog Articles",
-                "path": "/blog-articles"
+                "path": "https://medium.com/@MINT-IT"
             },
             {
                 "id": 7,

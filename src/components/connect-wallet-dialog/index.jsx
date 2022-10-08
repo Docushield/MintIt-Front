@@ -15,15 +15,14 @@ import {
 const ConnectWalletDialog = () => {
     const dispatch = useDispatch();
     const show = useSelector((state) => state.wallet.isConnectWalletDialog);
-    const baseURL = process.env.API_URL || "https://the-backend.fly.dev";
-
+    const baseURL = process.env.NEXT_PUBLIC_API_URL;
     const handleClose = () => {
         dispatch(toggleConnectWalletDialog());
     };
 
     const kdaEnvironment = {
-        networkId: "testnet04",
-        chainId: "1",
+        networkId: process.env.NEXT_PUBLIC_NETWORK_ID,
+        chainId: process.env.NEXT_PUBLIC_CHAIN_ID,
     };
 
     const apiPost = async (route, payload) =>
@@ -95,7 +94,7 @@ const ConnectWalletDialog = () => {
     };
 
     const sign = async (provider, cmd) => {
-        console.log("Signing tx...");
+        console.log("Signing tx....");
 
         const { chainId, networkId } = kdaEnvironment;
 
@@ -148,19 +147,19 @@ const ConnectWalletDialog = () => {
         try {
             await connect(provider);
 
-            // const loginSignature = await getLoginSignature(provider);
+            const loginSignature = await getLoginSignature(provider);
 
             handleClose();
 
-            // const response = await apiLogin(loginSignature);
-            // const { token } = await response.json();
+            const response = await apiLogin(loginSignature);
+            const { token } = await response.json();
 
-            // setCookie(null, "token", token, {
-            //     maxAge: 30 * 24 * 60 * 60,
-            // });
+            setCookie(null, "token", token, {
+                maxAge: 30 * 24 * 60 * 60,
+            });
 
             // TODO: Save token and use it in auth
-            // return token;
+            return token;
         } catch (error) {
             console.log("----Error----", error.message || error);
             return null;

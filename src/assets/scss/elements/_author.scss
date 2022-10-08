@@ -271,6 +271,15 @@
         margin-right: 20px;
     }
 }
+
+.address-wrapper {
+    color: unset;
+    &:active,
+    &:focus {
+        color: unset;
+    }
+}
+
 .status-box {
     display: flex;
     justify-content: space-between;
@@ -280,7 +289,19 @@
     background-color: #2f2f3c;
     margin-top: 10px;
     padding: 10px;
+    transition: background-color 0.25s ease;
+
+    &.address {
+        &:active {
+            color: #fff;
+        }
+        &:hover {
+            background-color: var(--color-primary);
+            color: #fff;
+        }
+    }
 }
+
 .mint-status-box {
     padding: 10px 20px;
     margin: 0px 5px;

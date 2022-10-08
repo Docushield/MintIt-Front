@@ -22,4 +22,10 @@ module.exports = {
     images: {
         domains: ["mintit-files.s3.us-east-2.amazonaws.com"],
     },
+    env: {
+        apiURL: process.env.NEXT_PUBLIC_API_URL,
+        chainAPI: process.env.NEXT_PUBLIC_CHAIN_API_HOST,
+        networkId: process.env.NEXT_PUBLIC_NETWORK_ID,
+        chainId: process.env.NEXT_PUBLIC_CHAIN_ID,
+    },
 };

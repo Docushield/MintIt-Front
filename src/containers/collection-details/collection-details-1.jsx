@@ -3,14 +3,9 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 import Image from "next/image";
 import ShareDropdown from "@components/share-dropdown";
-import TabContent from "react-bootstrap/TabContent";
-import TabContainer from "react-bootstrap/TabContainer";
-import TabPane from "react-bootstrap/TabPane";
-import Nav from "react-bootstrap/Nav";
 import ShareModal from "@components/modals/share-modal";
 import Button from "@components/ui/button";
 import Product from "@components/product/layout-01";
-import ProductFilter from "@components/product-filter/layout-02";
 import { formatDate } from "@utils/date";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -24,10 +19,6 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
     const connected = useSelector((state) => state.wallet.connected);
     const [isShareModalOpen, setIsShareModalOpen] = useState(false);
     const shareModalHandler = () => setIsShareModalOpen((prev) => !prev);
-
-    useEffect(() => {
-        dispatch(setCurrentCollection(data));
-    }, [data]);
 
     useEffect(() => {
         dispatch(setCurrentCollection(data));
@@ -105,7 +96,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                             </div>
                                         </div>
                                         <Button
-                                            path={`/provenance-hash/${data["provenance-hash"]}`}
+                                            path={`/collections/${data.slug}/provenance-hash`}
                                             className="mt--15"
                                         >
                                             View Provenance
@@ -179,9 +170,11 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                 <div className="mint-status-box">Public Round</div>
                 <div className="mint-status-box">Mint: 20 KDA</div>
                 <div className="mint-status-box">Remaining: 1029</div>
-                <Button className="ms-4" onClick={onMint}>
-                    Mint Now
-                </Button>
+                {data.status === "success" && (
+                    <Button className="ms-4" onClick={onMint}>
+                        Mint Now
+                    </Button>
+                )}
             </div>
             <div className="container my-4">
                 <div className="row">
@@ -227,13 +220,13 @@ CollectionDetailsIntroArea.propTypes = {
         id: PropTypes.string,
         imageUrl: PropTypes.string,
         "mint-price": PropTypes.number,
-        "mint-royalties": PropTypes.array,
+        "mint-royalties": PropTypes.object,
         "mint-starts": PropTypes.string,
         name: PropTypes.string,
         "premint-ends": PropTypes.string,
         "premint-whitelist": PropTypes.array,
         "provenance-hash": PropTypes.string,
-        "sale-royalties": PropTypes.array,
+        "sale-royalties": PropTypes.object,
         size: PropTypes.number,
         slug: PropTypes.string,
         status: PropTypes.string,

@@ -2,27 +2,22 @@
     {
         "id": 2,
         "text": "Discover",
-        "path": "/explore",
+        "path": "/all-nfts",
         "submenu": [
             {
                 "text": "All NFTs",
-                "path": "all-nfts"
+                "path": "/all-nfts"
             },
             {
                 "text": "Collections",
-                "path": "collection"
+                "path": "/collection"
             }
         ]
     },
     {
-        "id": 3,
-        "text": "Stats",
-        "path": "/stats"
-    },
-    {
         "id": 4,
         "text": "Create",
-        "path": "/create"
+        "path": "/create-multiple"
     },
     {
         "id": 5,

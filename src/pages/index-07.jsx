@@ -5,7 +5,7 @@ import Footer from "@layout/footer/footer-02";
 import TopBarArea from "@containers/top-bar";
 import HeroArea from "@containers/hero/layout-07";
 import LiveExploreArea from "@containers/live-explore/layout-03";
-import CollectionArea from "@containers/collection/layout-02";
+import CollectionArea from "@containers/collection/layout-03";
 import ExploreProductArea from "@containers/explore-product/layout-09";
 import ServiceArea from "@containers/services/layout-02";
 import NotificationArea from "@containers/notification";

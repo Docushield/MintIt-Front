@@ -27,7 +27,7 @@ const UploadVariants = ({ className, space }) => (
                 </div>
             </div>
             <div className="row g-5 mt--40">
-                <div className="offset-lg-3 col-lg-3 col-md-6 col-12">
+                {/*<div className="offset-lg-3 col-lg-3 col-md-6 col-12">
                     <div className="upload-variant-wrapper">
                         <div className="variant-preview">
                             <Image
@@ -47,7 +47,7 @@ const UploadVariants = ({ className, space }) => (
                             Create Single
                         </Button>
                     </div>
-                </div>
+                </div> */}
                 <div className="col-lg-3 col-md-6 col-12">
                     <div className="upload-variant-wrapper">
                         <div className="variant-preview">
