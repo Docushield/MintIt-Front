@@ -65,16 +65,15 @@ const SupportArea = ({ className, space }) => (
                                     interface. Purchasing and owning one of
                                     these passes will unlock its utility. Users
                                     {/* require a <a href="/">Creator Pass</a> to */}
-                                    require a Creator Pass to
-                                    create and launch NFT collections. Our
-                                    limited collection of Ads Pass offers
-                                    advertising placeholders across the
-                                    Docushield ecosystem with a 365-day
-                                    rotation.
+                                    require a Creator Pass to create and launch
+                                    NFT collections. Our limited collection of
+                                    Ads Pass offers advertising placeholders
+                                    across the Docushield ecosystem with a
+                                    365-day rotation.
                                 </p>
                             </div>
                         </div>
-                        <Button path="/create" className="mr--15">
+                        <Button path="/create-multiple" className="mr--15">
                             Create
                         </Button>
                         <Button path="/contact" className="btn-primary-alta">
