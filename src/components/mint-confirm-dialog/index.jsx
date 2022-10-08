@@ -15,6 +15,9 @@ const MintConfirmDialog = () => {
     const [isMinting, setIsMinting] = useState(false);
     const [mintStatus, setMintStatus] = useState("");
 
+    const host = `${process.env.chainAPI}/chainweb/0.0./${process.env.networkId}/${process.env.chainId}/pact`;
+    console.log(host);
+
     const handleClose = () => {
         setIsMinting(false);
         setMintStatus("");
@@ -124,9 +127,6 @@ const MintConfirmDialog = () => {
 
             // Send TX
 
-            const host =
-                "https://api.testnet.chainweb.com/chainweb/0.0/testnet04/chain/1/pact";
-
             const { requestKeys } = await fetch(`${host}/api/v1/send`, {
                 body: JSON.stringify({ cmds: [signedCmd.signedCmd] }),
                 method: "POST",
@@ -134,14 +134,19 @@ const MintConfirmDialog = () => {
                     "Content-Type": "application/json",
                 },
             }).then((res) => res.json());
-            setMintStatus("Transaction is pending, Request Key : "+requestKeys[0]);
+            setMintStatus(
+                "Transaction is pending, Request Key : " + requestKeys[0]
+            );
             const interval = setInterval(async () => {
                 const result = await Pact.fetch.poll({ requestKeys }, host);
                 if (Object.keys(result).length > 0) {
                     if (result[requestKeys[0]].result.data) {
                         clearInterval(interval);
                         toast.success("Successfully minted a new token");
-                        setMintStatus("Successfully minted a new token, Request Key : "+requestKeys[0]);
+                        setMintStatus(
+                            "Successfully minted a new token, Request Key : " +
+                                requestKeys[0]
+                        );
                         // setIsMinting(false);
                     } else if (result[requestKeys[0]].result.error) {
                         clearInterval(interval);
@@ -149,7 +154,12 @@ const MintConfirmDialog = () => {
                             "Failed to mint a new token: " +
                                 result[requestKeys[0]].result.error.message
                         );
-                        setMintStatus("Failed to mint a new token, Request Key : "+requestKeys[0] + " , Error : "+result[requestKeys[0]].result.error.message);
+                        setMintStatus(
+                            "Failed to mint a new token, Request Key : " +
+                                requestKeys[0] +
+                                " , Error : " +
+                                result[requestKeys[0]].result.error.message
+                        );
                         // setIsMinting(false);
                     }
                 }
@@ -157,7 +167,9 @@ const MintConfirmDialog = () => {
         } catch (error) {
             setError(error);
             toast("Error occurred in minting a new token", error);
-            setMintStatus("Error occurred in minting a new token, Error: "+error);
+            setMintStatus(
+                "Error occurred in minting a new token, Error: " + error
+            );
             // setIsMinting(false);
         }
     };
@@ -168,7 +180,6 @@ const MintConfirmDialog = () => {
                 <Modal.Title>Mint New</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-
                 {isMinting ? (
                     <div className="row text-center">
                         <p>{mintStatus}</p>
