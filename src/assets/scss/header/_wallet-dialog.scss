@@ -26,23 +26,20 @@
 }
 
 .wallet-dialog {
-    .modal-header {
-        padding-bottom: 10px;
-    }
+
     .modal-body {
         text-align: center;
-        padding-top: 0;
-    }
-
-    h3 {
-        color: #000;
+        padding: 40px;
     }
 
     .wallet-item {
-        border: 1px solid #eee;
-        border-radius: 6px;
-        margin: 5px 0 20px;
+        border: 1px solid rgb(155, 155, 155);
+        border-radius: 8px;
         cursor: pointer;
+    }
+
+    .wallet-item:hover{
+        border-color: #20ec8d;
     }
 }
 
