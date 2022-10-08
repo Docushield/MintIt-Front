@@ -20,8 +20,10 @@ const CreateMultiple = () => {
     const [json, setJson] = useState({});
     const [isError, setIsError] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+    const [status, setStatus] = useState("");
     const cookies = parseCookies();
-    const baseURL = process.env.NEXT_PUBLIC_API_URL;
+    const baseURL =
+        process.env.NEXT_PUBLIC_API_URL || "https://the-backend.fly.dev";
 
     const apiGet = async (route, headers) => {
         const response = await fetch(`${baseURL}/api/${route}`, {
@@ -61,6 +63,7 @@ const CreateMultiple = () => {
         }
         setJson(selectedJson);
         setUploading(true);
+        setStatus("Verifying to create a new collection...");
         try {
             const token = cookies["token"];
             // Check slug availability
@@ -68,6 +71,9 @@ const CreateMultiple = () => {
                 "x-auth-token": token,
             });
             if (collection.status === 200) {
+                setStatus(
+                    "Collection slug already exists. Please use another one."
+                );
                 throw new Error("Collection slug exists. Please change it.");
             }
 
@@ -83,19 +89,51 @@ const CreateMultiple = () => {
             form.append("slug", slug);
             form.append("collection_image", selectedImage);
             form.append("collection_banner", selectedBanner);
+            setStatus("Creating a new collection...");
             const response = await apiPost("collections", form, {
                 "x-auth-token": token,
             });
             if (response.status !== 200) {
                 const result = await response.json();
+                setStatus("Failed to create a collection");
                 throw new Error(result.error);
             }
-            router.push({
-                pathname: `/collections/${slug}`,
-            });
-            toast.success("Successfully created an NFT");
-            // setSelectedImage();
-            setIsSuccess(true);
+
+            setStatus(
+                "Initializing and deploying a collection... Please wait."
+            );
+            const interval = setInterval(async () => {
+                try {
+                    const result = await apiGet(`collections/${slug}`, {
+                        "x-auth-token": token,
+                    });
+                    if (result.status === 200) {
+                        const data = await result.json();
+                        if (data.status !== "pending") {
+                            clearInterval(interval);
+                            setIsSuccess(true);
+                            toast.success(
+                                `Successfully created a collection - ${data.name}`
+                            );
+                            router.push({
+                                pathname: `/collections/${slug}`,
+                            });
+                            setStatus(
+                                `Successfully created a collection - ${data.name}`
+                            );
+                        }
+                    } else {
+                        setStatus("Failed to create a collection");
+                        toast.error("Failed to create a collection");
+                        clearInterval(interval);
+                        setIsError(true);
+                    }
+                } catch (err) {
+                    setStatus("Failed to create a collection");
+                    toast.error(`Error: ${err.message}`);
+                    setIsError(true);
+                }
+            }, 3000);
         } catch (error) {
             toast.error(`Error: ${error.message}`);
             setIsError(true);
@@ -119,6 +157,7 @@ const CreateMultiple = () => {
                         name={json.name}
                         slug={json.slug}
                         error={isError}
+                        status={status}
                         success={isSuccess}
                     />
                 )}

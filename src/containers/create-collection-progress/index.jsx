@@ -4,12 +4,15 @@ import Link from "next/link";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import PropTypes from "prop-types";
 
-const CreateCollectionProgressArea = ({ name, slug, error, success }) => {
+const CreateCollectionProgressArea = ({
+    name,
+    slug,
+    error,
+    success,
+    status,
+}) => {
     const [progress, setProgress] = useState(0);
     const [timer, setTimer] = useState(null);
-    const status = useMemo(() => {
-        return error ? "Error" : success ? "Success" : "Loading";
-    }, [error, success]);
 
     useEffect(() => {
         setProgress(0);
@@ -48,7 +51,9 @@ const CreateCollectionProgressArea = ({ name, slug, error, success }) => {
                     <td>Collection Page</td>
                     <td>
                         <Link href={`/collection/${slug}`}>
-                            <a href="">https://testnet.mintit.studio/collection/{slug}</a>
+                            <a href="">
+                                https://testnet.mintit.studio/collection/{slug}
+                            </a>
                         </Link>
                     </td>
                 </tr>
@@ -61,6 +66,7 @@ CreateCollectionProgressArea.propTypes = {
     name: PropTypes.string,
     slug: PropTypes.string,
     error: PropTypes.bool,
+    status: PropTypes.string,
     success: PropTypes.bool,
 };
 
