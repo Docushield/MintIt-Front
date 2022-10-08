@@ -5,7 +5,7 @@ import Footer from "@layout/footer/footer-01";
 import PropTypes from "prop-types";
 import { parseCookies } from "nookies";
 import Breadcrumb from "@components/breadcrumb";
-import ProvenanceHashArea from "@containers/provenance-hash/provenance-hash-1";
+import ProvenanceHashArea from "@containers/provenance-hash/provenance-hash-2";
 import { fetchAPI } from "@utils/fetchAPI";
 
 export async function getServerSideProps(context) {
@@ -14,6 +14,7 @@ export async function getServerSideProps(context) {
 
     const res = await fetchAPI(`api/collections/${slug}`, cookies);
     const tokens = await fetchAPI(`api/collections/${slug}/tokens`, cookies);
+    console.log(tokens.response);
 
     if (res.error || tokens.error) {
         return {
@@ -36,8 +37,8 @@ export async function getServerSideProps(context) {
     return {
         props: {
             collection: res.response,
-            tokens: tokens.response,
             startIndex,
+            tokens: tokens.response,
             className: "template-color-1",
         },
     };
@@ -51,7 +52,6 @@ const ProvenanceHash = ({ collection, startIndex, tokens }) => (
             <Breadcrumb pageTitle="Provenance Hash" />
             <ProvenanceHashArea
                 collection={collection}
-                tokens={tokens}
                 startIndex={startIndex}
                 tokens={tokens}
             />
