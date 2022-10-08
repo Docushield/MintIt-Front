@@ -15,8 +15,8 @@ const MintConfirmDialog = () => {
     const [isMinting, setIsMinting] = useState(false);
     const [mintStatus, setMintStatus] = useState("");
 
-    const host = `${process.env.chainAPI}/chainweb/0.0./${process.env.networkId}/${process.env.chainId}/pact`;
-    console.log(host);
+    const host = `${process.env.chainAPI}/chainweb/0.0/${process.env.networkId}/${process.env.chainId}/pact`;
+    //console.log(host);
 
     const handleClose = () => {
         setIsMinting(false);
