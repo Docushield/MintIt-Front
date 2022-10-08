@@ -109,7 +109,10 @@ const CreateMultiple = () => {
                     });
                     if (result.status === 200) {
                         const data = await result.json();
-                        if (data.status !== "pending") {
+                        if (
+                            data.status !== "pending" &&
+                            data.status !== "failure"
+                        ) {
                             clearInterval(interval);
                             setIsSuccess(true);
                             toast.success(
