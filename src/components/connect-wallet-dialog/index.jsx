@@ -7,6 +7,8 @@ import Pact from "pact-lang-api";
 import { setCookie, parseCookies } from "nookies";
 import { signXWallet, connectXWallet as connectToXWallet } from "@utils/kadena";
 import Image from "next/image";
+import { toast } from "react-toastify";
+
 import {
     toggleConnectWalletDialog,
     setConnected,
@@ -48,7 +50,6 @@ const ConnectWalletDialog = () => {
     };
 
     const connectZelcore = async () => {
-        const { networkId, chainId } = kdaEnvironment;
 
         const getAccounts = await fetch("http://127.0.0.1:9467/v1/accounts", {
             headers: {
@@ -60,13 +61,16 @@ const ConnectWalletDialog = () => {
 
         const getAccountsJson = await getAccounts.json();
 
+        console.log(getAccountsJson);
         if (getAccountsJson.error) {
-            console.log("Error getting accounts");
+            console.log("Error getting Zelcore accounts");
+            toast.error("Error getting Zelcore accounts");
             return;
         }
 
         if (getAccountsJson.data.length === 0) {
             console.log("No accounts found");
+            toast.error("Error, No Zelcore accounts Found");
             return;
         }
 
@@ -158,6 +162,7 @@ const ConnectWalletDialog = () => {
                 maxAge: 30 * 24 * 60 * 60,
             });
 
+            // toast(`${provider} connected successfully.`);
             // TODO: Save token and use it in auth
             return token;
         } catch (error) {
