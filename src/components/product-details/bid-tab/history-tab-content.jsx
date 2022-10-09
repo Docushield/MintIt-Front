@@ -7,11 +7,11 @@ const HistoryTabContent = ({ history }) => (
         {history?.map((item) => (
             <TopSeller
                 key={item.id}
-                name="k:account"
+                name={item.user.name}
                 eth={item.amount}
                 path={item.user.slug}
                 time={item.bidAt}
-                image={item.user.image}
+                image={{ src: item.user.image.src, width: 44, height: 44 }}
             />
         ))}
     </div>

@@ -25,7 +25,7 @@ const BidTab = ({ className, bids, owner, properties, specs, history }) => (
                 </Nav>
             </nav>
             <TabContent className="rn-bid-content">
-                <TabPane eventKey="nav-home">
+                <TabPane eventKey="nav-home" className="scrollable-tab-pan">
                     <BidsTabContent bids={bids} />
                 </TabPane>
                 <TabPane eventKey="nav-profile">
@@ -35,7 +35,7 @@ const BidTab = ({ className, bids, owner, properties, specs, history }) => (
                         specs={specs}
                     />
                 </TabPane>
-                <TabPane eventKey="nav-contact">
+                <TabPane eventKey="nav-contact" className="scrollable-tab-pan">
                     <HistoryTabContent history={history} />
                 </TabPane>
             </TabContent>
