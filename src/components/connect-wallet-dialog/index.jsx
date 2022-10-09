@@ -7,6 +7,8 @@ import Pact from "pact-lang-api";
 import { setCookie, parseCookies } from "nookies";
 import { signXWallet, connectXWallet as connectToXWallet } from "@utils/kadena";
 import Image from "next/image";
+import { toast } from "react-toastify";
+
 import {
     toggleConnectWalletDialog,
     setConnected,
@@ -48,7 +50,6 @@ const ConnectWalletDialog = () => {
     };
 
     const connectZelcore = async () => {
-        const { networkId, chainId } = kdaEnvironment;
 
         const getAccounts = await fetch("http://127.0.0.1:9467/v1/accounts", {
             headers: {
@@ -60,13 +61,16 @@ const ConnectWalletDialog = () => {
 
         const getAccountsJson = await getAccounts.json();
 
+        console.log(getAccountsJson);
         if (getAccountsJson.error) {
-            console.log("Error getting accounts");
+            console.log("Error getting Zelcore accounts");
+            toast.error("Error getting Zelcore accounts");
             return;
         }
 
         if (getAccountsJson.data.length === 0) {
             console.log("No accounts found");
+            toast.error("Error, No Zelcore accounts Found");
             return;
         }
 
@@ -158,6 +162,7 @@ const ConnectWalletDialog = () => {
                 maxAge: 30 * 24 * 60 * 60,
             });
 
+            // toast(`${provider} connected successfully.`);
             // TODO: Save token and use it in auth
             return token;
         } catch (error) {
@@ -167,11 +172,11 @@ const ConnectWalletDialog = () => {
     };
 
     return (
-        <Modal show={show} onHide={handleClose} className="wallet-dialog">
-            <Modal.Header closeButton></Modal.Header>
+        <Modal show={show} onHide={handleClose} className="wallet-dialog rn-popup-modal2 share-modal-wrapper">
+            {/* <Modal.Header closeButton></Modal.Header> */}
             <Modal.Body>
                 <div
-                    className="wallet-item"
+                    className="wallet-item mb-5"
                     onClick={() => authenticate("X-Wallet")}
                 >
                     <div>
@@ -183,7 +188,7 @@ const ConnectWalletDialog = () => {
                     </div>
                     <div>
                         <h3>X-WALLET</h3>
-                        <p>Connect to your X-wallet</p>
+                        <p className="mb-3">Connect to your X-wallet</p>
                     </div>
                 </div>
                 <div
@@ -199,7 +204,7 @@ const ConnectWalletDialog = () => {
                     </div>
                     <div>
                         <h3>ZELCORE</h3>
-                        <p>Connect to your Zelcore Wallet</p>
+                        <p className="mb-3">Connect to your Zelcore Wallet</p>
                     </div>
                 </div>
             </Modal.Body>

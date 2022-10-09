@@ -15,6 +15,7 @@ import {
 import { toggleConnectWalletDialog } from "src/store/wallet.module";
 
 const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
+    console.log(data);
     const dispatch = useDispatch();
     const connected = useSelector((state) => state.wallet.connected);
     const [isShareModalOpen, setIsShareModalOpen] = useState(false);
@@ -112,10 +113,10 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                 </div>
                                 <div className="col-md-6 col-lg-6">
                                     <div className="row">
-                                        <div className="col-md-6">
+                                        <div className="col-12">
                                             <div className="status-box">
                                                 <div>Creator</div>
-                                                <div>{data.creator}</div>
+                                                <div>{data.creator.slice(0,17) + "....." + data.creator.slice(-15)}</div>
                                             </div>
                                         </div>
                                         <div className="col-md-6">
@@ -128,7 +129,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                             <div className="status-box">
                                                 <div>Price</div>
                                                 <div>
-                                                    {data["mint-price"]} $KDA
+                                                    {data["mint-price"]} KDA
                                                 </div>
                                             </div>
                                         </div>
@@ -140,20 +141,26 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                         </div>
                                         <div className="col-md-6">
                                             <div className="status-box">
-                                                <div>Start</div>
+                                                <div>Reveals at </div>
+                                                <div>Instant</div>
+                                            </div>
+                                        </div>
+                                        <div className="col-12">
+                                            <div className="status-box">
+                                                <div>Mint Starts</div>
                                                 <div>
                                                     {formatDate(
-                                                        data["mint-starts"]
+                                                        data["mint-starts"],"MMMM Do, h:mm:ss A"
                                                     )}
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="col-md-6">
+                                        <div className="col-12">
                                             <div className="status-box">
-                                                <div>End</div>
+                                                <div>Premint Ends</div>
                                                 <div>
                                                     {formatDate(
-                                                        data["premint-ends"]
+                                                        data["premint-ends"],"MMMM Do, h:mm:ss A"
                                                     )}
                                                 </div>
                                             </div>
@@ -167,9 +174,9 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
             </div>
 
             <div className="container d-flex my-4 align-items-center">
-                <div className="mint-status-box">Public Round</div>
-                <div className="mint-status-box">Mint: 20 KDA</div>
-                <div className="mint-status-box">Remaining: 1029</div>
+                <div className="mint-status-box">{data.type} Round</div>
+                <div className="mint-status-box">Mint: {data["mint-price"]} KDA</div>
+                <div className="mint-status-box">Remaining: {data.size - data.numMinted}</div>
                 {data.status === "success" && (
                     <Button className="ms-4" onClick={onMint}>
                         Mint Now
@@ -189,6 +196,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                         overlay
                                         title={data.name}
                                         slug={data.slug}
+                                        hash={prod.hash}
                                         image={{
                                             src: "/images/collection/placeholder.png",
                                         }}

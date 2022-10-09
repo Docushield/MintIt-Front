@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 export const signXWallet = async (
     cmd,
     gasPrice = 0.0000001,
@@ -33,6 +35,7 @@ export const connectXWallet = async () => {
 
     if (!window.kadena || !window.kadena.isKadena) {
         console.log("No xwallet installed");
+        toast.error("x-wallet is not installed!");
         return;
     }
 
@@ -49,10 +52,12 @@ export const connectXWallet = async () => {
     });
 
     if (!xwalletResp) {
+        toast.error("x-wallet is not working properly!");
         throw new Error("Invalid xwallet response");
     }
 
     if (xwalletResp.chainId !== chainId) {
+        toast.error(`Wrong chain ${xwalletResp.chainId}, please open chain ${chainId}`);
         throw new Error(
             `Wrong chain ${xwalletResp.chainId}, please open chain ${chainId}`
         );

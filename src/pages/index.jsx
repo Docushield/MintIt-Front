@@ -83,12 +83,12 @@ const Home = ({ collections }) => {
                     />
                     <ServiceArea data={content["service-section"]} />
                     {/* <CreatorArea data={{ creators: creatorData }} /> */}
-                    <ExploreProductArea
+                    {/* <ExploreProductArea
                         data={{
                             ...content["explore-product-section"],
                             products: productData,
                         }}
-                    />
+                    /> */}
                 </main>
                 <Footer />
             </Wrapper>

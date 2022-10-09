@@ -48,7 +48,7 @@ const UploadVariants = ({ className, space }) => (
                         </Button>
                     </div>
                 </div> */}
-                <div className="col-lg-3 col-md-6 col-12">
+                <div className="col-lg-3 col-md-6 col-12 m-auto">
                     <div className="upload-variant-wrapper">
                         <div className="variant-preview">
                             <Image
