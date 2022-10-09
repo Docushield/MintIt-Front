@@ -24,5 +24,8 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "files.associations": {
         "*.jsx": "javascriptreact"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
     }
 }
