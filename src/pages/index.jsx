@@ -18,6 +18,7 @@ import { fetchAPI } from "@utils/fetchAPI";
 import homepageData from "../data/homepages/homepage.json";
 import sellerData from "../data/sellers.json";
 import productData from "../data/categories.json";
+import Mint from "@components/constant-collections";
 
 export async function getServerSideProps(context) {
     const cookies = parseCookies(context);
@@ -81,6 +82,7 @@ const Home = ({ collections }) => {
                             collections: collections.slice(0, 4),
                         }}
                     />
+                    <Mint />
                     <ServiceArea data={content["service-section"]} />
                     {/* <CreatorArea data={{ creators: creatorData }} /> */}
                     {/* <ExploreProductArea

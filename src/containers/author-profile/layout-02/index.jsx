@@ -14,6 +14,7 @@ import Collection from "@components/collection";
 import { useSelector, useDispatch } from "react-redux";
 import FilterButton from "@ui/filter-button";
 import { slideToggle } from "@utils/methods";
+import Mint from "@components/constant-collections";
 
 function reducer(state, action) {
     switch (action.type) {
@@ -199,6 +200,7 @@ const DublicateCollectionArea = ({ className, data }) => {
                                     </div>
                                 ))}
                             </div>
+                            <Mint />
                         </TabPane>
                     </TabContent>
                 </div>
