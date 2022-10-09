@@ -5,15 +5,15 @@ import Button from "@ui/button";
 import WalletAddress from "@components/wallet-address";
 import Anchor from "@ui/anchor";
 
-const DetailsTabContent = ({ owner, properties, specs }) => {
+const DetailsTabContent = ({ owner, properties, spec, slug }) => {
     return (
         <div className="rn-pd-bd-wrapper mt--20">
-            <TopSeller
+            {/* <TopSeller
                 name={owner.name}
                 total_sale={owner.total_sale}
                 slug={owner.slug}
                 image={owner.image}
-            />
+            /> */}
             {properties && (
                 <div className="rn-pd-sm-property-wrapper">
                     <h6 className="pd-property-title">Properties</h6>
@@ -36,7 +36,7 @@ const DetailsTabContent = ({ owner, properties, specs }) => {
             )}
             <div className="rn-pd-sm-property-wrapper mt-5">
                 <h6 className="pd-property-title">More Information</h6>
-                <Anchor path="/profile" className="address-wrapper">
+                {/* <Anchor path="/profile" className="address-wrapper">
                     <div className="pd-property-spec address">
                         <div>Creator:</div>
                         <div>
@@ -46,22 +46,22 @@ const DetailsTabContent = ({ owner, properties, specs }) => {
                             />
                         </div>
                     </div>
-                </Anchor>
-                <div className="pd-property-spec">
+                </Anchor> */}
+                {/* <div className="pd-property-spec">
                     Creator Roaylties: {specs.creator_royalties}
-                </div>
-                <div className="pd-property-spec">
+                </div> */}
+                {/* <div className="pd-property-spec">
                     MINT-IT Royalties: {specs.mintit_royalties}
-                </div>
+                </div> */}
                 <div className="pd-property-spec">
-                    NFT Type: {specs.nft_type}
+                    NFT Type: {spec.type}
                 </div>
             </div>
             <Button
                 className="mt-4"
                 size="small"
                 color="primary-alta"
-                path="/provenance-hash"
+                path={`/collections/${slug}/provenance-hash`}
             >
                 View Provenance
             </Button>
@@ -70,12 +70,12 @@ const DetailsTabContent = ({ owner, properties, specs }) => {
 };
 
 DetailsTabContent.propTypes = {
-    owner: PropTypes.shape({
-        name: PropTypes.string,
-        total_sale: PropTypes.number,
-        slug: PropTypes.string,
-        image: ImageType,
-    }),
+    // owner: PropTypes.shape({
+    //     name: PropTypes.string,
+    //     total_sale: PropTypes.number,
+    //     slug: PropTypes.string,
+    //     image: ImageType,
+    // }),
     properties: PropTypes.arrayOf(
         PropTypes.shape({
             id: IDType,

@@ -196,6 +196,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                         overlay
                                         title={data.name}
                                         slug={data.slug}
+                                        hash={prod.hash}
                                         image={{
                                             src: "/images/collection/placeholder.png",
                                         }}
