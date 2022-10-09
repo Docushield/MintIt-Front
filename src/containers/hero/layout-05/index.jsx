@@ -36,7 +36,8 @@ const HeroArea = ({ data }) => (
                                 __html: data?.description,
                             }}
                         />
-                        {data?.buttons && (
+                        {/* to hide getting stated button */}
+                        {/* {data?.buttons && (
                             <div className="button-group">
                                 {data.buttons.map(({ id, content, ...btn }) => (
                                     <Button
@@ -50,7 +51,7 @@ const HeroArea = ({ data }) => (
                                     </Button>
                                 ))}
                             </div>
-                        )}
+                        )} */}
                     </div>
                 </div>
                 <div className="col-lg-6 order-1 order-lg-2">
