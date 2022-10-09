@@ -53,19 +53,19 @@ const Footer = ({ space, className, data }) => (
 
             <div className="container">
                 <div className="row gx-5">
-                    <div className="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <div className="col-lg-4 col-md-6 col-sm-6 col-12">
                         <div className="widget-content-wrapper">
                             <LogoWidget data={footerData["logo-widget"]} />
                             <NewsletterWidget
                                 data={footerData["newsletter-widget"]}
                             />
-                            <div className="f-banner">
+                            {/* <div className="f-banner">
                                 <p>Banner Required</p>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
 
-                    <div className="col-lg-3 col-md-6 col-sm-6 col-12 mt_mobile--40">
+                    <div className="col-lg-4 offset-1 col-md-6 col-sm-6 col-12 mt_mobile--40">
                         <QuicklinkWidget
                             data={footerData["quicklink-widget"]}
                         />
@@ -77,9 +77,9 @@ const Footer = ({ space, className, data }) => (
                         />
                     </div>
 
-                    <div className="col-lg-3 col-md-6 col-sm-6 col-12 mt_md--40 mt_sm--40">
+                    {/* <div className="col-lg-3 col-md-6 col-sm-6 col-12 mt_md--40 mt_sm--40">
                         <SoldOutWidget data={footerData["soldout-widget"]} />
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
