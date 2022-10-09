@@ -4,15 +4,33 @@ import Header from "@layout/header/header-01";
 import Footer from "@layout/footer/footer-01";
 import Breadcrumb from "@components/breadcrumb";
 import CollectionArea from "@containers/collection/layout-03";
+import { parseCookies } from "nookies";
+import { fetchAPI } from "@utils/fetchAPI";
 
-// demo data
-import collectionsData from "../data/collections.json";
+export async function getServerSideProps(context) {
+    const cookies = parseCookies(context);
 
-export async function getStaticProps() {
-    return { props: { className: "template-color-1" } };
+    const res = await fetchAPI("api/collections", cookies);
+
+    if (res.response.error || res.error) {
+        return {
+            props: {
+                error: res.response.error || res.error,
+                className: "template-color-1",
+                collections: [],
+            },
+        };
+    }
+
+    return {
+        props: {
+            collections: res.response,
+            className: "template-color-1",
+        },
+    };
 }
 
-const Collection = () => {
+const Collection = ({ collections }) => {
     return (
         <Wrapper>
             <SEO pageTitle="Discover Collections" />
@@ -25,7 +43,7 @@ const Collection = () => {
                 />
                 <CollectionArea
                     data={{
-                        collections: collectionsData,
+                        collections: collections,
                         section_title: {
                             title: "Discover Collections",
                         },
