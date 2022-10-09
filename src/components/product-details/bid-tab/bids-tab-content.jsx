@@ -7,7 +7,7 @@ const BidsTabContent = ({ bids }) => (
         {bids?.map((bid) => (
             <TopSeller
                 key={bid.id}
-                name="k:account"
+                name={bid.user.name}
                 eth={bid.amount}
                 path={bid.user.slug}
                 time={bid.bidAt}
