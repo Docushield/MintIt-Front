@@ -77,14 +77,14 @@ const DublicateCollectionArea = ({ className, data }) => {
         <div className={clsx("rn-dublicate-collection-area", className)}>
             <TabContainer defaultActiveKey="nav-owned">
                 <div className="container">
-                    <div className="col-12 mt_mobile--15 mb--20">
+                    {/* <div className="col-12 mt_mobile--15 mb--20">
                         <FilterButton
                             open={state.filterToggle}
                             onClick={filterHandler}
                         />
-                    </div>
+                    </div> */}
 
-                    <ProductFilter
+                    {/* <ProductFilter
                         ref={filterRef}
                         slectHandler={slectHandler}
                         sortHandler={sortHandler}
@@ -92,7 +92,7 @@ const DublicateCollectionArea = ({ className, data }) => {
                         inputs={{
                             price: [0, 100],
                         }}
-                    />
+                    /> */}
                     <div className="row">
                         <div className="col-12">
                             <div className="tab-wrapper-one">
@@ -108,17 +108,17 @@ const DublicateCollectionArea = ({ className, data }) => {
                                         >
                                             On Sale
                                         </Nav.Link> */}
-                                        <Nav.Link
+                                        {/* <Nav.Link
                                             as="button"
                                             eventKey="nav-owned"
                                         >
                                             Owned
-                                        </Nav.Link>
+                                        </Nav.Link> */}
                                         <Nav.Link
                                             as="button"
-                                            eventKey="nav-created"
+                                            eventKey="nav-owned"
                                         >
-                                            Created
+                                            My NFTs
                                         </Nav.Link>
                                         {/* <Nav.Link
                                             as="button"
@@ -164,7 +164,7 @@ const DublicateCollectionArea = ({ className, data }) => {
                                         <Product
                                             overlay
                                             placeBid
-                                            title={prod.title}
+                                            title={prod.name}
                                             slug={prod.slug}
                                             latestBid={prod.latestBid}
                                             price="10"
@@ -178,7 +178,7 @@ const DublicateCollectionArea = ({ className, data }) => {
                                 ))}
                             </div>
                         </TabPane>
-                        <TabPane eventKey="nav-created">
+                        {/* <TabPane eventKey="nav-created">
                             <div className="row g-5 mt--0 d-flex">
                                 {collections?.map((collection) => (
                                     <div
@@ -201,7 +201,7 @@ const DublicateCollectionArea = ({ className, data }) => {
                                 ))}
                             </div>
                             <Mint />
-                        </TabPane>
+                        </TabPane> */}
                     </TabContent>
                 </div>
             </TabContainer>

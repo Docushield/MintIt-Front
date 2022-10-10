@@ -8,7 +8,7 @@ import { parseCookies } from "nookies";
 import { fetchAPI } from "@utils/fetchAPI";
 
 // Demo data
-import authorData from "../data/author.json";
+// import authorData from "../data/author.json";
 // import productData from "../data/categories.json";
 
 export async function getServerSideProps(context) {
@@ -18,7 +18,6 @@ export async function getServerSideProps(context) {
     try {
         const token = cookies["token"];
         const account = cookies["userAccount"];
-        authorData.address = account;
         const response = await fetch(
             `${baseURL}/api/collections/profile/${account}`,
             {
@@ -31,8 +30,8 @@ export async function getServerSideProps(context) {
         return {
             props: {
                 collections: response.collections,
+                account:account,
                 tokens: response.nfts,
-                author: authorData,
                 className: "template-color-1",
             },
         };
@@ -40,8 +39,8 @@ export async function getServerSideProps(context) {
         return {
             props: {
                 error: error.message,
-                author: authorData,
                 tokens: [],
+                account:"",
                 collections: [],
                 className: "template-color-1",
             },
@@ -49,14 +48,17 @@ export async function getServerSideProps(context) {
     }
 }
 
-const Author = ({ collections, tokens }) => (
+const Author = ({ collections,tokens, account}) => (
+    console.log(account),
     <Wrapper>
         <SEO pageTitle="Author" />
         <Header />
         <main id="main-content">
-            <AuthorIntroArea data={authorData} />
+            <AuthorIntroArea data={account} />
             {collections && (
-                <AuthorProfileArea data={{ products: tokens, collections }} />
+                <AuthorProfileArea
+                    data={{ products: tokens, collections }}
+                />
             )}
         </main>
         <Footer />

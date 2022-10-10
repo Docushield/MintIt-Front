@@ -35,7 +35,7 @@ const Author = ({ collections }) => (
         <SEO pageTitle="Author" />
         <Header />
         <main id="main-content">
-            <AuthorIntroArea data={authorData} />
+            <AuthorIntroArea data={authorData.address} />
             {collections && (
                 <AuthorProfileArea
                     data={{ products: productData, collections }}
