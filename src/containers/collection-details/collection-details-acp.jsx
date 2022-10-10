@@ -118,6 +118,8 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                                             <div>
                                                 <WalletAddress
                                                     address={data.creator}
+                                                    length={17}
+                                                    lastLength={15}
                                                 />
                                             </div>
                                         </div>
