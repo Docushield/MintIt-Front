@@ -13,6 +13,7 @@ import {
     toggleMintConfirmDialog,
 } from "src/store/collection.module";
 import { toggleConnectWalletDialog } from "src/store/wallet.module";
+import WalletAddress from "@components/wallet-address";
 
 const CollectionDetailsIntroArea = ({ className, space, data }) => {
     console.log(data);
@@ -57,7 +58,7 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                     space === 1 && "mb--30 mt_dec--120",
                     className
                 )}
-                style={{marginTop:"-150px"}}
+                style={{ marginTop: "-150px" }}
             >
                 <div className="container">
                     <div className="row padding-tb-50 align-items-center d-flex">
@@ -115,12 +116,14 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                             <div className="row mb-5 col_textbox d-flex align-items-center">
                                 <div className="row">
                                     <div className="col-12">
-                                        <div className="status-box">
+                                        <div className="status-box address">
                                             <div>Creator</div>
                                             <div>
-                                                {data.creator.slice(0, 17) +
-                                                    "....." +
-                                                    data.creator.slice(-15)}
+                                                <WalletAddress
+                                                    address={data.creator}
+                                                    length={17}
+                                                    lastLength={15}
+                                                />
                                             </div>
                                         </div>
                                     </div>

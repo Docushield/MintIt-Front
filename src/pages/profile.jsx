@@ -4,7 +4,7 @@ import Header from "@layout/header/header-01";
 import Footer from "@layout/footer/footer-01";
 import AuthorIntroArea from "@containers/author-intro/layout-02";
 import AuthorProfileArea from "@containers/author-profile/layout-02";
-import Pact from "pact-lang-api"
+import Pact from "pact-lang-api";
 import { parseCookies } from "nookies";
 
 export async function getServerSideProps(context) {
@@ -54,20 +54,20 @@ export async function getServerSideProps(context) {
             !respObject ||
             !respObject.result ||
             respObject.result.status !== "success"
-        ){
+        ) {
             return {
                 props: {
                     account: account,
                     tokens: [],
-                    collections:[],
+                    collections: [],
                     className: "template-color-1",
                 },
             };
-        }else{
+        } else {
             return {
                 props: {
                     account: account,
-                    collections:[],
+                    collections: [],
                     tokens: respObject.result.data,
                     className: "template-color-1",
                 },
@@ -79,7 +79,7 @@ export async function getServerSideProps(context) {
             props: {
                 error: error.message,
                 tokens: [],
-                collections:[],
+                collections: [],
                 account: "",
                 className: "template-color-1",
             },
@@ -88,21 +88,17 @@ export async function getServerSideProps(context) {
 }
 
 const Author = ({ collections, tokens, account }) => (
-    (
-        <Wrapper>
-            <SEO pageTitle="Author" />
-            <Header />
-            <main id="main-content">
-                <AuthorIntroArea data={account} />
-                {collections && (
-                    <AuthorProfileArea
-                        data={{ products: tokens, collections}}
-                    />
-                )}
-            </main>
-            <Footer />
-        </Wrapper>
-    )
+    <Wrapper>
+        <SEO pageTitle="Author" />
+        <Header />
+        <main id="main-content">
+            <AuthorIntroArea data={account} />
+            {collections && (
+                <AuthorProfileArea data={{ products: tokens, collections }} />
+            )}
+        </main>
+        <Footer />
+    </Wrapper>
 );
 
 export default Author;

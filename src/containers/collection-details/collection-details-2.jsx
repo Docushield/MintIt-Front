@@ -201,7 +201,8 @@ const CollectionDetailsIntroArea = ({ className, space, collection }) => {
                                                                 address={
                                                                     collection.creator
                                                                 }
-                                                                length={40}
+                                                                length={17}
+                                                                lastLength={15}
                                                             />
                                                         }
                                                     </div>
