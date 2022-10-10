@@ -79,7 +79,7 @@ const Home = ({ collections }) => {
                     <CollectionArea
                         data={{
                             ...content["collection-section"],
-                            collections: collections.slice(0, 4),
+                            collections: collections,
                         }}
                     />
                     <Mint />
