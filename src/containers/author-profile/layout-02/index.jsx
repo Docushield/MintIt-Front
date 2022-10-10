@@ -167,7 +167,7 @@ const DublicateCollectionArea = ({ className, data }) => {
                                             title={prod.title}
                                             slug={prod.slug}
                                             latestBid={prod.latestBid}
-                                            price={prod.price}
+                                            price="10"
                                             likeCount={prod.likeCount}
                                             auction_date={prod.auction_date}
                                             image={prod.images?.[0]}
