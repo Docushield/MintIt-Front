@@ -65,7 +65,7 @@ const HeroArea = ({ data }) => (
                                 <div className="card-thumbnail">
                                     <Anchor path={`/collections/acp`}>
                                         <video
-                                            style={{ width: "240px" }}
+                                            style={{ width: "100%" }}
                                             src="/videos/product.mp4"
                                             autoPlay
                                             playsInline
