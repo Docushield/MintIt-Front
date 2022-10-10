@@ -157,6 +157,7 @@ const DublicateCollectionArea = ({ className, data }) => {
                         <TabPane eventKey="nav-owned">
                             <div className="row g-5 d-flex">
                                 {ownedProducts?.map((prod) => (
+                                    console.log(prod),
                                     <div
                                         key={prod.id}
                                         className="col-5 col-lg-4 col-md-6 col-sm-6 col-12"
@@ -164,8 +165,9 @@ const DublicateCollectionArea = ({ className, data }) => {
                                         <Product
                                             overlay
                                             placeBid
-                                            title={prod.name}
-                                            slug={prod.slug}
+                                            title={prod["name"]}
+                                            slug={prod["collection-name"].replace(/ /g,"-")}
+                                            hash={prod["content-hash"]}
                                             latestBid={prod.latestBid}
                                             price="10"
                                             likeCount={prod.likeCount}
