@@ -194,7 +194,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                 >
                                     <Product
                                         overlay
-                                        title={data.name}
+                                        title={prod.name}
                                         slug={data.slug}
                                         hash={prod.hash}
                                         image={{

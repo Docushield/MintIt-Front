@@ -74,7 +74,7 @@ const Product = ({
                             {bitCount}+ Place Bit.
                         </Anchor>
                     </div> */}
-                    <span className="product-name">Collection Name</span>
+                    <span className="product-name">Token Name</span>
                     {!disableShareDropdown && <ShareDropdown />}
                 </div>
                 <Anchor path={`/collections/${slug}/tokens/${hash}`}>
