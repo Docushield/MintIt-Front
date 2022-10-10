@@ -2,6 +2,10 @@ import PropTypes from "prop-types";
 import Button from "@ui/button";
 import Product from "@components/product/layout-01";
 import { ButtonType, ProductType } from "@utils/types";
+import ShareDropdown from "@components/share-dropdown";
+import ProductBid from "@components/product-bid";
+import Image from "next/image";
+import Anchor from "@ui/anchor";
 
 const HeroArea = ({ data }) => (
     <div className="slider-style-5 rn-section-gapTop">
@@ -56,22 +60,72 @@ const HeroArea = ({ data }) => (
                 </div>
                 <div className="col-lg-6 order-1 order-lg-2">
                     <div className="row g-5">
-                        {data?.products?.map((prod) => (
-                            <div className="col-lg-6 col-md-6" key={prod.id}>
-                                <Product
-                                    overlay
-                                    title={prod.title}
-                                    slug={prod.slug}
-                                    latestBid={prod.latestBid}
-                                    price={prod.price}
-                                    // likeCount={prod.likeCount}
-                                    auction_date={prod.auction_date}
-                                    image={prod.images?.[0]}
-                                    authors={prod.authors}
-                                    bitCount={prod.bitCount}
-                                />
+                        <div className="col-lg-6 col-md-6">
+                            <div className="product-style-one">
+                                <div className="card-thumbnail">
+                                    <Anchor path={`/collections/acp`}>
+                                        <video
+                                            style={{ width: "240px" }}
+                                            src="/videos/product.mp4"
+                                            autoPlay
+                                            playsInline
+                                            muted
+                                            loop
+                                        />
+                                    </Anchor>
+                                </div>
+                                <div className="product-share-wrapper">
+                                    <span className="product-name">
+                                        Collection Name
+                                    </span>
+                                    <ShareDropdown />
+                                </div>
+                                <Anchor path={`/collections/acp`}>
+                                    <span className="product-name">
+                                        Alpha Creator Pass
+                                    </span>
+                                </Anchor>
+                                <ProductBid price="150KDA" />
+                                <a
+                                    href="/collections/acp"
+                                    className="viewbtn connectBtn btn btn-small btn-primary"
+                                >
+                                    View
+                                </a>
                             </div>
-                        ))}
+                        </div>
+                        <div className="col-lg-6 col-md-6">
+                            <div className="product-style-one">
+                                <div className="card-thumbnail">
+                                    <Anchor path={`/collections/nightbreakerz`}>
+                                        <Image
+                                            src="/images/nightbreakerz.png"
+                                            alt={"NFT_portfolio"}
+                                            width={533}
+                                            height={533}
+                                        />
+                                    </Anchor>
+                                </div>
+                                <div className="product-share-wrapper">
+                                    <span className="product-name">
+                                        Collection Name
+                                    </span>
+                                    <ShareDropdown />
+                                </div>
+                                <Anchor path={`/collections/nightbreakerz`}>
+                                    <span className="product-name">
+                                        NIGHTBREAKERZ
+                                    </span>
+                                </Anchor>
+                                <ProductBid price="150KDA" />
+                                <a
+                                    href="/collections/nightbreakerz"
+                                    className="viewbtn connectBtn btn btn-small btn-primary"
+                                >
+                                    View
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

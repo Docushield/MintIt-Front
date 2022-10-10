@@ -14,6 +14,7 @@ import Collection from "@components/collection";
 import { useSelector, useDispatch } from "react-redux";
 import FilterButton from "@ui/filter-button";
 import { slideToggle } from "@utils/methods";
+import Mint from "@components/constant-collections";
 
 function reducer(state, action) {
     switch (action.type) {
@@ -76,14 +77,14 @@ const DublicateCollectionArea = ({ className, data }) => {
         <div className={clsx("rn-dublicate-collection-area", className)}>
             <TabContainer defaultActiveKey="nav-owned">
                 <div className="container">
-                    <div className="col-12 mt_mobile--15 mb--20">
+                    {/* <div className="col-12 mt_mobile--15 mb--20">
                         <FilterButton
                             open={state.filterToggle}
                             onClick={filterHandler}
                         />
-                    </div>
+                    </div> */}
 
-                    <ProductFilter
+                    {/* <ProductFilter
                         ref={filterRef}
                         slectHandler={slectHandler}
                         sortHandler={sortHandler}
@@ -91,7 +92,7 @@ const DublicateCollectionArea = ({ className, data }) => {
                         inputs={{
                             price: [0, 100],
                         }}
-                    />
+                    /> */}
                     <div className="row">
                         <div className="col-12">
                             <div className="tab-wrapper-one">
@@ -107,17 +108,17 @@ const DublicateCollectionArea = ({ className, data }) => {
                                         >
                                             On Sale
                                         </Nav.Link> */}
-                                        <Nav.Link
+                                        {/* <Nav.Link
                                             as="button"
                                             eventKey="nav-owned"
                                         >
                                             Owned
-                                        </Nav.Link>
+                                        </Nav.Link> */}
                                         <Nav.Link
                                             as="button"
-                                            eventKey="nav-created"
+                                            eventKey="nav-owned"
                                         >
-                                            Created
+                                            My NFTs
                                         </Nav.Link>
                                         {/* <Nav.Link
                                             as="button"
@@ -156,6 +157,7 @@ const DublicateCollectionArea = ({ className, data }) => {
                         <TabPane eventKey="nav-owned">
                             <div className="row g-5 d-flex">
                                 {ownedProducts?.map((prod) => (
+                                    console.log(prod),
                                     <div
                                         key={prod.id}
                                         className="col-5 col-lg-4 col-md-6 col-sm-6 col-12"
@@ -163,10 +165,11 @@ const DublicateCollectionArea = ({ className, data }) => {
                                         <Product
                                             overlay
                                             placeBid
-                                            title={prod.title}
-                                            slug={prod.slug}
+                                            title={prod["name"]}
+                                            slug={prod["collection-name"].replace(/ /g,"-")}
+                                            hash={prod["content-hash"]}
                                             latestBid={prod.latestBid}
-                                            price={prod.price}
+                                            price="10"
                                             likeCount={prod.likeCount}
                                             auction_date={prod.auction_date}
                                             image={prod.images?.[0]}
@@ -177,7 +180,7 @@ const DublicateCollectionArea = ({ className, data }) => {
                                 ))}
                             </div>
                         </TabPane>
-                        <TabPane eventKey="nav-created">
+                        {/* <TabPane eventKey="nav-created">
                             <div className="row g-5 mt--0 d-flex">
                                 {collections?.map((collection) => (
                                     <div
@@ -199,7 +202,8 @@ const DublicateCollectionArea = ({ className, data }) => {
                                     </div>
                                 ))}
                             </div>
-                        </TabPane>
+                            <Mint />
+                        </TabPane> */}
                     </TabContent>
                 </div>
             </TabContainer>

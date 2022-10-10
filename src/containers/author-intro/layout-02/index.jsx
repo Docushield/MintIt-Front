@@ -40,10 +40,10 @@ const AuthorIntroArea = ({ className, space, data }) => {
                         <div className="col-lg-3">
                             <div className="author-wrapper">
                                 <div className="author-inner">
-                                    {data?.image?.src && (
+                                    {/* {data.image?.src && ( */}
                                         <div className="user-thumbnail">
                                             <Image
-                                                src={data.image.src}
+                                                src={"/images/bg/bg-image-1.jpg"}
                                                 alt={
                                                     data.image?.alt || data.name
                                                 }
@@ -52,11 +52,11 @@ const AuthorIntroArea = ({ className, space, data }) => {
                                                 layout="fixed"
                                             />
                                         </div>
-                                    )}
+                                    {/* )} */}
 
                                     <div className="rn-author-info-content">
-                                        <h4 className="title">Name</h4>
-                                        <div className="d-flex align-items-center">
+                                        {/* <h4 className="title">Name</h4>
+                                         <div className="d-flex align-items-center">
                                             <a
                                                 href="https://twitter.com"
                                                 target="_blank"
@@ -73,13 +73,13 @@ const AuthorIntroArea = ({ className, space, data }) => {
                                                     <ShareDropdown />
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> */}
                                         {/* <div className="mt-4 blue-area">
                                             {data.address}
                                         </div> */}
                                         <div className="mt-4 blue-area">
                                             <WalletAddress
-                                                address={data.address}
+                                                address={data}
                                             />
                                         </div>
                                         {/* <div className="follow-area">
@@ -138,7 +138,7 @@ const AuthorIntroArea = ({ className, space, data }) => {
                             </div>
                         </div>
                         <div className="col-lg-6">
-                            <p>{data.description}</p>
+                            {/* <p>{data.description}</p> */}
                         </div>
                     </div>
                 </div>
@@ -150,13 +150,7 @@ const AuthorIntroArea = ({ className, space, data }) => {
 AuthorIntroArea.propTypes = {
     className: PropTypes.string,
     space: PropTypes.oneOf([1]),
-    data: PropTypes.shape({
-        name: PropTypes.string,
-        twitter: PropTypes.string,
-        followers: PropTypes.string,
-        following: PropTypes.string,
-        image: ImageType,
-    }),
+    data:PropTypes.string,
 };
 AuthorIntroArea.defaultProps = {
     space: 1,

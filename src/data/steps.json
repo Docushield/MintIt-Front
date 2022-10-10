@@ -1,16 +1,16 @@
 [
     {
         "name": "Create your collection",
-        "description": "A great collection of beautiful website templates for your need. Choose the best suitable template",
+        "description": "We’ve created an NFT Generator that you can use to generate your collection. Make sure to have your layers and attributes ready.",
         "path": "/collection"
     },
     {
         "name": "Add Your NFTs",
-        "description": "We've made the template fully responsive, so it looks great on all devices, desktop, tablets and mobile.",
+        "description": "The output JSON file from the NFT-Generator, your Collection Logo, and Banner must be uploaded to the create section",
         "path": "/create"
     },
     {
         "name": "Sell Your NFTs",
-        "description": "I throw myself down among the tall gross by the stream as I lie close to the earth NFTs"
+        "description": "Once you’ve completed all the steps and submitted your NFT Collection, a new collection page will be generated where your community can mint. It’s that simple!"
     }
 ]

@@ -18,10 +18,10 @@ import { useOffcanvas, useSticky, useFlyoutSearch } from "@hooks";
 import { parseCookies, setCookie } from "nookies";
 import headerData from "../../../data/general/header-01.json";
 
-{/* to hide menu bar */}
-// import menuData from "../../../data/general/menu-01.json";
+{/* to hide menu bar */ }
+import menuData from "../../../data/general/menu-01.json";
 
-const menuData = []
+// const menuData = []
 import {
     setConnected,
     toggleConnectWalletDialog,

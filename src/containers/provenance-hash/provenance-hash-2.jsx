@@ -1,6 +1,9 @@
+import { PROOF_FOR_STARTING_INDEX } from "src/lib/constants";
+
 const ProvenanceHashArea = ({ collection, startIndex, tokens }) => {
     console.log(collection);
     const concatenatedHash = tokens.map((token) => token.hash).join("");
+
     return (
         <div className="container mt-5">
             <h2 className="fst-italic">{collection.name} Provenance Record</h2>
@@ -18,13 +21,13 @@ const ProvenanceHashArea = ({ collection, startIndex, tokens }) => {
 
             <h4 className="mb-5">IMPORTANT INFORMATION</h4>
             <p>
-                Each {collection.name} token ID is assigned to an artwork image
-                from the initial sequence with this formula:
+                Each {collection.name} token ID is assigned to the NFTs from the
+                initial sequence, the random starting index for minting is
+                generated on-chain with this function:
             </p>
-            <p className="my-5 text-center">
-                (tokenId + startingIndex) % {collection.size} → Initial Sequence
-                Index
-            </p>
+            <pre>
+                <code>{PROOF_FOR_STARTING_INDEX}</code>
+            </pre>
             <p>Here's the relevant information:</p>
             <table className="my-5 provenance_blue_field_table">
                 <tr>
@@ -67,10 +70,10 @@ const ProvenanceHashArea = ({ collection, startIndex, tokens }) => {
                             <td>{token.hash}</td>
                             <td>
                                 <a
-                                    href={`https://ipfs.io/ipfs/${token.content_uri.data}`}
+                                    href={`https://ipfs.io/ipfs/${token.contentUri.data}`}
                                     target="_blank"
                                 >
-                                    {token.content_uri.data}
+                                    {token.contentUri.data}
                                 </a>
                             </td>
                         </tr>
