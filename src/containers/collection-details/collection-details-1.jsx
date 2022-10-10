@@ -185,7 +185,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
             </div>
             <div className="container my-4">
                 <div className="row">
-                    {tokens.length > 0 ? (
+                    {tokens?.length > 0 ? (
                         <>
                             {tokens.map((prod) => (
                                 <div

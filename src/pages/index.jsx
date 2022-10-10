@@ -45,17 +45,6 @@ export async function getServerSideProps(context) {
 
 const Home = ({ collections }) => {
     const content = normalizedData(homepageData?.content || []);
-    const liveAuctionData = productData
-        .filter(
-            (prod) =>
-                prod?.auction_date && new Date() <= new Date(prod?.auction_date)
-        )
-        .sort(
-            (a, b) =>
-                Number(new Date(b.published_at)) -
-                Number(new Date(a.published_at))
-        )
-        .slice(0, 2);
 
     return (
         <SSRProvider>
@@ -67,7 +56,6 @@ const Home = ({ collections }) => {
                     <HeroArea
                         data={{
                             ...content["hero-section"],
-                            products: liveAuctionData,
                         }}
                     />
                     {/* <TopSellerArea
