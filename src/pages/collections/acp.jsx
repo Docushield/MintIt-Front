@@ -13,7 +13,8 @@ export const acpCollection = {
     id: "60ad94a1-176f-4f01-a4aa-7b1e14031b27",
     creator:
         "k:4159aa0d1f1e6c119c532d9286746274c3cc46dadd50ffc486a38de502ad6855",
-    description: "This is Alpha Creator Pass Description",
+    description:
+        "This is our first edition of the Alpha Creator Pass; a limited collection of 1000 passes that gives owners lifetime access to the MINT-IT platform and tools required to create and mint an NFT collection. Creators will be able to seamlessly deploy NFT collections that follow the Kadena Marmalade Standard. We have also incorporated IPFS (Interplanetary File Storage) hosting, a peer-to-peer file hosting network which we are using to store all NFT content on MINT-IT.",
     name: "Alpha Creator Pass",
     type: "public",
     "provenance-hash": "e8c7f1b927702f287e8bafe95e81feb1ak0efO02rca",
