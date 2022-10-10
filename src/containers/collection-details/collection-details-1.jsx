@@ -121,7 +121,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                         </div>
                                         <div className="col-md-6">
                                             <div className="status-box">
-                                                <div>Total</div>
+                                                <div>Supply</div>
                                                 <div>{data.size}</div>
                                             </div>
                                         </div>
