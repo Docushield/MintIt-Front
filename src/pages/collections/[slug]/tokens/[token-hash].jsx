@@ -5,7 +5,8 @@ import Header from "@layout/header/header-01";
 import Footer from "@layout/footer/footer-01";
 import Breadcrumb from "@components/breadcrumb";
 import ProductDetailsArea from "@containers/product-details";
-import { pactLocalFetch } from "@utils/pactLocalFetch";
+import { parseCookies } from "nookies";
+import { fetchAPI } from "@utils/fetchAPI";
 
 const TokenHash = ({ token, slug }) => (
     <Wrapper>
@@ -36,42 +37,25 @@ const TokenHash = ({ token, slug }) => (
 );
 
 export async function getServerSideProps(context) {
+    const cookies = parseCookies(context);
     const slug = context.query.slug;
-    const collectionName = slug.replace(/-/g, " ");
-    const hash = context.query["token-hash"];
-    try {
-        const smartContract = process.env.NEXT_PUBLIC_CONTRACT;
-        const pactCode = `(${smartContract}.get-nft "${collectionName}" "${hash}")`;
-        const fetchRes = await pactLocalFetch(pactCode);
-        if (fetchRes == null) {
-            //blockchain request failed
-            return {
-                props: {
-                    slug,
-                    token: {},
-                    className: "template-color-1",
-                },
-            };
-        } else {
-            return {
-                props: {
-                    slug,
-                    token: fetchRes.result.data,
-                    className: "template-color-1",
-                },
-            };
-        }
-    } catch (error) {
-        console.log(error);
-        return {
-            props: {
-                error: error.message,
-                token: {},
-                slug,
-                className: "template-color-1",
-            },
-        };
-    }
+    const tokenHash = context.query['token-hash'];
+    const res = await fetchAPI(`api/collections/${slug}/tokens/${tokenHash}`, cookies);
+    const token = res.response;
+    // const { categories } = product;
+    // const recentViewProducts = shuffleArray(productData).slice(0, 5);
+    // const relatedProducts = productData
+    //     .filter((prod) => prod.categories?.some((r) => categories?.includes(r)))
+    //     .slice(0, 5);
+    return {
+        props: {
+            className: "template-color-1",
+            token,
+            slug,
+            // recentViewProducts,
+            // relatedProducts,
+        },
+    };
 }
 
 TokenHash.propTypes = {
