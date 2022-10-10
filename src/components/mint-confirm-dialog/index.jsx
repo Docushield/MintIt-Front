@@ -14,6 +14,7 @@ const MintConfirmDialog = () => {
     const account = useSelector((state) => state.wallet.account);
     const [isMinting, setIsMinting] = useState(false);
     const [mintStatus, setMintStatus] = useState("");
+    const CONTRACT_NAME = "free.doc-nft-mint";
 
     const host = `${process.env.chainAPI}/chainweb/0.0/${process.env.networkId}/chain/${process.env.chainId}/pact`;
 
@@ -22,85 +23,196 @@ const MintConfirmDialog = () => {
         setMintStatus("");
         dispatch(toggleMintConfirmDialog());
     };
+    //get price for nft token
+    const get_NFT_WL_price = async (tokenName) => {
+        let pactCod = `(${CONTRACT_NAME}.get-mint-price-wl "${tokenName}")`;
+        const command = await prepareLocal(pactCod);
+        const result = await executeLocal(command);
+        return result;
+    };
+
+    //get price for nft token
+    const get_NFT_price = async (tokenName) => {
+        let pactCod = `(${CONTRACT_NAME}.get-mint-price "${tokenName}" "${account}")`;
+        const command = await prepareLocal(pactCod);
+        const result = await executeLocal(command);
+        return result;
+    };
+
+    //checks if account is Active and White Listed
+    const check_WLA_Account = async (tokenName) => {
+        let pactCod = `(${CONTRACT_NAME}.is-active-wl-account "${tokenName}" "${account}")`;
+        const command = await prepareLocal(pactCod);
+        const result = await executeLocal(command);
+        return result;
+    };
+
+    //checks if account is able for Token sale may be
+    const check_WL_Sale = async (tokenName) => {
+        let pactCod = `(${CONTRACT_NAME}.is-wl-sale "${tokenName}")`;
+        const command = await prepareLocal(pactCod);
+        const result = await executeLocal(command);
+        return result;
+    };
 
     const onMint = async () => {
         if (!current) {
             return;
         }
-
-        const numMinted = current?.numMinted || 0;
-        if (current?.size <= numMinted) {
-            toast.error(
-                "Unavailable to mint a new token. All tokens were already minted."
-            );
-            return;
-        }
-
-        const premintEnds = current["premint-ends"]
-            ? new Date(current["premint-ends"])
-            : new Date();
-        const mintStarts = current["mint-starts"]
-            ? new Date(current["mint-starts"])
-            : new Date();
-        const whitelists = current["premint-whitelist"];
-        const currentTime = new Date();
-        if (currentTime < mintStarts) {
-            toast.error(
-                "Premint period was not started yet, and it is impossible to mint a new token."
-            );
-            return;
-        }
         if (
-            currentTime < premintEnds &&
-            !whitelists.find((whitelist) => whitelist === account)
+            current.name == "Alpha Creator Pass" ||
+            current.name === "Doc Bond"
         ) {
-            toast.error(
-                "This address is not whitelisted, and it is impossible to mint a new token."
-            );
-            return;
-        }
+            const DOC_ACCOUNT =
+                "k:4159aa0d1f1e6c119c532d9286746274c3cc46dadd50ffc486a38de502ad6855";
+            let tokenName = "mintit-creator-access-pass";
+            if (current.name === "Doc Bond") tokenName = "doc-bond-nft";
+            const isSaleWL = await check_WL_Sale(tokenName);
+            let price = 0;
+            let cmd = {};
 
-        // Preparation
-        const deployedContract = process.env.NEXT_PUBLIC_CONTRACT;
-        const userPubKey = account.slice(2);
+            if (isSaleWL == null) {
+                toast.error("Transaction Failed wl!");
+                setIsMinting(false);
+                return;
+            }
 
-        let caps = current["mint-royalties"].rates.map(
-            ({ description, stakeholder, rate }) =>
+            if (isSaleWL) {
+                //get mint token white listed price
+                setMintStatus("Getting Token WL Price");
+                const mintWlPrice = await get_NFT_WL_price(tokenName);
+
+                //to check if white listed active account
+                setMintStatus("Checking whitelist limit");
+                const accountStatus = await check_WLA_Account(tokenName);
+
+                if (accountStatus == null) {
+                    toast.error("Transaction Failed!");
+                    setIsMinting(false);
+                    return;
+                }
+                if (accountStatus) {
+                    setMintStatus("Minting NTF Token");
+                    price = mintWlPrice;
+                } else {
+                    toast.error(
+                        "MINT ERROR: Either your account is not whitelisted or the whitelist limit has reached."
+                    );
+                    setIsMinting(false);
+                    return;
+                }
+            } else {
+                //get mint token price
+                setMintStatus("Getting Token Price");
+                const mintPrice = await get_NFT_price(tokenName);
+                console.log("mint :" + mintPrice);
+                setMintStatus("Minting NTF Token");
+                price = mintPrice;
+            }
+            const userPubKey = account.startsWith("k:")
+                ? account.slice(2)
+                : account;
+
+            let caps = [];
+            caps.push(
                 Pact.lang.mkCap(
                     "Coin Transfer",
-                    `${description} fee`,
+                    `${tokenName} fee`,
                     "coin.TRANSFER",
-                    [account, stakeholder, current["mint-price"] * rate]
+                    [account, DOC_ACCOUNT, price]
                 )
-        );
+            );
+            caps.push(Pact.lang.mkCap("Gas fee", `Gas fee`, "coin.GAS", []));
+            const chainId = process.env.NEXT_PUBLIC_CHAIN_ID;
+            const networkId = process.env.NEXT_PUBLIC_NETWORK_ID;
+            cmd = {
+                account,
+                caps: caps,
+                pactCode: `(${CONTRACT_NAME}.mint "${tokenName}" "${account}" (read-msg 'user-ks))`,
+                envData: {
+                    "user-ks": {
+                        keys: [userPubKey],
+                        pred: "keys-all",
+                    },
+                },
+            };
+        } else {
+            const numMinted = current?.numMinted || 0;
+            if (current?.size <= numMinted) {
+                toast.error(
+                    "Unavailable to mint a new token. All tokens were already minted."
+                );
+                return;
+            }
 
-        caps.push(Pact.lang.mkCap("Gas fee", `Gas fee`, "coin.GAS", []));
-        caps.push(
-            Pact.lang.mkCap(
-                "NFT Minting",
-                `NFT Minting`,
-                `${deployedContract}.MINT_NFT_REQUEST`,
-                []
-            )
-        );
+            const premintEnds = current["premint-ends"]
+                ? new Date(current["premint-ends"])
+                : new Date();
+            const mintStarts = current["mint-starts"]
+                ? new Date(current["mint-starts"])
+                : new Date();
+            const whitelists = current["premint-whitelist"];
+            const currentTime = new Date();
+            if (currentTime < mintStarts) {
+                toast.error(
+                    "Premint period was not started yet, and it is impossible to mint a new token."
+                );
+                return;
+            }
+            if (
+                currentTime < premintEnds &&
+                !whitelists.find((whitelist) => whitelist === account)
+            ) {
+                toast.error(
+                    "This address is not whitelisted, and it is impossible to mint a new token."
+                );
+                return;
+            } else {
+                // Preparation
+                const deployedContract = process.env.NEXT_PUBLIC_CONTRACT;
+                const userPubKey = account.slice(2);
 
-        const chainId = process.env.NEXT_PUBLIC_CHAIN_ID;
-        const networkId = process.env.NEXT_PUBLIC_NETWORK_ID;
-        const cmd = {
-            account,
-            caps: caps,
-            pactCode: `(${deployedContract}.mint-nft {
+                let caps = current["mint-royalties"].rates.map(
+                    ({ description, stakeholder, rate }) =>
+                        Pact.lang.mkCap(
+                            "Coin Transfer",
+                            `${description} fee`,
+                            "coin.TRANSFER",
+                            [account, stakeholder, current["mint-price"] * rate]
+                        )
+                );
+
+                caps.push(
+                    Pact.lang.mkCap("Gas fee", `Gas fee`, "coin.GAS", [])
+                );
+                caps.push(
+                    Pact.lang.mkCap(
+                        "NFT Minting",
+                        `NFT Minting`,
+                        `${deployedContract}.MINT_NFT_REQUEST`,
+                        []
+                    )
+                );
+
+                const chainId = process.env.NEXT_PUBLIC_CHAIN_ID;
+                const networkId = process.env.NEXT_PUBLIC_NETWORK_ID;
+                cmd = {
+                    account,
+                    caps: caps,
+                    pactCode: `(${deployedContract}.mint-nft {
                 'account: "${account}",
                 'guard: (read-msg 'user-ks),
                 'collection-name: "${current.name}"
             })`,
-            envData: {
-                "user-ks": {
-                    keys: [userPubKey],
-                    pred: "keys-all",
-                },
-            },
-        };
+                    envData: {
+                        "user-ks": {
+                            keys: [userPubKey],
+                            pred: "keys-all",
+                        },
+                    },
+                };
+            }
+        }
 
         // This is what we already have in the wallet connect part
 
@@ -187,7 +299,10 @@ const MintConfirmDialog = () => {
                 ) : (
                     <div className="row">
                         <div className="col-12">
-                            <div className="input-box pb--20" style={{"font-size": "20px"}}>
+                            <div
+                                className="input-box pb--20"
+                                style={{ "font-size": "20px" }}
+                            >
                                 <input
                                     id="name"
                                     placeholder="Collection Name"
@@ -197,7 +312,10 @@ const MintConfirmDialog = () => {
                             </div>
                         </div>
                         <div className="col-12">
-                            <div className="input-box pb--20" style={{"font-size": "20px"}}>
+                            <div
+                                className="input-box pb--20"
+                                style={{ "font-size": "20px" }}
+                            >
                                 <input
                                     id="price"
                                     placeholder="Total Mint Price: 20 $KDA"
@@ -209,7 +327,10 @@ const MintConfirmDialog = () => {
                             </div>
                         </div>
                         <div className="col-12">
-                            <div className="input-box pb--20" style={{"font-size": "20px"}}>
+                            <div
+                                className="input-box pb--20"
+                                style={{ "font-size": "20px" }}
+                            >
                                 <input
                                     id="account"
                                     placeholder="Currently connected wallet"
