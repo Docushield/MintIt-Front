@@ -54,6 +54,7 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                     space === 1 && "mb--30 mt_dec--120",
                     className
                 )}
+                style={{marginTop:"-100px"}}
             >
                 <div className="container">
                     <div className="row padding-tb-50 align-items-center d-flex">
@@ -103,7 +104,9 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                                     </div>
                                 </div>
                             </div>
-                            <p style={{"textAlign":"justify"}}>{data.description}</p>
+                            <p style={{ textAlign: "justify" }}>
+                                {data.description}
+                            </p>
                         </div>
                         <div className="col-lg-5 offset-lg-1">
                             <div className="row mb-5 col_textbox d-flex align-items-center">
@@ -170,21 +173,6 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                     </div>
                 </div>
             </div>
-            {data.slug == "acp" ? (
-                <div className="col-lg-3 col-md-6 col-12 m-auto">
-                    <video
-                        style={{ width: "300px" }}
-                        src="/videos/product.mp4"
-                        autoPlay
-                        playsInline
-                        muted
-                        loop
-                    />
-                </div>
-            ) : (
-                <div />
-            )}
-
             <div className="container d-flex my-4 align-items-center">
                 <div className="mint-status-box">{data.type} Round</div>
                 <div className="mint-status-box">
@@ -198,6 +186,17 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                         Mint Now
                     </Button>
                 )}
+            </div>
+
+            <div className="col-lg-3 col-md-6 col-12 m-auto mt-5 pt-5">
+                <video
+                    style={{ width: "300px"}}
+                    src="/videos/product.mp4"
+                    autoPlay
+                    playsInline
+                    muted
+                    loop
+                />
             </div>
         </>
     );

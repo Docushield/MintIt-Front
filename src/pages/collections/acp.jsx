@@ -84,7 +84,7 @@ export const acpCollection = {
     },
     status: "success",
     statusMessage: "true",
-    imageUrl: "/images/banner/acp_banner.png",
+    imageUrl: "/images/banner/profile.png",
     bannerImageUrl: "/images/banner/acp_banner.png",
     slug: "acp",
     numMinted: 3,

@@ -13,7 +13,7 @@ export const docbondCollection = {
     id: "60ad94a1-176f-4f01-a4aa-7b1e14031b27",
     creator:
         "k:4159aa0d1f1e6c119c532d9286746274c3cc46dadd50ffc486a38de502ad6855",
-    description: "This is the Doc Bond collection,This is the Doc Bond collection,This is the Doc Bond collection,This is the Doc Bond collection,This is the Doc Bond collection,This is the Doc Bond collection,This is the Doc Bond collection,This is the Doc Bond collection,This is the Doc Bond collection,This is the Doc Bond collection,This is the Doc Bond collection,",
+    description: "The $DOC Bond collection has a supply of 1000 and is an innovative way to support the Docushield team and token stability, get the $DOC token at the initial IDO price as well as earn passive income at the same time.",
     name: "Doc Bond",
     type: "public",
     "provenance-hash": "e8c7f1b927702f287e8bafe95e81feb1ak0efO02rca",
@@ -95,7 +95,7 @@ const DocBond = () => (
         <SEO pageTitle="Doc Bond" />
         <Header />
         <main id="main-content">
-            <Breadcrumb pageTitle="Docbond" pageTitle1="" currentPage="Docbond" />
+            <Breadcrumb pageTitle="Collection Details" pageTitle1="" currentPage="Collection Details" />
             <CollectionDetailsIntroArea data={docbondCollection} />
         </main>
         <Footer />
