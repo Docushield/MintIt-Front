@@ -211,6 +211,7 @@ DublicateCollectionArea.propTypes = {
     className: PropTypes.string,
     data: PropTypes.shape({
         products: PropTypes.arrayOf(ProductType),
+        collections: PropTypes.arrayOf(ProductType),
     }),
 };
 export default DublicateCollectionArea;
