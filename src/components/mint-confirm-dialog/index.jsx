@@ -15,6 +15,10 @@ const MintConfirmDialog = () => {
     const [isMinting, setIsMinting] = useState(false);
     const [mintStatus, setMintStatus] = useState("");
     const CONTRACT_NAME = "free.doc-nft-mint";
+    const pactChainId = process.env.NEXT_PUBLIC_CHAIN_ID;
+    const pactGasLimit = 100000;
+    const pactGasPrice = 0.00000001;
+    const pactNetworkId = process.env.NEXT_PUBLIC_NETWORK_ID;
 
     const host = `${process.env.chainAPI}/chainweb/0.0/${process.env.networkId}/chain/${process.env.chainId}/pact`;
 
@@ -22,6 +26,25 @@ const MintConfirmDialog = () => {
         setIsMinting(false);
         setMintStatus("");
         dispatch(toggleMintConfirmDialog());
+    };
+
+    const prepareLocal = (pactCod) => {
+        let command = Pact.api.prepareExecCmd(
+            [],
+            new Date().toISOString(),
+            pactCod,
+            {},
+            Pact.lang.mkMeta(
+                "",
+                pactChainId,
+                pactGasPrice,
+                pactGasLimit,
+                Math.floor(Date.now() / 1000),
+                86400
+            ),
+            pactNetworkId
+        );
+        return command;
     };
     //get price for nft token
     const get_NFT_WL_price = async (tokenName) => {
@@ -54,11 +77,38 @@ const MintConfirmDialog = () => {
         const result = await executeLocal(command);
         return result;
     };
+    const executeLocal = async (command) => {
+        const response = await fetch(`${host}/api/v1/local`, {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+            },
+            redirect: "follow",
+            referrerPolicy: "no-referrer",
+            body: JSON.stringify(command),
+        });
+
+        const respObject = await response.json();
+        console.log(respObject);
+
+        if (
+            !respObject ||
+            !respObject.result ||
+            respObject.result.status !== "success"
+        )
+            return null;
+
+        return respObject.result.data;
+    };
 
     const onMint = async () => {
         if (!current) {
             return;
         }
+        let cmd = {};
+        let userPubKey = "";
         if (
             current.name == "Alpha Creator Pass" ||
             current.name === "Doc Bond"
@@ -69,7 +119,6 @@ const MintConfirmDialog = () => {
             if (current.name === "Doc Bond") tokenName = "doc-bond-nft";
             const isSaleWL = await check_WL_Sale(tokenName);
             let price = 0;
-            let cmd = {};
 
             if (isSaleWL == null) {
                 toast.error("Transaction Failed wl!");
@@ -109,9 +158,7 @@ const MintConfirmDialog = () => {
                 setMintStatus("Minting NTF Token");
                 price = mintPrice;
             }
-            const userPubKey = account.startsWith("k:")
-                ? account.slice(2)
-                : account;
+            userPubKey = account.startsWith("k:") ? account.slice(2) : account;
 
             let caps = [];
             caps.push(
@@ -123,8 +170,6 @@ const MintConfirmDialog = () => {
                 )
             );
             caps.push(Pact.lang.mkCap("Gas fee", `Gas fee`, "coin.GAS", []));
-            const chainId = process.env.NEXT_PUBLIC_CHAIN_ID;
-            const networkId = process.env.NEXT_PUBLIC_NETWORK_ID;
             cmd = {
                 account,
                 caps: caps,
@@ -170,7 +215,7 @@ const MintConfirmDialog = () => {
             } else {
                 // Preparation
                 const deployedContract = process.env.NEXT_PUBLIC_CONTRACT;
-                const userPubKey = account.slice(2);
+                userPubKey = account.slice(2);
 
                 let caps = current["mint-royalties"].rates.map(
                     ({ description, stakeholder, rate }) =>
@@ -194,8 +239,6 @@ const MintConfirmDialog = () => {
                     )
                 );
 
-                const chainId = process.env.NEXT_PUBLIC_CHAIN_ID;
-                const networkId = process.env.NEXT_PUBLIC_NETWORK_ID;
                 cmd = {
                     account,
                     caps: caps,
@@ -218,14 +261,14 @@ const MintConfirmDialog = () => {
 
         const signingObject = {
             sender: cmd.account,
-            chainId,
+            chainId: pactChainId,
             gasPrice: 0.00000001,
             gasLimit: 100000,
             ttl: 28800,
             caps: cmd.caps,
             pactCode: cmd.pactCode,
             envData: cmd.envData,
-            networkId,
+            networkId: pactNetworkId,
             signingPubKey: userPubKey,
         };
 
