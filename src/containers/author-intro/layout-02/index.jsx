@@ -9,7 +9,7 @@ import WalletAddress from "@components/wallet-address";
 import Button from "react-bootstrap/Button";
 import Anchor from "@ui/anchor";
 
-const AuthorIntroArea = ({ className, space, data, account }) => {
+const AuthorIntroArea = ({ className, space, data }) => {
     const [isShareModalOpen, setIsShareModalOpen] = useState(false);
     const shareModalHandler = () => setIsShareModalOpen((prev) => !prev);
     return (
@@ -79,7 +79,7 @@ const AuthorIntroArea = ({ className, space, data, account }) => {
                                         </div> */}
                                         <div className="mt-4 blue-area">
                                             <WalletAddress
-                                                address={account}
+                                                address={data.address}
                                             />
                                         </div>
                                         {/* <div className="follow-area">

@@ -9,55 +9,36 @@ import { fetchAPI } from "@utils/fetchAPI";
 
 // Demo data
 import authorData from "../data/author.json";
-// import productData from "../data/categories.json";
+import productData from "../data/categories.json";
 
 export async function getServerSideProps(context) {
     const cookies = parseCookies(context);
-    const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
-    try {
-        const token = cookies["token"];
-        console.log(token);
-        const account = cookies["userAccount"];
-        // const account = "k:431a0a02cdfd8eabb3b78789795818933f518c8de74c02666ec732457959b6a4";
-        const response = await fetch(
-            `${baseURL}/api/collections/profile/${account}`,
-            {
-                method: "GET",
-                headers: {
-                    "x-auth-token": token,
-                },
-            }
-        ).then((res) => res.json());
+    const res = await fetchAPI("api/collections", cookies);
+
+    if (res.error) {
         return {
             props: {
-                collections: response.collections,
-                tokens: response.nfts,
-                account:account,
-                className: "template-color-1",
-            },
-        };
-    } catch (error) {
-        return {
-            props: {
-                error: error.message,
-                tokens: [],
-                collections: [],
+                error: res.error,
                 className: "template-color-1",
             },
         };
     }
+
+    return {
+        props: { collections: res.response, className: "template-color-1" },
+    };
 }
 
-const Author = ({ collections, tokens, account }) => (
+const Author = ({ collections }) => (
     <Wrapper>
         <SEO pageTitle="Author" />
         <Header />
         <main id="main-content">
-            <AuthorIntroArea data={authorData} account={account} />
+            <AuthorIntroArea data={authorData} />
             {collections && (
                 <AuthorProfileArea
-                    data={{ products: tokens, collections:collections }}
+                    data={{ products: productData, collections }}
                 />
             )}
         </main>
