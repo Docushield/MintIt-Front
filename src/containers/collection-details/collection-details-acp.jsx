@@ -103,7 +103,7 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                         <div className="col-lg-9">
                             <div className="row mb-5 col_textbox d-flex align-items-center">
                                 <div className="col-md-6 col-lg-6">
-                                    <p>{data.description}</p>
+                                    <p style={{"textAlign":"justify"}}>{data.description}</p>
                                 </div>
                                 <div className="col-md-6 col-lg-6">
                                     <div className="row">
