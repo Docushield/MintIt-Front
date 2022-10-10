@@ -48,32 +48,32 @@ const MintConfirmDialog = () => {
     };
     //get price for nft token
     const get_NFT_WL_price = async (tokenName) => {
-        let pactCod = `(${CONTRACT_NAME}.get-mint-price-wl "${tokenName}")`;
-        const command = await prepareLocal(pactCod);
+        let pactCode = `(${CONTRACT_NAME}.get-mint-price-wl "${tokenName}")`;
+        const command = await prepareLocal(pactCode);
         const result = await executeLocal(command);
         return result;
     };
 
     //get price for nft token
     const get_NFT_price = async (contractName, tokenName) => {
-        let pactCod = `(${contractName}.get-mint-price "${tokenName}" "${account}")`;
-        const command = await prepareLocal(pactCod);
+        let pactCode = `(${contractName}.get-mint-price "${tokenName}" "${account}")`;
+        const command = await prepareLocal(pactCode);
         const result = await executeLocal(command);
         return result;
     };
 
     //checks if account is Active and White Listed
     const check_WLA_Account = async (tokenName) => {
-        let pactCod = `(${CONTRACT_NAME}.is-active-wl-account "${tokenName}" "${account}")`;
-        const command = await prepareLocal(pactCod);
+        let pactCode = `(${CONTRACT_NAME}.is-active-wl-account "${tokenName}" "${account}")`;
+        const command = await prepareLocal(pactCode);
         const result = await executeLocal(command);
         return result;
     };
 
     //checks if account is able for Token sale may be
     const check_WL_Sale = async (tokenName) => {
-        let pactCod = `(${CONTRACT_NAME}.is-wl-sale "${tokenName}")`;
-        const command = await prepareLocal(pactCod);
+        let pactCode = `(${CONTRACT_NAME}.is-wl-sale "${tokenName}")`;
+        const command = await prepareLocal(pactCode);
         const result = await executeLocal(command);
         return result;
     };
