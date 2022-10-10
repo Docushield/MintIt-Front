@@ -54,7 +54,7 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                     space === 1 && "mb--30 mt_dec--120",
                     className
                 )}
-                style={{marginTop:"-100px"}}
+                style={{ marginTop: "-100px" }}
             >
                 <div className="container">
                     <div className="row padding-tb-50 align-items-center d-flex">
@@ -188,15 +188,23 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                 )}
             </div>
 
-            <div className="col-lg-3 col-md-6 col-12 m-auto mt-5 pt-5">
-                <video
-                    style={{ width: "300px"}}
-                    src="/videos/product.mp4"
-                    autoPlay
-                    playsInline
-                    muted
-                    loop
-                />
+            <div className="container">
+                <div className="row padding-tb-50 align-items-center d-flex">
+                    <div className="col-lg-6">
+                        {data.slug == "acp" && (
+                            <div style={{ width: "100%" }}>
+                                <video
+                                    style={{ width: "100%" }}
+                                    src="/videos/product.mp4"
+                                    autoPlay
+                                    playsInline
+                                    muted
+                                    loop
+                                />
+                            </div>
+                        )}
+                    </div>
+                </div>
             </div>
         </>
     );
