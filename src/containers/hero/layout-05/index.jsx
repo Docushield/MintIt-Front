@@ -65,7 +65,7 @@ const HeroArea = ({ data }) => (
                                 <div className="card-thumbnail">
                                     <Anchor path={`/collections/acp`}>
                                         <video
-                                            style={{ width: "320px" }}
+                                            style={{ width: "240px" }}
                                             src="/videos/product.mp4"
                                             autoPlay
                                             playsInline
@@ -99,7 +99,7 @@ const HeroArea = ({ data }) => (
                                 <div className="card-thumbnail">
                                     <Anchor path={`/collections/docbond`}>
                                         <Image
-                                            src="/videos/product.mp4"
+                                            src="/images/token.png"
                                             alt={"NFT_portfolio"}
                                             width={533}
                                             height={533}
