@@ -75,11 +75,15 @@ const HeroArea = ({ data }) => (
                                     </Anchor>
                                 </div>
                                 <div className="product-share-wrapper">
-                                    <span className="product-name">Collection Name</span>
+                                    <span className="product-name">
+                                        Collection Name
+                                    </span>
                                     <ShareDropdown />
                                 </div>
                                 <Anchor path={`/collections/acp`}>
-                                    <span className="product-name">Alpha Creator Pass</span>
+                                    <span className="product-name">
+                                        Alpha Creator Pass
+                                    </span>
                                 </Anchor>
                                 <ProductBid price="150KDA" />
                                 <a
@@ -95,7 +99,7 @@ const HeroArea = ({ data }) => (
                                 <div className="card-thumbnail">
                                     <Anchor path={`/collections/docbond`}>
                                         <Image
-                                            src="/images/nightbreakerz.png"
+                                            src="/videos/product.mp4"
                                             alt={"NFT_portfolio"}
                                             width={533}
                                             height={533}
@@ -103,12 +107,15 @@ const HeroArea = ({ data }) => (
                                     </Anchor>
                                 </div>
                                 <div className="product-share-wrapper">
-                                    <span className="product-name">Collection Name</span>
+                                    <span className="product-name">
+                                        Collection Name
+                                    </span>
                                     <ShareDropdown />
                                 </div>
                                 <Anchor path={`/collections/docbond`}>
-
-                                    <span className="product-name">NIGHTBREAKERZ</span>
+                                    <span className="product-name">
+                                        Doc Bond
+                                    </span>
                                 </Anchor>
                                 <ProductBid price="150KDA" />
                                 <a
