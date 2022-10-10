@@ -7,6 +7,8 @@ import CollectionArea from "@containers/collection/layout-03";
 import { parseCookies } from "nookies";
 import { fetchAPI } from "@utils/fetchAPI";
 import Mint from "@components/constant-collections";
+import { acpCollection } from "./collections/acp";
+import { docbondCollection } from "./collections/docbond";
 
 export async function getServerSideProps(context) {
     const cookies = parseCookies(context);
@@ -18,14 +20,16 @@ export async function getServerSideProps(context) {
             props: {
                 error: res.response.error || res.error,
                 className: "template-color-1",
-                collections: [],
+                collections: [acpCollection, docbondCollection],
             },
         };
     }
 
     return {
         props: {
-            collections: res.response,
+            collections: res.response
+                .concat(acpCollection)
+                .concat(docbondCollection),
             className: "template-color-1",
         },
     };
@@ -50,7 +54,6 @@ const Collection = ({ collections }) => {
                         },
                     }}
                 />
-                <Mint />
             </main>
             <Footer />
         </Wrapper>
