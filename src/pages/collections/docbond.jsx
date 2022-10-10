@@ -19,11 +19,6 @@ const docbondCollection = {
     "mint-starts": "2022-09-30T16:00:00.000Z",
     "premint-ends": "2022-10-07T16:00:00.000Z",
     "reveal-at": "2022-09-30T16:00:00.000Z",
-    "premint-whitelist": [
-        "k:d46967fd03942c50f0d50edc9c35d018fe01166853dc79f62e2fdf72689e0484",
-        "k:047bc663e6cdaccb268e224765645dd11573091f9ff2ac083508b46a0647ace0",
-        "k:721c69fd9791abb2240a0844c4fc88ec1394f3f118bcb717b5df6bd0c8e70664"
-    ],
     "size": 1000,
     "mint-price": 250,
     "premint-price": 1,
