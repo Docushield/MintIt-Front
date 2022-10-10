@@ -110,7 +110,7 @@
                     "title": "Upload your Collection",
                     "path": "/create",
                     "subtitle": "Step-03",
-                    "description": "The output JSON file from the NFT-Generator, your Collection Logo, and Banner must be uploaded to the <a href='/create-multiple'>Create Section</a>.",
+                    "description": "The output JSON file from the NFT-Generator, your Collection Logo, and Banner must be uploaded to the Create Section",
                     "images": [
                         {
                             "src": "/images/icons/shape-5.png"
