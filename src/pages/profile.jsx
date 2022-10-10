@@ -18,8 +18,8 @@ export async function getServerSideProps(context) {
     try {
         const token = cookies["token"];
         console.log(token);
-        // const account = cookies["userAccount"];
-        const account = "k:431a0a02cdfd8eabb3b78789795818933f518c8de74c02666ec732457959b6a4";
+        const account = cookies["userAccount"];
+        // const account = "k:431a0a02cdfd8eabb3b78789795818933f518c8de74c02666ec732457959b6a4";
         const response = await fetch(
             `${baseURL}/api/collections/profile/${account}`,
             {
