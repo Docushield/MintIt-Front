@@ -6,7 +6,6 @@ import Breadcrumb from "@components/breadcrumb";
 import CollectionArea from "@containers/collection/layout-03";
 import { parseCookies } from "nookies";
 import { fetchAPI } from "@utils/fetchAPI";
-import Mint from "@components/constant-collections";
 import { acpCollection } from "./collections/acp";
 import { docbondCollection } from "./collections/docbond";
 

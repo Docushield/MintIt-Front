@@ -13,6 +13,7 @@ const Collection = ({
     path,
     live_date,
     minted,
+    video,
 }) => {
     const [left, setLeft] = React.useState("");
 
@@ -32,7 +33,19 @@ const Collection = ({
     return (
         <Anchor path={path} className="rn-collection-inner-one">
             <div className="collection-wrapper">
-                {image && (
+                {video && (
+                    <div className="collection-big-thumbnail">
+                        <video
+                            style={{ width: "100%" }}
+                            src="/videos/product.mp4"
+                            autoPlay
+                            playsInline
+                            muted
+                            loop
+                        />
+                    </div>
+                )}
+                {!video && image && (
                     <div className="collection-big-thumbnail">
                         <Image
                             src={image}
@@ -42,6 +55,7 @@ const Collection = ({
                         />
                     </div>
                 )}
+
                 {left && (!minted || total_item > minted) && (
                     <div className="collection-until-live">{left}</div>
                 )}

@@ -88,6 +88,7 @@ export const acpCollection = {
     bannerImageUrl: "/images/banner/acp_banner.png",
     slug: "acp",
     numMinted: 3,
+    vidoeUrl: "/vidoes/product.mp4",
     updatedAt: "2022-10-09T17:44:03.393Z",
 };
 
