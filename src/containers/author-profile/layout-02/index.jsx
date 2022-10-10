@@ -30,13 +30,15 @@ function reducer(state, action) {
 }
 
 const DublicateCollectionArea = ({ className, data }) => {
+    const appDispatch = useDispatch();
+    const connected = useSelector((state) => state.wallet.connected);
 
-    const ownedProducts = data.products;
-    const collections = data.collections;
+    const onSaleProducts = shuffleArray(data.products).slice(0, 10);
+    const ownedProducts = shuffleArray(data.products).slice(0, 10);
+    // const createdProducts = shuffleArray(data.products).slice(0, 10);
+    const collections = shuffleArray(data.collections).slice(0, 10);
+    const likedProducts = shuffleArray(data.products).slice(0, 10);
     const filterRef = useRef(null);
-
-    console.log(ownedProducts);
-
     const [state, dispatch] = useReducer(reducer, {
         filterToggle: false,
         products: data.products || [],
@@ -162,10 +164,10 @@ const DublicateCollectionArea = ({ className, data }) => {
                                         <Product
                                             overlay
                                             placeBid
-                                            title={prod.name}
-                                            slug={prod.name}
+                                            title={prod.title}
+                                            slug={prod.slug}
                                             latestBid={prod.latestBid}
-                                            price={prod.index}
+                                            price={prod.price}
                                             likeCount={prod.likeCount}
                                             auction_date={prod.auction_date}
                                             image={prod.images?.[0]}
