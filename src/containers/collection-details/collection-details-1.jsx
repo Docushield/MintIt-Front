@@ -116,7 +116,18 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                         <div className="col-12">
                                             <div className="status-box">
                                                 <div>Creator</div>
-                                                <div>{data.creator.slice(0, 17) + "....." + data.creator.slice(-15)}</div>
+                                                <div>
+                                                    {data.creator
+                                                        ? data.creator.slice(
+                                                              0,
+                                                              17
+                                                          ) +
+                                                          "....." +
+                                                          data.creator.slice(
+                                                              -15
+                                                          )
+                                                        : ""}
+                                                </div>
                                             </div>
                                         </div>
                                         <div className="col-md-6">
@@ -150,7 +161,8 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                                 <div>Mint Starts</div>
                                                 <div>
                                                     {formatDate(
-                                                        data["mint-starts"], "MMMM Do, h:mm:ss A"
+                                                        data["mint-starts"],
+                                                        "MMMM Do, h:mm:ss A"
                                                     )}
                                                 </div>
                                             </div>
@@ -160,7 +172,8 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                                 <div>Premint Ends</div>
                                                 <div>
                                                     {formatDate(
-                                                        data["premint-ends"], "MMMM Do, h:mm:ss A"
+                                                        data["premint-ends"],
+                                                        "MMMM Do, h:mm:ss A"
                                                     )}
                                                 </div>
                                             </div>
@@ -175,13 +188,17 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
 
             <div className="container d-flex my-4 align-items-center">
                 <div className="mint-status-box">{data.type} Round</div>
-                <div className="mint-status-box">Mint: {data["mint-price"]} KDA</div>
-                <div className="mint-status-box">Remaining: {data.size - data.numMinted}</div>
-                {data.status === "success" && (
-                    <Button className="ms-4" onClick={onMint}>
-                        Mint Now
-                    </Button>
-                )}
+                <div className="mint-status-box">
+                    Mint: {data["mint-price"]} KDA
+                </div>
+                <div className="mint-status-box">
+                    Remaining: {data.size - data.numMinted}
+                </div>
+                {/* {data.status === "success" && ( */}
+                <Button className="ms-4" onClick={onMint}>
+                    Mint Now
+                </Button>
+                {/* )} */}
             </div>
             <div className="container my-4">
                 <div className="row">

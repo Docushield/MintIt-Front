@@ -289,6 +289,17 @@ const MintConfirmDialog = () => {
                 },
             }).then((res) => res.json());
             setMintStatus(
+                <p>
+                    Transaction is pending, Request Key :{" "}
+                    <a
+                        href={`https://explorer.chainweb.com/testnet/tx/${requestKeys[0]}`}
+                        _target="blank"
+                    >
+                        {requestKeys[0]}
+                    </a>
+                </p>
+            );
+            setMintStatus(
                 "Transaction is pending, Request Key : " + requestKeys[0]
             );
             const interval = setInterval(async () => {
