@@ -55,10 +55,10 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                     space === 1 && "mb--30 mt_dec--120",
                     className
                 )}
-                style={{ marginTop: "-100px" }}
+                style={{ marginTop: "-80px" }}
             >
                 <div className="container">
-                    <div className="row padding-tb-50 align-items-center d-flex">
+                    <div className="row padding-tb-50 d-flex">
                         <div className="col-lg-6">
                             <div className="author-wrapper">
                                 <div className="author-inner">

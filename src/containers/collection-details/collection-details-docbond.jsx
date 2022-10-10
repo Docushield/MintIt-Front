@@ -58,10 +58,10 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                     space === 1 && "mb--30 mt_dec--120",
                     className
                 )}
-                style={{ marginTop: "-150px" }}
+                style={{ marginTop: "-80px" }}
             >
                 <div className="container">
-                    <div className="row padding-tb-50 align-items-center d-flex">
+                    <div className="row padding-tb-50 d-flex">
                         <div className="col-lg-6">
                             <div className="author-wrapper">
                                 <div className="author-inner">
@@ -197,13 +197,16 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                 )}
             </div>
 
-            <div className="col-lg-3 col-md-6 col-12 m-auto mt-5 pt-5">
-                <Image
-                    src={data.imageUrl}
-                    alt={data.name}
-                    height={400}
-                    width={400}
-                />
+            <div className="container">
+                <div className="row padding-tb-50 align-items-center d-flex">
+                    <div className="col-lg-6 position-relative">
+                        <img
+                            src="/images/token.png"
+                            alt={data.name}
+                            width="100%"
+                        />
+                    </div>
+                </div>
             </div>
         </>
     );

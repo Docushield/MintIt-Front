@@ -138,10 +138,11 @@ const CollectionArea = ({ className, space, id, data }) => {
                                     path={`/collections/${collection.slug}`}
                                     minted={collection.minted}
                                     image={collection.imageUrl}
-                                    video={collection.vidoeUrl}
+                                    logo={collection.logoUrl}
                                     thumbnails={collection.thumbnails}
                                     profile_image={collection.bannerImageUrl}
                                     live_date={collection.live_date}
+                                    isVideo={collection.isVideo}
                                 />
                             </div>
                         ))}
