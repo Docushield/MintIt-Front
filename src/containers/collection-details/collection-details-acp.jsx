@@ -60,7 +60,7 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
             >
                 <div className="container">
                     <div className="row padding-tb-50 align-items-center d-flex">
-                        <div className="col-lg-3">
+                        <div className="col-lg-6">
                             <div className="author-wrapper">
                                 <div className="author-inner">
                                     {data.imageUrl && (
@@ -77,86 +77,101 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                                     )}
 
                                     <div className="rn-author-info-content">
-                                        <h4 className="title">{data.name}</h4>
-                                        <div className="d-flex align-items-center">
-                                            <a
-                                                href="https://twitter.com"
-                                                target="_blank"
-                                                rel="noreferrer"
-                                                className="social-follw mb--0"
-                                            >
-                                                <i className="feather-twitter" />
-                                                <span className="user-name">
-                                                    {data.twitter}
-                                                </span>
-                                            </a>
-                                            <div className="author-button-area mt--0 ml--10">
-                                                <div className="count at-follw">
-                                                    <ShareDropdown />
+                                        <div className="row my-5">
+                                            <div className="col-8">
+                                                <h4 className="title">
+                                                    {data.name}
+                                                </h4>
+                                            </div>
+                                            <div className="col-2">
+                                                <div className="row">
+                                                    <div className="col-6">
+                                                        <a
+                                                            href="https://twitter.com"
+                                                            target="_blank"
+                                                            rel="noreferrer"
+                                                            className="social-follw mb--0 mt-3"
+                                                        >
+                                                            <i className="feather-twitter" />
+                                                            <span className="user-name">
+                                                                {data.twitter}
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                    <div className="col-6">
+                                                        <div className="author-button-area mt--0 ml--10">
+                                                            <div className="count at-follw">
+                                                                <ShareDropdown />
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <p style={{ textAlign: "justify" }}>
+                                            {data.description}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-9">
+                        <div className="col-lg-5 offset-lg-1">
                             <div className="row mb-5 col_textbox d-flex align-items-center">
-                                <div className="col-md-6 col-lg-6">
-                                    <p style={{"textAlign":"justify"}}>{data.description}</p>
-                                </div>
-                                <div className="col-md-6 col-lg-6">
-                                    <div className="row">
-                                        <div className="col-12">
-                                            <div className="status-box">
-                                                <div>Creator</div>
-                                                <div>{data.creator.slice(0, 17) + "....." + data.creator.slice(-15)}</div>
+                                <div className="row">
+                                    <div className="col-12">
+                                        <div className="status-box">
+                                            <div>Creator</div>
+                                            <div>
+                                                {data.creator.slice(0, 17) +
+                                                    "....." +
+                                                    data.creator.slice(-15)}
                                             </div>
                                         </div>
-                                        <div className="col-md-6">
-                                            <div className="status-box">
-                                                <div>Total</div>
-                                                <div>{data.size}</div>
+                                    </div>
+                                    <div className="col-md-6">
+                                        <div className="status-box">
+                                            <div>Total</div>
+                                            <div>{data.size}</div>
+                                        </div>
+                                    </div>
+                                    <div className="col-md-6">
+                                        <div className="status-box">
+                                            <div>Price</div>
+                                            <div>{data["mint-price"]} KDA</div>
+                                        </div>
+                                    </div>
+                                    <div className="col-md-6">
+                                        <div className="status-box">
+                                            <div>Type</div>
+                                            <div>{data.type}</div>
+                                        </div>
+                                    </div>
+                                    <div className="col-md-6">
+                                        <div className="status-box">
+                                            <div>Reveals at </div>
+                                            <div>Instant</div>
+                                        </div>
+                                    </div>
+                                    <div className="col-12">
+                                        <div className="status-box">
+                                            <div>Mint Starts</div>
+                                            <div>
+                                                {formatDate(
+                                                    data["mint-starts"],
+                                                    "MMMM Do, h:mm:ss A"
+                                                )}
                                             </div>
                                         </div>
-                                        <div className="col-md-6">
-                                            <div className="status-box">
-                                                <div>Price</div>
-                                                <div>
-                                                    {data["mint-price"]} KDA
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-6">
-                                            <div className="status-box">
-                                                <div>Type</div>
-                                                <div>{data.type}</div>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-6">
-                                            <div className="status-box">
-                                                <div>Reveals at </div>
-                                                <div>Instant</div>
-                                            </div>
-                                        </div>
-                                        <div className="col-12">
-                                            <div className="status-box">
-                                                <div>Mint Starts</div>
-                                                <div>
-                                                    {formatDate(
-                                                        data["mint-starts"], "MMMM Do, h:mm:ss A"
-                                                    )}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-12">
-                                            <div className="status-box">
-                                                <div>Premint Ends</div>
-                                                <div>
-                                                    {formatDate(
-                                                        data["premint-ends"], "MMMM Do, h:mm:ss A"
-                                                    )}
-                                                </div>
+                                    </div>
+                                    <div className="col-12">
+                                        <div className="status-box">
+                                            <div>Premint Ends</div>
+                                            <div>
+                                                {formatDate(
+                                                    data["premint-ends"],
+                                                    "MMMM Do, h:mm:ss A"
+                                                )}
                                             </div>
                                         </div>
                                     </div>
@@ -169,8 +184,12 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
 
             <div className="container d-flex my-4 align-items-center">
                 <div className="mint-status-box">{data.type} Round</div>
-                <div className="mint-status-box">Mint: {data["mint-price"]} KDA</div>
-                <div className="mint-status-box">Remaining: {data.size - data.numMinted}</div>
+                <div className="mint-status-box">
+                    Mint: {data["mint-price"]} KDA
+                </div>
+                <div className="mint-status-box">
+                    Remaining: {data.size - data.numMinted}
+                </div>
                 {data.status === "success" && (
                     <Button className="ms-4" onClick={onMint}>
                         Mint Now
