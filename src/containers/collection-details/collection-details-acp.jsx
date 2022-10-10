@@ -39,17 +39,14 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                 handleModal={shareModalHandler}
             />
             <div className="rn-author-bg-area position-relative ptb--150">
-                <img src={data.bannerImageUrl} />
-                {data.bannerImageUrl && (
-                    <Image
-                        src={data.bannerImageUrl}
-                        alt={data.name}
-                        layout="fill"
-                        objectFit="cover"
-                        quality={100}
-                        priority
-                    />
-                )}
+                <Image
+                    src={data.bannerImageUrl}
+                    alt={data.name}
+                    layout="fill"
+                    objectFit="cover"
+                    quality={90}
+                    priority
+                />
             </div>
             <div
                 className={clsx(

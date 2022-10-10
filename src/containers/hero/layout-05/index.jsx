@@ -97,9 +97,9 @@ const HeroArea = ({ data }) => (
                         <div className="col-lg-6 col-md-6">
                             <div className="product-style-one">
                                 <div className="card-thumbnail">
-                                    <Anchor path={`/collections/docbond`}>
+                                    <Anchor path={`/collections/nightbreakerz`}>
                                         <Image
-                                            src="/images/token.png"
+                                            src="/images/nightbreakerz.png"
                                             alt={"NFT_portfolio"}
                                             width={533}
                                             height={533}
@@ -112,14 +112,14 @@ const HeroArea = ({ data }) => (
                                     </span>
                                     <ShareDropdown />
                                 </div>
-                                <Anchor path={`/collections/docbond`}>
+                                <Anchor path={`/collections/nightbreakerz`}>
                                     <span className="product-name">
-                                        Doc Bond
+                                        NIGHTBREAKERZ
                                     </span>
                                 </Anchor>
                                 <ProductBid price="150KDA" />
                                 <a
-                                    href="/collections/docbond"
+                                    href="/collections/nightbreakerz"
                                     className="viewbtn connectBtn btn btn-small btn-primary"
                                 >
                                     View
