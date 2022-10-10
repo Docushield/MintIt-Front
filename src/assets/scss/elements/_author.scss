@@ -134,7 +134,13 @@
 .blue-area {
     background-color: var(--color-primary-alta);
     border-radius: 6px;
-    padding: 5px;
+    padding: 5px 10px;
+    transition: all 0.3s ease;
+
+    &:hover {
+        background-color: var(--color-primary);
+        color: white;
+    }
 }
 
 // tool tip
