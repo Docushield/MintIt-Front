@@ -18,7 +18,7 @@ export async function getServerSideProps(context) {
     const pactGasPrice = 0.00000001;
     const apiHost = `${pactHost}/chainweb/0.0/${networkId}/chain/${chainId}/pact`;
     try {
-        const account = "k:431a0a02cdfd8eabb3b78789795818933f518c8de74c02666ec732457959b6a4" //cookies["userAccount"];
+        const account = cookies["userAccount"];
         let command = await Pact.api.prepareExecCmd(
             [],
             new Date().toISOString(),
