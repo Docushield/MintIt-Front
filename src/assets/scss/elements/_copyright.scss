@@ -142,14 +142,6 @@
                         width: 16px;
                         transition: 0.4s;
                     }
-                    
-                    &:hover {
-                        color: var(--color-white) !important;
-                        background: var(--color-primary) !important;
-                        svg {
-                            color: var(--color-white);
-                        }
-                    }
                 }
             }
         }
