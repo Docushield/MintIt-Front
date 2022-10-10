@@ -55,8 +55,8 @@ const MintConfirmDialog = () => {
     };
 
     //get price for nft token
-    const get_NFT_price = async (tokenName) => {
-        let pactCod = `(${CONTRACT_NAME}.get-mint-price "${tokenName}" "${account}")`;
+    const get_NFT_price = async (contractName, tokenName) => {
+        let pactCod = `(${contractName}.get-mint-price "${tokenName}" "${account}")`;
         const command = await prepareLocal(pactCod);
         const result = await executeLocal(command);
         return result;
@@ -153,7 +153,7 @@ const MintConfirmDialog = () => {
             } else {
                 //get mint token price
                 setMintStatus("Getting Token Price");
-                const mintPrice = await get_NFT_price(tokenName);
+                const mintPrice = await get_NFT_price(CONTRACT_NAME, tokenName);
                 console.log("mint :" + mintPrice);
                 setMintStatus("Minting NTF Token");
                 price = mintPrice;
@@ -217,13 +217,17 @@ const MintConfirmDialog = () => {
                 const deployedContract = process.env.NEXT_PUBLIC_CONTRACT;
                 userPubKey = account.slice(2);
 
+                const mintPrice = await get_NFT_price(
+                    deployedContract,
+                    tokenName
+                );
                 let caps = current["mint-royalties"].rates.map(
                     ({ description, stakeholder, rate }) =>
                         Pact.lang.mkCap(
                             "Coin Transfer",
                             `${description} fee`,
                             "coin.TRANSFER",
-                            [account, stakeholder, current["mint-price"] * rate]
+                            [account, stakeholder, mintPrice * rate]
                         )
                 );
 
