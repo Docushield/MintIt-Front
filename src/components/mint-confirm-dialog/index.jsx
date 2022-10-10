@@ -48,32 +48,32 @@ const MintConfirmDialog = () => {
     };
     //get price for nft token
     const get_NFT_WL_price = async (tokenName) => {
-        let pactCod = `(${CONTRACT_NAME}.get-mint-price-wl "${tokenName}")`;
-        const command = await prepareLocal(pactCod);
+        let pactCode = `(${CONTRACT_NAME}.get-mint-price-wl "${tokenName}")`;
+        const command = await prepareLocal(pactCode);
         const result = await executeLocal(command);
         return result;
     };
 
     //get price for nft token
-    const get_NFT_price = async (tokenName) => {
-        let pactCod = `(${CONTRACT_NAME}.get-mint-price "${tokenName}" "${account}")`;
-        const command = await prepareLocal(pactCod);
+    const get_NFT_price = async (contractName, tokenName) => {
+        let pactCode = `(${contractName}.get-mint-price "${tokenName}" "${account}")`;
+        const command = await prepareLocal(pactCode);
         const result = await executeLocal(command);
         return result;
     };
 
     //checks if account is Active and White Listed
     const check_WLA_Account = async (tokenName) => {
-        let pactCod = `(${CONTRACT_NAME}.is-active-wl-account "${tokenName}" "${account}")`;
-        const command = await prepareLocal(pactCod);
+        let pactCode = `(${CONTRACT_NAME}.is-active-wl-account "${tokenName}" "${account}")`;
+        const command = await prepareLocal(pactCode);
         const result = await executeLocal(command);
         return result;
     };
 
     //checks if account is able for Token sale may be
     const check_WL_Sale = async (tokenName) => {
-        let pactCod = `(${CONTRACT_NAME}.is-wl-sale "${tokenName}")`;
-        const command = await prepareLocal(pactCod);
+        let pactCode = `(${CONTRACT_NAME}.is-wl-sale "${tokenName}")`;
+        const command = await prepareLocal(pactCode);
         const result = await executeLocal(command);
         return result;
     };
@@ -153,7 +153,7 @@ const MintConfirmDialog = () => {
             } else {
                 //get mint token price
                 setMintStatus("Getting Token Price");
-                const mintPrice = await get_NFT_price(tokenName);
+                const mintPrice = await get_NFT_price(CONTRACT_NAME, tokenName);
                 console.log("mint :" + mintPrice);
                 setMintStatus("Minting NTF Token");
                 price = mintPrice;
@@ -217,13 +217,17 @@ const MintConfirmDialog = () => {
                 const deployedContract = process.env.NEXT_PUBLIC_CONTRACT;
                 userPubKey = account.slice(2);
 
+                const mintPrice = await get_NFT_price(
+                    deployedContract,
+                    tokenName
+                );
                 let caps = current["mint-royalties"].rates.map(
                     ({ description, stakeholder, rate }) =>
                         Pact.lang.mkCap(
                             "Coin Transfer",
                             `${description} fee`,
                             "coin.TRANSFER",
-                            [account, stakeholder, current["mint-price"] * rate]
+                            [account, stakeholder, mintPrice * rate]
                         )
                 );
 
