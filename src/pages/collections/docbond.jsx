@@ -3,7 +3,7 @@ import Wrapper from "@layout/wrapper";
 import Header from "@layout/header/header-01";
 import Footer from "@layout/footer/footer-01";
 import Breadcrumb from "@components/breadcrumb";
-import CollectionDetailsIntroArea from "@containers/collection-details/collection-details-3";
+import CollectionDetailsIntroArea from "@containers/collection-details/collection-details-docbond";
 
 export async function getStaticProps() {
     return { props: { className: "template-color-1" } };
@@ -13,7 +13,8 @@ export const docbondCollection = {
     id: "60ad94a1-176f-4f01-a4aa-7b1e14031b27",
     creator:
         "k:4159aa0d1f1e6c119c532d9286746274c3cc46dadd50ffc486a38de502ad6855",
-    description: "The $DOC Bond collection has a supply of 1000 and is an innovative way to support the Docushield team and token stability, get the $DOC token at the initial IDO price as well as earn passive income at the same time.",
+    description:
+        "The $DOC Bond collection has a supply of 1000 and is an innovative way to support the Docushield team and token stability, get the $DOC token at the initial IDO price as well as earn passive income at the same time.",
     name: "Doc Bond",
     type: "public",
     "provenance-hash": "e8c7f1b927702f287e8bafe95e81feb1ak0efO02rca",
@@ -83,9 +84,10 @@ export const docbondCollection = {
     },
     status: "success",
     statusMessage: "true",
-    imageUrl: "/images/token.png",
+    imageUrl: "/images/acp.png",
     bannerImageUrl: "/images/banner/docbond_banner.png",
     slug: "docbond",
+    logoUrl: "/images/token.png",
     numMinted: 3,
     updatedAt: "2022-10-09T17:44:03.393Z",
 };
@@ -95,7 +97,11 @@ const DocBond = () => (
         <SEO pageTitle="Doc Bond" />
         <Header />
         <main id="main-content">
-            <Breadcrumb pageTitle="Collection Details" pageTitle1="" currentPage="Collection Details" />
+            <Breadcrumb
+                pageTitle="Collection Details"
+                pageTitle1=""
+                currentPage="Collection Details"
+            />
             <CollectionDetailsIntroArea data={docbondCollection} />
         </main>
         <Footer />

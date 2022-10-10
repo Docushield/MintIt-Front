@@ -41,7 +41,6 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                 handleModal={shareModalHandler}
             />
             <div className="rn-author-bg-area position-relative ptb--150">
-                <img src={data.bannerImageUrl} />
                 {data.bannerImageUrl && (
                     <Image
                         src={data.bannerImageUrl}
@@ -59,9 +58,10 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                     space === 1 && "mb--30 mt_dec--120",
                     className
                 )}
+                style={{ marginTop: "-80px", overflow: "hidden" }}
             >
                 <div className="container">
-                    <div className="row padding-tb-50 align-items-center d-flex">
+                    <div className="row padding-tb-50 d-flex">
                         <div className="col-lg-3">
                             <div className="author-wrapper">
                                 <div className="author-inner">
@@ -98,17 +98,17 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                             </div>
                                         </div>
                                         <Button
-                                            path={`/collections/${data.slug}/provenance-hash`}
+                                            onClick={onMint}
                                             className="mt--15"
                                         >
-                                            View Provenance
+                                            Mint Now
                                         </Button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div className="col-lg-9">
-                            <div className="row mb-5 col_textbox d-flex align-items-center">
+                            <div className="row mb-5 col_textbox d-flex">
                                 <div className="col-md-6 col-lg-6">
                                     <p>{data.description}</p>
                                 </div>
@@ -128,7 +128,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                         </div>
                                         <div className="col-md-6">
                                             <div className="status-box">
-                                                <div>Supply</div>
+                                                <div>Total</div>
                                                 <div>{data.size}</div>
                                             </div>
                                         </div>
@@ -191,8 +191,11 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                     Remaining: {data.size - data.numMinted}
                 </div>
                 {data.status === "success" && (
-                    <Button className="ms-4" onClick={onMint}>
-                        Mint Now
+                    <Button
+                        className="ms-4"
+                        path={`/collections/${data.slug}/provenance-hash`}
+                    >
+                        View Provenance
                     </Button>
                 )}
             </div>

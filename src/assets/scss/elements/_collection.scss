@@ -129,6 +129,7 @@
         .collection-big-thumbnail {
             overflow: hidden;
             border-radius: 5px;
+            max-height: 202px;
             img,
             video {
                 border-radius: 5px;
