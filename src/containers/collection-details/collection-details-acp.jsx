@@ -44,7 +44,7 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                     alt={data.name}
                     layout="fill"
                     objectFit="cover"
-                    quality={100}
+                    quality={90}
                     priority
                 />
             </div>
