@@ -33,7 +33,7 @@ export async function getServerSideProps(context) {
             props: {
                 collections: response.collections,
                 tokens: response.nfts,
-                account:account,
+                account: account,
                 className: "template-color-1",
             },
         };
@@ -57,7 +57,7 @@ const Author = ({ collections, tokens, account }) => (
             <AuthorIntroArea data={authorData} account={account} />
             {collections && (
                 <AuthorProfileArea
-                    data={{ products: tokens, collections:collections }}
+                    data={{ products: tokens, collections: collections }}
                 />
             )}
         </main>

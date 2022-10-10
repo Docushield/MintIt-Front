@@ -21,7 +21,7 @@ const Author = () => (
         <main id="main-content">
             <CollectionDetailsIntroArea collection={collection} />
             <AuthorProfileArea
-                data={{ products: productData, collection: collection }}
+                data={{ products: productData, collections: collection }}
             />
         </main>
         <Footer />

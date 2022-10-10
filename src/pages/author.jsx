@@ -38,7 +38,7 @@ const Author = ({ collections }) => (
             <AuthorIntroArea data={authorData} />
             {collections && (
                 <AuthorProfileArea
-                    data={{ products: productData, collections }}
+                    data={{ products: productData, collections: collections }}
                 />
             )}
         </main>

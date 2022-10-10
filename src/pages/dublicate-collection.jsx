@@ -18,11 +18,10 @@ const Author = () => (
         <SEO pageTitle="Author" />
         <Header />
         <main id="main-content">
-            <AuthorIntroArea
-                data={authorData}
-                account="K:asfddsafadsfsdafaasdfasd"
+            <AuthorIntroArea data={authorData} account="K:asfddsafadsfsdaf" />
+            <AuthorProfileArea
+                data={{ products: productData, collections: productData }}
             />
-            <AuthorProfileArea data={{ products: productData }} />
         </main>
         <Footer />
     </Wrapper>
