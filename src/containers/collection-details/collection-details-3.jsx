@@ -46,7 +46,7 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                         alt={data.name}
                         layout="fill"
                         objectFit="cover"
-                        quality={100}
+                        quality={90}
                         priority
                     />
                 )}
@@ -57,6 +57,7 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                     space === 1 && "mb--30 mt_dec--120",
                     className
                 )}
+                style={{marginTop:"-150px"}}
             >
                 <div className="container">
                     <div className="row padding-tb-50 align-items-center d-flex">
@@ -191,6 +192,15 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                         Mint Now
                     </Button>
                 )}
+            </div>
+
+            <div className="col-lg-3 col-md-6 col-12 m-auto mt-5 pt-5">
+                <Image
+                    src={data.imageUrl}
+                    alt={data.name}
+                    height={400}
+                    width={400}
+                />
             </div>
         </>
     );
