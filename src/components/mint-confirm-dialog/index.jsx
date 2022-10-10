@@ -110,7 +110,7 @@ const MintConfirmDialog = () => {
         let cmd = {};
         let userPubKey = "";
         if (
-            current.name == "Alpha Creator Pass" ||
+            current.name === "Alpha Creator Pass" ||
             current.name === "Doc Bond"
         ) {
             const DOC_ACCOUNT =
@@ -219,7 +219,7 @@ const MintConfirmDialog = () => {
 
                 const mintPrice = await get_NFT_price(
                     deployedContract,
-                    tokenName
+                    current.name
                 );
                 let caps = current["mint-royalties"].rates.map(
                     ({ description, stakeholder, rate }) =>
