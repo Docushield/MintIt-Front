@@ -292,7 +292,7 @@ const MintConfirmDialog = () => {
                 <p>
                     Transaction is pending, Request Key :{" "}
                     <a
-                        href={`https://explorer.chainweb.com/testnet/tx/${requestKeys[0]}`}
+                        href={`${process.env.explorerURL}/tx/${requestKeys[0]}`}
                         _target="blank"
                     >
                         {requestKeys[0]}
