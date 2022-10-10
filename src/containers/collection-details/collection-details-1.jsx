@@ -116,7 +116,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                         <div className="col-12">
                                             <div className="status-box">
                                                 <div>Creator</div>
-                                                <div>{data.creator.slice(0,17) + "....." + data.creator.slice(-15)}</div>
+                                                <div>{data.creator.slice(0, 17) + "....." + data.creator.slice(-15)}</div>
                                             </div>
                                         </div>
                                         <div className="col-md-6">
@@ -150,7 +150,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                                 <div>Mint Starts</div>
                                                 <div>
                                                     {formatDate(
-                                                        data["mint-starts"],"MMMM Do, h:mm:ss A"
+                                                        data["mint-starts"], "MMMM Do, h:mm:ss A"
                                                     )}
                                                 </div>
                                             </div>
@@ -160,7 +160,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                                 <div>Premint Ends</div>
                                                 <div>
                                                     {formatDate(
-                                                        data["premint-ends"],"MMMM Do, h:mm:ss A"
+                                                        data["premint-ends"], "MMMM Do, h:mm:ss A"
                                                     )}
                                                 </div>
                                             </div>
@@ -194,7 +194,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                 >
                                     <Product
                                         overlay
-                                        title={prod.name||prod["marmalade-token-id"]}
+                                        title={prod.name || prod.id}
                                         slug={data.slug}
                                         hash={prod.hash}
                                         image={{
