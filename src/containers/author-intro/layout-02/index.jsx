@@ -20,7 +20,7 @@ const AuthorIntroArea = ({ className, space, data }) => {
             />
             <div className="rn-author-bg-area position-relative ptb--150">
                 <Image
-                    src="/images/banner/profile.png"
+                    src="/images/banner/general.png"
                     alt="profile banner"
                     layout="fill"
                     objectFit="cover"
@@ -75,8 +75,12 @@ const AuthorIntroArea = ({ className, space, data }) => {
                                         {/* <div className="mt-4 blue-area">
                                             {data.address}
                                         </div> */}
-                                        <div className="mt-4 blue-area">
-                                            <WalletAddress address={data} />
+                                        <div className="mt-4 blue-area col-lg-12 col-md-6 col-12 m-auto">
+                                            <WalletAddress
+                                                address={data}
+                                                length={17}
+                                                lastLength={15}
+                                            />
                                         </div>
                                         {/* <div className="follow-area">
                                             <div className="follow followers">
