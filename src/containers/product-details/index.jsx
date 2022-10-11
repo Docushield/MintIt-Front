@@ -48,9 +48,11 @@ const ProductDetailsArea = ({ space, className, product, slug }) => (
                                 path="/profile"
                             >
                                 <WalletAddress
-                                    address={product.creator || product.owner}
-                                    length="15"
-                                    lastLength="15"
+                                    address={
+                                        product.owner.address || product.creator
+                                    }
+                                    length={17}
+                                    lastLength={15}
                                 />
                             </Button>
                         </h6>
