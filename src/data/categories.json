@@ -11,7 +11,13 @@
             "currency": " KDA"
         },
         "likeCount": 322,
-        "categories": ["music", "video"],
+        "categories": [
+            "music",
+            "video"
+        ],
+        "contentUri": {
+            "data": ""
+        },
         "images": [
             {
                 "src": "/images/portfolio/lg/portfolio-01.jpg"
@@ -284,7 +290,7 @@
                 }
             }
         },
-        "specs": {
+        "spec": {
             "creator": "k:aalskjdflakjdsflkj",
             "creator_royalties": "5%",
             "mintit_royalties": "2.5%",
@@ -307,7 +313,13 @@
             "currency": " KDA"
         },
         "likeCount": 322,
-        "categories": ["art", "video"],
+        "categories": [
+            "art",
+            "video"
+        ],
+        "contentUri": {
+            "data": ""
+        },
         "images": [
             {
                 "src": "/images/portfolio/lg/1.jpg"
@@ -580,7 +592,7 @@
                 }
             }
         },
-        "specs": {
+        "spec": {
             "creator": "k:aalskjdflakjdsflkj",
             "creator_royalties": "5%",
             "mintit_royalties": "2.5%",
@@ -603,7 +615,13 @@
             "currency": " KDA"
         },
         "likeCount": 12,
-        "categories": ["music", "lowest"],
+        "categories": [
+            "music",
+            "lowest"
+        ],
+        "contentUri": {
+            "data": ""
+        },
         "images": [
             {
                 "src": "/images/portfolio/lg/2.jpg"
@@ -876,7 +894,7 @@
                 }
             }
         },
-        "specs": {
+        "spec": {
             "creator": "k:aalskjdflakjdsflkj",
             "creator_royalties": "5%",
             "mintit_royalties": "2.5%",
@@ -899,7 +917,13 @@
             "currency": " KDA"
         },
         "likeCount": 20,
-        "categories": ["video", "highest"],
+        "categories": [
+            "video",
+            "highest"
+        ],
+        "contentUri": {
+            "data": ""
+        },
         "images": [
             {
                 "src": "/images/portfolio/lg/7.jpg"
@@ -1172,7 +1196,7 @@
                 }
             }
         },
-        "specs": {
+        "spec": {
             "creator": "k:aalskjdflakjdsflkj",
             "creator_royalties": "5%",
             "mintit_royalties": "2.5%",
@@ -1195,7 +1219,13 @@
             "currency": " KDA"
         },
         "likeCount": 205,
-        "categories": ["collectionable", "art"],
+        "categories": [
+            "collectionable",
+            "art"
+        ],
+        "contentUri": {
+            "data": ""
+        },
         "images": [
             {
                 "src": "/images/portfolio/lg/11.jpg"
@@ -1468,7 +1498,7 @@
                 }
             }
         },
-        "specs": {
+        "spec": {
             "creator": "k:aalskjdflakjdsflkj",
             "creator_royalties": "5%",
             "mintit_royalties": "2.5%",
@@ -1491,7 +1521,13 @@
             "currency": " KDA"
         },
         "likeCount": 205,
-        "categories": ["highest", "music"],
+        "categories": [
+            "highest",
+            "music"
+        ],
+        "contentUri": {
+            "data": ""
+        },
         "images": [
             {
                 "src": "/images/portfolio/lg/portfolio-02.jpg"
@@ -1764,7 +1800,7 @@
                 }
             }
         },
-        "specs": {
+        "spec": {
             "creator": "k:aalskjdflakjdsflkj",
             "creator_royalties": "5%",
             "mintit_royalties": "2.5%",
@@ -1787,7 +1823,13 @@
             "currency": " KDA"
         },
         "likeCount": 322,
-        "categories": ["lowest", "art"],
+        "categories": [
+            "lowest",
+            "art"
+        ],
+        "contentUri": {
+            "data": ""
+        },
         "images": [
             {
                 "src": "/images/portfolio/lg/4.jpg"
@@ -2059,7 +2101,7 @@
                 }
             }
         },
-        "specs": {
+        "spec": {
             "creator": "k:aalskjdflakjdsflkj",
             "creator_royalties": "5%",
             "mintit_royalties": "2.5%",
@@ -2082,7 +2124,13 @@
             "currency": " KDA"
         },
         "likeCount": 420,
-        "categories": ["collectionable", "video"],
+        "categories": [
+            "collectionable",
+            "video"
+        ],
+        "contentUri": {
+            "data": ""
+        },
         "images": [
             {
                 "src": "/images/portfolio/lg/7.jpg"
@@ -2354,7 +2402,7 @@
                 }
             }
         },
-        "specs": {
+        "spec": {
             "creator": "k:aalskjdflakjdsflkj",
             "creator_royalties": "5%",
             "mintit_royalties": "2.5%",
@@ -2377,7 +2425,13 @@
             "currency": " KDA"
         },
         "likeCount": 20,
-        "categories": ["music", "video"],
+        "categories": [
+            "music",
+            "video"
+        ],
+        "contentUri": {
+            "data": ""
+        },
         "images": [
             {
                 "src": "/images/portfolio/lg/9.jpg"
@@ -2649,7 +2703,7 @@
                 }
             }
         },
-        "specs": {
+        "spec": {
             "creator": "k:aalskjdflakjdsflkj",
             "creator_royalties": "5%",
             "mintit_royalties": "2.5%",
@@ -2672,7 +2726,13 @@
             "currency": " KDA"
         },
         "likeCount": 205,
-        "categories": ["highest", "collectionable"],
+        "categories": [
+            "highest",
+            "collectionable"
+        ],
+        "contentUri": {
+            "data": ""
+        },
         "images": [
             {
                 "src": "/images/portfolio/lg/5.jpg"
@@ -2944,7 +3004,7 @@
                 }
             }
         },
-        "specs": {
+        "spec": {
             "creator": "k:aalskjdflakjdsflkj",
             "creator_royalties": "5%",
             "mintit_royalties": "2.5%",
@@ -2967,7 +3027,13 @@
             "currency": " KDA"
         },
         "likeCount": 502,
-        "categories": ["lowest", "art"],
+        "categories": [
+            "lowest",
+            "art"
+        ],
+        "contentUri": {
+            "data": ""
+        },
         "images": [
             {
                 "src": "/images/portfolio/lg/6.jpg"
@@ -3239,7 +3305,7 @@
                 }
             }
         },
-        "specs": {
+        "spec": {
             "creator": "k:aalskjdflakjdsflkj",
             "creator_royalties": "5%",
             "mintit_royalties": "2.5%",
@@ -3262,7 +3328,13 @@
             "currency": " KDA"
         },
         "likeCount": 308,
-        "categories": ["music", "video"],
+        "categories": [
+            "music",
+            "video"
+        ],
+        "contentUri": {
+            "data": ""
+        },
         "images": [
             {
                 "src": "/images/portfolio/lg/8.jpg"
@@ -3534,7 +3606,7 @@
                 }
             }
         },
-        "specs": {
+        "spec": {
             "creator": "k:aalskjdflakjdsflkj",
             "creator_royalties": "5%",
             "mintit_royalties": "2.5%",
@@ -3557,7 +3629,13 @@
             "currency": " KDA"
         },
         "likeCount": 500,
-        "categories": ["music", "highest"],
+        "categories": [
+            "music",
+            "highest"
+        ],
+        "contentUri": {
+            "data": ""
+        },
         "images": [
             {
                 "src": "/images/portfolio/lg/10.jpg"
@@ -3829,7 +3907,7 @@
                 }
             }
         },
-        "specs": {
+        "spec": {
             "creator": "k:aalskjdflakjdsflkj",
             "creator_royalties": "5%",
             "mintit_royalties": "2.5%",
@@ -3852,7 +3930,13 @@
             "currency": " KDA"
         },
         "likeCount": 542,
-        "categories": ["collectionable", "music"],
+        "categories": [
+            "collectionable",
+            "music"
+        ],
+        "contentUri": {
+            "data": ""
+        },
         "images": [
             {
                 "src": "/images/portfolio/lg/9.jpg"
@@ -4124,7 +4208,7 @@
                 }
             }
         },
-        "specs": {
+        "spec": {
             "creator": "k:aalskjdflakjdsflkj",
             "creator_royalties": "5%",
             "mintit_royalties": "2.5%",
@@ -4147,7 +4231,13 @@
             "currency": " KDA"
         },
         "likeCount": 345,
-        "categories": ["art", "video"],
+        "categories": [
+            "art",
+            "video"
+        ],
+        "contentUri": {
+            "data": ""
+        },
         "images": [
             {
                 "src": "/images/portfolio/lg/8.jpg"
@@ -4419,7 +4509,7 @@
                 }
             }
         },
-        "specs": {
+        "spec": {
             "creator": "k:aalskjdflakjdsflkj",
             "creator_royalties": "5%",
             "mintit_royalties": "2.5%",

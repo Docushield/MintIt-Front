@@ -20,8 +20,8 @@ const AuthorIntroArea = ({ className, space, data }) => {
             />
             <div className="rn-author-bg-area position-relative ptb--150">
                 <Image
-                    src="/images/bg/bg-image-9.jpg"
-                    alt="Slider BG"
+                    src="/images/banner/profile.png"
+                    alt="profile banner"
                     layout="fill"
                     objectFit="cover"
                     quality={100}
@@ -40,23 +40,21 @@ const AuthorIntroArea = ({ className, space, data }) => {
                         <div className="col-lg-3">
                             <div className="author-wrapper">
                                 <div className="author-inner">
-                                    {data?.image?.src && (
-                                        <div className="user-thumbnail">
-                                            <Image
-                                                src={data.image.src}
-                                                alt={
-                                                    data.image?.alt || data.name
-                                                }
-                                                width={140}
-                                                height={140}
-                                                layout="fixed"
-                                            />
-                                        </div>
-                                    )}
+                                    {/* {data.image?.src && ( */}
+                                    <div className="user-thumbnail">
+                                        <Image
+                                            src={"/images/profile/user.png"}
+                                            alt={data.image?.alt || data.name}
+                                            width={140}
+                                            height={140}
+                                            layout="fixed"
+                                        />
+                                    </div>
+                                    {/* )} */}
 
                                     <div className="rn-author-info-content">
-                                        <h4 className="title">Name</h4>
-                                        <div className="d-flex align-items-center">
+                                        {/* <h4 className="title">Name</h4>
+                                         <div className="d-flex align-items-center">
                                             <a
                                                 href="https://twitter.com"
                                                 target="_blank"
@@ -73,14 +71,12 @@ const AuthorIntroArea = ({ className, space, data }) => {
                                                     <ShareDropdown />
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> */}
                                         {/* <div className="mt-4 blue-area">
                                             {data.address}
                                         </div> */}
                                         <div className="mt-4 blue-area">
-                                            <WalletAddress
-                                                address={data.address}
-                                            />
+                                            <WalletAddress address={data} />
                                         </div>
                                         {/* <div className="follow-area">
                                             <div className="follow followers">
@@ -138,7 +134,7 @@ const AuthorIntroArea = ({ className, space, data }) => {
                             </div>
                         </div>
                         <div className="col-lg-6">
-                            <p>{data.description}</p>
+                            {/* <p>{data.description}</p> */}
                         </div>
                     </div>
                 </div>
@@ -150,13 +146,7 @@ const AuthorIntroArea = ({ className, space, data }) => {
 AuthorIntroArea.propTypes = {
     className: PropTypes.string,
     space: PropTypes.oneOf([1]),
-    data: PropTypes.shape({
-        name: PropTypes.string,
-        twitter: PropTypes.string,
-        followers: PropTypes.string,
-        following: PropTypes.string,
-        image: ImageType,
-    }),
+    data: PropTypes.string,
 };
 AuthorIntroArea.defaultProps = {
     space: 1,

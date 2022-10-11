@@ -6,7 +6,7 @@ import TabPane from "react-bootstrap/TabPane";
 import Nav from "react-bootstrap/Nav";
 import { ImageType } from "@utils/types";
 
-const GalleryTab = ({ images }) => (
+const GalleryTab = ({ url }) => (
     <div className="product-tab-wrapper">
         <TabContainer defaultActiveKey="nav-0">
             <div className="pd-tab-inner">
@@ -29,18 +29,18 @@ const GalleryTab = ({ images }) => (
                     ))}
                 </Nav> */}
                 <TabContent className="rn-pd-content">
-                    {images?.map((image, index) => (
-                        <TabPane key={image.src} eventKey={`nav-${index}`}>
+                    {/* {images?.map((image, index) => (
+                        <TabPane key={image.src} eventKey={`nav-${index}`}> */}
                             <div className="rn-pd-thumbnail">
                                 <Image
-                                    src={image.src}
-                                    alt={image?.alt || "Product"}
+                                    src={url}
+                                    alt={"Product"}
                                     width={800}
                                     height={800}
                                 />
                             </div>
-                        </TabPane>
-                    ))}
+                        {/* </TabPane>
+                    ))} */}
                 </TabContent>
             </div>
         </TabContainer>

@@ -13,8 +13,10 @@ import {
     toggleMintConfirmDialog,
 } from "src/store/collection.module";
 import { toggleConnectWalletDialog } from "src/store/wallet.module";
+import WalletAddress from "@components/wallet-address";
 
 const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
+    console.log(data);
     const dispatch = useDispatch();
     const connected = useSelector((state) => state.wallet.connected);
     const [isShareModalOpen, setIsShareModalOpen] = useState(false);
@@ -39,7 +41,6 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                 handleModal={shareModalHandler}
             />
             <div className="rn-author-bg-area position-relative ptb--150">
-                <img src={data.bannerImageUrl} />
                 {data.bannerImageUrl && (
                     <Image
                         src={data.bannerImageUrl}
@@ -57,10 +58,11 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                     space === 1 && "mb--30 mt_dec--120",
                     className
                 )}
+                style={{ marginTop: "-80px", overflow: "hidden" }}
             >
                 <div className="container">
-                    <div className="row padding-tb-50 align-items-center d-flex">
-                        <div className="col-lg-3">
+                    <div className="row padding-tb-50 d-flex">
+                        <div className="col-lg-6">
                             <div className="author-wrapper">
                                 <div className="author-inner">
                                     {data.imageUrl && (
@@ -76,86 +78,112 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                     )}
 
                                     <div className="rn-author-info-content">
-                                        <h4 className="title">{data.name}</h4>
-                                        <div className="d-flex align-items-center">
-                                            <a
-                                                href="https://twitter.com"
-                                                target="_blank"
-                                                rel="noreferrer"
-                                                className="social-follw mb--0"
-                                            >
-                                                <i className="feather-twitter" />
-                                                <span className="user-name">
-                                                    {data.twitter}
-                                                </span>
-                                            </a>
-                                            <div className="author-button-area mt--0 ml--10">
-                                                <div className="count at-follw">
-                                                    <ShareDropdown />
+                                        <div className="row my-5">
+                                            <div className="col-10">
+                                                <h4 className="title">
+                                                    {data.name}
+                                                </h4>
+                                            </div>
+                                            <div className="col-2">
+                                                <div className="d-flex align-items-center">
+                                                    <a
+                                                        href="https://twitter.com"
+                                                        target="_blank"
+                                                        rel="noreferrer"
+                                                        className="social-follw mb--0"
+                                                    >
+                                                        <i className="feather-twitter" />
+                                                        <span className="user-name">
+                                                            {data.twitter}
+                                                        </span>
+                                                    </a>
+                                                    <div className="author-button-area mt--0 ml--10">
+                                                        <div className="count at-follw">
+                                                            <ShareDropdown />
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <Button
-                                            path={`/collections/${data.slug}/provenance-hash`}
+                                            onClick={onMint}
                                             className="mt--15"
                                         >
-                                            View Provenance
+                                            Mint Now
                                         </Button>
                                     </div>
                                 </div>
                             </div>
+                            <p
+                                style={{
+                                    textAlign: "justify",
+                                    paddingTop: "50px",
+                                }}
+                            >
+                                {data.description}
+                            </p>
                         </div>
-                        <div className="col-lg-9">
+                        <div
+                            className="col-lg-5 offset-lg-1"
+                            style={{ marginTop: "-100px" }}
+                        >
                             <div className="row mb-5 col_textbox d-flex align-items-center">
-                                <div className="col-md-6 col-lg-6">
-                                    <p>{data.description}</p>
-                                </div>
-                                <div className="col-md-6 col-lg-6">
-                                    <div className="row">
-                                        <div className="col-md-6">
-                                            <div className="status-box">
-                                                <div>Creator</div>
-                                                <div>{data.creator}</div>
+                                <div className="row">
+                                    <div className="col-12">
+                                        <div className="status-box address">
+                                            <div>Creator</div>
+                                            <div>
+                                                <WalletAddress
+                                                    address={data.creator}
+                                                    length={17}
+                                                    lastLength={15}
+                                                />
                                             </div>
                                         </div>
-                                        <div className="col-md-6">
-                                            <div className="status-box">
-                                                <div>Total</div>
-                                                <div>{data.size}</div>
+                                    </div>
+                                    <div className="col-md-6">
+                                        <div className="status-box">
+                                            <div>Supply</div>
+                                            <div>{data.size}</div>
+                                        </div>
+                                    </div>
+                                    <div className="col-md-6">
+                                        <div className="status-box">
+                                            <div>Price</div>
+                                            <div>{data["mint-price"]} KDA</div>
+                                        </div>
+                                    </div>
+                                    <div className="col-md-6">
+                                        <div className="status-box">
+                                            <div>Type</div>
+                                            <div>{data.type}</div>
+                                        </div>
+                                    </div>
+                                    <div className="col-md-6">
+                                        <div className="status-box">
+                                            <div>Reveals at </div>
+                                            <div>Instant</div>
+                                        </div>
+                                    </div>
+                                    <div className="col-12">
+                                        <div className="status-box">
+                                            <div>Mint Starts</div>
+                                            <div>
+                                                {formatDate(
+                                                    data["mint-starts"],
+                                                    "MMMM Do, h:mm:ss A"
+                                                )}
                                             </div>
                                         </div>
-                                        <div className="col-md-6">
-                                            <div className="status-box">
-                                                <div>Price</div>
-                                                <div>
-                                                    {data["mint-price"]} $KDA
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-6">
-                                            <div className="status-box">
-                                                <div>Type</div>
-                                                <div>{data.type}</div>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-6">
-                                            <div className="status-box">
-                                                <div>Start</div>
-                                                <div>
-                                                    {formatDate(
-                                                        data["mint-starts"]
-                                                    )}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-6">
-                                            <div className="status-box">
-                                                <div>End</div>
-                                                <div>
-                                                    {formatDate(
-                                                        data["premint-ends"]
-                                                    )}
-                                                </div>
+                                    </div>
+                                    <div className="col-12">
+                                        <div className="status-box">
+                                            <div>Premint Ends</div>
+                                            <div>
+                                                {formatDate(
+                                                    data["premint-ends"],
+                                                    "MMMM Do, h:mm:ss A"
+                                                )}
                                             </div>
                                         </div>
                                     </div>
@@ -165,18 +193,26 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                     </div>
                 </div>
             </div>
-
             <div className="container d-flex my-4 align-items-center">
-                <div className="mint-status-box">Public Round</div>
-                <div className="mint-status-box">Mint: 20 KDA</div>
-                <div className="mint-status-box">Remaining: 1029</div>
-                <Button className="ms-4" onClick={onMint}>
-                    Mint Now
-                </Button>
+                <div className="mint-status-box">{data.type} Round</div>
+                <div className="mint-status-box">
+                    Mint: {data["mint-price"]} KDA
+                </div>
+                <div className="mint-status-box">
+                    Remaining: {data.size - data.numMinted}
+                </div>
+                {data.status === "success" && (
+                    <Button
+                        className="ms-4"
+                        path={`/collections/${data.slug}/provenance-hash`}
+                    >
+                        View Provenance
+                    </Button>
+                )}
             </div>
             <div className="container my-4">
                 <div className="row">
-                    {tokens.length > 0 ? (
+                    {tokens?.length > 0 ? (
                         <>
                             {tokens.map((prod) => (
                                 <div
@@ -185,8 +221,9 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                 >
                                     <Product
                                         overlay
-                                        title={data.name}
+                                        title={prod.name || prod.id}
                                         slug={data.slug}
+                                        hash={prod.hash}
                                         image={{
                                             src: "/images/collection/placeholder.png",
                                         }}

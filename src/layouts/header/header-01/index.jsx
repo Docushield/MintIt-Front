@@ -17,7 +17,11 @@ import Button from "@ui/button";
 import { useOffcanvas, useSticky, useFlyoutSearch } from "@hooks";
 import { parseCookies, setCookie } from "nookies";
 import headerData from "../../../data/general/header-01.json";
+
+{/* to hide menu bar */ }
 import menuData from "../../../data/general/menu-01.json";
+
+// const menuData = []
 import {
     setConnected,
     toggleConnectWalletDialog,
@@ -77,7 +81,7 @@ const Header = ({ className }) => {
                             </div>
                         </div>
                         <div className="header-right">
-                            <div className="setting-option d-none d-lg-block">
+                            {/* <div className="setting-option d-none d-lg-block">
                                 <SearchForm />
                             </div>
                             <div className="setting-option rn-icon-list d-block d-lg-none">
@@ -91,7 +95,7 @@ const Header = ({ className }) => {
                                     </button>
                                 </div>
                                 <FlyoutSearchForm isOpen={search} />
-                            </div>
+                            </div> */}
                             <div className="setting-option header-btn">
                                 <div className="icon-box">
                                     {!connected ? (

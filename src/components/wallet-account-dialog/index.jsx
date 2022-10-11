@@ -21,8 +21,8 @@ const WalletAccountDialog = ({ onChangeWallet }) => {
     };
 
     const kdaEnvironment = {
-        networkId: "testnet04",
-        chainId: "1",
+        networkId: process.env.NEXT_PUBLIC_NETWORK_ID,
+        chainId: process.env.NEXT_PUBLIC_CHAIN_ID,
     };
 
     const disconnectWallet = async () => {
@@ -34,35 +34,61 @@ const WalletAccountDialog = ({ onChangeWallet }) => {
         });
         destroyCookie(null, "userAccount");
         destroyCookie(null, "walletName");
+        destroyCookie(null, "token");
         handleClose();
     };
 
     const handleCopy = async () => {
         setIsCopied(true);
         navigator.clipboard.writeText(account);
+        setTimeout(() => {
+            setIsCopied(false);
+        }, 3000);
     };
 
     return (
-        <Modal show={show} onHide={handleClose} className="account-dialog">
-            <Modal.Header closeButton>
-                <Modal.Title>Account</Modal.Title>
-            </Modal.Header>
+        <Modal
+            show={show}
+            onHide={handleClose}
+            className="rn-popup-modal2 share-modal-wrapper"
+        >
             <Modal.Body>
-                <h5>Connected to {walletName}</h5>
-                <div className="account-address">
-                    <div>{account.slice(0, 30)}...</div>
-                    <Button variant="dark" onClick={handleCopy}>
-                        {isCopied ? "Copied" : "Copy"}
-                    </Button>
+                <h3 className="mb-5">Connected to {walletName}</h3>
+                <div className="mt-5 pt-4">
+                    <div className="row">
+                        <div className="col-9">
+                            <h5>
+                                {account.slice(0, 9) +
+                                    "...." +
+                                    account.slice(-7)}
+                            </h5>
+                            
+                        </div>
+                        <div className="col-3">
+                            <button style={{"border":"none","width":"40px"}} onClick={handleCopy}>
+                                <i style={{"font-size":"24px",}} className={isCopied ? "feather-check-circle" : "feather-copy"}></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div className="account-footer">
-                    <Button variant="dark" onClick={disconnectWallet}>
-                        Disconnect
-                    </Button>
-                    <Button variant="dark" onClick={onChangeWallet}>
-                        Change Wallet
-                    </Button>
-                </div>
+                <Modal.Footer>
+                    <div>
+                        <Button
+                            size="medium"
+                            className="mr--20 w-auto"
+                            onClick={disconnectWallet}
+                        >
+                            Disconnect
+                        </Button>
+                        <Button
+                            size="medium"
+                            className="w-auto"
+                            onClick={onChangeWallet}
+                        >
+                            Change Wallet
+                        </Button>
+                    </div>
+                </Modal.Footer>
             </Modal.Body>
         </Modal>
     );

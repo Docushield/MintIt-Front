@@ -1,4 +1,5 @@
 import Pact from "pact-lang-api";
+import { toast } from "react-toastify";
 
 export const signXWallet = async (
     cmd,
@@ -44,14 +45,15 @@ export const sign = async (provider, signingObject) => {
 
 export const connectXWallet = async () => {
     const kdaEnvironment = {
-        networkId: "testnet04",
-        chainId: "1",
+        networkId: process.env.NEXT_PUBLIC_NETWORK_ID,
+        chainId: process.env.NEXT_PUBLIC_CHAIN_ID,
     };
 
     const { networkId, chainId } = kdaEnvironment;
 
     if (!window.kadena || !window.kadena.isKadena) {
         console.log("No xwallet installed");
+        toast.error("x-wallet is not installed!");
         return;
     }
 
@@ -68,15 +70,18 @@ export const connectXWallet = async () => {
     });
 
     if (!xwalletResp) {
+        toast.error("x-wallet is not working properly!");
         throw new Error("Invalid xwallet response");
     }
 
     if (xwalletResp.chainId !== chainId) {
+        toast.error(
+            `Wrong chain ${xwalletResp.chainId}, please open chain ${chainId}`
+        );
         throw new Error(
             `Wrong chain ${xwalletResp.chainId}, please open chain ${chainId}`
         );
     }
-
     return xwalletResp;
 };
 

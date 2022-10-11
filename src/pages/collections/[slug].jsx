@@ -15,6 +15,7 @@ const CollectionDetails = ({ collection, slug, tokens }) => {
             <main id="main-content">
                 <Breadcrumb
                     pageTitle="Collection Details"
+                    pageTitle1=""
                     currentPage="Collection Details"
                 />
                 <CollectionDetailsIntroArea data={collection} tokens={tokens} />
@@ -27,7 +28,7 @@ const CollectionDetails = ({ collection, slug, tokens }) => {
 export async function getServerSideProps(context) {
     const cookies = parseCookies(context);
     const slug = context.params.slug;
-    const baseURL = process.env.API_URL || "https://the-backend.fly.dev";
+    const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
     try {
         const token = cookies["token"];

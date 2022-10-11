@@ -1,5 +1,6 @@
 export const apiPost = async (route, payload) => {
-    const baseURL = process.env.API_URL || "https://the-backend.fly.dev";
+    const baseURL =
+        process.env.NEXT_PUBLIC_API_URL || "https://the-backend.fly.dev";
     return fetch(`${baseURL}/api/${route}`, {
         method: "POST",
         headers: {

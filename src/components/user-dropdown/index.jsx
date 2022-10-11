@@ -11,7 +11,7 @@ const UserDropdown = () => {
         dispatch(setDisconnected());
         await window.kadena.request({
             method: "kda_disconnect",
-            networkId: "testnet04",
+            networkId: process.env.NEXT_PUBLIC_NETWORK_ID,
         });
         destroyCookie(null, "userAccount");
         destroyCookie(null, "walletName");
@@ -31,7 +31,8 @@ const UserDropdown = () => {
             <div className="rn-dropdown">
                 <div className="rn-inner-top">
                     <h4 className="title">
-                        <Anchor path="/profile">My Profile</Anchor>
+                        {/* <Anchor path="/profile">My Profile</Anchor> */}
+                        Account Settings
                     </h4>
                 </div>
                 {/* <div className="rn-product-inner">
@@ -88,7 +89,7 @@ const UserDropdown = () => {
                 </div> */}
                 <ul className="list-inner">
                     <li>
-                        <Anchor path="/manage-profile">Manage Profile</Anchor>
+                        <Anchor path="/profile">My Profile</Anchor>
                     </li>
                     {/* <li>
                         <Anchor path="/admanager">Ad Manager</Anchor>

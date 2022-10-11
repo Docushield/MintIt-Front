@@ -18,16 +18,17 @@ import { fetchAPI } from "@utils/fetchAPI";
 import homepageData from "../data/homepages/homepage.json";
 import sellerData from "../data/sellers.json";
 import productData from "../data/categories.json";
+import Mint from "@components/constant-collections";
 
 export async function getServerSideProps(context) {
     const cookies = parseCookies(context);
 
     const res = await fetchAPI("api/collections", cookies);
 
-    if (res.response.error) {
+    if (res.response.error || res.error) {
         return {
             props: {
-                error: res.error,
+                error: res.response.error || res.error,
                 className: "template-color-1 with-particles",
                 collections: [],
             },
@@ -44,17 +45,6 @@ export async function getServerSideProps(context) {
 
 const Home = ({ collections }) => {
     const content = normalizedData(homepageData?.content || []);
-    const liveAuctionData = productData
-        .filter(
-            (prod) =>
-                prod?.auction_date && new Date() <= new Date(prod?.auction_date)
-        )
-        .sort(
-            (a, b) =>
-                Number(new Date(b.published_at)) -
-                Number(new Date(a.published_at))
-        )
-        .slice(0, 2);
 
     return (
         <SSRProvider>
@@ -66,7 +56,6 @@ const Home = ({ collections }) => {
                     <HeroArea
                         data={{
                             ...content["hero-section"],
-                            products: liveAuctionData,
                         }}
                     />
                     {/* <TopSellerArea
@@ -78,17 +67,17 @@ const Home = ({ collections }) => {
                     <CollectionArea
                         data={{
                             ...content["collection-section"],
-                            collections: collections.slice(0, 4),
+                            collections: collections,
                         }}
                     />
                     <ServiceArea data={content["service-section"]} />
                     {/* <CreatorArea data={{ creators: creatorData }} /> */}
-                    <ExploreProductArea
+                    {/* <ExploreProductArea
                         data={{
                             ...content["explore-product-section"],
                             products: productData,
                         }}
-                    />
+                    /> */}
                 </main>
                 <Footer />
             </Wrapper>

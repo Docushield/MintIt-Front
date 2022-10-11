@@ -7,7 +7,7 @@ const TopSeller = ({ name, time, path, image, eth, isVarified }) => (
     <div className="top-seller-inner-one">
         <div className="top-seller-wrapper">
             {image?.src && (
-                <div className={clsx("thumbnail", isVarified && "varified")}>
+                <div className={clsx("thumbnail", isVarified && "varified")} style={{"marginRight":"20px;"}}>
                     <Anchor path={path}>
                         <Image
                             src={image.src}

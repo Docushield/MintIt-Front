@@ -17,24 +17,14 @@
         "title": "Browse",
         "menu": [
             {
-                "id": 1,
-                "text": "Explore NFTs",
-                "path": "/all-nfts"
-            },
-            {
                 "id": 2,
                 "text": "Minting Now",
                 "path": "/mint"
             },
             {
-                "id": 3,
-                "text": "Activity",
-                "path": "/stats"
-            },
-            {
                 "id": 7,
                 "text": "Collections",
-                "path": "/collections"
+                "path": "/collection"
             }
         ]
     },

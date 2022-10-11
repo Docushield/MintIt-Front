@@ -1,6 +1,11 @@
 import PropTypes from "prop-types";
 import Modal from "react-bootstrap/Modal";
 import Button from "@ui/button";
+import { toast } from "react-toastify";
+
+const handleSubmitReport = () => {
+    toast.success("Successfully reported the issue");
+};
 
 const ReportModal = ({ show, handleModal }) => (
     <Modal
@@ -20,7 +25,7 @@ const ReportModal = ({ show, handleModal }) => (
             </button>
         )}
         <Modal.Header className="report-modal-header">
-            <h5 className="modal-title">Why are you reporting?</h5>
+            <h5 className="modal-white-title">Why are you reporting?</h5>
         </Modal.Header>
         <Modal.Body>
             <p>
@@ -31,7 +36,14 @@ const ReportModal = ({ show, handleModal }) => (
                 <h6 className="title">Message</h6>
                 <textarea name="message" placeholder="Write issues" />
                 <div className="report-button">
-                    <Button size="medium" className="mr--10 w-auto">
+                    <Button
+                        size="medium"
+                        className="mr--10 w-auto"
+                        onClick={function () {
+                            handleSubmitReport();
+                            handleModal();
+                        }}
+                    >
                         Report
                     </Button>
                     <Button
