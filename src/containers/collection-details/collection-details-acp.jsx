@@ -109,7 +109,10 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                                 {data.description}
                             </p>
                         </div>
-                        <div className="col-lg-5 offset-lg-1">
+                        <div
+                            className="col-lg-5 offset-lg-1"
+                            style={{ marginTop: "-100px" }}
+                        >
                             <div className="row mb-5 col_textbox d-flex align-items-center">
                                 <div className="row">
                                     <div className="col-12">
@@ -126,7 +129,7 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                                     </div>
                                     <div className="col-md-6">
                                         <div className="status-box">
-                                            <div>Total</div>
+                                            <div>Supply</div>
                                             <div>{data.size}</div>
                                         </div>
                                     </div>
