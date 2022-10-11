@@ -227,7 +227,11 @@ const MintConfirmDialog = () => {
                             "Coin Transfer",
                             `${description} fee`,
                             "coin.TRANSFER",
-                            [account, stakeholder, mintPrice * rate]
+                            [
+                                account,
+                                stakeholder,
+                                parseFloat(mintPrice * rate).toPrecision(6),
+                            ]
                         )
                 );
 
