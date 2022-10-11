@@ -230,7 +230,7 @@ const MintConfirmDialog = () => {
                             [
                                 account,
                                 stakeholder,
-                                parseFloat(mintPrice * rate).toPrecision(6),
+                                parseFloat((mintPrice * rate).toPrecision(6)),
                             ]
                         )
                 );
