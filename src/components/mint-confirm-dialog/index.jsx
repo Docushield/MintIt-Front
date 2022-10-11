@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import Spinner from "react-bootstrap/Spinner";
 import Pact from "pact-lang-api";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +14,7 @@ const MintConfirmDialog = () => {
     const current = useSelector((state) => state.collection.current);
     const account = useSelector((state) => state.wallet.account);
     const [isMinting, setIsMinting] = useState(false);
+    const [pending, setPending] = useState(false);
     const [mintStatus, setMintStatus] = useState("");
     const CONTRACT_NAME = "free.doc-nft-mint";
     const pactChainId = process.env.NEXT_PUBLIC_CHAIN_ID;
@@ -296,6 +298,7 @@ const MintConfirmDialog = () => {
                     "Content-Type": "application/json",
                 },
             }).then((res) => res.json());
+            setPending(true);
             setMintStatus(
                 "Transaction is pending, Request Key : " + requestKeys[0]
             );
@@ -310,6 +313,7 @@ const MintConfirmDialog = () => {
                                 requestKeys[0]
                         );
                         // setIsMinting(false);
+                        setPending(false);
                     } else if (result[requestKeys[0]].result.error) {
                         clearInterval(interval);
                         toast.error(
@@ -322,6 +326,7 @@ const MintConfirmDialog = () => {
                                 " , Error : " +
                                 result[requestKeys[0]].result.error.message
                         );
+                        setPending(false);
                         // setIsMinting(false);
                     }
                 }
@@ -331,6 +336,7 @@ const MintConfirmDialog = () => {
             setMintStatus(
                 "Error occurred in minting a new token, Error: " + error
             );
+            setPending(false);
             // setIsMinting(false);
         }
     };
@@ -345,7 +351,13 @@ const MintConfirmDialog = () => {
                 <h3 className="mb-5">Mint Collections</h3>
                 {isMinting ? (
                     <div className="row text-center">
-                        <p>{mintStatus}</p>
+                        {pending ? (
+                            <Spinner animation="border" role="status">
+                                <span>{mintStatus}</span>
+                            </Spinner>
+                        ) : (
+                            <p>{mintStatus}</p>
+                        )}
                     </div>
                 ) : (
                     <div className="row">
