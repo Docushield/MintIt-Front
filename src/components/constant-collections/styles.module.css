@@ -1,22 +1,22 @@
 .mine {
     color: #fff;
-  }
-  .videoNFT {
+}
+.videoNFT {
     width: 100%;
-  }
-  
-  .cardWrapper {
+}
+
+.cardWrapper {
     position: relative;
     background-color: #ddd;
     color: #d5c497;
-  }
-  
-  .cardContent {
+}
+
+.cardContent {
     position: absolute;
     top: 0;
-  }
-  
-  .text1{
+}
+
+.text1 {
     text-transform: uppercase;
     color: #ededed;
     letter-spacing: 0em;
@@ -24,9 +24,9 @@
     font-family: YADW1-vpsoc-0;
     line-height: 5em;
     text-align: center;
-  }
-  
-  .text2{
+}
+
+.text2 {
     text-transform: uppercase;
     color: #ededed;
     text-align: center;
@@ -35,11 +35,11 @@
     font-weight: bold;
     font-family: YADW1-vpsoc-0;
     line-height: 2.5em;
-  }
-  .heading {
+}
+.heading {
     font-family: YADW1-vpsoc-0;
     font-weight: 700;
     font-size: 32px;
     text-align: center;
     letter-spacing: 5px;
-  }
+}

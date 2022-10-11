@@ -13,6 +13,8 @@ const Collection = ({
     path,
     live_date,
     minted,
+    logo,
+    isVideo,
 }) => {
     const [left, setLeft] = React.useState("");
 
@@ -32,7 +34,29 @@ const Collection = ({
     return (
         <Anchor path={path} className="rn-collection-inner-one">
             <div className="collection-wrapper">
-                {image && (
+                {logo &&
+                    (isVideo ? (
+                        <div className="collection-big-thumbnail">
+                            <video
+                                style={{ width: "100%" }}
+                                src={logo}
+                                autoPlay
+                                playsInline
+                                muted
+                                loop
+                            />
+                        </div>
+                    ) : (
+                        <div className="collection-big-thumbnail">
+                            <Image
+                                src={logo}
+                                alt={image?.alt || "Nft_Profile"}
+                                width={507}
+                                height={339}
+                            />
+                        </div>
+                    ))}
+                {!logo && image && (
                     <div className="collection-big-thumbnail">
                         <Image
                             src={image}
@@ -42,6 +66,7 @@ const Collection = ({
                         />
                     </div>
                 )}
+
                 {left && (!minted || total_item > minted) && (
                     <div className="collection-until-live">{left}</div>
                 )}

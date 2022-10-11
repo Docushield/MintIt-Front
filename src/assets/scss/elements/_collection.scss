@@ -129,7 +129,9 @@
         .collection-big-thumbnail {
             overflow: hidden;
             border-radius: 5px;
-            img {
+            max-height: 202px;
+            img,
+            video {
                 border-radius: 5px;
                 object-fit: cover;
                 width: 100%;
@@ -235,7 +237,8 @@
 
         &:hover {
             .collection-big-thumbnail {
-                img {
+                img,
+                video {
                     transform: scale(1.1);
                 }
             }

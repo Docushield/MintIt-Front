@@ -65,7 +65,7 @@ const HeroArea = ({ data }) => (
                                 <div className="card-thumbnail">
                                     <Anchor path={`/collections/acp`}>
                                         <video
-                                            style={{ width: "320px" }}
+                                            style={{ width: "100%" }}
                                             src="/videos/product.mp4"
                                             autoPlay
                                             playsInline
@@ -75,11 +75,15 @@ const HeroArea = ({ data }) => (
                                     </Anchor>
                                 </div>
                                 <div className="product-share-wrapper">
-                                    <span className="product-name">Collection Name</span>
+                                    <span className="product-name">
+                                        Collection Name
+                                    </span>
                                     <ShareDropdown />
                                 </div>
                                 <Anchor path={`/collections/acp`}>
-                                    <span className="product-name">Alpha Creator Pass</span>
+                                    <span className="product-name">
+                                        Alpha Creator Pass
+                                    </span>
                                 </Anchor>
                                 <ProductBid price="150KDA" />
                                 <a
@@ -93,7 +97,7 @@ const HeroArea = ({ data }) => (
                         <div className="col-lg-6 col-md-6">
                             <div className="product-style-one">
                                 <div className="card-thumbnail">
-                                    <Anchor path={`/collections/docbond`}>
+                                    <Anchor path={`/collections/nightbreakerz`}>
                                         <Image
                                             src="/images/nightbreakerz.png"
                                             alt={"NFT_portfolio"}
@@ -103,16 +107,19 @@ const HeroArea = ({ data }) => (
                                     </Anchor>
                                 </div>
                                 <div className="product-share-wrapper">
-                                    <span className="product-name">Collection Name</span>
+                                    <span className="product-name">
+                                        Collection Name
+                                    </span>
                                     <ShareDropdown />
                                 </div>
-                                <Anchor path={`/collections/docbond`}>
-
-                                    <span className="product-name">NIGHTBREAKERZ</span>
+                                <Anchor path={`/collections/nightbreakerz`}>
+                                    <span className="product-name">
+                                        NIGHTBREAKERZ
+                                    </span>
                                 </Anchor>
                                 <ProductBid price="150KDA" />
                                 <a
-                                    href="/collections/docbond"
+                                    href="/collections/nightbreakerz"
                                     className="viewbtn connectBtn btn btn-small btn-primary"
                                 >
                                     View

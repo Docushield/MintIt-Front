@@ -70,7 +70,6 @@ const Home = ({ collections }) => {
                             collections: collections,
                         }}
                     />
-                    <Mint />
                     <ServiceArea data={content["service-section"]} />
                     {/* <CreatorArea data={{ creators: creatorData }} /> */}
                     {/* <ExploreProductArea

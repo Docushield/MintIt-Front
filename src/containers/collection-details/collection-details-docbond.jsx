@@ -5,6 +5,7 @@ import Image from "next/image";
 import ShareDropdown from "@components/share-dropdown";
 import ShareModal from "@components/modals/share-modal";
 import Button from "@components/ui/button";
+import Product from "@components/product/layout-01";
 import { formatDate } from "@utils/date";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -40,14 +41,16 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                 handleModal={shareModalHandler}
             />
             <div className="rn-author-bg-area position-relative ptb--150">
-                <Image
-                    src={data.bannerImageUrl}
-                    alt={data.name}
-                    layout="fill"
-                    objectFit="cover"
-                    quality={90}
-                    priority
-                />
+                {data.bannerImageUrl && (
+                    <Image
+                        src={data.bannerImageUrl}
+                        alt={data.name}
+                        layout="fill"
+                        objectFit="cover"
+                        quality={90}
+                        priority
+                    />
+                )}
             </div>
             <div
                 className={clsx(
@@ -126,7 +129,7 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                                     </div>
                                     <div className="col-md-6">
                                         <div className="status-box">
-                                            <div>Total</div>
+                                            <div>Supply</div>
                                             <div>{data.size}</div>
                                         </div>
                                     </div>
@@ -176,8 +179,11 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                     </div>
                 </div>
             </div>
+
             <div className="container d-flex my-4 align-items-center">
-                <div className="mint-status-box">{data.type} Round</div>
+                <div className="mint-status-box" style={{ fontStyle: "c" }}>
+                    {data.type} Round
+                </div>
                 <div className="mint-status-box">
                     Mint: {data["mint-price"]} KDA
                 </div>
@@ -193,19 +199,12 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
 
             <div className="container">
                 <div className="row padding-tb-50 align-items-center d-flex">
-                    <div className="col-lg-6">
-                        {data.slug == "acp" && (
-                            <div style={{ width: "100%" }}>
-                                <video
-                                    style={{ width: "100%" }}
-                                    src="/videos/product.mp4"
-                                    autoPlay
-                                    playsInline
-                                    muted
-                                    loop
-                                />
-                            </div>
-                        )}
+                    <div className="col-lg-6 position-relative">
+                        <img
+                            src="/images/token.png"
+                            alt={data.name}
+                            width="100%"
+                        />
                     </div>
                 </div>
             </div>

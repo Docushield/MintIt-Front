@@ -20,8 +20,8 @@ const AuthorIntroArea = ({ className, space, data }) => {
             />
             <div className="rn-author-bg-area position-relative ptb--150">
                 <Image
-                    src="/images/bg/bg-image-9.jpg"
-                    alt="Slider BG"
+                    src="/images/banner/profile.png"
+                    alt="profile banner"
                     layout="fill"
                     objectFit="cover"
                     quality={100}
@@ -41,17 +41,15 @@ const AuthorIntroArea = ({ className, space, data }) => {
                             <div className="author-wrapper">
                                 <div className="author-inner">
                                     {/* {data.image?.src && ( */}
-                                        <div className="user-thumbnail">
-                                            <Image
-                                                src={"/images/bg/bg-image-1.jpg"}
-                                                alt={
-                                                    data.image?.alt || data.name
-                                                }
-                                                width={140}
-                                                height={140}
-                                                layout="fixed"
-                                            />
-                                        </div>
+                                    <div className="user-thumbnail">
+                                        <Image
+                                            src={"/images/profile/user.png"}
+                                            alt={data.image?.alt || data.name}
+                                            width={140}
+                                            height={140}
+                                            layout="fixed"
+                                        />
+                                    </div>
                                     {/* )} */}
 
                                     <div className="rn-author-info-content">
@@ -78,9 +76,7 @@ const AuthorIntroArea = ({ className, space, data }) => {
                                             {data.address}
                                         </div> */}
                                         <div className="mt-4 blue-area">
-                                            <WalletAddress
-                                                address={data}
-                                            />
+                                            <WalletAddress address={data} />
                                         </div>
                                         {/* <div className="follow-area">
                                             <div className="follow followers">
@@ -150,7 +146,7 @@ const AuthorIntroArea = ({ className, space, data }) => {
 AuthorIntroArea.propTypes = {
     className: PropTypes.string,
     space: PropTypes.oneOf([1]),
-    data:PropTypes.string,
+    data: PropTypes.string,
 };
 AuthorIntroArea.defaultProps = {
     space: 1,

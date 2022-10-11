@@ -1,3 +1,5 @@
+import { PROOF_FOR_STARTING_INDEX } from "src/lib/constants";
+
 const ProvenanceHashArea = ({ collection, startIndex, tokens }) => {
     console.log(collection);
     const concatenatedHash = tokens.map((token) => token.hash).join("");
@@ -21,10 +23,11 @@ const ProvenanceHashArea = ({ collection, startIndex, tokens }) => {
                 Each {collection.name} token ID is assigned to an artwork image
                 from the initial sequence with this formula:
             </p>
-            <p className="my-5 text-center">
-                (tokenId + startingIndex) % {collection.size} → Initial Sequence
-                Index
-            </p>
+            <pre>
+                <code>
+                    {PROOF_FOR_STARTING_INDEX}
+                </code>
+            </pre>
             <p>Here's the relevant information:</p>
             <table className="my-5 provenance_blue_field_table">
                 <tr>
