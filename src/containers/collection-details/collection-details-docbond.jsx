@@ -112,7 +112,10 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                                 {data.description}
                             </p>
                         </div>
-                        <div className="col-lg-5 offset-lg-1">
+                        <div
+                            className="col-lg-5 offset-lg-1"
+                            style={{ marginTop: "-100px" }}
+                        >
                             <div className="row mb-5 col_textbox d-flex align-items-center">
                                 <div className="row">
                                     <div className="col-12">
@@ -181,9 +184,7 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
             </div>
 
             <div className="container d-flex my-4 align-items-center">
-                <div className="mint-status-box" style={{ fontStyle: "c" }}>
-                    {data.type} Round
-                </div>
+                <div className="mint-status-box">{data.type} Round</div>
                 <div className="mint-status-box">
                     Mint: {data["mint-price"]} KDA
                 </div>
