@@ -27,7 +27,9 @@ const ProductDetailsArea = ({ space, className, product, slug }) => (
             <div className="row g-5">
                 <div className="col-lg-7 col-md-12 col-sm-12">
                     <Sticky>
-                        <GalleryTab url={`https://res.cloudinary.com/demo/image/fetch/https://${product.contentUri.data}.ipfs.w3s.link`} />
+                        <GalleryTab
+                            url={`https://res.cloudinary.com/demo/image/fetch/https://${product.contentUri.data}.ipfs.w3s.link`}
+                        />
                         <DescriptionDropdown />
                     </Sticky>
                 </div>
@@ -42,7 +44,11 @@ const ProductDetailsArea = ({ space, className, product, slug }) => (
                                 path="/profile"
                             >
                                 <WalletAddress
-                                    address={product.owner.address || product.owner}
+                                    address={
+                                        product.owner.address || product.owner
+                                    }
+                                    length={17}
+                                    lastLength={15}
                                 />
                             </Button>
                         </h6>
