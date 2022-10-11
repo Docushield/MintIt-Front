@@ -238,7 +238,10 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                                 : "/images/collection/placeholder.png",
                                         }}
                                         //dummy data
-                                        price="1"
+                                        price={{
+                                            amount:"",
+                                            currency:"KDA",
+                                        }}
                                     />
                                 </div>
                             ))}
