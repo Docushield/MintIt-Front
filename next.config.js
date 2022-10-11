@@ -20,7 +20,12 @@ module.exports = {
         return config;
     },
     images: {
-        domains: (process.env.NEXT_PUBLIC_IMAGE_DOMAINS || "").split(","),
+        domains: [
+            `${
+                process.env.NEXT_PUBLIC_BUCKET_NAME || "mintit-files"
+            }.s3.us-east-2.amazonaws.com`,
+            "res.cloudinary.com",
+        ],
     },
     env: {
         apiURL: process.env.NEXT_PUBLIC_API_URL,
