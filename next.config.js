@@ -25,6 +25,7 @@ module.exports = {
                 process.env.NEXT_PUBLIC_BUCKET_NAME || "mintit-files"
             }.s3.us-east-2.amazonaws.com`,
             "res.cloudinary.com",
+            "ipfs.io",
         ],
     },
     env: {
