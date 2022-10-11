@@ -20,7 +20,7 @@ module.exports = {
         return config;
     },
     images: {
-        domains: process.env.NEXT_PUBLIC_IMAGE_DOMAINS.split(","),
+        domains: (process.env.NEXT_PUBLIC_IMAGE_DOMAINS || "").split(","),
     },
     env: {
         apiURL: process.env.NEXT_PUBLIC_API_URL,
