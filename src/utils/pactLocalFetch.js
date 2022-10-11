@@ -24,8 +24,6 @@ export const pactLocalFetch = async (pactCode) => {
             networkId
         );
 
-        console.log(command);
-
         const response = await fetch(`${apiHost}/api/v1/local`, {
             method: "POST",
             mode: "cors",
@@ -39,7 +37,6 @@ export const pactLocalFetch = async (pactCode) => {
         });
 
         const respObject = await response.json();
-        console.log(respObject);
 
         if (
             !respObject ||

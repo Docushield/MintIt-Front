@@ -27,13 +27,19 @@ const ProductDetailsArea = ({ space, className, product, slug }) => (
             <div className="row g-5">
                 <div className="col-lg-7 col-md-12 col-sm-12">
                     <Sticky>
-                        <GalleryTab url={`https://res.cloudinary.com/demo/image/fetch/https://${product.contentUri.data}.ipfs.w3s.link`} />
+                        <GalleryTab
+                            url={
+                                product.revealed
+                                    ? `https://ipfs.io/ipfs/${product["content-uri"].data}`
+                                    : "/images/collection/placeholder.png"
+                            }
+                        />
                         <DescriptionDropdown />
                     </Sticky>
                 </div>
                 <div className="col-lg-5 col-md-12 col-sm-12 mt_md--50 mt_sm--60">
                     <div className="rn-pd-content-area">
-                        <ProductTitle id={product.name} />
+                        <ProductTitle id={product.revealed? product["name"] : product["collection-name"]} />
                         <h6 className="title-name">
                             Owner:{" "}
                             <Button
@@ -42,7 +48,9 @@ const ProductDetailsArea = ({ space, className, product, slug }) => (
                                 path="/profile"
                             >
                                 <WalletAddress
-                                    address={product.owner.address || product.owner}
+                                    address={product.creator || product.owner}
+                                    length="15"
+                                    lastLength="15"
                                 />
                             </Button>
                         </h6>

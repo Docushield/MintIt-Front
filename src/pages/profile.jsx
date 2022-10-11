@@ -10,7 +10,7 @@ import { parseCookies } from "nookies";
 export async function getServerSideProps(context) {
     try {
         const cookies = parseCookies(context);
-        const account = "k:431a0a02cdfd8eabb3b78789795818933f518c8de74c02666ec732457959b6a4" //cookies["userAccount"];
+        const account = cookies["userAccount"];
         const smartContract = process.env.NEXT_PUBLIC_CONTRACT;
         const pactCode = `(${smartContract}.search-nfts-by-owner "${account}")`;
         const fetchRes = await pactLocalFetch(pactCode);

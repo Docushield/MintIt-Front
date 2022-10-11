@@ -40,16 +40,14 @@ const Product = ({
                 )}
             >
                 <div className="card-thumbnail">
-                    {image?.src && (
-                        <Anchor path={`/collections/${slug}/tokens/${hash}`}>
-                            <Image
-                                src={image.src}
-                                alt={image?.alt || "NFT_portfolio"}
-                                width={533}
-                                height={533}
-                            />
-                        </Anchor>
-                    )}
+                    <Anchor path={`/collections/${slug}/tokens/${hash}`}>
+                        <Image
+                            src={image}
+                            alt={image?.alt || "NFT_portfolio"}
+                            width={533}
+                            height={533}
+                        />
+                    </Anchor>
                     {/* {auction_date && <CountdownTimer date={auction_date} />} */}
                     {placeBid && (
                         <Button onClick={handleBidModal} size="small">
@@ -106,7 +104,7 @@ Product.propTypes = {
     }).isRequired,
     likeCount: PropTypes.number.isRequired,
     auction_date: PropTypes.string,
-    image: ImageType.isRequired,
+    image: PropTypes.string,
     authors: PropTypes.arrayOf(
         PropTypes.shape({
             name: PropTypes.string.isRequired,
