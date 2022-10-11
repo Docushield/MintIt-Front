@@ -225,7 +225,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                         slug={data.slug}
                                         hash={prod.hash}
                                         image={{
-                                            src: "/images/collection/placeholder.png",
+                                            src: `https://ipfs.io/ipfs/${prod.contentUri.data}`,
                                         }}
                                         price={{
                                             amount: data.price,
