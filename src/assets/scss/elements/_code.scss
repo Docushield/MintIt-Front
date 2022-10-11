@@ -1,0 +1,38 @@
+code {
+    .red {
+        color: red;
+    }
+    .blue {
+        color: blue;
+    }
+    .purple {
+        color: purple;
+    }
+
+    .variable {
+        color: black;
+    }
+
+    .func {
+        color: gray;
+    }
+
+    .type {
+        color: yellow;
+    }
+
+    .operator {
+        color: cyan;
+    }
+
+    .comma {
+        color: black;
+    }
+}
+
+.code-block {
+    transition: all 0.25 ease-in-out;
+    &:hover {
+        transform: scale(1.03);
+    }
+}

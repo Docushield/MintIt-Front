@@ -156,28 +156,49 @@ const DublicateCollectionArea = ({ className, data }) => {
                         </TabPane> */}
                         <TabPane eventKey="nav-owned">
                             <div className="row g-5 d-flex">
-                                {ownedProducts?.map((prod) => (
-                                    console.log(prod),
-                                    <div
-                                        key={prod.id}
-                                        className="col-5 col-lg-4 col-md-6 col-sm-6 col-12"
-                                    >
-                                        <Product
-                                            overlay
-                                            placeBid
-                                            title={prod["name"]}
-                                            slug={prod["collection-name"].replace(/ /g,"-")}
-                                            hash={prod["content-hash"]}
-                                            latestBid={prod.latestBid}
-                                            price="10"
-                                            likeCount={prod.likeCount}
-                                            auction_date={prod.auction_date}
-                                            image={prod.images?.[0]}
-                                            authors={prod.authors}
-                                            bitCount={prod.bitCount}
-                                        />
-                                    </div>
-                                ))}
+                                {ownedProducts?.map(
+                                    (prod) => (
+                                        (
+                                            <div
+                                                key={prod.id}
+                                                className="col-5 col-lg-4 col-md-6 col-sm-6 col-12"
+                                            >
+                                                <Product
+                                                    overlay
+                                                    placeBid
+                                                    title={
+                                                        prod.revealed
+                                                            ? prod["name"]
+                                                            : prod[
+                                                                  "collection-name"
+                                                              ]
+                                                    }
+                                                    slug={prod[
+                                                        "collection-name"
+                                                    ].replace(/ /g, "-")}
+                                                    hash={prod["content-hash"]}
+                                                    latestBid={prod.latestBid}
+                                                    //dummy data
+                                                    price={{
+                                                        amount:"",
+                                                        currency:"KDA",
+                                                    }}
+                                                    likeCount={prod.likeCount}
+                                                    auction_date={
+                                                        prod.auction_date
+                                                    }
+                                                    image={{
+                                                        src: prod.revealed
+                                                            ? `https://ipfs.io/ipfs/${prod["content-uri"].data}`
+                                                            : "/images/collection/placeholder.png",
+                                                    }}
+                                                    authors={prod.authors}
+                                                    bitCount={prod.bitCount}
+                                                />
+                                            </div>
+                                        )
+                                    )
+                                )}
                             </div>
                         </TabPane>
                         {/* <TabPane eventKey="nav-created">

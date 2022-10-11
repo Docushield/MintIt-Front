@@ -20,15 +20,81 @@ const ProvenanceHashArea = ({ collection, startIndex, tokens }) => {
             <div className="divider"></div>
 
             <h4 className="mb-5">IMPORTANT INFORMATION</h4>
-            <p>
-                Each {collection.name} token ID is assigned to the NFTs from the
-                initial sequence, the random starting index for minting is
-                generated on-chain with this function:
-            </p>
+            <p>A random integer is generated using this formula:</p>
+            <p>A random integer is generated using this formula:</p>
             <pre>
-                <code>{PROOF_FOR_STARTING_INDEX}</code>
+                <code className="formula">
+                    <span className="red">(</span>
+                    <span className="func">defun</span>{" "}
+                    <span className="variable">random-integer</span>
+                    <span className="operator">:</span>
+                    <span className="type">integer</span>
+                    <span className="purple">()</span>
+                    <br />
+                    <span className="blue">{"   "}(</span>
+                    <span className="func">bind</span>{" "}
+                    <span className="purple">(</span>
+                    <span className="variable">chain-data</span>
+                    <span className="purple">)</span>
+                    <br />
+                    <span className="blue">{"       "}&#x7B;</span>
+                    <br />
+                    <span className="operator"> {"      "}'</span>
+                    <span className="variable">block-height</span>{" "}
+                    <span className="operator">:=</span>{" "}
+                    <span className="variable">block-height</span>
+                    <span className="comma">,</span>
+                    <br />
+                    <span className="operator"> {"      "}'</span>
+                    <span className="variable">block-time</span>{" "}
+                    <span className="operator">:=</span>{" "}
+                    <span className="variable">block-time</span>
+                    <br />
+                    <span className="blue">{"       "}&#x7D;</span>
+                    <br />
+                    <span className="purple">{"       "}(</span>
+                    <span className="variable">round</span>{" "}
+                    <span className="red">(</span>
+                    <span className="operator">*</span>
+                    <span className="variable">block-height</span>{" "}
+                    <span className="blue">(</span>
+                    <span className="variable">diff-time block-time</span>{" "}
+                    <span className="purple">(</span>{" "}
+                    <span className="variable">
+                        time "1970-01-01T00:00:00Z"
+                    </span>
+                    <span className="purple">)</span>
+                    <span className="blue">)</span>
+                    <span className="red">)</span>
+                    <span className="purple">)</span>
+                    <br />
+                    <span className="blue">{"   "})</span>
+                    <br />
+                    <span className="red">)</span>
+                </code>
             </pre>
-            <p>Here's the relevant information:</p>
+
+            <p className="mt-5 pt-5">
+                The random integer generated is used to yield the random
+                starting index for minting using this formula:
+            </p>
+            <pre className="mb-5 pb-5">
+                <code className="formula">
+                    <span className="red">(</span>
+                    <span className="variable">starting-index</span>{" "}
+                    <span className="blue">(</span>
+                    <span className="func">mod</span>{" "}
+                    <span className="purple">(</span>
+                    <span className="variable">random-integer</span>
+                    <span className="purple">)</span>{" "}
+                    <span className="variable">size</span>
+                    <span span className="blue">
+                        )
+                    </span>
+                    <span className="red">)</span>
+                </code>
+            </pre>
+            <p className="pt-5">Here's the relevant information:</p>
             <table className="my-5 provenance_blue_field_table">
                 <tr>
                     <td className="text-end">FINALIZED STARTING INDEX</td>
