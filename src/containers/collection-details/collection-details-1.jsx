@@ -221,16 +221,24 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                 >
                                     <Product
                                         overlay
-                                        title={prod.name || prod.id}
-                                        slug={data.slug}
-                                        hash={prod.hash}
+                                        title={
+                                            prod.revealed
+                                                ? prod["name"]
+                                                : prod[
+                                                      "collection-name"
+                                                  ]
+                                        }
+                                        slug={prod[
+                                            "collection-name"
+                                        ].replace(/ /g, "-")}
+                                        hash={prod["content-hash"]}
                                         image={{
-                                            src: `https://ipfs.io/ipfs/${prod.contentUri.data}`,
+                                            src: prod.revealed
+                                                ? `https://ipfs.io/ipfs/${prod["content-uri"].data}`
+                                                : "/images/collection/placeholder.png",
                                         }}
-                                        price={{
-                                            amount: data.price,
-                                            currency: "$KDA",
-                                        }}
+                                        //dummy data
+                                        price="1"
                                     />
                                 </div>
                             ))}

@@ -158,7 +158,6 @@ const DublicateCollectionArea = ({ className, data }) => {
                             <div className="row g-5 d-flex">
                                 {ownedProducts?.map(
                                     (prod) => (
-                                        console.log(prod),
                                         (
                                             <div
                                                 key={prod.id}
@@ -179,7 +178,8 @@ const DublicateCollectionArea = ({ className, data }) => {
                                                     ].replace(/ /g, "-")}
                                                     hash={prod["content-hash"]}
                                                     latestBid={prod.latestBid}
-                                                    price="10"
+                                                    //dummy data
+                                                    price="1"
                                                     likeCount={prod.likeCount}
                                                     auction_date={
                                                         prod.auction_date
