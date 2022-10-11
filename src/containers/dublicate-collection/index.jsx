@@ -84,7 +84,7 @@ const AuthorProfileArea = ({ className, data }) => {
                             className="row g-5 d-flex"
                             eventKey="nav-profile"
                         >
-                            {ownedProducts?.map((prod) => (
+                            {/* {ownedProducts?.map((prod) => (
                                 <div
                                     key={prod.id}
                                     className="col-5 col-lg-4 col-md-6 col-sm-6 col-12"
@@ -103,13 +103,13 @@ const AuthorProfileArea = ({ className, data }) => {
                                         bitCount={prod.bitCount}
                                     />
                                 </div>
-                            ))}
+                            ))} */}
                         </TabPane>
                         <TabPane
                             className="row g-5 d-flex"
                             eventKey="nav-contact"
                         >
-                            {createdProducts?.map((prod) => (
+                            {/* {createdProducts?.map((prod) => (
                                 <div
                                     key={prod.id}
                                     className="col-5 col-lg-4 col-md-6 col-sm-6 col-12"
@@ -128,7 +128,7 @@ const AuthorProfileArea = ({ className, data }) => {
                                         bitCount={prod.bitCount}
                                     />
                                 </div>
-                            ))}
+                            ))} */}
                         </TabPane>
                         {/* <TabPane
                             className="row g-5 d-flex"
