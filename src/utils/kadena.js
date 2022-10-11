@@ -1,3 +1,4 @@
+import Pact from "pact-lang-api";
 import { toast } from "react-toastify";
 
 export const signXWallet = async (
@@ -24,6 +25,23 @@ export const signXWallet = async (
             },
         },
     });
+
+export const signZelcore = async (cmd) => {
+    console.log(`Signing...`);
+    console.log(cmd);
+
+    return Pact.wallet.sign(cmd);
+};
+
+export const sign = async (provider, signingObject) => {
+    console.log("Signing tx...");
+    if (provider === "X-Wallet") {
+        const res = await signXWallet(signingObject);
+        return res.signedCmd;
+    } else if (provider === "Zelcore") {
+        return signZelcore(signingObject);
+    }
+};
 
 export const connectXWallet = async () => {
     const kdaEnvironment = {
@@ -57,10 +75,25 @@ export const connectXWallet = async () => {
     }
 
     if (xwalletResp.chainId !== chainId) {
-        toast.error(`Wrong chain ${xwalletResp.chainId}, please open chain ${chainId}`);
+        toast.error(
+            `Wrong chain ${xwalletResp.chainId}, please open chain ${chainId}`
+        );
         throw new Error(
             `Wrong chain ${xwalletResp.chainId}, please open chain ${chainId}`
         );
     }
     return xwalletResp;
+};
+
+export const connectZelcore = async () => {
+    const accounts = await fetch("http://127.0.0.1:9467/v1/accounts", {
+        headers: {
+            "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify({ asset: "kadena" }),
+    });
+
+    const accountsJson = await accounts.json();
+    return accountsJson;
 };
