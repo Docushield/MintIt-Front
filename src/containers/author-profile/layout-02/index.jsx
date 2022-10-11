@@ -179,7 +179,10 @@ const DublicateCollectionArea = ({ className, data }) => {
                                                     hash={prod["content-hash"]}
                                                     latestBid={prod.latestBid}
                                                     //dummy data
-                                                    price="1"
+                                                    price={{
+                                                        amount:"",
+                                                        currency:"KDA",
+                                                    }}
                                                     likeCount={prod.likeCount}
                                                     auction_date={
                                                         prod.auction_date
