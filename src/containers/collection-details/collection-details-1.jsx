@@ -21,6 +21,9 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
     const connected = useSelector((state) => state.wallet.connected);
     const [isShareModalOpen, setIsShareModalOpen] = useState(false);
     const shareModalHandler = () => setIsShareModalOpen((prev) => !prev);
+    const currentTime = Date().toLocaleString();
+    const revealTime = new Date(data["reveal-at"]).toLocaleString();
+    const premintTime = new Date(data["premint-ends"]).toLocaleString();
 
     useEffect(() => {
         dispatch(setCurrentCollection(data));
@@ -150,7 +153,12 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                     <div className="col-md-6">
                                         <div className="status-box">
                                             <div>Price</div>
-                                            <div>{data["mint-price"]} KDA</div>
+                                            <div>
+                                                {currentTime < premintTime
+                                                    ? data["premint-price"]
+                                                    : data["mint-price"]}{" "}
+                                                KDA
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="col-md-6">
@@ -162,7 +170,14 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                     <div className="col-md-6">
                                         <div className="status-box">
                                             <div>Reveals at </div>
-                                            <div>Instant</div>
+                                            <div>
+                                                {currentTime >= revealTime
+                                                    ? formatDate(
+                                                          data["reveal-at"],
+                                                          "MMMM Do, h:mm:ss A"
+                                                      )
+                                                    : "Instant"}
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="col-12">

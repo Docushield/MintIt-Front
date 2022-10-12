@@ -30,7 +30,10 @@ const DetailsTabContent = ({
                                     {property["trait_type"]}
                                 </span>
                                 <span className="color-white value">
-                                    {property.value}
+                                    {property.value.length > 3 ||
+                                    property.value.split(" ").length > 1
+                                        ? property.value.slice(0, 3) + "..."
+                                        : property.value}
                                 </span>
                             </div>
                         ))}
