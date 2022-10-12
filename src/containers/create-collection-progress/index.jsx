@@ -46,7 +46,7 @@ const CreateCollectionProgressArea = ({
             />
             <p className="mt-5">Status: {status}</p>
 
-            <h2>Collection Information</h2>
+            {/*<h2>Collection Information</h2>
             <table>
                 <tr>
                     <td>Collection Page</td>
@@ -56,7 +56,7 @@ const CreateCollectionProgressArea = ({
                         </Link>
                     </td>
                 </tr>
-            </table>
+            </table>*/}
         </div>
     );
 };
