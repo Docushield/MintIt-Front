@@ -13,7 +13,9 @@ export async function getServerSideProps(context) {
     const cookies = parseCookies(context);
     const slug = context.params.slug;
     const smartContract = process.env.NEXT_PUBLIC_CONTRACT;
-    const collectionName = slug.replace(/-/g, " ");
+
+    const collection = await fetchAPI(`api/collections/${slug}`, cookies);
+    const collectionName = collection.response.name;
 
     const res = await pactLocalFetch(
         `(${smartContract}.get-nft-collection "${collectionName}")`
