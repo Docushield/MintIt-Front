@@ -9,7 +9,7 @@ import ShareDropdown from "@components/share-dropdown";
 import DescriptionDropdown from "@components/product-details/DescriptionDropdown";
 import WalletAddress from "@components/wallet-address";
 
-const TokenDetailsArea = ({ space, className, product, slug }) => (
+const TokenDetailsArea = ({ space, className, product, slug, collection }) => (
     <div
         className={clsx(
             "product-details-area",
@@ -28,7 +28,7 @@ const TokenDetailsArea = ({ space, className, product, slug }) => (
                                     : "/images/collection/placeholder.png"
                             }
                         />
-                        <DescriptionDropdown />
+                        <DescriptionDropdown collection={collection} />
                     </Sticky>
                 </div>
                 <div className="col-lg-5 col-md-12 col-sm-12 mt_md--50 mt_sm--60">
@@ -55,7 +55,7 @@ const TokenDetailsArea = ({ space, className, product, slug }) => (
                             </Button>
                         </h6>
                         <div className="catagory-collection items-center">
-                            <div className="mx-2">
+                            {/*                             <div className="mx-2">
                                 <Button
                                     size="small"
                                     color="primary-alta"
@@ -63,7 +63,7 @@ const TokenDetailsArea = ({ space, className, product, slug }) => (
                                 >
                                     Listed: Yes/No
                                 </Button>
-                            </div>
+                            </div>*/}
                             {/* <div className="mx-2">
                                 <Button
                                     size="small"
@@ -81,10 +81,12 @@ const TokenDetailsArea = ({ space, className, product, slug }) => (
                             <BidTab
                                 bids={product?.bids}
                                 owner={product.owner}
-                                properties={product?.properties}
+                                creator={collection?.creator}
+                                properties={product.spec.value.attributes}
                                 spec={product.spec}
                                 history={product?.history}
                                 slug={slug}
+                                collection={collection}
                             />
                             {/* <PlaceBet
                                 highest_bid={product.highest_bid}

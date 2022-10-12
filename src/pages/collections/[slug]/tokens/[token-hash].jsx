@@ -6,8 +6,10 @@ import Footer from "@layout/footer/footer-01";
 import Breadcrumb from "@components/breadcrumb";
 import TokenDetailsArea from "@containers/product-details/token-details";
 import { pactLocalFetch } from "@utils/pactLocalFetch";
+import { fetchAPI } from "@utils/fetchAPI";
+import { parseCookies } from "nookies";
 
-const TokenHash = ({ token, slug }) => (
+const TokenHash = ({ token, slug, collection }) => (
     <Wrapper>
         <SEO pageTitle="Product Details" />
         <Header />
@@ -17,7 +19,11 @@ const TokenHash = ({ token, slug }) => (
                 pageTitle1=""
                 currentPage="Product Details"
             />
-            <TokenDetailsArea product={token} slug={slug} />
+            <TokenDetailsArea
+                product={token}
+                slug={slug}
+                collection={collection}
+            />
             {/* <ProductArea
                 data={{
                     section_title: { title: "Recent View" },
@@ -36,28 +42,41 @@ const TokenHash = ({ token, slug }) => (
 );
 
 export async function getServerSideProps(context) {
+    const cookies = parseCookies();
     const slug = context.query.slug;
+    console.log(slug);
     const hash = context.query["token-hash"];
-    const collectionName = slug.replace(/-/g, " ");
+    const res = await fetchAPI(
+        `api/collections/${slug}/tokens/${hash}`,
+        cookies
+    );
+    const backendToken = res.response;
+
+    const cres = await fetchAPI(`api/collections/${slug}`, cookies);
+    const collection = cres.response;
     try {
         const smartContract = process.env.NEXT_PUBLIC_CONTRACT;
-        const pactCode = `(${smartContract}.get-nft "${collectionName}" "${hash}")`;
+        const pactCode = `(${smartContract}.get-nft "${collection.name}" "${hash}")`;
         const fetchRes = await pactLocalFetch(pactCode);
         if (fetchRes == null) {
             //blockchain request failed
             return {
                 props: {
                     slug,
-                    token: {},
+                    token: { spec: backendToken.spec },
                     className: "template-color-1",
+                    collection,
                 },
             };
         } else {
+            let updated = fetchRes.result.data;
+            updated.spec = backendToken.spec;
             return {
                 props: {
                     slug,
-                    token: fetchRes.result.data,
+                    token: updated,
                     className: "template-color-1",
+                    collection,
                 },
             };
         }
@@ -66,9 +85,10 @@ export async function getServerSideProps(context) {
         return {
             props: {
                 error: error.message,
-                token: {},
+                token: { spec: backendToken.spec },
                 slug,
                 className: "template-color-1",
+                collection,
             },
         };
     }
@@ -76,6 +96,7 @@ export async function getServerSideProps(context) {
 
 TokenHash.propTypes = {
     token: PropTypes.shape({}),
+    collection: PropTypes.shape({}),
 };
 
 export default TokenHash;
