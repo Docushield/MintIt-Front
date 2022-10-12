@@ -17,6 +17,7 @@ const BidTab = ({
     spec,
     history,
     slug,
+    collection,
 }) => (
     <TabContainer defaultActiveKey="nav-profile">
         <div className={clsx("tab-wrapper-one", className)}>
@@ -44,6 +45,7 @@ const BidTab = ({
                         properties={properties}
                         spec={spec}
                         slug={slug}
+                        collection={collection}
                     />
                 </TabPane>
                 <TabPane eventKey="nav-contact" className="scrollable-tab-pan">
@@ -62,6 +64,7 @@ BidTab.propTypes = {
     properties: PropTypes.arrayOf(PropTypes.shape({})),
     tags: PropTypes.arrayOf(PropTypes.shape({})),
     history: PropTypes.arrayOf(PropTypes.shape({})),
+    collection: PropTypes.shape({}),
 };
 
 export default BidTab;

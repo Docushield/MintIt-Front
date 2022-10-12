@@ -86,6 +86,7 @@ const TokenDetailsArea = ({ space, className, product, slug, collection }) => (
                                 spec={product.spec}
                                 history={product?.history}
                                 slug={slug}
+                                collection={collection}
                             />
                             {/* <PlaceBet
                                 highest_bid={product.highest_bid}

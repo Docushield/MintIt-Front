@@ -5,7 +5,15 @@ import Button from "@ui/button";
 import WalletAddress from "@components/wallet-address";
 import Anchor from "@ui/anchor";
 
-const DetailsTabContent = ({ owner, creator, properties, spec, slug }) => {
+const DetailsTabContent = ({
+    owner,
+    creator,
+    properties,
+    spec,
+    slug,
+    collection,
+}) => {
+    console.log(collection);
     return (
         <div className="rn-pd-bd-wrapper mt--20">
             <TopSeller name={owner} slug={slug} />
@@ -43,12 +51,14 @@ const DetailsTabContent = ({ owner, creator, properties, spec, slug }) => {
                         </div>
                     </div>
                 </Anchor>
-                {/* <div className="pd-property-spec">
-                    Creator Roaylties: {specs.creator_royalties}
-                </div> */}
-                {/* <div className="pd-property-spec">
-                    MINT-IT Royalties: {specs.mintit_royalties}
-                </div> */}
+                <div className="pd-property-spec">
+                    Creator Roaylties:{" "}
+                    {collection["sale-royalties"]["rates"][0].rate * 100} %
+                </div>
+                <div className="pd-property-spec">
+                    MINT-IT Royalties:{" "}
+                    {collection["mint-royalties"]["rates"][0].rate * 100} %
+                </div>
                 <div className="pd-property-spec">NFT Type: {spec.type}</div>
             </div>
             <Button

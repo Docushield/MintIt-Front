@@ -90,6 +90,7 @@ const ProductDetailsArea = ({
                                 spec={product.spec}
                                 history={product?.history}
                                 slug={slug}
+                                collection={collection}
                             />
                             {/* <PlaceBet
                                 highest_bid={product.highest_bid}
@@ -123,9 +124,7 @@ ProductDetailsArea.propTypes = {
         auction_date: PropTypes.string,
         images: PropTypes.arrayOf(ImageType),
     }),
-    collection: PropTypes.shape({
-        creator: PropTypes.string,
-    }),
+    collection: PropTypes.shape({}),
 };
 
 ProductDetailsArea.defaultProps = {
