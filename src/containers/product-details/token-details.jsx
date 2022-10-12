@@ -9,7 +9,7 @@ import ShareDropdown from "@components/share-dropdown";
 import DescriptionDropdown from "@components/product-details/DescriptionDropdown";
 import WalletAddress from "@components/wallet-address";
 
-const TokenDetailsArea = ({ space, className, product, slug }) => (
+const TokenDetailsArea = ({ space, className, product, slug, collection }) => (
     <div
         className={clsx(
             "product-details-area",
@@ -81,10 +81,12 @@ const TokenDetailsArea = ({ space, className, product, slug }) => (
                             <BidTab
                                 bids={product?.bids}
                                 owner={product.owner}
-                                properties={product?.properties}
+                                creator={collection?.creator}
+                                properties={product.spec.value.attributes}
                                 spec={product.spec}
                                 history={product?.history}
                                 slug={slug}
+                                collection={collection}
                             />
                             {/* <PlaceBet
                                 highest_bid={product.highest_bid}
