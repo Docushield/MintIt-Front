@@ -44,13 +44,14 @@ const TokenHash = ({ token, slug, collection }) => (
 export async function getServerSideProps(context) {
     const cookies = parseCookies();
     const slug = context.query.slug;
-    console.log(slug);
     const hash = context.query["token-hash"];
     const res = await fetchAPI(
         `api/collections/${slug}/tokens/${hash}`,
         cookies
     );
     const backendToken = res.response;
+    backendToken["creator"] = backendToken["owner"];
+    backendToken["revealed"] = backendToken["revealedAt"] != null;
 
     const cres = await fetchAPI(`api/collections/${slug}`, cookies);
     const collection = cres.response;
@@ -63,16 +64,18 @@ export async function getServerSideProps(context) {
             return {
                 props: {
                     slug,
-                    token: {},
+                    token: backendToken,
                     className: "template-color-1",
                     collection,
                 },
             };
         } else {
+            backendToken["content-uri"] = fetchRes.result.data["content-uri"];
+            backendToken["spec"] = fetchRes.result.data["spec"];
             return {
                 props: {
                     slug,
-                    token: fetchRes.result.data,
+                    token: backendToken,
                     className: "template-color-1",
                     collection,
                 },
@@ -83,7 +86,7 @@ export async function getServerSideProps(context) {
         return {
             props: {
                 error: error.message,
-                token: {},
+                token: backendToken,
                 slug,
                 className: "template-color-1",
                 collection,
