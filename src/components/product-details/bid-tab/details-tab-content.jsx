@@ -13,7 +13,6 @@ const DetailsTabContent = ({
     slug,
     collection,
 }) => {
-    console.log(collection);
     return (
         <div className="rn-pd-bd-wrapper mt--20">
             {properties && <TopSeller name={owner} slug={slug} />}
@@ -56,11 +55,17 @@ const DetailsTabContent = ({
                 </Anchor>
                 <div className="pd-property-spec">
                     Creator Roaylties:{" "}
-                    {collection["sale-royalties"]["rates"][0].rate * 100} %
+                    {(
+                        collection["sale-royalties"]["rates"][0].rate * 100
+                    ).toFixed(2)}{" "}
+                    %
                 </div>
                 <div className="pd-property-spec">
                     MINT-IT Royalties:{" "}
-                    {collection["mint-royalties"]["rates"][0].rate * 100} %
+                    {(
+                        collection["mint-royalties"]["rates"][0].rate * 100
+                    ).toFixed(2)}{" "}
+                    %
                 </div>
                 <div className="pd-property-spec">NFT Type: {spec.type}</div>
             </div>
