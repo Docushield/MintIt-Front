@@ -16,7 +16,7 @@ const DetailsTabContent = ({
     console.log(collection);
     return (
         <div className="rn-pd-bd-wrapper mt--20">
-            <TopSeller name={owner} slug={slug} />
+            {properties && <TopSeller name={owner} slug={slug} />}
             {properties && (
                 <div className="rn-pd-sm-property-wrapper">
                     <h6 className="pd-property-title">Properties</h6>

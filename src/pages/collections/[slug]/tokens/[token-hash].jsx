@@ -63,18 +63,16 @@ export async function getServerSideProps(context) {
             return {
                 props: {
                     slug,
-                    token: { spec: backendToken.spec },
+                    token: {},
                     className: "template-color-1",
                     collection,
                 },
             };
         } else {
-            let updated = fetchRes.result.data;
-            updated.spec = backendToken.spec;
             return {
                 props: {
                     slug,
-                    token: updated,
+                    token: fetchRes.result.data,
                     className: "template-color-1",
                     collection,
                 },
@@ -85,7 +83,7 @@ export async function getServerSideProps(context) {
         return {
             props: {
                 error: error.message,
-                token: { spec: backendToken.spec },
+                token: {},
                 slug,
                 className: "template-color-1",
                 collection,
