@@ -131,10 +131,10 @@ const ProvenanceHashArea = ({ collection, tokens, concatenatedHashStr }) => {
                     {tokens.length > 0 &&
                         tokens.map((token, index) => (
                             <tr key={token.hash}>
-                                <td>{index}</td>
                                 <td>
                                     {(startIndex + index) % collection.size.int}
                                 </td>
+                                <td>{index}</td>
                                 <td>{token.hash}</td>
                                 <td>
                                     <div>

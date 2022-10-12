@@ -20,7 +20,7 @@ export async function getServerSideProps(context) {
     const res = await pactLocalFetch(
         `(${smartContract}.get-nft-collection "${collectionName}")`
     );
-    const tokens = await fetchAPI(`api/collections/${slug}/tokens`, cookies);
+    let tokens = await fetchAPI(`api/collections/${slug}/tokens`, cookies);
 
     const tokenhashs = await fetchAPI(
         `api/collections/${slug}/tokenHashes`,
@@ -33,6 +33,11 @@ export async function getServerSideProps(context) {
     tokenhashs.response.forEach(
         (tokenHash) => (concatenatedHashStr += tokenHash)
     );
+    tokens = tokenhashs.response
+        .map((e) => {
+            return tokens.response.find((x) => x.hash == e);
+        })
+        .filter((e) => e != undefined);
 
     if (res.error || tokens.error) {
         return {
@@ -46,7 +51,7 @@ export async function getServerSideProps(context) {
     return {
         props: {
             collection: res.result.data,
-            tokens: tokens.response,
+            tokens: tokens,
             concatenatedHashStr,
             className: "template-color-1",
         },
