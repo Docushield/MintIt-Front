@@ -25,9 +25,11 @@ export async function getServerSideProps(context) {
         cookies
     );
 
+    console.log(tokenhashs);
+
     let concatenatedHashStr = "";
     tokenhashs.response.forEach(
-        (tokenHash) => (concatenatedHashStr += tokenHash.hash)
+        (tokenHash) => (concatenatedHashStr += tokenHash)
     );
 
     if (res.error || tokens.error) {
