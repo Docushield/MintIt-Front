@@ -58,7 +58,7 @@ const ProvenanceHash = ({ collection, tokens, concatenatedHashStr }) => (
         <SEO pageTitle="Provenance Hash" />
         <Header />
         <main id="main-content">
-            <Breadcrumb pageTitle="Provenance Hash" />
+            <Breadcrumb pageTitle="Provenance Hash" pageTitle1="" currentPage="Provenance Hash"/>
             <ProvenanceHashArea
                 collection={collection}
                 tokens={tokens}
