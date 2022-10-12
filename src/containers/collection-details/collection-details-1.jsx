@@ -171,7 +171,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                         <div className="status-box">
                                             <div>Reveals at </div>
                                             <div>
-                                                {currentTime >= revealTime
+                                                {currentTime < revealTime
                                                     ? formatDate(
                                                           data["reveal-at"],
                                                           "MMMM Do, h:mm:ss A"
