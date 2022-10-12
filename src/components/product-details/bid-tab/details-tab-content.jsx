@@ -4,6 +4,8 @@ import { IDType, ImageType } from "@utils/types";
 import Button from "@ui/button";
 import WalletAddress from "@components/wallet-address";
 import Anchor from "@ui/anchor";
+import { useState } from "react";
+import Image from "next/image";
 
 const DetailsTabContent = ({
     owner,
@@ -13,6 +15,13 @@ const DetailsTabContent = ({
     slug,
     collection,
 }) => {
+    const [isCopied, setIsCopied] = useState(false);
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText(creator);
+        setIsCopied(true);
+    };
+
     return (
         <div className="rn-pd-bd-wrapper mt--20">
             {properties && <TopSeller name={owner} slug={slug} />}
@@ -41,18 +50,30 @@ const DetailsTabContent = ({
             )}
             <div className="rn-pd-sm-property-wrapper mt-5">
                 <h6 className="pd-property-title">More Information</h6>
-                <Anchor path="/profile" className="address-wrapper">
-                    <div className="pd-property-spec address">
-                        <div>Creator:</div>
-                        <div>
-                            <WalletAddress
-                                address={creator}
-                                length={17}
-                                lastLength={15}
-                            />
+                {/* <Anchor path="#" className="address-wrapper"> */}
+                <div className="pd-property-spec address" onClick={handleCopy}>
+                    <div>Creator:</div>
+                    <div>
+                        <div className="wallet-address-wrapper">
+                            <div>
+                                {creator.slice(0, 17)}...
+                                {creator.slice(-15)}
+                            </div>
+                            <div className="copy-icon-wrapper">
+                                <Image
+                                    src={
+                                        !isCopied
+                                            ? "/images/icons/copy.svg"
+                                            : "/images/icons/checked.svg"
+                                    }
+                                    width={20}
+                                    height={20}
+                                />
+                            </div>
                         </div>
                     </div>
-                </Anchor>
+                </div>
+                {/* </Anchor> */}
                 <div className="pd-property-spec">
                     Creator Roaylties:{" "}
                     {(
