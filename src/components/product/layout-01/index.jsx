@@ -25,6 +25,7 @@ const Product = ({
     placeBid,
     disableShareDropdown,
     hash,
+    revealed,
 }) => {
     const [showBidModal, setShowBidModal] = useState(false);
     const handleBidModal = () => {
@@ -74,7 +75,9 @@ const Product = ({
                             {bitCount}+ Place Bit.
                         </Anchor>
                     </div> */}
-                    <span className="product-name">Token Name</span>
+                    <span className="product-name">
+                        {revealed ? "Token Name" : "Collection Name"}
+                    </span>
                     {!disableShareDropdown && <ShareDropdown />}
                 </div>
                 <Anchor path={`/collections/${slug}/tokens/${hash}`}>

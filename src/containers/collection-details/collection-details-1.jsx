@@ -238,6 +238,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                             amount: "",
                                             currency: "KDA",
                                         }}
+                                        revealed={prod.revealed}
                                     />
                                 </div>
                             ))}
