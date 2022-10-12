@@ -5,15 +5,10 @@ import Button from "@ui/button";
 import WalletAddress from "@components/wallet-address";
 import Anchor from "@ui/anchor";
 
-const DetailsTabContent = ({ owner, properties, spec, slug }) => {
+const DetailsTabContent = ({ owner, creator, properties, spec, slug }) => {
     return (
         <div className="rn-pd-bd-wrapper mt--20">
-            {/* <TopSeller
-                name={owner.name}
-                total_sale={owner.total_sale}
-                slug={owner.slug}
-                image={owner.image}
-            /> */}
+            <TopSeller name={owner} slug={slug} />
             {properties && (
                 <div className="rn-pd-sm-property-wrapper">
                     <h6 className="pd-property-title">Properties</h6>
@@ -24,7 +19,7 @@ const DetailsTabContent = ({ owner, properties, spec, slug }) => {
                                 className="pd-property-inner"
                             >
                                 <span className="color-body type">
-                                    {property.type}
+                                    {property["trait_type"]}
                                 </span>
                                 <span className="color-white value">
                                     {property.value}
@@ -36,26 +31,25 @@ const DetailsTabContent = ({ owner, properties, spec, slug }) => {
             )}
             <div className="rn-pd-sm-property-wrapper mt-5">
                 <h6 className="pd-property-title">More Information</h6>
-                {/* <Anchor path="/profile" className="address-wrapper">
+                <Anchor path="/profile" className="address-wrapper">
                     <div className="pd-property-spec address">
                         <div>Creator:</div>
                         <div>
                             <WalletAddress
-                                address={specs.creator}
-                                length={40}
+                                address={creator}
+                                length={17}
+                                lastLength={15}
                             />
                         </div>
                     </div>
-                </Anchor> */}
+                </Anchor>
                 {/* <div className="pd-property-spec">
                     Creator Roaylties: {specs.creator_royalties}
                 </div> */}
                 {/* <div className="pd-property-spec">
                     MINT-IT Royalties: {specs.mintit_royalties}
                 </div> */}
-                <div className="pd-property-spec">
-                    NFT Type: {spec.type}
-                </div>
+                <div className="pd-property-spec">NFT Type: {spec.type}</div>
             </div>
             <Button
                 className="mt-4"
@@ -70,12 +64,12 @@ const DetailsTabContent = ({ owner, properties, spec, slug }) => {
 };
 
 DetailsTabContent.propTypes = {
-    // owner: PropTypes.shape({
-    //     name: PropTypes.string,
-    //     total_sale: PropTypes.number,
-    //     slug: PropTypes.string,
-    //     image: ImageType,
-    // }),
+    owner: PropTypes.shape({
+        name: PropTypes.string,
+        total_sale: PropTypes.number,
+        slug: PropTypes.string,
+        image: ImageType,
+    }),
     properties: PropTypes.arrayOf(
         PropTypes.shape({
             id: IDType,

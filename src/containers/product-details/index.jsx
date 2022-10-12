@@ -15,7 +15,13 @@ import WalletAddress from "@components/wallet-address";
 
 // Demo Image
 
-const ProductDetailsArea = ({ space, className, product, slug }) => (
+const ProductDetailsArea = ({
+    space,
+    className,
+    product,
+    slug,
+    collection,
+}) => (
     <div
         className={clsx(
             "product-details-area",
@@ -53,7 +59,7 @@ const ProductDetailsArea = ({ space, className, product, slug }) => (
                             </Button>
                         </h6>
                         <div className="catagory-collection items-center">
-                            <div className="mx-2">
+                            {/*<div className="mx-2">
                                 <Button
                                     size="small"
                                     color="primary-alta"
@@ -61,7 +67,7 @@ const ProductDetailsArea = ({ space, className, product, slug }) => (
                                 >
                                     Listed: Yes/No
                                 </Button>
-                            </div>
+                            </div> */}
                             {/* <div className="mx-2">
                                 <Button
                                     size="small"
@@ -79,7 +85,8 @@ const ProductDetailsArea = ({ space, className, product, slug }) => (
                             <BidTab
                                 bids={product?.bids}
                                 owner={product.owner}
-                                properties={product?.properties}
+                                creator={collection?.creator}
+                                properties={product.spec.value.attributes}
                                 spec={product.spec}
                                 history={product?.history}
                                 slug={slug}
@@ -115,6 +122,9 @@ ProductDetailsArea.propTypes = {
         highest_bid: PropTypes.shape({}),
         auction_date: PropTypes.string,
         images: PropTypes.arrayOf(ImageType),
+    }),
+    collection: PropTypes.shape({
+        creator: PropTypes.string,
     }),
 };
 

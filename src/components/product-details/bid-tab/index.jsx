@@ -8,7 +8,16 @@ import BidsTabContent from "./bids-tab-content";
 import DetailsTabContent from "./details-tab-content";
 import HistoryTabContent from "./history-tab-content";
 
-const BidTab = ({ className, bids, owner, properties, spec, history, slug }) => (
+const BidTab = ({
+    className,
+    bids,
+    owner,
+    creator,
+    properties,
+    spec,
+    history,
+    slug,
+}) => (
     <TabContainer defaultActiveKey="nav-profile">
         <div className={clsx("tab-wrapper-one", className)}>
             <nav className="tab-button-one">
@@ -19,27 +28,27 @@ const BidTab = ({ className, bids, owner, properties, spec, history, slug }) => 
                     <Nav.Link as="button" eventKey="nav-profile">
                         Details
                     </Nav.Link>
-                    {/* <Nav.Link as="button" eventKey="nav-contact">
+                    <Nav.Link as="button" eventKey="nav-contact">
                         History
-                    </Nav.Link> */}
+                    </Nav.Link>
                 </Nav>
             </nav>
             <TabContent className="rn-bid-content">
-
                 {/* <TabPane eventKey="nav-home" className="scrollable-tab-pan">
                     <BidsTabContent bids={bids} />
                 </TabPane> */}
                 <TabPane eventKey="nav-profile">
                     <DetailsTabContent
                         owner={owner}
+                        creator={creator}
                         properties={properties}
                         spec={spec}
                         slug={slug}
                     />
                 </TabPane>
-                {/* <TabPane eventKey="nav-contact" className="scrollable-tab-pan">
+                <TabPane eventKey="nav-contact" className="scrollable-tab-pan">
                     <HistoryTabContent history={history} />
-                </TabPane> */}
+                </TabPane>
             </TabContent>
         </div>
     </TabContainer>
@@ -49,6 +58,7 @@ BidTab.propTypes = {
     className: PropTypes.string,
     bids: PropTypes.arrayOf(PropTypes.shape({})),
     owner: PropTypes.shape({}),
+    creator: PropTypes.shape({}),
     properties: PropTypes.arrayOf(PropTypes.shape({})),
     tags: PropTypes.arrayOf(PropTypes.shape({})),
     history: PropTypes.arrayOf(PropTypes.shape({})),
