@@ -44,8 +44,8 @@ const TokenHash = ({ token, slug, collection }) => (
 export async function getServerSideProps(context) {
     const cookies = parseCookies();
     const slug = context.query.slug;
+    console.log(slug);
     const hash = context.query["token-hash"];
-    const collectionName = slug.replace(/-/g, " ");
     const res = await fetchAPI(
         `api/collections/${slug}/tokens/${hash}`,
         cookies
@@ -56,7 +56,7 @@ export async function getServerSideProps(context) {
     const collection = cres.response;
     try {
         const smartContract = process.env.NEXT_PUBLIC_CONTRACT;
-        const pactCode = `(${smartContract}.get-nft "${collectionName}" "${hash}")`;
+        const pactCode = `(${smartContract}.get-nft "${collection.name}" "${hash}")`;
         const fetchRes = await pactLocalFetch(pactCode);
         if (fetchRes == null) {
             //blockchain request failed

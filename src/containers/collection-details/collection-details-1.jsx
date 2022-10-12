@@ -224,13 +224,9 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                         title={
                                             prod.revealed
                                                 ? prod["name"]
-                                                : prod[
-                                                      "collection-name"
-                                                  ]
+                                                : prod["collection-name"]
                                         }
-                                        slug={prod[
-                                            "collection-name"
-                                        ].replace(/ /g, "-")}
+                                        slug={data.slug}
                                         hash={prod["content-hash"]}
                                         image={{
                                             src: prod.revealed
@@ -239,8 +235,8 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                         }}
                                         //dummy data
                                         price={{
-                                            amount:"",
-                                            currency:"KDA",
+                                            amount: "",
+                                            currency: "KDA",
                                         }}
                                     />
                                 </div>
