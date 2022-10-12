@@ -297,7 +297,7 @@ const MintConfirmDialog = () => {
                 },
             }).then((res) => res.json());
             setMintStatus(
-                "Transaction is pending, Request Key : " + requestKeys[0]
+                "Your transaction is pending, here's your Request Key : " + requestKeys[0]
             );
             const interval = setInterval(async () => {
                 const result = await Pact.fetch.poll({ requestKeys }, host);
