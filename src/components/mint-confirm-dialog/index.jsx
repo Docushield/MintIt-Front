@@ -348,7 +348,7 @@ const MintConfirmDialog = () => {
             className="rn-popup-modal2 share-modal-wrapper"
         >
             <Modal.Body>
-                <h3 className="mb-5">Mint Collections</h3>
+                <h3 className="mb-5">Minting, <span style={{color:"#20ec8d"}}>{current.name}</span></h3>
                 {isMinting ? (
                     pending ? (
                         <div className="row text-center">
