@@ -21,7 +21,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
     const connected = useSelector((state) => state.wallet.connected);
     const [isShareModalOpen, setIsShareModalOpen] = useState(false);
     const shareModalHandler = () => setIsShareModalOpen((prev) => !prev);
-    const currentTime = Date().toLocaleString();
+    const currentTime = new Date().toLocaleString();
     const revealTime = new Date(data["reveal-at"]).toLocaleString();
     const premintTime = new Date(data["premint-ends"]).toLocaleString();
 
