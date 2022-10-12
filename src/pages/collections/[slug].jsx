@@ -34,8 +34,6 @@ export async function getServerSideProps(context) {
 
     try {
         const token = cookies["token"];
-        const collectionName = slug.replace(/-/g, " ");
-        const pactCode = `(${smartContract}.search-nfts-by-collection "${collectionName}")`;
 
         const response = await fetch(`${baseURL}/api/collections/${slug}`, {
             method: "GET",
@@ -44,6 +42,7 @@ export async function getServerSideProps(context) {
             },
         }).then((res) => res.json());
 
+        const pactCode = `(${smartContract}.search-nfts-by-collection "${response.name}")`;
         let tokens = [];
         const fetchRes = await pactLocalFetch(pactCode);
         if (fetchRes !== null) {
