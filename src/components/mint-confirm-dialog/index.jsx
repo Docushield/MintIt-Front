@@ -350,15 +350,20 @@ const MintConfirmDialog = () => {
             <Modal.Body>
                 <h3 className="mb-5">Mint Collections</h3>
                 {isMinting ? (
-                    <div className="row text-center">
-                        {pending ? (
-                            <Spinner animation="border" role="status">
-                                <span>{mintStatus}</span>
-                            </Spinner>
-                        ) : (
+                    pending ? (
+                        <div className="row text-center">
+                            <div className="col-1">
+                                <Spinner animation="border"></Spinner>
+                            </div>
+                            <div className="col-11">
+                                <p>{mintStatus}</p>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="row text-center">
                             <p>{mintStatus}</p>
-                        )}
-                    </div>
+                        </div>
+                    )
                 ) : (
                     <div className="row">
                         <div className="col-12">
