@@ -5,7 +5,7 @@ import Footer from "@layout/footer/footer-01";
 import PropTypes from "prop-types";
 import { parseCookies } from "nookies";
 import Breadcrumb from "@components/breadcrumb";
-import ProvenanceHashArea from "@containers/provenance-hash/provenance-hash-1";
+import ProvenanceHashArea from "@containers/provenance-hash/provenance-hash";
 import { fetchAPI } from "@utils/fetchAPI";
 import { pactLocalFetch } from "@utils/pactLocalFetch";
 
@@ -58,7 +58,11 @@ const ProvenanceHash = ({ collection, tokens, concatenatedHashStr }) => (
         <SEO pageTitle="Provenance Hash" />
         <Header />
         <main id="main-content">
-            <Breadcrumb pageTitle="Provenance Hash" pageTitle1="" currentPage="Provenance Hash"/>
+            <Breadcrumb
+                pageTitle="Provenance Hash"
+                pageTitle1=""
+                currentPage="Provenance Hash"
+            />
             <ProvenanceHashArea
                 collection={collection}
                 tokens={tokens}

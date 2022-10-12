@@ -4,7 +4,7 @@ import Header from "@layout/header/header-01";
 import Footer from "@layout/footer/footer-01";
 import Breadcrumb from "@components/breadcrumb";
 import { parseCookies } from "nookies";
-import ProvenanceHashArea from "@containers/provenance-hash/provenance-hash-1";
+import ProvenanceHashArea from "@containers/provenance-hash/provenance-hash";
 
 export async function getServerSideProps(context) {
     const cookies = parseCookies(context);
