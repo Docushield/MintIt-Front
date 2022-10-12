@@ -1,8 +1,7 @@
 import { PROOF_FOR_STARTING_INDEX } from "src/lib/constants";
 
-const ProvenanceHashArea = ({ collection, startIndex, tokens }) => {
-    console.log(collection);
-    const concatenatedHash = tokens.map((token) => token.hash).join("");
+const ProvenanceHashArea = ({ collection, tokens, concatenatedHashStr }) => {
+    const startIndex = collection["starting-index"].int;
     return (
         <div className="container mt-5">
             <h2 className="fst-italic">{collection.name} Provenance Record</h2>
@@ -20,7 +19,7 @@ const ProvenanceHashArea = ({ collection, startIndex, tokens }) => {
 
             <h4 className="mb-5">IMPORTANT INFORMATION</h4>
             <p>A random integer is generated using this formula:</p>
-            <pre className="code-block">
+            <pre>
                 <code className="formula">
                     <span className="red">(</span>
                     <span className="func">defun</span>{" "}
@@ -97,11 +96,7 @@ const ProvenanceHashArea = ({ collection, startIndex, tokens }) => {
                 <tr>
                     <td className="text-end">FINALIZED STARTING INDEX</td>
                     <td>
-                        <a
-                            href={`https://explorer.chainweb.com/mainnet/tx/${collection.requestKey}`}
-                        >
-                            8853
-                        </a>
+                        <a href={`#`}>{collection["starting-index"].int}</a>
                     </td>
                 </tr>
 
@@ -114,7 +109,7 @@ const ProvenanceHashArea = ({ collection, startIndex, tokens }) => {
             <textarea
                 readOnly
                 className="fs-6 hash-content"
-                value={concatenatedHash}
+                value={concatenatedHashStr}
             ></textarea>
             <div className="divider"></div>
             <h4>PROVENANCE RECORD</h4>
@@ -138,7 +133,7 @@ const ProvenanceHashArea = ({ collection, startIndex, tokens }) => {
                             <tr key={token.hash}>
                                 <td>{index}</td>
                                 <td>
-                                    {(startIndex + index) % collection.size}
+                                    {(startIndex + index) % collection.size.int}
                                 </td>
                                 <td>{token.hash}</td>
                                 <td>

@@ -1,8 +1,8 @@
 import { PROOF_FOR_STARTING_INDEX } from "src/lib/constants";
 
-const ProvenanceHashArea = ({ collection, startIndex, tokens }) => {
+const ProvenanceHashArea = ({ collection, tokens, concatenatedHashStr }) => {
     console.log(collection);
-    const concatenatedHash = tokens.map((token) => token.hash).join("");
+    const startIndex = collection["starting-index"].int;
 
     return (
         <div className="container mt-5">
@@ -98,7 +98,9 @@ const ProvenanceHashArea = ({ collection, startIndex, tokens }) => {
             <table className="my-5 provenance_blue_field_table">
                 <tr>
                     <td className="text-end">FINALIZED STARTING INDEX</td>
-                    <td>8853</td>
+                    <td>
+                        <a href={`#`}>{collection["starting-index"].int}</a>
+                    </td>
                 </tr>
 
                 <tr>
@@ -110,7 +112,7 @@ const ProvenanceHashArea = ({ collection, startIndex, tokens }) => {
             <textarea
                 readOnly
                 className="fs-6 hash-content"
-                value={concatenatedHash}
+                value={concatenatedHashStr}
             ></textarea>
             <div className="divider"></div>
             <h4>PROVENANCE RECORD</h4>
@@ -132,7 +134,9 @@ const ProvenanceHashArea = ({ collection, startIndex, tokens }) => {
                     {tokens.map((token, index) => (
                         <tr key={token.hash}>
                             <td>{index}</td>
-                            <td>{(startIndex + index) % collection.size}</td>
+                            <td>
+                                {(startIndex + index) % collection.size.int}
+                            </td>
                             <td>{token.hash}</td>
                             <td>
                                 <a

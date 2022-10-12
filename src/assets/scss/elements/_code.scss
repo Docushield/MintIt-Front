@@ -29,10 +29,3 @@ code {
         color: black;
     }
 }
-
-.code-block {
-    transition: all 0.25 ease-in-out;
-    &:hover {
-        transform: scale(1.03);
-    }
-}

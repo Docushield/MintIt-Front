@@ -7,14 +7,29 @@ import { parseCookies } from "nookies";
 import Breadcrumb from "@components/breadcrumb";
 import ProvenanceHashArea from "@containers/provenance-hash/provenance-hash-2";
 import { fetchAPI } from "@utils/fetchAPI";
+import { pactLocalFetch } from "@utils/pactLocalFetch";
 
 export async function getServerSideProps(context) {
     const cookies = parseCookies(context);
     const slug = context.params.slug;
 
-    const res = await fetchAPI(`api/collections/${slug}`, cookies);
+    const smartContract = process.env.NEXT_PUBLIC_CONTRACT;
+    const collectionName = slug.replace(/-/g, " ");
+
+    const res = await pactLocalFetch(
+        `(${smartContract}.get-nft-collection "${collectionName}")`
+    );
     const tokens = await fetchAPI(`api/collections/${slug}/tokens`, cookies);
-    console.log(tokens.response);
+
+    const tokenhashs = await fetchAPI(
+        `api/collections/${slug}/tokenHashes`,
+        cookies
+    );
+
+    let concatenatedHashStr = "";
+    tokenhashs.response.forEach(
+        (tokenHash) => (concatenatedHashStr += tokenHash.hash)
+    );
 
     if (res.error || tokens.error) {
         return {
@@ -25,26 +40,17 @@ export async function getServerSideProps(context) {
         };
     }
 
-    let startIndex = 0;
-    let min = tokens.response[0];
-    for (let i = 0; i < tokens.response.length; i++) {
-        if (new Date(min.mint_at) > new Date(tokens.response[i].mint_at)) {
-            min = tokens.response[i];
-            startIndex = i;
-        }
-    }
-
     return {
         props: {
-            collection: res.response,
-            startIndex,
+            collection: res.result.data,
             tokens: tokens.response,
+            concatenatedHashStr,
             className: "template-color-1",
         },
     };
 }
 
-const ProvenanceHash = ({ collection, startIndex, tokens }) => (
+const ProvenanceHash = ({ collection, tokens, concatenatedHashStr }) => (
     <Wrapper>
         <SEO pageTitle="Provenance Hash" />
         <Header />
@@ -52,8 +58,8 @@ const ProvenanceHash = ({ collection, startIndex, tokens }) => (
             <Breadcrumb pageTitle="Provenance Hash" />
             <ProvenanceHashArea
                 collection={collection}
-                startIndex={startIndex}
                 tokens={tokens}
+                concatenatedHashStr={concatenatedHashStr}
             />
         </main>
         <Footer />
