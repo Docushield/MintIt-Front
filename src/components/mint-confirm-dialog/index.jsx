@@ -351,12 +351,13 @@ const MintConfirmDialog = () => {
                 <h3 className="mb-5">Mint Collections</h3>
                 {isMinting ? (
                     <div className="row text-center">
-                        {pending ? (
-                            <Spinner animation="border" role="status">
-                                <span>{mintStatus}</span>
-                            </Spinner>
-                        ) : (
-                            <p>{mintStatus}</p>
+                        <p>{mintStatus}</p>
+                        {pending && (
+                            <Spinner
+                                animation="border"
+                                role="status"
+                                className="mx-auto mt-1"
+                            />
                         )}
                     </div>
                 ) : (
