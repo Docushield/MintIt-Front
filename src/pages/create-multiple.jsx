@@ -101,7 +101,7 @@ const CreateMultiple = () => {
             }
 
             setStatus(
-                "Initializing and deploying a collection... Please wait."
+                "Initializing and deploying a collection... Please wait, this may take a while."
             );
             const interval = setInterval(async () => {
                 try {
