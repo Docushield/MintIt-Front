@@ -28,7 +28,7 @@ const TokenDetailsArea = ({ space, className, product, slug, collection }) => (
                                     : "/images/collection/placeholder.png"
                             }
                         />
-                        <DescriptionDropdown />
+                        <DescriptionDropdown collection={collection} />
                     </Sticky>
                 </div>
                 <div className="col-lg-5 col-md-12 col-sm-12 mt_md--50 mt_sm--60">
@@ -55,7 +55,7 @@ const TokenDetailsArea = ({ space, className, product, slug, collection }) => (
                             </Button>
                         </h6>
                         <div className="catagory-collection items-center">
-                            <div className="mx-2">
+                            {/*                             <div className="mx-2">
                                 <Button
                                     size="small"
                                     color="primary-alta"
@@ -63,7 +63,7 @@ const TokenDetailsArea = ({ space, className, product, slug, collection }) => (
                                 >
                                     Listed: Yes/No
                                 </Button>
-                            </div>
+                            </div>*/}
                             {/* <div className="mx-2">
                                 <Button
                                     size="small"

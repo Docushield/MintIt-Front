@@ -11,11 +11,39 @@ import ActivityArea from "@containers/activity-new";
 import rankingData from "../data/stats-ranking.json";
 import activityData from "../data/activity.json";
 
-export async function getStaticProps() {
-    return { props: { className: "template-color-1" } };
+export async function getServerSideProps(context) {
+    try {
+        const smartContract = process.env.NEXT_PUBLIC_CONTRACT;
+        const pactCode = `(${smartContract}.get-nft "${collection.name}" "${hash}")`;
+        const fetchRes = await pactLocalFetch(pactCode);
+        if (fetchRes == null) {
+            //blockchain request failed
+            return {
+                props: {
+                    className: "template-color-1",
+                    activityData: [],
+                },
+            };
+        } else {
+            return {
+                props: {
+                    activityData: [],
+                    className: "template-color-1",
+                },
+            };
+        }
+    } catch (error) {
+        console.log(error);
+        return {
+            props: {
+                activityData: [],
+                className: "template-color-1",
+            },
+        };
+    }
 }
 
-const Product = () => {
+const Product = ({ activityData }) => {
     return (
         <Wrapper>
             <SEO pageTitle="Stats" />
@@ -26,7 +54,7 @@ const Product = () => {
                     pageTitle1=""
                     currentPage="Stats"
                 />
-                <RankingArea data={{ ranking: rankingData.slice(0, 10) }} />
+                {/* <RankingArea data={{ ranking: rankingData.slice(0, 10) }} /> */}
                 <ActivityArea
                     data={{ activityData: activityData.slice(0, 10) }}
                 />

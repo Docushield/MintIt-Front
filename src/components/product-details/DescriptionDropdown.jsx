@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
-const DescriptionDropdown = () => {
+const DescriptionDropdown = ({ collection }) => {
     const [isCollapsed, setIsCollapsed] = useState(false);
 
     return (
@@ -19,12 +19,7 @@ const DescriptionDropdown = () => {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5 }}
                 >
-                    This is the mock description. This is the mock description.
-                    This is the mock description This is the mock description.
-                    This is the mock description. This is the mock description
-                    This is the mock description. This is the mock description.
-                    This is the mock description This is the mock description.
-                    This is the mock description. This is the mock description
+                    {collection.description}
                 </motion.div>
             )}
         </div>
