@@ -16,7 +16,6 @@ import { toggleConnectWalletDialog } from "src/store/wallet.module";
 import WalletAddress from "@components/wallet-address";
 
 const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
-    console.log(data);
     const dispatch = useDispatch();
     const connected = useSelector((state) => state.wallet.connected);
     const [isShareModalOpen, setIsShareModalOpen] = useState(false);
@@ -214,23 +213,22 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                 <div className="row">
                     {tokens?.length > 0 ? (
                         <>
-                            {tokens.map((prod) => (
+                            {tokens.map((prod, index) => (
                                 <div
                                     key={prod.id}
                                     className="col-5 col-lg-4 col-md-3 col-sm-4 col-6 my-3"
                                 >
                                     <Product
                                         overlay
-                                        title={
+                                        title={`#${index + 1} ${
                                             prod.revealed
                                                 ? prod["name"]
-                                                : prod[
-                                                      "collection-name"
-                                                  ]
-                                        }
-                                        slug={prod[
-                                            "collection-name"
-                                        ].replace(/ /g, "-")}
+                                                : prod["collection-name"]
+                                        }`}
+                                        slug={prod["collection-name"].replace(
+                                            / /g,
+                                            "-"
+                                        )}
                                         hash={prod["content-hash"]}
                                         image={{
                                             src: prod.revealed
@@ -239,8 +237,8 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                         }}
                                         //dummy data
                                         price={{
-                                            amount:"",
-                                            currency:"KDA",
+                                            amount: "",
+                                            currency: "KDA",
                                         }}
                                     />
                                 </div>
