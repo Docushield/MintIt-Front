@@ -133,53 +133,61 @@ const ProvenanceHashArea = ({ collection, tokens, concatenatedHashStr }) => {
                 </thead>
                 <tbody>
                     {tokens.length > 0 &&
-                        tokens.map((token, index) => (
-                            <tr key={token.hash}>
-                                <td>
-                                    {(startIndex + index) % collection.size.int}
-                                </td>
-                                <td>{index}</td>
-                                <td>{token["content-hash"]}</td>
-                                <td>
-                                    <div>
-                                        {token.spec.type !== "mutating" ||
-                                        !token.spec["sub-specs"] ? (
-                                            <a
-                                                href={`https://ipfs.io/ipfs/${token["content-uri"].data}`}
-                                                target="_blank"
-                                            >
-                                                {token["content-uri"].data}
-                                            </a>
-                                        ) : (
-                                            <>
-                                                {token.spec["sub-specs"].map(
-                                                    (spec) => (
-                                                        <div
-                                                            key={
-                                                                spec[
-                                                                    "content_uri"
-                                                                ].data
-                                                            }
-                                                        >
-                                                            <a
-                                                                href={`https://ipfs.io/ipfs/${spec["content_uri"].data}`}
-                                                                target="_blank"
-                                                            >
-                                                                {
+                        tokens.map(
+                            (token, index) =>
+                                (token.revealed || token.revealedAt > 0) && (
+                                    <tr key={token.hash}>
+                                        <td>
+                                            {(startIndex + index) %
+                                                collection.size.int}
+                                        </td>
+                                        <td>{index}</td>
+                                        <td>{token["content-hash"]}</td>
+                                        <td>
+                                            <div>
+                                                {token.spec.type !==
+                                                    "mutating" ||
+                                                !token.spec["sub-specs"] ? (
+                                                    <a
+                                                        href={`https://ipfs.io/ipfs/${token["content-uri"].data}`}
+                                                        target="_blank"
+                                                    >
+                                                        {
+                                                            token["content-uri"]
+                                                                .data
+                                                        }
+                                                    </a>
+                                                ) : (
+                                                    <>
+                                                        {token.spec[
+                                                            "sub-specs"
+                                                        ].map((spec) => (
+                                                            <div
+                                                                key={
                                                                     spec[
                                                                         "content_uri"
                                                                     ].data
                                                                 }
-                                                            </a>
-                                                        </div>
-                                                    )
+                                                            >
+                                                                <a
+                                                                    href={`https://ipfs.io/ipfs/${spec["content_uri"].data}`}
+                                                                    target="_blank"
+                                                                >
+                                                                    {
+                                                                        spec[
+                                                                            "content_uri"
+                                                                        ].data
+                                                                    }
+                                                                </a>
+                                                            </div>
+                                                        ))}
+                                                    </>
                                                 )}
-                                            </>
-                                        )}
-                                    </div>
-                                </td>
-                            </tr>
-                        ))}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                )
+                        )}
                 </tbody>
             </table>
         </div>
