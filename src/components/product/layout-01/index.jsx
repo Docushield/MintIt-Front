@@ -26,6 +26,7 @@ const Product = ({
     disableShareDropdown,
     hash,
     revealed,
+    index,
 }) => {
     const [showBidModal, setShowBidModal] = useState(false);
     const handleBidModal = () => {
@@ -75,16 +76,13 @@ const Product = ({
                             {bitCount}+ Place Bit.
                         </Anchor>
                     </div> */}
-                    <span className="product-name">
-                        {revealed ? "Token Name" : "Collection Name"}
-                    </span>
+                    <span className="product-name">#{index}</span>
                     {!disableShareDropdown && <ShareDropdown />}
                 </div>
                 <Anchor path={`/collections/${slug}/tokens/${hash}`}>
                     <span className="product-name">{title}</span>
                 </Anchor>
                 {/* <span className="latest-bid">Highest bid {latestBid}</span> */}
-                <ProductBid price={price} />
                 <a
                     href={`/collections/${slug}/tokens/${hash}`}
                     className="viewbtn connectBtn btn btn-small btn-primary"

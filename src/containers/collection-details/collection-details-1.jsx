@@ -236,11 +236,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                 >
                                     <Product
                                         overlay
-                                        title={
-                                            prod.revealed
-                                                ? prod["name"]
-                                                : prod["collection-name"]
-                                        }
+                                        title={prod["collection-name"]}
                                         slug={data.slug}
                                         hash={
                                             prod["content-hash"] || prod["hash"]
@@ -256,6 +252,12 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                             currency: "KDA",
                                         }}
                                         revealed={prod.revealed}
+                                        index={
+                                            prod.index ||
+                                            (prod["mint-index"]
+                                                ? prod["mint-index"].int
+                                                : "")
+                                        }
                                     />
                                 </div>
                             ))}
