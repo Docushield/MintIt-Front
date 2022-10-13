@@ -77,14 +77,14 @@ const DetailsTabContent = ({
                 <div className="pd-property-spec">
                     Creator Roaylties:{" "}
                     {(
-                        collection["sale-royalties"]["rates"][0].rate * 100
+                        collection["mint-royalties"]["rates"][0].rate * 100
                     ).toFixed(2)}{" "}
                     %
                 </div>
                 <div className="pd-property-spec">
                     MINT-IT Royalties:{" "}
                     {(
-                        collection["mint-royalties"]["rates"][0].rate * 100
+                        collection["sale-royalties"]["rates"][0].rate * 100
                     ).toFixed(2)}{" "}
                     %
                 </div>
