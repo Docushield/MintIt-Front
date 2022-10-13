@@ -17,6 +17,25 @@ const TokenDetailsArea = ({ space, className, product, slug, collection }) => {
         setIsCopied(true);
     };
 
+    const history = [
+        {
+            id: "0",
+            status: "mint",
+            price: "",
+            from: "",
+            to: product.owner,
+            time: product.mintedAt,
+        },
+        {
+            id: "1",
+            status: "reveal",
+            price: "",
+            from: "",
+            to: "",
+            time: product.revealedAt,
+        },
+    ];
+
     return (
         <div
             className={clsx(
@@ -104,7 +123,7 @@ const TokenDetailsArea = ({ space, className, product, slug, collection }) => {
                                     creator={collection?.creator}
                                     properties={product.spec.value.attributes}
                                     spec={product.spec}
-                                    history={product?.history}
+                                    history={history}
                                     slug={slug}
                                     collection={collection}
                                 />

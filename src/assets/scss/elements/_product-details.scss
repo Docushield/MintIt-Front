@@ -612,3 +612,8 @@
         padding: 5px;
     }
 }
+
+thead.token-history-header tr th,
+tbody.token-history tr td {
+    padding: 0.5rem !important;
+}
