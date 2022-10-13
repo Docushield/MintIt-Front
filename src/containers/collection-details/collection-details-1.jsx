@@ -15,8 +15,11 @@ import {
 import { toggleConnectWalletDialog } from "src/store/wallet.module";
 import WalletAddress from "@components/wallet-address";
 
+const getIndex = (token) => token.index || token["mint-index"].int;
+
 const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
     console.log(data);
+    tokens = tokens.sort((a, b) => getIndex(a) - getIndex(b));
     const dispatch = useDispatch();
     const connected = useSelector((state) => state.wallet.connected);
     const [isShareModalOpen, setIsShareModalOpen] = useState(false);
@@ -235,11 +238,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                 >
                                     <Product
                                         overlay
-                                        title={
-                                            prod.revealed
-                                                ? prod["name"]
-                                                : prod["collection-name"]
-                                        }
+                                        title={prod["collection-name"]}
                                         slug={data.slug}
                                         hash={
                                             prod["content-hash"] || prod["hash"]
@@ -255,6 +254,12 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                             currency: "KDA",
                                         }}
                                         revealed={prod.revealed}
+                                        index={
+                                            prod.index ||
+                                            (prod["mint-index"]
+                                                ? prod["mint-index"].int
+                                                : "")
+                                        }
                                     />
                                 </div>
                             ))}
