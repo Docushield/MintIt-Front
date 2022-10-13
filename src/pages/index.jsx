@@ -25,7 +25,7 @@ export async function getServerSideProps(context) {
 
     const res = await fetchAPI("api/collections", cookies);
 
-    if (res.response.error || res.error) {
+    if ((res.response && res.response.error) || res.error) {
         return {
             props: {
                 error: res.response.error || res.error,
