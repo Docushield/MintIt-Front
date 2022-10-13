@@ -136,7 +136,7 @@ const CollectionArea = ({ className, space, id, data }) => {
                                     title={collection.name}
                                     total_item={collection.size}
                                     path={`/collections/${collection.slug}`}
-                                    minted={collection.minted}
+                                    minted={collection.numMinted}
                                     image={collection.imageUrl}
                                     logo={collection.logoUrl}
                                     thumbnails={collection.thumbnails}
