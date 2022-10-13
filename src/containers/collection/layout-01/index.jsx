@@ -42,24 +42,27 @@ const TopCollectionArea = ({ className, id, space, data }) => (
                 <div className="row g-5">
                     {/* must be updated when applying status condition at backend server */}
                     {/* {data.collections.map((collection) => ( */}
-                    {data.collections.filter(collection => collection.status == "success").map((collection) => (
-                        <div
-                            key={collection.id}
-                            data-sal="slide-up"
-                            data-sal-delay="150"
-                            data-sal-duration="800"
-                            className="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-12"
-                        >
-                            <Collection
-                                title={collection.name}
-                                total_item={collection.size}
-                                path={`/collections/${collection.slug}`}
-                                image={collection.imageUrl}
-                                thumbnails={collection.thumbnails}
-                                profile_image={collection.bannerImageUrl}
-                            />
-                        </div>
-                    ))}
+                    {data.collections
+                        .filter((collection) => collection.status == "success")
+                        .map((collection) => (
+                            <div
+                                key={collection.id}
+                                data-sal="slide-up"
+                                data-sal-delay="150"
+                                data-sal-duration="800"
+                                className="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-12"
+                            >
+                                <Collection
+                                    title={collection.name}
+                                    total_item={collection.size}
+                                    path={`/collections/${collection.slug}`}
+                                    image={collection.imageUrl}
+                                    thumbnails={collection.thumbnails}
+                                    profile_image={collection.bannerImageUrl}
+                                    minted={collection.numMinted}
+                                />
+                            </div>
+                        ))}
                 </div>
             )}
         </div>
