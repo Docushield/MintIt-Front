@@ -45,37 +45,28 @@ export async function getServerSideProps(context) {
     const cookies = parseCookies();
     const slug = context.query.slug;
     const hash = context.query["token-hash"];
-    const res = await fetchAPI(
-        `api/collections/${slug}/tokens/${hash}`,
-        cookies
-    );
-    const backendToken = res.response;
-    backendToken["creator"] = backendToken["owner"];
-    backendToken["revealed"] = backendToken["revealedAt"] != null;
-
     const cres = await fetchAPI(`api/collections/${slug}`, cookies);
     const collection = cres.response;
     try {
         const smartContract = process.env.NEXT_PUBLIC_CONTRACT;
         const pactCode = `(${smartContract}.get-nft "${collection.name}" "${hash}")`;
         const fetchRes = await pactLocalFetch(pactCode);
+        console.log(fetchRes);
         if (fetchRes == null) {
             //blockchain request failed
             return {
                 props: {
                     slug,
-                    token: backendToken,
+                    token: {},
                     className: "template-color-1",
                     collection,
                 },
             };
         } else {
-            backendToken["content-uri"] = fetchRes.result.data["content-uri"];
-            backendToken["spec"] = fetchRes.result.data["spec"];
             return {
                 props: {
                     slug,
-                    token: backendToken,
+                    token: fetchRes.result.data,
                     className: "template-color-1",
                     collection,
                 },
@@ -86,7 +77,7 @@ export async function getServerSideProps(context) {
         return {
             props: {
                 error: error.message,
-                token: backendToken,
+                token: {},
                 slug,
                 className: "template-color-1",
                 collection,
