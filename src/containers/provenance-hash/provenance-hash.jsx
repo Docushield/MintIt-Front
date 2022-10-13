@@ -142,7 +142,8 @@ const ProvenanceHashArea = ({ collection, tokens, concatenatedHashStr }) => {
                                 <td>{token["content-hash"]}</td>
                                 <td>
                                     <div>
-                                        {token.spec.type !== "mutating" ? (
+                                        {token.spec.type !== "mutating" ||
+                                        !token.spec["sub-specs"] ? (
                                             <a
                                                 href={`https://ipfs.io/ipfs/${token["content-uri"].data}`}
                                                 target="_blank"

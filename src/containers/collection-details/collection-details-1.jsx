@@ -18,7 +18,6 @@ import WalletAddress from "@components/wallet-address";
 const getIndex = (token) => token.index || token["mint-index"].int;
 
 const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
-    console.log(data);
     tokens = tokens.sort((a, b) => getIndex(a) - getIndex(b));
     const dispatch = useDispatch();
     const connected = useSelector((state) => state.wallet.connected);
@@ -231,7 +230,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                 <div className="row">
                     {tokens?.length > 0 ? (
                         <>
-                            {tokens.map((prod) => (
+                            {tokens.map((prod, index) => (
                                 <div
                                     key={prod.id}
                                     className="col-5 col-lg-4 col-md-3 col-sm-4 col-6 my-3"
@@ -254,12 +253,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                             currency: "KDA",
                                         }}
                                         revealed={prod.revealed}
-                                        index={
-                                            prod.index ||
-                                            (prod["mint-index"]
-                                                ? prod["mint-index"].int
-                                                : "")
-                                        }
+                                        index={index}
                                     />
                                 </div>
                             ))}
