@@ -21,7 +21,12 @@ export async function getServerSideProps(context) {
     const res = await pactLocalFetch(
         `(${smartContract}.get-nft-collection "${collectionName}")`
     );
-    let tokens = await fetchAPI(`api/collections/${slug}/tokens`, cookies);
+    const pactCode = `(${smartContract}.search-nfts-by-collection "${collectionName}")`;
+    let tokens = [];
+    const fetchRes = await pactLocalFetch(pactCode);
+    if (fetchRes !== null) {
+        tokens = fetchRes.result.data;
+    }
 
     const tokenhashs = await fetchAPI(
         `api/collections/${slug}/tokenHashes`,
@@ -36,7 +41,7 @@ export async function getServerSideProps(context) {
     );
     tokens = tokenhashs.response
         .map((e) => {
-            return tokens.response.find((x) => x.hash == e);
+            return tokens.find((x) => x["content-hash"] == e);
         })
         .filter((e) => e != undefined);
 
