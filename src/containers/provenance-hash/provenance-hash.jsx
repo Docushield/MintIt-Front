@@ -125,8 +125,7 @@ const ProvenanceHashArea = ({ collection, tokens, concatenatedHashStr }) => {
             <table className="my-5 text-center">
                 <thead>
                     <tr>
-                        <th>INITIAL SEQUENCE INDEX</th>
-                        <th>ASSIGNED TOKEN ID</th>
+                        <th>MINTING ORDER</th>
                         <th>BLAKE2B HASH</th>
                         <th>IPFS HASH</th>
                     </tr>
@@ -137,11 +136,7 @@ const ProvenanceHashArea = ({ collection, tokens, concatenatedHashStr }) => {
                             (token, index) =>
                                 (token.revealed || token.revealedAt > 0) && (
                                     <tr key={token.hash}>
-                                        <td>
-                                            {(startIndex + index) %
-                                                collection.size.int}
-                                        </td>
-                                        <td>{index}</td>
+                                        <td>{token["mint-index"].int}</td>
                                         <td>{token["content-hash"]}</td>
                                         <td>
                                             <div>

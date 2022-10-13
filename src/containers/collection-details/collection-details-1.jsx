@@ -230,7 +230,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                 <div className="row">
                     {tokens?.length > 0 ? (
                         <>
-                            {tokens.map((prod, index) => (
+                            {tokens.map((prod) => (
                                 <div
                                     key={prod.id}
                                     className="col-5 col-lg-4 col-md-3 col-sm-4 col-6 my-3"
@@ -253,7 +253,12 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                             currency: "KDA",
                                         }}
                                         revealed={prod.revealed}
-                                        index={index}
+                                        index={
+                                            prod.index ||
+                                            (prod["mint-index"]
+                                                ? prod["mint-index"].int
+                                                : "")
+                                        }
                                     />
                                 </div>
                             ))}
