@@ -26,14 +26,6 @@ const TokenDetailsArea = ({ space, className, product, slug, collection }) => {
             to: product.owner,
             time: product.mintedAt,
         },
-        {
-            id: "1",
-            status: "reveal",
-            price: "",
-            from: "",
-            to: "",
-            time: product.revealedAt,
-        },
     ];
 
     return (
