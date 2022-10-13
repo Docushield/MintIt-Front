@@ -42,32 +42,14 @@ export async function getServerSideProps(context) {
             },
         }).then((res) => res.json());
 
-        const tokenResponse = await fetch(
-            `${baseURL}/api/collections/${slug}/tokens`,
-            {
-                method: "GET",
-                headers: {
-                    "x-auth-token": token,
-                },
-            }
-        ).then((res) => res.json());
-
         const pactCode = `(${smartContract}.search-nfts-by-collection "${response.name}")`;
         let tokens = [];
         const fetchRes = await pactLocalFetch(pactCode);
+        console.log(JSON.stringify(fetchRes));
         if (fetchRes !== null) {
-            tokens = fetchRes.result.data.map((k, i) => {
-                const res = tokenResponse.find((e) => e.index == i);
-                if (res && !k["content-hash"]) {
-                    res["content-uri"] = k["content-uri"];
-                    res["spec"] = k["spec"];
-                    res["revealed"] = res["revealedAt"] != null;
-                    return res;
-                } else {
-                    return k;
-                }
-            });
+            tokens = fetchRes.result.data;
         }
+        console.log(tokens);
         return {
             props: {
                 collection: response,
