@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import Spinner from "react-bootstrap/Spinner";
 import Pact from "pact-lang-api";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
@@ -356,14 +355,17 @@ const MintConfirmDialog = () => {
                 </h3>
                 {isMinting ? (
                     <div className="row text-center">
-                        <p>{mintStatus}</p>
-                        {pending && (
-                            <Spinner
-                                animation="border"
+                        <div className="col-12">
+                            <p>{mintStatus}afdas</p>
+                        </div>
+                        <div className="col-12 mt-5">
+                            <div
+                                className={
+                                    pending ? "spinner-border" : "spinner-grow"
+                                }
                                 role="status"
-                                className="mx-auto mt-1"
-                            />
-                        )}
+                            ></div>
+                        </div>
                     </div>
                 ) : (
                     <div className="row">
