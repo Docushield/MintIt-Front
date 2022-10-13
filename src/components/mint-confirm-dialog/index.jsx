@@ -356,7 +356,7 @@ const MintConfirmDialog = () => {
                 {isMinting ? (
                     <div className="row text-center">
                         <div className="col-12">
-                            <p>{mintStatus}afdas</p>
+                            <p>{mintStatus}</p>
                         </div>
                         <div className="col-12 mt-5">
                             <div
