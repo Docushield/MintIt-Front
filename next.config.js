@@ -31,5 +31,6 @@ module.exports = {
         chainAPI: process.env.NEXT_PUBLIC_CHAIN_API_HOST,
         networkId: process.env.NEXT_PUBLIC_NETWORK_ID,
         chainId: process.env.NEXT_PUBLIC_CHAIN_ID,
+        chainExplorer: process.env.NEXT_PUBLIC_CNAIN_EXPLORER,
     },
 };

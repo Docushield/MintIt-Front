@@ -97,7 +97,7 @@ const ProvenanceHashArea = ({ collection, tokens, concatenatedHashStr }) => {
                     <td className="text-end">FINALIZED STARTING INDEX</td>
                     <td>
                         <a
-                            href={`https://explorer.chainweb.com/mainnet/tx/${collection.requestKey}`}
+                            href={`${process.env.chainExplorer}/${collection.requestKey}`}
                         >
                             {collection["starting-index"].int}
                         </a>
