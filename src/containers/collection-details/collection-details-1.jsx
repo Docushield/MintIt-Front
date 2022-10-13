@@ -153,12 +153,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                     <div className="col-md-6">
                                         <div className="status-box">
                                             <div>Price</div>
-                                            <div>
-                                                {currentTime < premintTime
-                                                    ? data["premint-price"]
-                                                    : data["mint-price"]}{" "}
-                                                KDA
-                                            </div>
+                                            <div>{data["mint-price"]} KDA</div>
                                         </div>
                                     </div>
                                     <div className="col-md-6">
@@ -211,7 +206,11 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
             <div className="container d-flex my-4 align-items-center">
                 <div className="mint-status-box">Type: {data.type}</div>
                 <div className="mint-status-box">
-                    Mint: {data["mint-price"]} KDA
+                    Mint:
+                    {currentTime < premintTime
+                        ? data["premint-price"]
+                        : data["mint-price"]}{" "}
+                    KDA
                 </div>
                 <div className="mint-status-box">
                     Remaining: {data.size - data.numMinted}
