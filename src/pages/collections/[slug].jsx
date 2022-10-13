@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import { parseCookies } from "nookies";
 import Breadcrumb from "@components/breadcrumb";
 import CollectionDetailsIntroArea from "@containers/collection-details/collection-details-1";
+import { pactLocalFetch } from "@utils/pactLocalFetch";
 
 const CollectionDetails = ({ collection, slug, tokens }) => {
     return (
@@ -29,9 +30,11 @@ export async function getServerSideProps(context) {
     const cookies = parseCookies(context);
     const slug = context.params.slug;
     const baseURL = process.env.NEXT_PUBLIC_API_URL;
+    const smartContract = process.env.NEXT_PUBLIC_CONTRACT;
 
     try {
         const token = cookies["token"];
+
         const response = await fetch(`${baseURL}/api/collections/${slug}`, {
             method: "GET",
             headers: {
@@ -39,16 +42,14 @@ export async function getServerSideProps(context) {
             },
         }).then((res) => res.json());
 
-        const tokens = await fetch(
-            `${baseURL}/api/collections/${slug}/tokens`,
-            {
-                method: "GET",
-                headers: {
-                    "x-auth-token": token,
-                },
-            }
-        ).then((res) => res.json());
-
+        const pactCode = `(${smartContract}.search-nfts-by-collection "${response.name}")`;
+        let tokens = [];
+        const fetchRes = await pactLocalFetch(pactCode);
+        console.log(JSON.stringify(fetchRes));
+        if (fetchRes !== null) {
+            tokens = fetchRes.result.data;
+        }
+        console.log(tokens);
         return {
             props: {
                 collection: response,

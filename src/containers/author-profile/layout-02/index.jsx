@@ -34,7 +34,7 @@ const DublicateCollectionArea = ({ className, data }) => {
     const connected = useSelector((state) => state.wallet.connected);
 
     const onSaleProducts = shuffleArray(data.products).slice(0, 10);
-    const ownedProducts = shuffleArray(data.products).slice(0, 10);
+    const ownedProducts = data.products.slice(0, 20);
     // const createdProducts = shuffleArray(data.products).slice(0, 10);
     const collections = shuffleArray(data.collections).slice(0, 10);
     const likedProducts = shuffleArray(data.products).slice(0, 10);
@@ -157,7 +157,6 @@ const DublicateCollectionArea = ({ className, data }) => {
                         <TabPane eventKey="nav-owned">
                             <div className="row g-5 d-flex">
                                 {ownedProducts?.map((prod) => (
-                                    console.log(prod),
                                     <div
                                         key={prod.id}
                                         className="col-5 col-lg-4 col-md-6 col-sm-6 col-12"
@@ -165,16 +164,32 @@ const DublicateCollectionArea = ({ className, data }) => {
                                         <Product
                                             overlay
                                             placeBid
-                                            title={prod["name"]}
-                                            slug={prod["collection-name"].replace(/ /g,"-")}
+                                            title={prod["collection-name"]}
+                                            slug={prod[
+                                                "collection-name"
+                                            ].replace(/ /g, "-")}
                                             hash={prod["content-hash"]}
                                             latestBid={prod.latestBid}
-                                            price="10"
+                                            //dummy data
+                                            price={{
+                                                amount: "",
+                                                currency: "KDA",
+                                            }}
                                             likeCount={prod.likeCount}
                                             auction_date={prod.auction_date}
-                                            image={prod.images?.[0]}
+                                            image={{
+                                                src: prod.revealed
+                                                    ? `https://ipfs.io/ipfs/${prod["content-uri"].data}`
+                                                    : "/images/collection/placeholder.png",
+                                            }}
                                             authors={prod.authors}
                                             bitCount={prod.bitCount}
+                                            index={
+                                                prod.index ||
+                                                (prod["mint-index"]
+                                                    ? prod["mint-index"].int
+                                                    : "")
+                                            }
                                         />
                                     </div>
                                 ))}

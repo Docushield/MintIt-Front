@@ -9,6 +9,7 @@ import Breadcrumb from "@components/breadcrumb";
 import CreateMultipleArea from "@containers/create-multiple";
 import CreateCollectionProgressArea from "@containers/create-collection-progress";
 import { toast } from "react-toastify";
+import { toSlug } from "@utils/methods";
 
 export async function getStaticProps() {
     return { props: { className: "template-color-1" } };
@@ -100,7 +101,7 @@ const CreateMultiple = () => {
             }
 
             setStatus(
-                "Initializing and deploying a collection... Please wait."
+                "Initializing and deploying a collection... Please wait, this may take a while."
             );
             const interval = setInterval(async () => {
                 try {
@@ -167,7 +168,7 @@ const CreateMultiple = () => {
                 ) : (
                     <CreateCollectionProgressArea
                         name={json.name}
-                        slug={json.slug}
+                        slug={toSlug(json.name)}
                         error={isError}
                         status={status}
                         success={isSuccess}

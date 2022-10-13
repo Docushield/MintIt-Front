@@ -15,12 +15,17 @@ import {
 import { toggleConnectWalletDialog } from "src/store/wallet.module";
 import WalletAddress from "@components/wallet-address";
 
+const getIndex = (token) => token.index || token["mint-index"].int;
+
 const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
-    console.log(data);
+    tokens = tokens.sort((a, b) => getIndex(a) - getIndex(b));
     const dispatch = useDispatch();
     const connected = useSelector((state) => state.wallet.connected);
     const [isShareModalOpen, setIsShareModalOpen] = useState(false);
     const shareModalHandler = () => setIsShareModalOpen((prev) => !prev);
+    const currentTime = new Date().toLocaleString();
+    const revealTime = new Date(data["reveal-at"]).toLocaleString();
+    const premintTime = new Date(data["premint-ends"]).toLocaleString();
 
     useEffect(() => {
         dispatch(setCurrentCollection(data));
@@ -162,7 +167,14 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                     <div className="col-md-6">
                                         <div className="status-box">
                                             <div>Reveals at </div>
-                                            <div>Instant</div>
+                                            <div>
+                                                {currentTime < revealTime
+                                                    ? formatDate(
+                                                          data["reveal-at"],
+                                                          "MMMM Do, h:mm:ss A"
+                                                      )
+                                                    : "Instant"}
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="col-12">
@@ -194,9 +206,13 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                 </div>
             </div>
             <div className="container d-flex my-4 align-items-center">
-                <div className="mint-status-box">{data.type} Round</div>
+                <div className="mint-status-box">Type: {data.type}</div>
                 <div className="mint-status-box">
-                    Mint: {data["mint-price"]} KDA
+                    Mint:
+                    {currentTime < premintTime
+                        ? data["premint-price"]
+                        : data["mint-price"]}{" "}
+                    KDA
                 </div>
                 <div className="mint-status-box">
                     Remaining: {data.size - data.numMinted}
@@ -221,16 +237,28 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                 >
                                     <Product
                                         overlay
-                                        title={prod.name || prod.id}
+                                        title={prod["collection-name"]}
                                         slug={data.slug}
-                                        hash={prod.hash}
+                                        hash={
+                                            prod["content-hash"] || prod["hash"]
+                                        }
                                         image={{
-                                            src: "/images/collection/placeholder.png",
+                                            src: prod.revealed
+                                                ? `https://ipfs.io/ipfs/${prod["content-uri"].data}`
+                                                : "/images/collection/placeholder.png",
                                         }}
+                                        //dummy data
                                         price={{
-                                            amount: data.price,
-                                            currency: "$KDA",
+                                            amount: "",
+                                            currency: "KDA",
                                         }}
+                                        revealed={prod.revealed}
+                                        index={
+                                            prod.index ||
+                                            (prod["mint-index"]
+                                                ? prod["mint-index"].int
+                                                : "")
+                                        }
                                     />
                                 </div>
                             ))}
