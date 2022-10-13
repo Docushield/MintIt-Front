@@ -39,11 +39,6 @@ export async function getServerSideProps(context) {
     tokenhashs.response.forEach(
         (tokenHash) => (concatenatedHashStr += tokenHash)
     );
-    tokens = tokenhashs.response
-        .map((e) => {
-            return tokens.find((x) => x["content-hash"] == e);
-        })
-        .filter((e) => e != undefined);
 
     if (res.error || tokens.error) {
         return {

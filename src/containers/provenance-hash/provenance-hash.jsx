@@ -2,6 +2,7 @@ import { PROOF_FOR_STARTING_INDEX } from "src/lib/constants";
 
 const ProvenanceHashArea = ({ collection, tokens, concatenatedHashStr }) => {
     const startIndex = collection["starting-index"].int;
+    tokens = tokens.sort((a, b) => a["mint-index"].int - b["mint-index"].int);
     return (
         <div className="container mt-5">
             <h2 className="fst-italic">{collection.name} Provenance Record</h2>
