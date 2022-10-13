@@ -13,6 +13,7 @@ const MintConfirmDialog = () => {
     const current = useSelector((state) => state.collection.current);
     const account = useSelector((state) => state.wallet.account);
     const [isMinting, setIsMinting] = useState(false);
+    const [pending, setPending] = useState(false);
     const [mintStatus, setMintStatus] = useState("");
     const CONTRACT_NAME = "free.doc-nft-mint";
     const pactChainId = process.env.NEXT_PUBLIC_CHAIN_ID;
@@ -296,6 +297,7 @@ const MintConfirmDialog = () => {
                     "Content-Type": "application/json",
                 },
             }).then((res) => res.json());
+            setPending(true);
             setMintStatus(
                 "Your transaction is pending, here's your Request Key : " + requestKeys[0]
             );
@@ -310,6 +312,7 @@ const MintConfirmDialog = () => {
                                 requestKeys[0]
                         );
                         // setIsMinting(false);
+                        setPending(false);
                     } else if (result[requestKeys[0]].result.error) {
                         clearInterval(interval);
                         toast.error(
@@ -322,6 +325,7 @@ const MintConfirmDialog = () => {
                                 " , Error : " +
                                 result[requestKeys[0]].result.error.message
                         );
+                        setPending(false);
                         // setIsMinting(false);
                     }
                 }
@@ -331,6 +335,7 @@ const MintConfirmDialog = () => {
             setMintStatus(
                 "Error occurred in minting a new token, Error: " + error
             );
+            setPending(false);
             // setIsMinting(false);
         }
     };
@@ -342,10 +347,25 @@ const MintConfirmDialog = () => {
             className="rn-popup-modal2 share-modal-wrapper"
         >
             <Modal.Body>
-                <h3 className="mb-5">Mint Collections</h3>
+                <h3 className="mb-5">
+                    Minting,{" "}
+                    <span style={{ color: "#20ec8d" }}>
+                        {current && current.name}
+                    </span>
+                </h3>
                 {isMinting ? (
                     <div className="row text-center">
-                        <p>{mintStatus}</p>
+                        <div className="col-12">
+                            <p>{mintStatus}</p>
+                        </div>
+                        <div className="col-12 mt-5">
+                            <div
+                                className={
+                                    pending ? "spinner-border" : "spinner-grow"
+                                }
+                                role="status"
+                            ></div>
+                        </div>
                     </div>
                 ) : (
                     <div className="row">
