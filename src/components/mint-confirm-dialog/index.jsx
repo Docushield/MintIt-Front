@@ -299,7 +299,15 @@ const MintConfirmDialog = () => {
             }).then((res) => res.json());
             setPending(true);
             setMintStatus(
-                "Your transaction is pending, here's your Request Key : " + requestKeys[0]
+                <p>
+                    Transaction is pending, Request Key :{" "}
+                    <a
+                        href={`${process.env.chainExplorer}/tx/${requestKeys[0]}`}
+                        _target="blank"
+                    >
+                        {requestKeys[0]}
+                    </a>
+                </p>
             );
             const interval = setInterval(async () => {
                 const result = await Pact.fetch.poll({ requestKeys }, host);
@@ -308,8 +316,15 @@ const MintConfirmDialog = () => {
                         clearInterval(interval);
                         toast.success("Successfully minted a new token");
                         setMintStatus(
-                            "Successfully minted a new token, Request Key : " +
-                                requestKeys[0]
+                            <p>
+                                Successfully minted a new token, Request Key :{" "}
+                                <a
+                                    href={`${process.env.chainExplorer}/tx/${requestKeys[0]}`}
+                                    _target="blank"
+                                >
+                                    {requestKeys[0]}
+                                </a>
+                            </p>
                         );
                         // setIsMinting(false);
                         setPending(false);
