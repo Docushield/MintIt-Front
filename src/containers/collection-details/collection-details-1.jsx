@@ -15,8 +15,11 @@ import {
 import { toggleConnectWalletDialog } from "src/store/wallet.module";
 import WalletAddress from "@components/wallet-address";
 
+const getIndex = (token) => token.index || token["mint-index"].int;
+
 const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
     console.log(data);
+    tokens = tokens.sort((a, b) => getIndex(a) - getIndex(b));
     const dispatch = useDispatch();
     const connected = useSelector((state) => state.wallet.connected);
     const [isShareModalOpen, setIsShareModalOpen] = useState(false);
