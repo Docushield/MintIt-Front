@@ -16,6 +16,7 @@ export async function getServerSideProps(context) {
 
     const collection = await fetchAPI(`api/collections/${slug}`, cookies);
     const collectionName = collection.response.name;
+    const requestKey = collection.response.requestKey;
 
     const res = await pactLocalFetch(
         `(${smartContract}.get-nft-collection "${collectionName}")`
@@ -50,7 +51,7 @@ export async function getServerSideProps(context) {
 
     return {
         props: {
-            collection: res.result.data,
+            collection: { ...res.result.data, requestKey },
             tokens: tokens,
             concatenatedHashStr,
             className: "template-color-1",
