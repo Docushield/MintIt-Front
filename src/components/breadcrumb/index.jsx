@@ -68,9 +68,9 @@ const Breadcrumb = ({
                         </div>
                     )}
                     <div className="col-lg-6 col-md-6 col-12">
-                        <div className="col_banner">
+                        {/* <div className="col_banner">
                             <p>Banner Required</p>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

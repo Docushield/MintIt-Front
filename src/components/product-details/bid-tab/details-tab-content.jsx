@@ -4,16 +4,27 @@ import { IDType, ImageType } from "@utils/types";
 import Button from "@ui/button";
 import WalletAddress from "@components/wallet-address";
 import Anchor from "@ui/anchor";
+import { useState } from "react";
+import Image from "next/image";
 
-const DetailsTabContent = ({ owner, properties, specs }) => {
+const DetailsTabContent = ({
+    owner,
+    creator,
+    properties,
+    spec,
+    slug,
+    collection,
+}) => {
+    const [isCopied, setIsCopied] = useState(false);
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText(creator);
+        setIsCopied(true);
+    };
+
     return (
         <div className="rn-pd-bd-wrapper mt--20">
-            <TopSeller
-                name={owner.name}
-                total_sale={owner.total_sale}
-                slug={owner.slug}
-                image={owner.image}
-            />
+            {properties && <TopSeller name={owner} slug={slug} />}
             {properties && (
                 <div className="rn-pd-sm-property-wrapper">
                     <h6 className="pd-property-title">Properties</h6>
@@ -24,10 +35,13 @@ const DetailsTabContent = ({ owner, properties, specs }) => {
                                 className="pd-property-inner"
                             >
                                 <span className="color-body type">
-                                    {property.type}
+                                    {property["trait_type"]}
                                 </span>
                                 <span className="color-white value">
-                                    {property.value}
+                                    {property.value.length > 3 ||
+                                    property.value.split(" ").length > 1
+                                        ? property.value.slice(0, 3) + "..."
+                                        : property.value}
                                 </span>
                             </div>
                         ))}
@@ -36,32 +50,51 @@ const DetailsTabContent = ({ owner, properties, specs }) => {
             )}
             <div className="rn-pd-sm-property-wrapper mt-5">
                 <h6 className="pd-property-title">More Information</h6>
-                <Anchor path="/profile" className="address-wrapper">
-                    <div className="pd-property-spec address">
-                        <div>Creator:</div>
-                        <div>
-                            <WalletAddress
-                                address={specs.creator}
-                                length={40}
-                            />
+                {/* <Anchor path="#" className="address-wrapper"> */}
+                <div className="pd-property-spec address" onClick={handleCopy}>
+                    <div>Creator:</div>
+                    <div>
+                        <div className="wallet-address-wrapper">
+                            <div>
+                                {creator.slice(0, 17)}...
+                                {creator.slice(-15)}
+                            </div>
+                            <div className="copy-icon-wrapper">
+                                <Image
+                                    src={
+                                        !isCopied
+                                            ? "/images/icons/copy.svg"
+                                            : "/images/icons/checked.svg"
+                                    }
+                                    width={20}
+                                    height={20}
+                                />
+                            </div>
                         </div>
                     </div>
-                </Anchor>
+                </div>
+                {/* </Anchor> */}
                 <div className="pd-property-spec">
-                    Creator Roaylties: {specs.creator_royalties}
+                    Creator Roaylties:{" "}
+                    {(
+                        collection["mint-royalties"]["rates"][0].rate * 100
+                    ).toFixed(2)}{" "}
+                    %
                 </div>
                 <div className="pd-property-spec">
-                    MINT-IT Royalties: {specs.mintit_royalties}
+                    MINT-IT Royalties:{" "}
+                    {(
+                        collection["sale-royalties"]["rates"][0].rate * 100
+                    ).toFixed(2)}{" "}
+                    %
                 </div>
-                <div className="pd-property-spec">
-                    NFT Type: {specs.nft_type}
-                </div>
+                <div className="pd-property-spec">NFT Type: {spec.type}</div>
             </div>
             <Button
                 className="mt-4"
                 size="small"
                 color="primary-alta"
-                path="/provenance-hash"
+                path={`/collections/${slug}/provenance-hash`}
             >
                 View Provenance
             </Button>

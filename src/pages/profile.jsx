@@ -4,42 +4,58 @@ import Header from "@layout/header/header-01";
 import Footer from "@layout/footer/footer-01";
 import AuthorIntroArea from "@containers/author-intro/layout-02";
 import AuthorProfileArea from "@containers/author-profile/layout-02";
+import { pactLocalFetch } from "@utils/pactLocalFetch";
 import { parseCookies } from "nookies";
-import { fetchAPI } from "@utils/fetchAPI";
-
-// Demo data
-import authorData from "../data/author.json";
-import productData from "../data/categories.json";
 
 export async function getServerSideProps(context) {
-    const cookies = parseCookies(context);
-
-    const res = await fetchAPI("api/collections", cookies);
-
-    if (res.error) {
+    try {
+        const cookies = parseCookies(context);
+        const account = cookies["userAccount"];
+        const smartContract = process.env.NEXT_PUBLIC_CONTRACT;
+        const pactCode = `(${smartContract}.search-nfts-by-owner "${account}")`;
+        const fetchRes = await pactLocalFetch(pactCode);
+        if (fetchRes == null) {
+            //blockchain request failed
+            return {
+                props: {
+                    account: account,
+                    tokens: [],
+                    collections: [],
+                    className: "template-color-1",
+                },
+            };
+        } else {
+            return {
+                props: {
+                    account: account,
+                    collections: [],
+                    tokens: fetchRes.result.data,
+                    className: "template-color-1",
+                },
+            };
+        }
+    } catch (error) {
+        console.log(error);
         return {
             props: {
-                error: res.error,
+                error: error.message,
+                tokens: [],
+                collections: [],
+                account: "",
                 className: "template-color-1",
             },
         };
     }
-
-    return {
-        props: { collections: res.response, className: "template-color-1" },
-    };
 }
 
-const Author = ({ collections }) => (
+const Author = ({ collections, tokens, account }) => (
     <Wrapper>
         <SEO pageTitle="Author" />
         <Header />
         <main id="main-content">
-            <AuthorIntroArea data={authorData} />
+            <AuthorIntroArea data={account} />
             {collections && (
-                <AuthorProfileArea
-                    data={{ products: productData, collections }}
-                />
+                <AuthorProfileArea data={{ products: tokens, collections }} />
             )}
         </main>
         <Footer />

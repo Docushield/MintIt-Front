@@ -18,9 +18,13 @@ const ProductDetails = ({ product, recentViewProducts, relatedProducts }) => (
         <main id="main-content">
             <Breadcrumb
                 pageTitle="Product Details"
+                pageTitle1=""
                 currentPage="Product Details"
             />
-            <ProductDetailsArea product={product} />
+            {/*      <ProductDetailsArea
+                product={product}
+                collection={{ creator: product.owner }}
+            /> */}
             <ProductArea
                 data={{
                     section_title: { title: "Recent View" },

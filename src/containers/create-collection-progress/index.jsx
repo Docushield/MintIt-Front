@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import ProgressBar from "react-bootstrap/ProgressBar";
 import PropTypes from "prop-types";
+const App_url = process.env.NEXT_PUBLIC_APP_URL || "https://testnet.mintit.studio";
 
 const CreateCollectionProgressArea = ({
     name,
@@ -45,19 +46,17 @@ const CreateCollectionProgressArea = ({
             />
             <p className="mt-5">Status: {status}</p>
 
-            <h2>Collection Information</h2>
+            {/*<h2>Collection Information</h2>
             <table>
                 <tr>
                     <td>Collection Page</td>
                     <td>
-                        <Link href={`/collection/${slug}`}>
-                            <a href="">
-                                https://testnet.mintit.studio/collection/{slug}
-                            </a>
+                        <Link href={`/collections/${slug}`}>
+                            <a href="">{`${App_url}/${slug}`}</a>
                         </Link>
                     </td>
                 </tr>
-            </table>
+            </table>*/}
         </div>
     );
 };

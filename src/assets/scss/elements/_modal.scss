@@ -45,6 +45,28 @@ body.modal-open {
     opacity: 0.75;
 }
 
+.rn-popup-modal2 {
+    .modal-content {
+        width: 500px;
+        background-color: var(--background-color-2);
+        border: 0 none;
+        border-radius: 10px;
+        @media #{$sm-layout} {
+            padding: 20px 15px;
+        }
+    }
+    .modal-header {
+        border: 0 none;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+    @media (min-width: 576px) {
+        .modal-dialog {
+            max-width: 450px;
+        }
+    }
+}
+
 .rn-popup-modal {
     .modal-content {
         background-color: var(--background-color-2);

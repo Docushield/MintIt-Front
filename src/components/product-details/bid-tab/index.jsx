@@ -8,14 +8,24 @@ import BidsTabContent from "./bids-tab-content";
 import DetailsTabContent from "./details-tab-content";
 import HistoryTabContent from "./history-tab-content";
 
-const BidTab = ({ className, bids, owner, properties, specs, history }) => (
-    <TabContainer defaultActiveKey="nav-home">
+const BidTab = ({
+    className,
+    bids,
+    owner,
+    creator,
+    properties,
+    spec,
+    history,
+    slug,
+    collection,
+}) => (
+    <TabContainer defaultActiveKey="nav-profile">
         <div className={clsx("tab-wrapper-one", className)}>
             <nav className="tab-button-one">
                 <Nav as="div" className="nav-tabs">
-                    <Nav.Link as="button" eventKey="nav-home">
+                    {/* <Nav.Link as="button" eventKey="nav-home">
                         Bids
-                    </Nav.Link>
+                    </Nav.Link> */}
                     <Nav.Link as="button" eventKey="nav-profile">
                         Details
                     </Nav.Link>
@@ -25,17 +35,20 @@ const BidTab = ({ className, bids, owner, properties, specs, history }) => (
                 </Nav>
             </nav>
             <TabContent className="rn-bid-content">
-                <TabPane eventKey="nav-home">
+                {/* <TabPane eventKey="nav-home" className="scrollable-tab-pan">
                     <BidsTabContent bids={bids} />
-                </TabPane>
+                </TabPane> */}
                 <TabPane eventKey="nav-profile">
                     <DetailsTabContent
                         owner={owner}
+                        creator={creator}
                         properties={properties}
-                        specs={specs}
+                        spec={spec}
+                        slug={slug}
+                        collection={collection}
                     />
                 </TabPane>
-                <TabPane eventKey="nav-contact">
+                <TabPane eventKey="nav-contact" className="scrollable-tab-pan">
                     <HistoryTabContent history={history} />
                 </TabPane>
             </TabContent>
@@ -47,9 +60,11 @@ BidTab.propTypes = {
     className: PropTypes.string,
     bids: PropTypes.arrayOf(PropTypes.shape({})),
     owner: PropTypes.shape({}),
+    creator: PropTypes.shape({}),
     properties: PropTypes.arrayOf(PropTypes.shape({})),
     tags: PropTypes.arrayOf(PropTypes.shape({})),
     history: PropTypes.arrayOf(PropTypes.shape({})),
+    collection: PropTypes.shape({}),
 };
 
 export default BidTab;

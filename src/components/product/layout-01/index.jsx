@@ -24,6 +24,9 @@ const Product = ({
     authors,
     placeBid,
     disableShareDropdown,
+    hash,
+    revealed,
+    index,
 }) => {
     const [showBidModal, setShowBidModal] = useState(false);
     const handleBidModal = () => {
@@ -40,7 +43,7 @@ const Product = ({
             >
                 <div className="card-thumbnail">
                     {image?.src && (
-                        <Anchor path={`/product/${slug}`}>
+                        <Anchor path={`/collections/${slug}/tokens/${hash}`}>
                             <Image
                                 src={image.src}
                                 alt={image?.alt || "NFT_portfolio"}
@@ -50,11 +53,11 @@ const Product = ({
                         </Anchor>
                     )}
                     {/* {auction_date && <CountdownTimer date={auction_date} />} */}
-                    {placeBid && (
+                    {/* {placeBid && (
                         <Button onClick={handleBidModal} size="small">
                             Buy
                         </Button>
-                    )}
+                    )} */}
                 </div>
                 <div className="product-share-wrapper">
                     {/* <div className="profile-share">
@@ -73,16 +76,15 @@ const Product = ({
                             {bitCount}+ Place Bit.
                         </Anchor>
                     </div> */}
-                    <span className="product-name">Collection Name</span>
+                    <span className="product-name">#{index}</span>
                     {!disableShareDropdown && <ShareDropdown />}
                 </div>
-                <Anchor path={`/product/${slug}`}>
+                <Anchor path={`/collections/${slug}/tokens/${hash}`}>
                     <span className="product-name">{title}</span>
                 </Anchor>
                 {/* <span className="latest-bid">Highest bid {latestBid}</span> */}
-                <ProductBid price={price} />
                 <a
-                    href={`/product/${slug}`}
+                    href={`/collections/${slug}/tokens/${hash}`}
                     className="viewbtn connectBtn btn btn-small btn-primary"
                 >
                     View
@@ -116,6 +118,7 @@ Product.propTypes = {
     bitCount: PropTypes.number,
     placeBid: PropTypes.bool,
     disableShareDropdown: PropTypes.bool,
+    hash: PropTypes.string,
 };
 
 Product.defaultProps = {

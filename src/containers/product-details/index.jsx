@@ -15,7 +15,13 @@ import WalletAddress from "@components/wallet-address";
 
 // Demo Image
 
-const ProductDetailsArea = ({ space, className, product }) => (
+const ProductDetailsArea = ({
+    space,
+    className,
+    product,
+    slug,
+    collection,
+}) => (
     <div
         className={clsx(
             "product-details-area",
@@ -27,13 +33,15 @@ const ProductDetailsArea = ({ space, className, product }) => (
             <div className="row g-5">
                 <div className="col-lg-7 col-md-12 col-sm-12">
                     <Sticky>
-                        <GalleryTab images={product.images} />
+                        <GalleryTab
+                            url={`https://res.cloudinary.com/demo/image/fetch/https://${product.contentUri.data}.ipfs.w3s.link`}
+                        />
                         <DescriptionDropdown />
                     </Sticky>
                 </div>
                 <div className="col-lg-5 col-md-12 col-sm-12 mt_md--50 mt_sm--60">
                     <div className="rn-pd-content-area">
-                        <ProductTitle id={product.nft_id} />
+                        <ProductTitle id={product.name} />
                         <h6 className="title-name">
                             Owner:{" "}
                             <Button
@@ -42,12 +50,16 @@ const ProductDetailsArea = ({ space, className, product }) => (
                                 path="/profile"
                             >
                                 <WalletAddress
-                                    address={product.owner.address}
+                                    address={
+                                        product.owner.address || product.owner
+                                    }
+                                    length={17}
+                                    lastLength={15}
                                 />
                             </Button>
                         </h6>
                         <div className="catagory-collection items-center">
-                            <div className="mx-2">
+                            {/*<div className="mx-2">
                                 <Button
                                     size="small"
                                     color="primary-alta"
@@ -55,8 +67,8 @@ const ProductDetailsArea = ({ space, className, product }) => (
                                 >
                                     Listed: Yes/No
                                 </Button>
-                            </div>
-                            <div className="mx-2">
+                            </div> */}
+                            {/* <div className="mx-2">
                                 <Button
                                     size="small"
                                     color="primary-alta"
@@ -64,23 +76,26 @@ const ProductDetailsArea = ({ space, className, product }) => (
                                 >
                                     Price: 20 $KDA
                                 </Button>
-                            </div>
+                            </div> */}
                         </div>
-                        <Button color="primary" path="#">
+                        {/* <Button color="primary" path="#">
                             Buy Now
-                        </Button>
+                        </Button> */}
                         <div className="rn-bid-details">
                             <BidTab
                                 bids={product?.bids}
                                 owner={product.owner}
-                                properties={product?.properties}
-                                specs={product.specs}
+                                creator={collection?.creator}
+                                properties={product.spec.value.attributes}
+                                spec={product.spec}
                                 history={product?.history}
+                                slug={slug}
+                                collection={collection}
                             />
-                            <PlaceBet
+                            {/* <PlaceBet
                                 highest_bid={product.highest_bid}
                                 auction_date={product?.auction_date}
-                            />
+                            /> */}
                         </div>
                     </div>
                 </div>
@@ -109,6 +124,7 @@ ProductDetailsArea.propTypes = {
         auction_date: PropTypes.string,
         images: PropTypes.arrayOf(ImageType),
     }),
+    collection: PropTypes.shape({}),
 };
 
 ProductDetailsArea.defaultProps = {
