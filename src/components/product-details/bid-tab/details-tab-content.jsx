@@ -7,6 +7,15 @@ import Anchor from "@ui/anchor";
 import { useState } from "react";
 import Image from "next/image";
 
+const getRoyalty = (rates, name) => {
+    const royalty = rates.find((x) => x.description == name);
+    if (royalty && royalty.rate) {
+        return royalty.rate;
+    } else {
+        return 0;
+    }
+};
+
 const DetailsTabContent = ({
     owner,
     creator,
@@ -77,14 +86,20 @@ const DetailsTabContent = ({
                 <div className="pd-property-spec">
                     Creator Roaylties:{" "}
                     {(
-                        collection["mint-royalties"]["rates"][0].rate * 100
+                        getRoyalty(
+                            collection["sale-royalties"]["rates"],
+                            "creator"
+                        ) * 100
                     ).toFixed(2)}{" "}
                     %
                 </div>
                 <div className="pd-property-spec">
                     MINT-IT Royalties:{" "}
                     {(
-                        collection["sale-royalties"]["rates"][0].rate * 100
+                        getRoyalty(
+                            collection["sale-royalties"]["rates"],
+                            "mintit"
+                        ) * 100
                     ).toFixed(2)}{" "}
                     %
                 </div>
