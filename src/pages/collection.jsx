@@ -27,6 +27,7 @@ export async function getServerSideProps(context) {
     return {
         props: {
             collections: res.response
+                .filter((collection) => collection.status === "success")
                 .concat(acpCollection)
                 .concat(docbondCollection),
             className: "template-color-1",
