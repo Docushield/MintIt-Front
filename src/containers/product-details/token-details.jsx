@@ -57,8 +57,14 @@ const TokenDetailsArea = ({ space, className, product, slug, collection }) => {
                                 >
                                     <div className="wallet-address-wrapper">
                                         <div>
-                                            {product.creator.slice(0, 17)}...
-                                            {product.creator.slice(-15)}
+                                            {product["current-owner"].slice(
+                                                0,
+                                                17
+                                            )}
+                                            ...
+                                            {product["current-owner"].slice(
+                                                -15
+                                            )}
                                         </div>
                                         <div className="copy-icon-wrapper">
                                             <Image
