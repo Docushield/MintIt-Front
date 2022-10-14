@@ -31,7 +31,7 @@ const TopCollectionArea = ({ className, id, space, data }) => (
                         data-sal="slide-up"
                         data-sal-duration="800"
                     >
-                        <Anchor className="btn-transparent" path="/mint">
+                        <Anchor className="btn-transparent" path="/collection">
                             VIEW ALL
                             <i className="feather feather-arrow-right" />
                         </Anchor>

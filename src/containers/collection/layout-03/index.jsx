@@ -8,7 +8,7 @@ import ProductFilter from "@components/product-filter/layout-01";
 import CategoryFilter from "@components/category-filter";
 import { CollectionType, SectionTitleType } from "@utils/types";
 
-const POSTS_PER_PAGE = 8;
+const POSTS_PER_PAGE = 20;
 
 function reducer(state, action) {
     switch (action.type) {
@@ -27,7 +27,9 @@ const CollectionArea = ({ className, space, id, data }) => {
     const itemsToFilter = [...(data.collections || [])];
     const [collections, setCollections] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const numberOfPages = Math.ceil(data.collections.length / POSTS_PER_PAGE);
+    const numberOfPages = Math.ceil(
+        (data.count || data.collections.length) / POSTS_PER_PAGE
+    );
     const paginationHandler = (page) => {
         setCurrentPage(page);
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -90,8 +92,7 @@ const CollectionArea = ({ className, space, id, data }) => {
     }, [itemFilterHandler]);
 
     const creatorHandler = useCallback(() => {
-        const start = (currentPage - 1) * POSTS_PER_PAGE;
-        setCollections(data.collections.slice(start, start + POSTS_PER_PAGE));
+        setCollections(data.collections);
     }, [currentPage, data.collections]);
 
     useEffect(() => {
