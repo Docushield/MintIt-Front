@@ -43,9 +43,9 @@ const TokenDetailsArea = ({ space, className, product, slug, collection }) => {
                         <div className="rn-pd-content-area">
                             <ProductTitle
                                 id={
-                                    product.revealed
-                                        ? product["name"]
-                                        : product["collection-name"]
+                                    collection["name"] +
+                                    " #" +
+                                    product["mint-index"].int
                                 }
                             />
                             <h6 className="title-name">
