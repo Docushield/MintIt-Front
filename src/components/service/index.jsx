@@ -43,9 +43,13 @@ const Service = ({ title, subtitle, path, description, image }) => (
 Service.propTypes = {
     title: PropTypes.string.isRequired,
     subtitle: PropTypes.string.isRequired,
-    path: PropTypes.string.isRequired,
+    path: PropTypes.string,
     description: PropTypes.string.isRequired,
     image: ImageType,
+};
+
+Service.defaultProps = {
+    path: "#",
 };
 
 export default Service;

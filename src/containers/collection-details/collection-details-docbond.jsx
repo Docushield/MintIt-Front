@@ -16,7 +16,6 @@ import { toggleConnectWalletDialog } from "src/store/wallet.module";
 import WalletAddress from "@components/wallet-address";
 
 const CollectionDetailsIntroArea = ({ className, space, data }) => {
-    console.log(data);
     const dispatch = useDispatch();
     const connected = useSelector((state) => state.wallet.connected);
     const [isShareModalOpen, setIsShareModalOpen] = useState(false);

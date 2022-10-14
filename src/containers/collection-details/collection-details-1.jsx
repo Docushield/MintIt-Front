@@ -18,7 +18,7 @@ import WalletAddress from "@components/wallet-address";
 const getIndex = (token) => token.index || token["mint-index"].int;
 
 const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
-    tokens = tokens.sort((a, b) => getIndex(a) - getIndex(b));
+    const sortedtokens = tokens.sort((a, b) => getIndex(a) - getIndex(b));
     const dispatch = useDispatch();
     const connected = useSelector((state) => state.wallet.connected);
     const [isShareModalOpen, setIsShareModalOpen] = useState(false);
@@ -228,41 +228,37 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
             </div>
             <div className="container my-4">
                 <div className="row">
-                    {tokens?.length > 0 ? (
-                        <>
-                            {tokens.map((prod) => (
-                                <div
-                                    key={prod.id}
-                                    className="col-5 col-lg-4 col-md-3 col-sm-4 col-6 my-3"
-                                >
-                                    <Product
-                                        overlay
-                                        title={prod["collection-name"]}
-                                        slug={data.slug}
-                                        hash={
-                                            prod["content-hash"] || prod["hash"]
-                                        }
-                                        image={{
-                                            src: prod.revealed
-                                                ? `https://ipfs.io/ipfs/${prod["content-uri"].data}`
-                                                : "/images/collection/placeholder.png",
-                                        }}
-                                        //dummy data
-                                        price={{
-                                            amount: "",
-                                            currency: "KDA",
-                                        }}
-                                        revealed={prod.revealed}
-                                        index={
-                                            prod.index ||
-                                            (prod["mint-index"]
-                                                ? prod["mint-index"].int
-                                                : "")
-                                        }
-                                    />
-                                </div>
-                            ))}
-                        </>
+                    {sortedtokens?.length > 0 ? (
+                        sortedtokens.map((prod) => (
+                            <div
+                                key={prod["marmalade-token-id"]}
+                                className="col-5 col-lg-4 col-md-3 col-sm-4 col-6 my-3"
+                            >
+                                <Product
+                                    overlay
+                                    title={prod["collection-name"]}
+                                    slug={data.slug}
+                                    hash={prod["content-hash"] || prod["hash"]}
+                                    image={{
+                                        src: prod.revealed
+                                            ? `https://ipfs.io/ipfs/${prod["content-uri"].data}`
+                                            : "/images/collection/placeholder.png",
+                                    }}
+                                    //dummy data
+                                    price={{
+                                        amount: "",
+                                        currency: "KDA",
+                                    }}
+                                    revealed={prod.revealed}
+                                    index={
+                                        prod.index ||
+                                        (prod["mint-index"]
+                                            ? prod["mint-index"].int
+                                            : "")
+                                    }
+                                />
+                            </div>
+                        ))
                     ) : (
                         <p>No tokens to show</p>
                     )}

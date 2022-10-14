@@ -60,7 +60,7 @@ BidTab.propTypes = {
     className: PropTypes.string,
     bids: PropTypes.arrayOf(PropTypes.shape({})),
     owner: PropTypes.shape({}),
-    creator: PropTypes.shape({}),
+    creator: PropTypes.string,
     properties: PropTypes.arrayOf(PropTypes.shape({})),
     tags: PropTypes.arrayOf(PropTypes.shape({})),
     history: PropTypes.arrayOf(PropTypes.shape({})),

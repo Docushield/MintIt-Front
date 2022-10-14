@@ -26,11 +26,8 @@ const ProductBid = ({ price, likeCount }) => (
 );
 
 ProductBid.propTypes = {
-    price: PropTypes.shape({
-        amount: PropTypes.number.isRequired,
-        currency: PropTypes.string.isRequired,
-    }).isRequired,
-    likeCount: PropTypes.number.isRequired,
+    price: PropTypes.string.isRequired,
+    likeCount: PropTypes.number,
 };
 
 export default ProductBid;
