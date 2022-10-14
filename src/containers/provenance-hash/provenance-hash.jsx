@@ -92,21 +92,23 @@ const ProvenanceHashArea = ({ collection, tokens, concatenatedHashStr }) => {
             </pre>
             <p className="pt-5">Here's the relevant information:</p>
             <table className="my-5 provenance_blue_field_table">
-                <tr>
-                    <td className="text-end">FINALIZED STARTING INDEX</td>
-                    <td>
-                        <a
-                            href={`${process.env.chainExplorer}/${collection.requestKey}`}
-                        >
-                            {collection["starting-index"].int}
-                        </a>
-                    </td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <td className="text-end">FINALIZED STARTING INDEX</td>
+                        <td>
+                            <a
+                                href={`${process.env.chainExplorer}/${collection.requestKey}`}
+                            >
+                                {collection["starting-index"].int}
+                            </a>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td className="text-end">PROVENANCE HASH</td>
-                    <td>{collection["provenance-hash"]}</td>
-                </tr>
+                    <tr>
+                        <td className="text-end">PROVENANCE HASH</td>
+                        <td>{collection["provenance-hash"]}</td>
+                    </tr>
+                </tbody>
             </table>
             <p>CONCATENATED HASH STRING</p>
             <textarea
