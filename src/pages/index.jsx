@@ -13,6 +13,8 @@ import { normalizedData } from "@utils/methods";
 import { SSRProvider } from "react-bootstrap";
 import { parseCookies } from "nookies";
 import { fetchAPI } from "@utils/fetchAPI";
+import { acpCollection } from "./collections/acp";
+import { docbondCollection } from "./collections/docbond";
 
 // Demo data
 import homepageData from "../data/homepages/homepage.json";
@@ -30,14 +32,16 @@ export async function getServerSideProps(context) {
             props: {
                 error: res.response.error || res.error,
                 className: "template-color-1 with-particles",
-                collections: [],
+                collections: [acpCollection, docbondCollection],
             },
         };
     }
 
     return {
         props: {
-            collections: res.response,
+            collections: res.response
+                .concat(acpCollection)
+                .concat(docbondCollection),
             className: "template-color-1 with-particles",
         },
     };
@@ -49,7 +53,7 @@ const Home = ({ collections }) => {
     return (
         <SSRProvider>
             <Wrapper>
-                <SEO pageTitle="Home five" />
+                <SEO pageTitle="Home " />
                 <Header />
                 <main id="main-content">
                     <Particles />

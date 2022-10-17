@@ -53,9 +53,11 @@ const TopCollectionArea = ({ className, id, space, data }) => (
                                     total_item={collection.size}
                                     path={`/collections/${collection.slug}`}
                                     image={collection.imageUrl}
+                                    logo={collection.logoUrl}
                                     thumbnails={collection.thumbnails}
                                     profile_image={collection.bannerImageUrl}
                                     minted={collection.numMinted}
+                                    isVideo={collection.isVideo}
                                 />
                             </div>
                         ))}
