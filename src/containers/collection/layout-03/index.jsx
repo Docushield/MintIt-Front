@@ -28,8 +28,9 @@ const CollectionArea = ({ className, space, id, data }) => {
     const itemsToFilter = [...(data.collections || [])];
     const [collections, setCollections] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    //-2 is for acp and bond
     const numberOfPages = Math.ceil(
-        (data.count || data.collections.length) / POSTS_PER_PAGE
+        (data.count-2) / POSTS_PER_PAGE
     );
     const paginationHandler = async (page) => {
         setCurrentPage(page);
@@ -136,11 +137,7 @@ const CollectionArea = ({ className, space, id, data }) => {
                     }}
                 /> */}
                 <div className="row g-5">
-                    {/* must be updated when applying status condition at backend server */}
-                    {/* {state.collections.map((collection) => ( */}
-                    {collections
-                        .filter((collection) => collection.status == "success")
-                        .map((collection) => (
+                    {collections.map((collection) => (
                             <div
                                 key={collection.id}
                                 className="col-lg-6 col-xl-3 col-md-6 col-sm-6 col-12"
