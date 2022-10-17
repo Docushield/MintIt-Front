@@ -53,7 +53,7 @@ const Home = ({ collections }) => {
     return (
         <SSRProvider>
             <Wrapper>
-                <SEO pageTitle="Home five" />
+                <SEO pageTitle="Home " />
                 <Header />
                 <main id="main-content">
                     <Particles />
