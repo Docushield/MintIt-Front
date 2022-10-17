@@ -9,7 +9,7 @@ import CategoryFilter from "@components/category-filter";
 import { fetchAPI } from "@utils/fetchAPI";
 import { CollectionType, SectionTitleType } from "@utils/types";
 
-const POSTS_PER_PAGE = 20;
+const POSTS_PER_PAGE = 2;
 
 function reducer(state, action) {
     switch (action.type) {
