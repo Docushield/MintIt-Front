@@ -6,9 +6,10 @@ import Collection from "@components/collection";
 import Pagination from "@components/pagination-02";
 import ProductFilter from "@components/product-filter/layout-01";
 import CategoryFilter from "@components/category-filter";
+import { fetchAPI } from "@utils/fetchAPI";
 import { CollectionType, SectionTitleType } from "@utils/types";
 
-const POSTS_PER_PAGE = 20;
+const POSTS_PER_PAGE = 2;
 
 function reducer(state, action) {
     switch (action.type) {
@@ -30,7 +31,7 @@ const CollectionArea = ({ className, space, id, data }) => {
     const numberOfPages = Math.ceil(
         (data.count || data.collections.length) / POSTS_PER_PAGE
     );
-    const paginationHandler = (page) => {
+    const paginationHandler = async (page) => {
         setCurrentPage(page);
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
@@ -91,8 +92,19 @@ const CollectionArea = ({ className, space, id, data }) => {
         itemFilterHandler();
     }, [itemFilterHandler]);
 
-    const creatorHandler = useCallback(() => {
-        setCollections(data.collections);
+    const creatorHandler = useCallback(async () => {
+        if (currentPage == 1) {
+            setCollections(data.collections);
+        } else {
+            const res = await fetchAPI(
+                `api/collections?limit=${POSTS_PER_PAGE}&offset=${
+                    POSTS_PER_PAGE * currentPage
+                }`,
+                data.cookies
+            );
+            setCollections(res.response);
+            console.log(res.response);
+        }
     }, [currentPage, data.collections]);
 
     useEffect(() => {

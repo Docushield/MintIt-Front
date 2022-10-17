@@ -17,7 +17,7 @@ export async function getServerSideProps(context) {
          * passing 18 as limit.
          * */
     }
-    const res = await fetchAPI("api/collections?limit=18", cookies);
+    const res = await fetchAPI("api/collections?limit=2", cookies);
     const countRes = await fetchAPI("api/collections?count=true", cookies);
 
     if (res.response.error || res.error) {
