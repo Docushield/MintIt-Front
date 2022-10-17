@@ -187,9 +187,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, count }) => {
                 <div className="mint-status-box">
                     Mint: {data["mint-price"]} KDA
                 </div>
-                <div className="mint-status-box">
-                    Remaining: {data.size - count}
-                </div>
+                <div className="mint-status-box">Remaining: {count}</div>
                 {data.status === "success" && (
                     <Button className="ms-4" onClick={onMint}>
                         Mint Now
