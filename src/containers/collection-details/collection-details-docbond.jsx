@@ -15,8 +15,7 @@ import {
 import { toggleConnectWalletDialog } from "src/store/wallet.module";
 import WalletAddress from "@components/wallet-address";
 
-const CollectionDetailsIntroArea = ({ className, space, data }) => {
-    console.log(data);
+const CollectionDetailsIntroArea = ({ className, space, data, count }) => {
     const dispatch = useDispatch();
     const connected = useSelector((state) => state.wallet.connected);
     const [isShareModalOpen, setIsShareModalOpen] = useState(false);
@@ -188,9 +187,7 @@ const CollectionDetailsIntroArea = ({ className, space, data }) => {
                 <div className="mint-status-box">
                     Mint: {data["mint-price"]} KDA
                 </div>
-                <div className="mint-status-box">
-                    Remaining: {data.size - data.numMinted}
-                </div>
+                <div className="mint-status-box">Remaining: {count}</div>
                 {data.status === "success" && (
                     <Button className="ms-4" onClick={onMint}>
                         Mint Now
