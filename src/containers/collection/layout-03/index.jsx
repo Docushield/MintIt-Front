@@ -28,9 +28,8 @@ const CollectionArea = ({ className, space, id, data }) => {
     const itemsToFilter = [...(data.collections || [])];
     const [collections, setCollections] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    //-2 is for acp and bond
     const numberOfPages = Math.ceil(
-        (data.count-2) / POSTS_PER_PAGE
+        (data.count) / POSTS_PER_PAGE
     );
     const paginationHandler = async (page) => {
         setCurrentPage(page);
