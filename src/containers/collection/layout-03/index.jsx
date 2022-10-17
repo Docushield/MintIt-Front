@@ -9,7 +9,7 @@ import CategoryFilter from "@components/category-filter";
 import { fetchAPI } from "@utils/fetchAPI";
 import { CollectionType, SectionTitleType } from "@utils/types";
 
-const POSTS_PER_PAGE = 2;
+const POSTS_PER_PAGE = 20;
 
 function reducer(state, action) {
     switch (action.type) {
@@ -34,7 +34,6 @@ const CollectionArea = ({ className, space, id, data }) => {
     );
     const paginationHandler = async (page) => {
         setCurrentPage(page);
-        window.scrollTo({ top: 0, behavior: "smooth" });
     };
     const [state, dispatch] = useReducer(reducer, {
         filterToggle: false,

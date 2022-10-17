@@ -39,9 +39,7 @@ export async function getServerSideProps(context) {
 
     return {
         props: {
-            collections: res.response
-                .concat(acpCollection)
-                .concat(docbondCollection),
+            collections: [acpCollection, docbondCollection].concat(res.response.slice(0,6)),
             className: "template-color-1 with-particles",
         },
     };
