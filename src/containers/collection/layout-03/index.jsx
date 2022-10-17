@@ -8,7 +8,7 @@ import ProductFilter from "@components/product-filter/layout-01";
 import CategoryFilter from "@components/category-filter";
 import { CollectionType, SectionTitleType } from "@utils/types";
 
-const POSTS_PER_PAGE = 8;
+const POSTS_PER_PAGE = 20;
 
 function reducer(state, action) {
     switch (action.type) {
@@ -125,7 +125,7 @@ const CollectionArea = ({ className, space, id, data }) => {
                 <div className="row g-5">
                     {/* must be updated when applying status condition at backend server */}
                     {/* {state.collections.map((collection) => ( */}
-                    {state.collections
+                    {collections
                         .filter((collection) => collection.status == "success")
                         .map((collection) => (
                             <div
