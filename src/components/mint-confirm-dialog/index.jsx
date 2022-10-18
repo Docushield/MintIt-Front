@@ -391,8 +391,10 @@ const MintConfirmDialog = () => {
                                     id="price"
                                     placeholder="Total Mint Price: 20 $KDA"
                                     value={`${
-                                        current && current["mint-price"]
-                                    }   $KDA`}
+                                        current && (new Date().toLocaleString() < new Date(current["premint-ends"]).toLocaleString()
+                                        ? current["premint-price"]
+                                        : current["mint-price"])}
+                                    KDA`}
                                     disabled
                                 />
                             </div>
