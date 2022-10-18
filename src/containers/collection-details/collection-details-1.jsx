@@ -155,7 +155,9 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                     <div className="col-md-6">
                                         <div className="status-box">
                                             <div>Price</div>
-                                            <div>{data["mint-price"]} KDA</div>
+                                            <div>{currentTime < premintTime
+                                                    ? data["premint-price"]
+                                                    : data["mint-price"]} KDA</div>
                                         </div>
                                     </div>
                                     <div className="col-md-6">
