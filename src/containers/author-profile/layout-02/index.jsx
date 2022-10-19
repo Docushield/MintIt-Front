@@ -165,9 +165,9 @@ const DublicateCollectionArea = ({ className, data }) => {
                                             overlay
                                             placeBid
                                             title={prod["collection-name"]}
-                                            slug={prod[
-                                                "collection-name"
-                                            ].replace(/ /g, "-")}
+                                            slug={prod["collection-name"]
+                                                .replace(/ /g, "-")
+                                                .toLowerCase()}
                                             hash={prod["content-hash"]}
                                             latestBid={prod.latestBid}
                                             //dummy data
