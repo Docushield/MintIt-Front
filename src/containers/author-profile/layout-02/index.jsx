@@ -34,7 +34,7 @@ const DublicateCollectionArea = ({ className, data }) => {
     const connected = useSelector((state) => state.wallet.connected);
 
     const onSaleProducts = shuffleArray(data.products).slice(0, 10);
-    const ownedProducts = data.products.slice(0, 20);
+    const ownedProducts = data.products;
     // const createdProducts = shuffleArray(data.products).slice(0, 10);
     const collections = shuffleArray(data.collections).slice(0, 10);
     const likedProducts = shuffleArray(data.products).slice(0, 10);
@@ -165,9 +165,9 @@ const DublicateCollectionArea = ({ className, data }) => {
                                             overlay
                                             placeBid
                                             title={prod["collection-name"]}
-                                            slug={prod[
-                                                "collection-name"
-                                            ].replace(/ /g, "-")}
+                                            slug={prod["collection-name"]
+                                                .replace(/ /g, "-")
+                                                .toLowerCase()}
                                             hash={prod["content-hash"]}
                                             latestBid={prod.latestBid}
                                             //dummy data

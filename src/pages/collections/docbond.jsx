@@ -3,10 +3,66 @@ import Wrapper from "@layout/wrapper";
 import Header from "@layout/header/header-01";
 import Footer from "@layout/footer/footer-01";
 import Breadcrumb from "@components/breadcrumb";
+import Pact from "pact-lang-api";
 import CollectionDetailsIntroArea from "@containers/collection-details/collection-details-docbond";
 
 export async function getStaticProps() {
-    return { props: { className: "template-color-1" } };
+    const pactChainId = "8";
+    const pactGasLimit = 100000;
+    const pactGasPrice = 0.00000001;
+    const pactNetworkId = "mainnet01";
+    const apiHost = `https://api.chainweb.com/chainweb/0.0/${pactNetworkId}/chain/${pactChainId}/pact`;
+
+    let command = await Pact.api.prepareExecCmd(
+        [],
+        new Date().toISOString(),
+        `(marmalade.ledger.get-balance "t:doc-bond-nft" "m:free.doc-nft-mint:doc-bond-nft" )`,
+        {},
+        Pact.lang.mkMeta(
+            "",
+            pactChainId,
+            pactGasPrice,
+            pactGasLimit,
+            Math.floor(Date.now() / 1000),
+            86400
+        ),
+        pactNetworkId
+    );
+
+    const response = await fetch(`${apiHost}/api/v1/local`, {
+        method: "POST",
+        mode: "cors",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(command),
+    });
+
+    const respObject = await response.json();
+    console.log(respObject);
+
+    if (
+        !respObject ||
+        !respObject.result ||
+        respObject.result.status !== "success"
+    ) {
+        return {
+            props: {
+                className: "template-color-1",
+                count: 0,
+            },
+        };
+    } else {
+        return {
+            props: {
+                className: "template-color-1",
+                count: respObject.result.data,
+            },
+        };
+    }
 }
 
 export const docbondCollection = {
@@ -92,7 +148,7 @@ export const docbondCollection = {
     updatedAt: "2022-10-09T17:44:03.393Z",
 };
 
-const DocBond = () => (
+const DocBond = ({count}) => (
     <Wrapper>
         <SEO pageTitle="Doc Bond" />
         <Header />
@@ -102,7 +158,7 @@ const DocBond = () => (
                 pageTitle1=""
                 currentPage="Collection Details"
             />
-            <CollectionDetailsIntroArea data={docbondCollection} />
+            <CollectionDetailsIntroArea data={docbondCollection} count={count} />
         </main>
         <Footer />
     </Wrapper>
