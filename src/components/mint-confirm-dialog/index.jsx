@@ -6,12 +6,14 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { signXWallet } from "@utils/kadena";
 import { toggleMintConfirmDialog } from "../../store/collection.module";
+import { ZELCORE } from "../../constants/kadena";
 
 const MintConfirmDialog = () => {
     const dispatch = useDispatch();
     const show = useSelector((state) => state.collection.isMintConfirmDialog);
     const current = useSelector((state) => state.collection.current);
     const account = useSelector((state) => state.wallet.account);
+    const wallet = useSelector((state) => state.wallet.walletName);
     const [isMinting, setIsMinting] = useState(false);
     const [pending, setPending] = useState(false);
     const [mintStatus, setMintStatus] = useState("");
