@@ -4,7 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import Pact from "pact-lang-api";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { signXWallet } from "@utils/kadena";
+import { signXWallet, signZelcore } from "@utils/kadena";
 import { toggleMintConfirmDialog } from "../../store/collection.module";
 import { ZELCORE } from "../../constants/kadena";
 
