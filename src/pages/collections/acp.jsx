@@ -8,7 +8,7 @@ import CollectionDetailsIntroArea from "@containers/collection-details/collectio
 
 export async function getStaticProps() {
     const pactChainId = "8";
-    const pactGasLimit = 100000;
+    const pactGasLimit = 150000;
     const pactGasPrice = 0.00000001;
     const pactNetworkId = "mainnet01";
     const apiHost = `https://api.chainweb.com/chainweb/0.0/${pactNetworkId}/chain/${pactChainId}/pact`;
