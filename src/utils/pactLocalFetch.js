@@ -4,7 +4,7 @@ export const pactLocalFetch = async (pactCode) => {
     const chainId = process.env.NEXT_PUBLIC_CHAIN_ID;
     const networkId = process.env.NEXT_PUBLIC_NETWORK_ID;
     const pactHost = process.env.NEXT_PUBLIC_CHAIN_API_HOST;
-    const pactGasLimit = 100000;
+    const pactGasLimit = 150000;
     const pactGasPrice = 0.00000001;
     const apiHost = `${pactHost}/chainweb/0.0/${networkId}/chain/${chainId}/pact`;
     try {

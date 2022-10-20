@@ -17,7 +17,7 @@ const MintConfirmDialog = () => {
     const [mintStatus, setMintStatus] = useState("");
     const CONTRACT_NAME = "free.doc-nft-mint";
     const pactChainId = process.env.NEXT_PUBLIC_CHAIN_ID;
-    const pactGasLimit = 100000;
+    const pactGasLimit = 150000;
     const pactGasPrice = 0.00000001;
     const pactNetworkId = process.env.NEXT_PUBLIC_NETWORK_ID;
 
@@ -272,7 +272,7 @@ const MintConfirmDialog = () => {
             sender: cmd.account,
             chainId: pactChainId,
             gasPrice: 0.00000001,
-            gasLimit: 100000,
+            gasLimit: 150000,
             ttl: 28800,
             caps: cmd.caps,
             pactCode: cmd.pactCode,
@@ -286,12 +286,18 @@ const MintConfirmDialog = () => {
         setIsMinting(true);
         setMintStatus("Minting...");
         try {
-            const signedCmd = await signXWallet(signingObject);
+            let signedCmd;
+
+            if (wallet === ZELCORE) {
+                signedCmd = await signZelcore(signingObject);
+            } else {
+                signedCmd = (await signXWallet(signingObject)).signedCmd;
+            }
 
             // Send TX
 
             const { requestKeys } = await fetch(`${host}/api/v1/send`, {
-                body: JSON.stringify({ cmds: [signedCmd.signedCmd] }),
+                body: JSON.stringify({ cmds: [signedCmd] }),
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -299,7 +305,8 @@ const MintConfirmDialog = () => {
             }).then((res) => res.json());
             setPending(true);
             setMintStatus(
-                "Your transaction is pending, here's your Request Key : " + requestKeys[0]
+                "Your transaction is pending, here's your Request Key : " +
+                    requestKeys[0]
             );
             const interval = setInterval(async () => {
                 const result = await Pact.fetch.poll({ requestKeys }, host);
@@ -391,9 +398,14 @@ const MintConfirmDialog = () => {
                                     id="price"
                                     placeholder="Total Mint Price: 20 $KDA"
                                     value={`${
-                                        current && (new Date().toLocaleString() < new Date(current["premint-ends"]).toLocaleString()
-                                        ? current["premint-price"]
-                                        : current["mint-price"])}
+                                        current &&
+                                        (new Date().toLocaleString() <
+                                        new Date(
+                                            current["premint-ends"]
+                                        ).toLocaleString()
+                                            ? current["premint-price"]
+                                            : current["mint-price"])
+                                    }
                                     KDA`}
                                     disabled
                                 />
