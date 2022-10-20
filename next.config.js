@@ -22,6 +22,7 @@ module.exports = {
     images: {
         domains: [
             "mintit-files.s3.us-east-2.amazonaws.com",
+            "mintit-images.s3.us-east-2.amazonaws.com",
             "res.cloudinary.com",
             "ipfs.io",
         ],
@@ -32,5 +33,11 @@ module.exports = {
         networkId: process.env.NEXT_PUBLIC_NETWORK_ID,
         chainId: process.env.NEXT_PUBLIC_CHAIN_ID,
         chainExplorer: process.env.NEXT_PUBLIC_CNAIN_EXPLORER,
+        pactGasPrice:
+            parseInt(process.env.NEXT_PUBLIC_GAS_PRICE || "0.00000001") ||
+            0.00000001,
+        pactGasLimit:
+            parseInt(process.env.NEXT_PUBLIC_GAS_LIMIT || "150000") || 150000,
+        pactTtl: parseInt(process.env.NEXT_PUBLIC_TTL || "28800") || 28800,
     },
 };
