@@ -17,7 +17,7 @@ const MintConfirmDialog = () => {
     const [mintStatus, setMintStatus] = useState("");
     const CONTRACT_NAME = "free.doc-nft-mint";
     const pactChainId = process.env.NEXT_PUBLIC_CHAIN_ID;
-    const pactGasLimit = 100000;
+    const pactGasLimit = 150000;
     const pactGasPrice = 0.00000001;
     const pactNetworkId = process.env.NEXT_PUBLIC_NETWORK_ID;
 
@@ -272,7 +272,7 @@ const MintConfirmDialog = () => {
             sender: cmd.account,
             chainId: pactChainId,
             gasPrice: 0.00000001,
-            gasLimit: 100000,
+            gasLimit: 150000,
             ttl: 28800,
             caps: cmd.caps,
             pactCode: cmd.pactCode,
