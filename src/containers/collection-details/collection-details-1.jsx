@@ -7,6 +7,7 @@ import ShareModal from "@components/modals/share-modal";
 import Button from "@components/ui/button";
 import Product from "@components/product/layout-01";
 import { formatDate } from "@utils/date";
+import Nav from "react-bootstrap/Nav";
 import { useSelector, useDispatch } from "react-redux";
 import {
     setCurrentCollection,
@@ -14,11 +15,25 @@ import {
 } from "src/store/collection.module";
 import { toggleConnectWalletDialog } from "src/store/wallet.module";
 import WalletAddress from "@components/wallet-address";
+import Pagination from "@components/pagination-02";
 
 const getIndex = (token) => token.index || token["mint-index"].int;
 
 const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
-    tokens = tokens.sort((a, b) => getIndex(a) - getIndex(b));
+    const sorted_tokens = tokens.sort((a, b) => getIndex(a) - getIndex(b));
+
+    const POSTS_PER_PAGE = 6;
+    const [currentPage, setCurrentPage] = useState(1);
+    const [collections_tokens, setMyTokens] = useState(
+        sorted_tokens.slice(0, POSTS_PER_PAGE)
+    );
+    const numberOfPages = Math.ceil(sorted_tokens.length / POSTS_PER_PAGE);
+    const paginationHandler = (page) => {
+        setCurrentPage(page);
+        const start = (page - 1) * POSTS_PER_PAGE;
+        setMyTokens(sorted_tokens.slice(start, start + POSTS_PER_PAGE));
+    };
+
     const dispatch = useDispatch();
     const connected = useSelector((state) => state.wallet.connected);
     const [isShareModalOpen, setIsShareModalOpen] = useState(false);
@@ -155,9 +170,12 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                     <div className="col-md-6">
                                         <div className="status-box">
                                             <div>Price</div>
-                                            <div>{currentTime < premintTime
+                                            <div>
+                                                {currentTime < premintTime
                                                     ? data["premint-price"]
-                                                    : data["mint-price"]} KDA</div>
+                                                    : data["mint-price"]}{" "}
+                                                KDA
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="col-md-6">
@@ -229,10 +247,26 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                 )}
             </div>
             <div className="container my-4">
+                <div className="row mt-4">
+                    <div className="col-12">
+                        <div className="tab-wrapper-one">
+                            <nav className="tab-button-one">
+                                <Nav
+                                    className="nav nav-tabs"
+                                    style={{ width: "100%" }}
+                                >
+                                    <Nav.Link as="button">
+                                        Minted Tokens
+                                    </Nav.Link>
+                                </Nav>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
                 <div className="row">
-                    {tokens?.length > 0 ? (
+                    {collections_tokens?.length > 0 ? (
                         <>
-                            {tokens.map((prod) => (
+                            {collections_tokens.map((prod) => (
                                 <div
                                     key={prod.id}
                                     className="col-5 col-lg-4 col-md-3 col-sm-4 col-6 my-3"
@@ -268,6 +302,11 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                     ) : (
                         <p>No tokens to show</p>
                     )}
+                    <Pagination
+                        currentPage={currentPage}
+                        numberOfPages={numberOfPages}
+                        onClick={paginationHandler}
+                    />
                 </div>
             </div>
         </>
