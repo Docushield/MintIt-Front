@@ -13,7 +13,6 @@ import {
 } from "src/constants/kadena";
 import {
     sign,
-    signXWallet,
     connectXWallet as connectToXWallet,
     connectZelcore as connectToZelcore,
 } from "@utils/kadena";

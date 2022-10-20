@@ -4,14 +4,16 @@ import Modal from "react-bootstrap/Modal";
 import Pact from "pact-lang-api";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { signXWallet } from "@utils/kadena";
+import { signXWallet, signZelcore } from "@utils/kadena";
 import { toggleMintConfirmDialog } from "../../store/collection.module";
+import { ZELCORE } from "src/constants/kadena";
 
 const MintConfirmDialog = () => {
     const dispatch = useDispatch();
     const show = useSelector((state) => state.collection.isMintConfirmDialog);
     const current = useSelector((state) => state.collection.current);
     const account = useSelector((state) => state.wallet.account);
+    const wallet = useSelector((state) => state.wallet.walletName);
     const [isMinting, setIsMinting] = useState(false);
     const [pending, setPending] = useState(false);
     const [mintStatus, setMintStatus] = useState("");
@@ -252,10 +254,10 @@ const MintConfirmDialog = () => {
                     account,
                     caps: caps,
                     pactCode: `(${deployedContract}.mint-nft {
-                'account: "${account}",
-                'guard: (read-msg 'user-ks),
-                'collection-name: "${current.name}"
-            })`,
+                                    'account: "${account}",
+                                    'guard: (read-msg 'user-ks),
+                                    'collection-name: "${current.name}"
+                                })`,
                     envData: {
                         "user-ks": {
                             keys: [userPubKey],
@@ -286,7 +288,13 @@ const MintConfirmDialog = () => {
         setIsMinting(true);
         setMintStatus("Minting...");
         try {
-            const signedCmd = await signXWallet(signingObject);
+            let signedCmd;
+
+            if (wallet === ZELCORE) {
+                signedCmd = await signZelcore(signingObject);
+            } else {
+                signedCmd = await signXWallet(signingObject);
+            }
 
             // Send TX
 
@@ -299,7 +307,8 @@ const MintConfirmDialog = () => {
             }).then((res) => res.json());
             setPending(true);
             setMintStatus(
-                "Your transaction is pending, here's your Request Key : " + requestKeys[0]
+                "Your transaction is pending, here's your Request Key : " +
+                    requestKeys[0]
             );
             const interval = setInterval(async () => {
                 const result = await Pact.fetch.poll({ requestKeys }, host);
@@ -391,9 +400,14 @@ const MintConfirmDialog = () => {
                                     id="price"
                                     placeholder="Total Mint Price: 20 $KDA"
                                     value={`${
-                                        current && (new Date().toLocaleString() < new Date(current["premint-ends"]).toLocaleString()
-                                        ? current["premint-price"]
-                                        : current["mint-price"])}
+                                        current &&
+                                        (new Date().toLocaleString() <
+                                        new Date(
+                                            current["premint-ends"]
+                                        ).toLocaleString()
+                                            ? current["premint-price"]
+                                            : current["mint-price"])
+                                    }
                                     KDA`}
                                     disabled
                                 />
