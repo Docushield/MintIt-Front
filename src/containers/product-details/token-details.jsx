@@ -13,7 +13,7 @@ const TokenDetailsArea = ({ space, className, product, slug, collection }) => {
     const [isCopied, setIsCopied] = useState(false);
 
     const handleCopy = () => {
-        navigator.clipboard.writeText(product.creator);
+        navigator.clipboard.writeText(product["current-owner"]);
         setIsCopied(true);
     };
 
