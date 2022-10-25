@@ -85,7 +85,9 @@ const HeroArea = ({ data }) => (
                                         Alpha Creator Pass
                                     </span>
                                 </Anchor>
-                                <ProductBid price="150KDA" />
+                                <ProductBid
+                                    price={{ amount: 150, currency: "KDA" }}
+                                />
                                 <a
                                     href="/collections/acp"
                                     className="viewbtn connectBtn btn btn-small btn-primary"
@@ -117,7 +119,9 @@ const HeroArea = ({ data }) => (
                                         NIGHTBREAKERZ
                                     </span>
                                 </Anchor>
-                                <ProductBid price="150KDA" />
+                                <ProductBid
+                                    price={{ amount: 25, currency: "KDA" }}
+                                />
                                 <a
                                     href="/collections/nightbreakerz"
                                     className="viewbtn connectBtn btn btn-small btn-primary"

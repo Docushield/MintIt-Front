@@ -80,7 +80,9 @@ const Product = ({
                     {!disableShareDropdown && <ShareDropdown />}
                 </div>
                 <Anchor path={`/collections/${slug}/tokens/${hash}`}>
-                    <span className="product-name">{title}</span>
+                    <span className="product-name">
+                        {title.slice(0, 14) + "..."}
+                    </span>
                 </Anchor>
                 {/* <span className="latest-bid">Highest bid {latestBid}</span> */}
                 <a

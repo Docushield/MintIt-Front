@@ -110,12 +110,21 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <Button
-                                            onClick={onMint}
-                                            className="mt--15"
-                                        >
-                                            Mint Now
-                                        </Button>
+                                        {data.size == data.numMinted ? (
+                                            <Button
+                                                className="mt--15"
+                                                
+                                            >
+                                                Sold Out
+                                            </Button>
+                                        ) : (
+                                            <Button
+                                                onClick={onMint}
+                                                className="mt--15"
+                                            >
+                                                Mint Now
+                                            </Button>
+                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -155,9 +164,12 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                     <div className="col-md-6">
                                         <div className="status-box">
                                             <div>Price</div>
-                                            <div>{currentTime < premintTime
+                                            <div>
+                                                {currentTime < premintTime
                                                     ? data["premint-price"]
-                                                    : data["mint-price"]} KDA</div>
+                                                    : data["mint-price"]}{" "}
+                                                KDA
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="col-md-6">
