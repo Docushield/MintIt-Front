@@ -9,7 +9,7 @@ import { pactLocalFetch } from "@utils/pactLocalFetch";
 import { fetchAPI } from "@utils/fetchAPI";
 import { parseCookies } from "nookies";
 
-const TokenHash = ({ token, slug, collection }) => (
+const TokenHash = ({ token, slug, collection, user }) => (
     <Wrapper>
         <SEO pageTitle="Product Details" />
         <Header />
@@ -23,6 +23,7 @@ const TokenHash = ({ token, slug, collection }) => (
                 product={token}
                 slug={slug}
                 collection={collection}
+                userAccount={user}
             />
             {/* <ProductArea
                 data={{
@@ -42,16 +43,16 @@ const TokenHash = ({ token, slug, collection }) => (
 );
 
 export async function getServerSideProps(context) {
-    const cookies = parseCookies();
+    const cookies = parseCookies(context);
     const slug = context.query.slug;
     const hash = context.query["token-hash"];
+    const userAccount = cookies["userAccount"];
     const cres = await fetchAPI(`api/collections/${slug}`, cookies);
     const collection = cres.response;
     try {
         const smartContract = process.env.NEXT_PUBLIC_CONTRACT;
         const pactCode = `(${smartContract}.get-nft "${collection.name}" "${hash}")`;
         const fetchRes = await pactLocalFetch(pactCode);
-        console.log(fetchRes);
         if (fetchRes == null) {
             //blockchain request failed
             return {
@@ -60,6 +61,7 @@ export async function getServerSideProps(context) {
                     token: {},
                     className: "template-color-1",
                     collection,
+                    user: userAccount,
                 },
             };
         } else {
@@ -69,6 +71,7 @@ export async function getServerSideProps(context) {
                     token: fetchRes.result.data,
                     className: "template-color-1",
                     collection,
+                    user: userAccount,
                 },
             };
         }
@@ -81,6 +84,7 @@ export async function getServerSideProps(context) {
                 slug,
                 className: "template-color-1",
                 collection,
+                user: userAccount,
             },
         };
     }

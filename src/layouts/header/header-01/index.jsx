@@ -12,13 +12,16 @@ import ColorSwitcher from "@components/color-switcher";
 import ConnectWalletDialog from "@components/connect-wallet-dialog";
 import WalletAccountDialog from "@components/wallet-account-dialog";
 import MintConfirmDialog from "@components/mint-confirm-dialog";
+import TokenSaleDialog from "@components/token-sale-dialog";
 import BurgerButton from "@ui/burger-button";
 import Button from "@ui/button";
 import { useOffcanvas, useSticky, useFlyoutSearch } from "@hooks";
 import { parseCookies, setCookie } from "nookies";
 import headerData from "../../../data/general/header-01.json";
 
-{/* to hide menu bar */ }
+{
+    /* to hide menu bar */
+}
 import menuData from "../../../data/general/menu-01.json";
 
 // const menuData = []
@@ -148,6 +151,7 @@ const Header = ({ className }) => {
             <ConnectWalletDialog />
             <WalletAccountDialog onChangeWallet={onChangeWallet} />
             <MintConfirmDialog />
+            <TokenSaleDialog />
             <MobileMenu
                 isOpen={offcanvas}
                 onClick={offcanvasHandler}

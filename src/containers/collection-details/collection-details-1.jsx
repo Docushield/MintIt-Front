@@ -14,6 +14,10 @@ import {
 } from "src/store/collection.module";
 import { toggleConnectWalletDialog } from "src/store/wallet.module";
 import WalletAddress from "@components/wallet-address";
+import TabContent from "react-bootstrap/TabContent";
+import TabContainer from "react-bootstrap/TabContainer";
+import TabPane from "react-bootstrap/TabPane";
+import Nav from "react-bootstrap/Nav";
 
 const getIndex = (token) => token.index || token["mint-index"].int;
 
@@ -155,9 +159,12 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                     <div className="col-md-6">
                                         <div className="status-box">
                                             <div>Price</div>
-                                            <div>{currentTime < premintTime
+                                            <div>
+                                                {currentTime < premintTime
                                                     ? data["premint-price"]
-                                                    : data["mint-price"]} KDA</div>
+                                                    : data["mint-price"]}{" "}
+                                                KDA
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="col-md-6">
@@ -228,48 +235,92 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                     </Button>
                 )}
             </div>
-            <div className="container my-4">
-                <div className="row">
-                    {tokens?.length > 0 ? (
-                        <>
-                            {tokens.map((prod) => (
-                                <div
-                                    key={prod.id}
-                                    className="col-5 col-lg-4 col-md-3 col-sm-4 col-6 my-3"
-                                >
-                                    <Product
-                                        overlay
-                                        title={prod["collection-name"]}
-                                        slug={data.slug}
-                                        hash={
-                                            prod["content-hash"] || prod["hash"]
-                                        }
-                                        image={{
-                                            src: prod.revealed
-                                                ? `https://ipfs.io/ipfs/${prod["content-uri"].data}`
-                                                : "/images/collection/placeholder.png",
-                                        }}
-                                        //dummy data
-                                        price={{
-                                            amount: "",
-                                            currency: "KDA",
-                                        }}
-                                        revealed={prod.revealed}
-                                        index={
-                                            prod.index ||
-                                            (prod["mint-index"]
-                                                ? prod["mint-index"].int
-                                                : "")
-                                        }
-                                    />
-                                </div>
-                            ))}
-                        </>
-                    ) : (
-                        <p>No tokens to show</p>
-                    )}
+            <TabContainer defaultActiveKey="nav-all">
+                <div className="container">
+                    <div className="row g-5 d-flex">
+                        <div className="col-12">
+                            <div className="tab-wrapper-one">
+                                <nav className="tab-button-one">
+                                    <Nav
+                                        className="nav nav-tabs"
+                                        id="nav-tab"
+                                        role="tablist"
+                                    >
+                                        <Nav.Link
+                                            as="button"
+                                            eventKey="nav-all"
+                                        >
+                                            All Minted NFTs
+                                        </Nav.Link>
+                                        <Nav.Link
+                                            as="button"
+                                            eventKey="nav-sale"
+                                        >
+                                            NFTs For Sale
+                                        </Nav.Link>
+                                    </Nav>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <TabContent className="tab-content rn-bid-content">
+                        <TabPane eventKey="nav-all">
+                            <div className="row">
+                                {tokens?.length > 0 ? (
+                                    <>
+                                        {tokens.map((prod) => (
+                                            <div
+                                                key={prod.id}
+                                                className="col-5 col-lg-4 col-md-3 col-sm-4 col-6 my-3"
+                                            >
+                                                <Product
+                                                    overlay
+                                                    title={
+                                                        prod["collection-name"]
+                                                    }
+                                                    slug={data.slug}
+                                                    hash={
+                                                        prod["content-hash"] ||
+                                                        prod["hash"]
+                                                    }
+                                                    image={{
+                                                        src: prod.revealed
+                                                            ? `https://ipfs.io/ipfs/${prod["content-uri"].data}`
+                                                            : "/images/collection/placeholder.png",
+                                                    }}
+                                                    //dummy data
+                                                    price={{
+                                                        amount: "",
+                                                        currency: "KDA",
+                                                    }}
+                                                    revealed={prod.revealed}
+                                                    index={
+                                                        prod.index ||
+                                                        (prod["mint-index"]
+                                                            ? prod["mint-index"]
+                                                                  .int
+                                                            : "")
+                                                    }
+                                                />
+                                            </div>
+                                        ))}
+                                    </>
+                                ) : (
+                                    <div className="row text-center">
+                                        <p>No tokens to show</p>
+                                    </div>
+                                )}
+                            </div>
+                        </TabPane>
+                        <TabPane eventKey="nav-sale">
+                            <div className="row text-center">
+                                {/* show token for sale here */}
+                                <p>No tokens to show</p>
+                            </div>
+                        </TabPane>
+                    </TabContent>
                 </div>
-            </div>
+            </TabContainer>
         </>
     );
 };
