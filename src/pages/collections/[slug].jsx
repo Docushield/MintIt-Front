@@ -51,11 +51,9 @@ export async function getServerSideProps(context) {
         const pactCode = `(${smartContract}.search-nfts-by-collection "${response.name}")`;
         let tokens = [];
         const fetchRes = await pactLocalFetch(pactCode);
-        console.log(JSON.stringify(fetchRes));
         if (fetchRes !== null) {
             tokens = fetchRes.result.data;
         }
-        console.log(tokens);
         return {
             props: {
                 collection: response,
