@@ -9,6 +9,8 @@ import TabContainer from "react-bootstrap/TabContainer";
 import TabPane from "react-bootstrap/TabPane";
 import Nav from "react-bootstrap/Nav";
 import { pactLocalFetch } from "@utils/pactLocalFetch";
+import Pagination from "@components/pagination-02";
+import React, { useState } from "react";
 
 export async function getServerSideProps() {
     const smartContract = process.env.NEXT_PUBLIC_CONTRACT;
@@ -37,6 +39,17 @@ export async function getServerSideProps() {
 }
 
 const Purchase = ({ tokens }) => {
+    const POSTS_PER_PAGE = 18;
+    const [currentPage, setCurrentPage] = useState(1);
+    const [page_tokens, setMyTokens] = useState(
+        tokens.slice(0, POSTS_PER_PAGE)
+    );
+    const numberOfPages = Math.ceil(tokens.length / POSTS_PER_PAGE);
+    const paginationHandler = (page) => {
+        setCurrentPage(page);
+        const start = (page - 1) * POSTS_PER_PAGE;
+        setMyTokens(tokens.slice(start, start + POSTS_PER_PAGE));
+    };
     return (
         <Wrapper>
             <SEO pageTitle="Purchase NFTs" />
@@ -73,9 +86,9 @@ const Purchase = ({ tokens }) => {
                         <TabContent className="tab-content rn-bid-content">
                             <TabPane eventKey="nav-all">
                                 <div className="row">
-                                    {tokens?.length > 0 ? (
+                                    {page_tokens?.length > 0 ? (
                                         <>
-                                            {tokens.map((prod) => (
+                                            {page_tokens.map((prod) => (
                                                 <div
                                                     key={prod.id}
                                                     className="col-5 col-lg-4 col-md-3 col-sm-4 col-6 my-3"
@@ -122,6 +135,11 @@ const Purchase = ({ tokens }) => {
                                         </div>
                                     )}
                                 </div>
+                                <Pagination
+                                    currentPage={currentPage}
+                                    numberOfPages={numberOfPages}
+                                    onClick={paginationHandler}
+                                />
                             </TabPane>
                         </TabContent>
                     </div>
