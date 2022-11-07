@@ -1,4 +1,4 @@
-import React, { useRef, useReducer, useEffect } from "react";
+import React, { useRef, useReducer, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import TabContent from "react-bootstrap/TabContent";
@@ -15,6 +15,7 @@ import { useSelector, useDispatch } from "react-redux";
 import FilterButton from "@ui/filter-button";
 import { slideToggle } from "@utils/methods";
 import Mint from "@components/constant-collections";
+import Pagination from "@components/pagination-02";
 
 function reducer(state, action) {
     switch (action.type) {
@@ -30,30 +31,39 @@ function reducer(state, action) {
 }
 
 const DublicateCollectionArea = ({ className, data }) => {
-    const appDispatch = useDispatch();
-    const connected = useSelector((state) => state.wallet.connected);
-
-    const onSaleProducts = shuffleArray(data.products).slice(0, 10);
-    const ownedProducts = data.products;
-    // const createdProducts = shuffleArray(data.products).slice(0, 10);
-    const collections = shuffleArray(data.collections).slice(0, 10);
-    const likedProducts = shuffleArray(data.products).slice(0, 10);
-    const filterRef = useRef(null);
-    const [state, dispatch] = useReducer(reducer, {
-        filterToggle: false,
-        products: data.products || [],
-        inputs: { price: [0, 100] },
-    });
-
-    const filterHandler = () => {
-        dispatch({ type: "FILTER_TOGGLE" });
-        if (!filterRef.current) return;
-        slideToggle(filterRef.current);
+    const POSTS_PER_PAGE = 6;
+    const [currentPage, setCurrentPage] = useState(1);
+    const [myTokens, setMyTokens] = useState(
+        data.products.slice(0, POSTS_PER_PAGE)
+    );
+    const numberOfPages = Math.ceil(data.products.length / POSTS_PER_PAGE);
+    const paginationHandler = (page) => {
+        setCurrentPage(page);
+        const start = (page - 1) * POSTS_PER_PAGE;
+        setMyTokens(data.products.slice(start, start + POSTS_PER_PAGE));
     };
 
-    useEffect(() => {
-        filterHandler();
-    }, [filterRef]);
+    // NOTE : below commented code can be used for filtering and sorting
+    // const appDispatch = useDispatch();
+    // const connected = useSelector((state) => state.wallet.connected);
+    // const onSaleProducts = shuffleArray(data.products).slice(0, 10);
+    // const createdProducts = shuffleArray(data.products).slice(0, 10);
+    // const collections = shuffleArray(data.collections).slice(0, 10);
+    // const likedProducts = shuffleArray(data.products).slice(0, 10);
+    // const filterRef = useRef(null);
+    // const [state, dispatch] = useReducer(reducer, {
+    //     filterToggle: false,
+    //     products: data.products || [],
+    //     inputs: { price: [0, 100] },
+    // });
+    // const filterHandler = () => {
+    //     dispatch({ type: "FILTER_TOGGLE" });
+    //     if (!filterRef.current) return;
+    //     slideToggle(filterRef.current);
+    // };
+    // useEffect(() => {
+    //     filterHandler();
+    // }, [filterRef]);
 
     const slectHandler = ({ value }, name) => {
         // dispatch({ type: "SET_INPUTS", payload: { [name]: value } });
@@ -101,6 +111,7 @@ const DublicateCollectionArea = ({ className, data }) => {
                                         className="nav nav-tabs"
                                         id="nav-tab"
                                         role="tablist"
+                                        style={{width: "100%"}}
                                     >
                                         {/* <Nav.Link
                                             as="button"
@@ -156,7 +167,7 @@ const DublicateCollectionArea = ({ className, data }) => {
                         </TabPane> */}
                         <TabPane eventKey="nav-owned">
                             <div className="row g-5 d-flex">
-                                {ownedProducts?.map((prod) => (
+                                {myTokens?.map((prod) => (
                                     <div
                                         key={prod.id}
                                         className="col-5 col-lg-4 col-md-6 col-sm-6 col-12"
@@ -222,6 +233,11 @@ const DublicateCollectionArea = ({ className, data }) => {
                     </TabContent>
                 </div>
             </TabContainer>
+            <Pagination
+                currentPage={currentPage}
+                numberOfPages={numberOfPages}
+                onClick={paginationHandler}
+            />
         </div>
     );
 };
