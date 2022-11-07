@@ -6,6 +6,7 @@ import sal from "sal.js";
 import { ThemeProvider } from "next-themes";
 import { Provider } from "react-redux";
 import store from "../store";
+import NextNProgress from 'nextjs-progressbar';
 import "../assets/css/bootstrap.min.css";
 import "../assets/css/feather.css";
 import "../assets/css/modal-video.css";
@@ -28,6 +29,7 @@ const MyApp = ({ Component, pageProps }) => {
         <Provider store={store}>
             <SSRProvider>
                 <ThemeProvider defaultTheme="dark">
+                    <NextNProgress options={{showSpinner: false}} color="#20ec8d" height={4} />
                     <Component {...pageProps} />
                 </ThemeProvider>
             </SSRProvider>
