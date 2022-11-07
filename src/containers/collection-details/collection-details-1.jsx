@@ -125,12 +125,21 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <Button
-                                            onClick={onMint}
-                                            className="mt--15"
-                                        >
-                                            Mint Now
-                                        </Button>
+                                        {data.size == data.numMinted ? (
+                                            <Button
+                                                className="mt--15"
+                                                
+                                            >
+                                                Sold Out
+                                            </Button>
+                                        ) : (
+                                            <Button
+                                                onClick={onMint}
+                                                className="mt--15"
+                                            >
+                                                Mint Now
+                                            </Button>
+                                        )}
                                     </div>
                                 </div>
                             </div>

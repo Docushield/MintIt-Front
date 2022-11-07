@@ -49,7 +49,7 @@ const DetailsTabContent = ({
                                 <span className="color-white value">
                                     {property.value.length > 3 ||
                                     property.value.split(" ").length > 1
-                                        ? property.value.slice(0, 3) + "..."
+                                        ? property.value.slice(0, 12) + "..."
                                         : property.value}
                                 </span>
                             </div>
@@ -84,7 +84,7 @@ const DetailsTabContent = ({
                 </div>
                 {/* </Anchor> */}
                 <div className="pd-property-spec">
-                    Creator Roaylties:{" "}
+                    Creator Royalties:{" "}
                     {(
                         getRoyalty(
                             collection["sale-royalties"]["rates"],
