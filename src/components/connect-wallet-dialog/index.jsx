@@ -4,32 +4,20 @@ import { useSelector, useDispatch } from "react-redux";
 import Modal from "react-bootstrap/Modal";
 import { setCookie, parseCookies } from "nookies";
 import { apiLogin } from "@utils/apiLogin";
-import {
-    ZELCORE,
-    X_WALLET,
-    GAS_PRICE,
-    GAS_LIMIT,
-    TTL,
-} from "src/constants/kadena";
+import { ZELCORE, X_WALLET } from "src/constants/kadena";
 import {
     sign,
-    signXWallet,
     connectXWallet as connectToXWallet,
     connectZelcore as connectToZelcore,
 } from "@utils/kadena";
-import { toast } from "react-toastify";
 
 import {
     toggleConnectWalletDialog,
     setConnected,
 } from "../../store/wallet.module";
+import { baseSignInObject } from "src/lib/constants";
 
 const ConnectWalletDialog = () => {
-    const kdaEnvironment = {
-        networkId: process.env.NEXT_PUBLIC_NETWORK_ID,
-        chainId: process.env.NEXT_PUBLIC_CHAIN_ID,
-    };
-
     const dispatch = useDispatch();
     const show = useSelector((state) => state.wallet.isConnectWalletDialog);
     const handleClose = () => {
@@ -71,8 +59,6 @@ const ConnectWalletDialog = () => {
     };
 
     const getLoginSignature = async (provider) => {
-        const { networkId, chainId } = kdaEnvironment;
-
         const cookies = parseCookies();
         const account = cookies["userAccount"];
         const userPubKey = account.startsWith("k:")
@@ -80,11 +66,8 @@ const ConnectWalletDialog = () => {
             : account;
 
         const signingObject = {
+            ...baseSignInObject,
             sender: account,
-            chainId,
-            gasPrice: GAS_PRICE,
-            gasLimit: GAS_LIMIT,
-            ttl: TTL,
             caps: [],
             pactCode: `(coin.details ${account})`,
             envData: {
@@ -94,7 +77,6 @@ const ConnectWalletDialog = () => {
                 },
             },
             signingPubKey: userPubKey,
-            networkId,
         };
 
         const signedCmd = await sign(provider, signingObject);
@@ -131,7 +113,6 @@ const ConnectWalletDialog = () => {
             onHide={handleClose}
             className="wallet-dialog rn-popup-modal2 share-modal-wrapper"
         >
-            {/* <Modal.Header closeButton></Modal.Header> */}
             <Modal.Body>
                 <div
                     className="wallet-item"
