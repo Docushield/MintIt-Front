@@ -6,9 +6,10 @@ import Collection from "@components/collection";
 import Pagination from "@components/pagination-02";
 import ProductFilter from "@components/product-filter/layout-01";
 import CategoryFilter from "@components/category-filter";
+import { fetchAPI } from "@utils/fetchAPI";
 import { CollectionType, SectionTitleType } from "@utils/types";
 
-const POSTS_PER_PAGE = 8;
+const POSTS_PER_PAGE = 20;
 
 function reducer(state, action) {
     switch (action.type) {
@@ -27,10 +28,11 @@ const CollectionArea = ({ className, space, id, data }) => {
     const itemsToFilter = [...(data.collections || [])];
     const [collections, setCollections] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const numberOfPages = Math.ceil(data.collections.length / POSTS_PER_PAGE);
-    const paginationHandler = (page) => {
+    const numberOfPages = Math.ceil(
+        (data.count) / POSTS_PER_PAGE
+    );
+    const paginationHandler = async (page) => {
         setCurrentPage(page);
-        window.scrollTo({ top: 0, behavior: "smooth" });
     };
     const [state, dispatch] = useReducer(reducer, {
         filterToggle: false,
@@ -89,9 +91,19 @@ const CollectionArea = ({ className, space, id, data }) => {
         itemFilterHandler();
     }, [itemFilterHandler]);
 
-    const creatorHandler = useCallback(() => {
-        const start = (currentPage - 1) * POSTS_PER_PAGE;
-        setCollections(data.collections.slice(start, start + POSTS_PER_PAGE));
+    const creatorHandler = useCallback(async () => {
+        if (currentPage == 1) {
+            setCollections(data.collections);
+        } else {
+            const res = await fetchAPI(
+                `api/collections?limit=${POSTS_PER_PAGE}&offset=${
+                    POSTS_PER_PAGE * currentPage
+                }`,
+                data.cookies
+            );
+            setCollections(res.response);
+            console.log(res.response);
+        }
     }, [currentPage, data.collections]);
 
     useEffect(() => {
@@ -122,11 +134,7 @@ const CollectionArea = ({ className, space, id, data }) => {
                     }}
                 /> */}
                 <div className="row g-5">
-                    {/* must be updated when applying status condition at backend server */}
-                    {/* {state.collections.map((collection) => ( */}
-                    {state.collections
-                        .filter((collection) => collection.status == "success")
-                        .map((collection) => (
+                    {collections.map((collection) => (
                             <div
                                 key={collection.id}
                                 className="col-lg-6 col-xl-3 col-md-6 col-sm-6 col-12"

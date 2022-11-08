@@ -7,6 +7,7 @@ import ShareModal from "@components/modals/share-modal";
 import Button from "@components/ui/button";
 import Product from "@components/product/layout-01";
 import { formatDate } from "@utils/date";
+import Nav from "react-bootstrap/Nav";
 import { useSelector, useDispatch } from "react-redux";
 import {
     setCurrentCollection,
@@ -17,12 +18,25 @@ import WalletAddress from "@components/wallet-address";
 import TabContent from "react-bootstrap/TabContent";
 import TabContainer from "react-bootstrap/TabContainer";
 import TabPane from "react-bootstrap/TabPane";
-import Nav from "react-bootstrap/Nav";
+import Pagination from "@components/pagination-02";
 
 const getIndex = (token) => token.index || token["mint-index"].int;
 
 const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
-    tokens = tokens.sort((a, b) => getIndex(a) - getIndex(b));
+    const sorted_tokens = tokens.sort((a, b) => getIndex(a) - getIndex(b));
+
+    const POSTS_PER_PAGE = 12;
+    const [currentPage, setCurrentPage] = useState(1);
+    const [all_tokens, setAllTokens] = useState(
+        sorted_tokens.slice(0, POSTS_PER_PAGE)
+    );
+    const numberOfPages = Math.ceil(sorted_tokens.length / POSTS_PER_PAGE);
+    const paginationHandler = (page) => {
+        setCurrentPage(page);
+        const start = (page - 1) * POSTS_PER_PAGE;
+        setAllTokens(sorted_tokens.slice(start, start + POSTS_PER_PAGE));
+    };
+
     const dispatch = useDispatch();
     const connected = useSelector((state) => state.wallet.connected);
     const [isShareModalOpen, setIsShareModalOpen] = useState(false);
@@ -114,12 +128,18 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <Button
-                                            onClick={onMint}
-                                            className="mt--15"
-                                        >
-                                            Mint Now
-                                        </Button>
+                                        {data.size == data.numMinted ? (
+                                            <Button className="mt--15">
+                                                Sold Out
+                                            </Button>
+                                        ) : (
+                                            <Button
+                                                onClick={onMint}
+                                                className="mt--15"
+                                            >
+                                                Mint Now
+                                            </Button>
+                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -266,9 +286,9 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                     <TabContent className="tab-content rn-bid-content">
                         <TabPane eventKey="nav-all">
                             <div className="row">
-                                {tokens?.length > 0 ? (
+                                {all_tokens?.length > 0 ? (
                                     <>
-                                        {tokens.map((prod) => (
+                                        {all_tokens.map((prod) => (
                                             <div
                                                 key={prod.id}
                                                 className="col-5 col-lg-4 col-md-3 col-sm-4 col-6 my-3"
@@ -311,6 +331,11 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                     </div>
                                 )}
                             </div>
+                            <Pagination
+                                currentPage={currentPage}
+                                numberOfPages={numberOfPages}
+                                onClick={paginationHandler}
+                            />
                         </TabPane>
                         <TabPane eventKey="nav-sale">
                             <div className="row text-center">
