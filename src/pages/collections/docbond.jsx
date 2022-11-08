@@ -42,7 +42,6 @@ export async function getStaticProps() {
     });
 
     const respObject = await response.json();
-    console.log(respObject);
 
     if (
         !respObject ||

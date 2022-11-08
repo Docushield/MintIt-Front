@@ -51,7 +51,6 @@ export async function getServerSideProps(context) {
         const smartContract = process.env.NEXT_PUBLIC_CONTRACT;
         const pactCode = `(${smartContract}.get-nft "${collection.name}" "${hash}")`;
         const fetchRes = await pactLocalFetch(pactCode);
-        console.log(fetchRes);
         if (fetchRes == null) {
             //blockchain request failed
             return {
