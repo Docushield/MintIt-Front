@@ -14,5 +14,10 @@
         "id": 5,
         "text": "Mint",
         "path": "/mint"
+    },
+    {
+        "id": 6,
+        "text": "Purchase",
+        "path": "/purchase"
     }
 ]
