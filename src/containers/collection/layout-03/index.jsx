@@ -114,14 +114,13 @@ const CollectionArea = ({ className, space, id, data }) => {
         <div
             className={clsx(
                 "rn-collection-area",
-                space === 1 && "rn-section-gapTop",
                 className
             )}
             id={id}
         >
-            <div className="container">
+            <div className="container pt-5">
                 {data?.section_title && (
-                    <h2 className="text-center mb--50">
+                    <h2 className="text-center my-5">
                         {data.section_title.title}
                     </h2>
                 )}

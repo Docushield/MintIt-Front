@@ -1,5 +1,5 @@
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { useState } from "react";
 import clsx from "clsx";
 import Sticky from "@ui/sticky";
 import Button from "@ui/button";
@@ -7,14 +7,41 @@ import GalleryTab from "@components/product-details/gallery-tab";
 import ProductTitle from "@components/product-details/title";
 import BidTab from "@components/product-details/bid-tab";
 import DescriptionDropdown from "@components/product-details/DescriptionDropdown";
+import { useSelector, useDispatch } from "react-redux";
 import Image from "next/image";
+import { toggleConnectWalletDialog } from "src/store/wallet.module";
+import { setCurrentToken, toggleTokenSaleDialog } from "src/store/token.module";
 
-const TokenDetailsArea = ({ space, className, product, slug, collection }) => {
+const TokenDetailsArea = ({
+    space,
+    className,
+    product,
+    slug,
+    collection,
+    userAccount,
+}) => {
+    const dispatch = useDispatch();
+    const connected = useSelector((state) => state.wallet.connected);
     const [isCopied, setIsCopied] = useState(false);
 
     const handleCopy = () => {
         navigator.clipboard.writeText(product["current-owner"]);
         setIsCopied(true);
+        setTimeout(() => {
+            setIsCopied(false);
+        }, 4000);
+    };
+
+    useEffect(() => {
+        dispatch(setCurrentToken(product));
+    }, [product]);
+
+    const onSale = () => {
+        if (connected) {
+            dispatch(toggleTokenSaleDialog());
+        } else {
+            dispatch(toggleConnectWalletDialog());
+        }
     };
 
     return (
@@ -80,6 +107,7 @@ const TokenDetailsArea = ({ space, className, product, slug, collection }) => {
                                     </div>
                                 </Button>
                             </h6>
+                            <Button onClick={onSale}>{userAccount == product["current-owner"] ? "Sale NFT Now" : "Purchase NFT"}</Button>
                             <div className="catagory-collection items-center">
                                 {/*                             <div className="mx-2">
                                 <Button

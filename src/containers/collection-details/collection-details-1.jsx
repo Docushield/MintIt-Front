@@ -15,6 +15,9 @@ import {
 } from "src/store/collection.module";
 import { toggleConnectWalletDialog } from "src/store/wallet.module";
 import WalletAddress from "@components/wallet-address";
+import TabContent from "react-bootstrap/TabContent";
+import TabContainer from "react-bootstrap/TabContainer";
+import TabPane from "react-bootstrap/TabPane";
 import Pagination from "@components/pagination-02";
 
 const getIndex = (token) => token.index || token["mint-index"].int;
@@ -22,16 +25,16 @@ const getIndex = (token) => token.index || token["mint-index"].int;
 const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
     const sorted_tokens = tokens.sort((a, b) => getIndex(a) - getIndex(b));
 
-    const POSTS_PER_PAGE = 6;
+    const POSTS_PER_PAGE = 12;
     const [currentPage, setCurrentPage] = useState(1);
-    const [collections_tokens, setMyTokens] = useState(
+    const [all_tokens, setAllTokens] = useState(
         sorted_tokens.slice(0, POSTS_PER_PAGE)
     );
     const numberOfPages = Math.ceil(sorted_tokens.length / POSTS_PER_PAGE);
     const paginationHandler = (page) => {
         setCurrentPage(page);
         const start = (page - 1) * POSTS_PER_PAGE;
-        setMyTokens(sorted_tokens.slice(start, start + POSTS_PER_PAGE));
+        setAllTokens(sorted_tokens.slice(start, start + POSTS_PER_PAGE));
     };
 
     const dispatch = useDispatch();
@@ -126,10 +129,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                             </div>
                                         </div>
                                         {data.size == data.numMinted ? (
-                                            <Button
-                                                className="mt--15"
-                                                
-                                            >
+                                            <Button className="mt--15">
                                                 Sold Out
                                             </Button>
                                         ) : (
@@ -255,69 +255,97 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                     </Button>
                 )}
             </div>
-            <div className="container my-4">
-                <div className="row mt-4">
-                    <div className="col-12">
-                        <div className="tab-wrapper-one">
-                            <nav className="tab-button-one">
-                                <Nav
-                                    className="nav nav-tabs"
-                                    style={{ width: "100%" }}
-                                >
-                                    <Nav.Link as="button">
-                                        Minted Tokens
-                                    </Nav.Link>
-                                </Nav>
-                            </nav>
+            <TabContainer defaultActiveKey="nav-all">
+                <div className="container">
+                    <div className="row g-5 d-flex">
+                        <div className="col-12">
+                            <div className="tab-wrapper-one">
+                                <nav className="tab-button-one">
+                                    <Nav
+                                        className="nav nav-tabs"
+                                        id="nav-tab"
+                                        role="tablist"
+                                    >
+                                        <Nav.Link
+                                            as="button"
+                                            eventKey="nav-all"
+                                        >
+                                            All Minted NFTs
+                                        </Nav.Link>
+                                        <Nav.Link
+                                            as="button"
+                                            eventKey="nav-sale"
+                                        >
+                                            NFTs For Sale
+                                        </Nav.Link>
+                                    </Nav>
+                                </nav>
+                            </div>
                         </div>
                     </div>
+                    <TabContent className="tab-content rn-bid-content">
+                        <TabPane eventKey="nav-all">
+                            <div className="row">
+                                {all_tokens?.length > 0 ? (
+                                    <>
+                                        {all_tokens.map((prod) => (
+                                            <div
+                                                key={prod.id}
+                                                className="col-5 col-lg-4 col-md-3 col-sm-4 col-6 my-3"
+                                            >
+                                                <Product
+                                                    overlay
+                                                    title={
+                                                        prod["collection-name"]
+                                                    }
+                                                    slug={data.slug}
+                                                    hash={
+                                                        prod["content-hash"] ||
+                                                        prod["hash"]
+                                                    }
+                                                    image={{
+                                                        src: prod.revealed
+                                                            ? `https://ipfs.io/ipfs/${prod["content-uri"].data}`
+                                                            : "/images/collection/placeholder.png",
+                                                    }}
+                                                    //dummy data
+                                                    price={{
+                                                        amount: "",
+                                                        currency: "KDA",
+                                                    }}
+                                                    revealed={prod.revealed}
+                                                    index={
+                                                        prod.index ||
+                                                        (prod["mint-index"]
+                                                            ? prod["mint-index"]
+                                                                  .int
+                                                            : "")
+                                                    }
+                                                />
+                                            </div>
+                                        ))}
+                                    </>
+                                ) : (
+                                    <div className="row text-center">
+                                        <p>No tokens to show</p>
+                                    </div>
+                                )}
+                            </div>
+                            <Pagination
+                                currentPage={currentPage}
+                                numberOfPages={numberOfPages}
+                                onClick={paginationHandler}
+                            />
+                        </TabPane>
+                        <TabPane eventKey="nav-sale">
+                            <div className="row text-center">
+                                {/* show token for sale here */}
+                                <p>No tokens to show</p>
+                            </div>
+                        </TabPane>
+                    </TabContent>
                 </div>
-                <div className="row">
-                    {collections_tokens?.length > 0 ? (
-                        <>
-                            {collections_tokens.map((prod) => (
-                                <div
-                                    key={prod["content-hash"]}
-                                    className="col-5 col-lg-4 col-md-3 col-sm-4 col-6 my-3"
-                                >
-                                    <Product
-                                        overlay
-                                        title={prod["collection-name"]}
-                                        slug={data.slug}
-                                        hash={
-                                            prod["content-hash"] || prod["hash"]
-                                        }
-                                        image={{
-                                            src: prod.revealed
-                                                ? `https://ipfs.io/ipfs/${prod["content-uri"].data}`
-                                                : "/images/collection/placeholder.png",
-                                        }}
-                                        //dummy data
-                                        price={{
-                                            amount: 0,
-                                            currency: "KDA",
-                                        }}
-                                        revealed={prod.revealed}
-                                        index={
-                                            prod.index ||
-                                            (prod["mint-index"]
-                                                ? prod["mint-index"].int
-                                                : "")
-                                        }
-                                    />
-                                </div>
-                            ))}
-                        </>
-                    ) : (
-                        <p>No tokens to show</p>
-                    )}
-                    <Pagination
-                        currentPage={currentPage}
-                        numberOfPages={numberOfPages}
-                        onClick={paginationHandler}
-                    />
-                </div>
-            </div>
+            </TabContainer>
         </>
     );
 };
