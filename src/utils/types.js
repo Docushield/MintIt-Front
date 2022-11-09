@@ -90,12 +90,12 @@ export const SellerType = PropTypes.shape({
 
 export const CollectionType = PropTypes.shape({
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    title: PropTypes.string.isRequired,
+    title: PropTypes.string,
     slug: PropTypes.string.isRequired,
-    total_item: PropTypes.number.isRequired,
-    image: ImageType.isRequired,
-    thumbnails: PropTypes.arrayOf(ImageType).isRequired,
-    profile_image: ImageType.isRequired,
+    total_item: PropTypes.number,
+    image: ImageType,
+    thumbnails: PropTypes.arrayOf(ImageType),
+    profile_image: ImageType,
     live_date: PropTypes.string,
 });
 

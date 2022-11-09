@@ -18,9 +18,6 @@ import { docbondCollection } from "./collections/docbond";
 
 // Demo data
 import homepageData from "../data/homepages/homepage.json";
-import sellerData from "../data/sellers.json";
-import productData from "../data/categories.json";
-import Mint from "@components/constant-collections";
 
 export async function getServerSideProps(context) {
     const cookies = parseCookies(context);

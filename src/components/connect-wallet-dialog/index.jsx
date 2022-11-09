@@ -115,7 +115,7 @@ const ConnectWalletDialog = () => {
         >
             <Modal.Body>
                 <div
-                    className="wallet-item"
+                    className="wallet-item mb-4"
                     onClick={() => authenticate(X_WALLET)}
                 >
                     <div>

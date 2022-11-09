@@ -55,7 +55,7 @@ const Collection = ({ collections, count, cookies }) => {
             <Header />
             <main id="main-content">
                 <Breadcrumb
-                    pageTitle="Discover Collections"
+                    pageTitle="Collection"
                     pageTitle1=""
                     currentPage="Collection"
                 />
