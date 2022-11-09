@@ -12,12 +12,18 @@ import Mint from "@components/constant-collections";
 export async function getServerSideProps(context) {
     const cookies = parseCookies(context);
 
-    const res = await fetchAPI("api/collections", cookies);
+    const res = await fetchAPI("api/collections?limit=18", cookies);
+    const countRes = await fetchAPI("api/collections?count=true", cookies);
 
     if (res.error) {
         return {
             props: {
                 error: res.error,
+                count:
+                    countRes && countRes.response && countRes.response.count
+                        ? countRes.response.count
+                        : 0,
+                cookies,
                 className: "template-color-1 with-particles",
             },
         };
@@ -26,18 +32,16 @@ export async function getServerSideProps(context) {
     return {
         props: {
             collections: res.response,
+            count:
+                countRes && countRes.response && countRes.response.count
+                    ? countRes.response.count
+                    : res.response.length,
+            cookies,
             className: "template-color-1 with-particles",
         },
     };
 }
-const MintPage = ({ collections }) => {
-    const [pageNumber, setPageNumber] = useState(1);
-
-    const onPageChageHandler = (page) => {
-        console.log("Discover page: ", page);
-        setPageNumber(page);
-    };
-
+const MintPage = ({ collections, count, cookies }) => {
     return (
         <Wrapper>
             <SEO pageTitle="Mint" />
@@ -47,14 +51,15 @@ const MintPage = ({ collections }) => {
                     pageTitle="Mint"
                     pageTitle1=""
                     currentPage="Mint"
-                    onPageChageHandler={onPageChageHandler}
                 />
                 <CollectionArea
                     data={{
-                        collections,
+                        collections: collections,
                         section_title: {
                             title: "Minting Now",
                         },
+                        count: count,
+                        cookies,
                     }}
                 />
 

@@ -102,12 +102,12 @@ Product.propTypes = {
     overlay: PropTypes.bool,
     title: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
-    latestBid: PropTypes.string.isRequired,
+    latestBid: PropTypes.string,
     price: PropTypes.shape({
         amount: PropTypes.number.isRequired,
         currency: PropTypes.string.isRequired,
     }).isRequired,
-    likeCount: PropTypes.number.isRequired,
+    likeCount: PropTypes.number,
     auction_date: PropTypes.string,
     image: ImageType.isRequired,
     authors: PropTypes.arrayOf(

@@ -277,7 +277,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                         <>
                             {collections_tokens.map((prod) => (
                                 <div
-                                    key={prod.id}
+                                    key={prod["content-hash"]}
                                     className="col-5 col-lg-4 col-md-3 col-sm-4 col-6 my-3"
                                 >
                                     <Product
@@ -294,7 +294,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                         }}
                                         //dummy data
                                         price={{
-                                            amount: "",
+                                            amount: 0,
                                             currency: "KDA",
                                         }}
                                         revealed={prod.revealed}
