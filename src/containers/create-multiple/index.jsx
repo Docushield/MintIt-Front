@@ -46,19 +46,33 @@ const CreateNewArea = ({ className, space, handleSend }) => {
     // This function will be triggered when the file field change
     const imageChange = (e) => {
         if (e.target.files && e.target.files.length > 0) {
-            setSelectedImage(e.target.files[0]);
-        }
-    };
-
-    const logoChange = (e) => {
-        if (e.target.files && e.target.files.length > 0) {
-            setSelectedLogo(e.target.files[0]);
+            const profile = e.target.files[0];
+            console.log(profile.type);
+            if (
+                profile.type !== "image/jpeg" &&
+                profile.type !== "image/png" &&
+                profile.type !== "image/jpg"
+            ) {
+                toast("Invalid file type, select valid image file.");
+                return;
+            }
+            setSelectedImage(profile);
         }
     };
 
     const bannerChange = (e) => {
         if (e.target.files && e.target.files.length > 0) {
-            setSelectedBanner(e.target.files[0]);
+            const banner = e.target.files[0];
+            console.log(banner.type);
+            if (
+                banner.type !== "image/jpeg" &&
+                banner.type !== "image/png" &&
+                banner.type !== "image/jpg"
+            ) {
+                toast("Invalid file type, select valid image file.");
+                return;
+            }
+            setSelectedBanner(banner);
         }
     };
 
@@ -66,12 +80,19 @@ const CreateNewArea = ({ className, space, handleSend }) => {
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0];
             if (file.type !== "application/json") {
-                toast("File type is mismatched for JSON files.");
+                toast("Invalid file type, select valid JSON file.");
                 return;
             }
             const reader = new FileReader();
             reader.addEventListener("load", (event) => {
-                setSelectedJson(JSON.parse(event.target.result));
+                const input_json = JSON.parse(event.target.result);
+                if (!input_json.creator || !input_json.name) {
+                    toast(
+                        "Invalid file, this file is not valid for creating collection."
+                    );
+                    return;
+                }
+                setSelectedJson(input_json);
                 setIsPreview(true);
             });
             reader.readAsText(file);
@@ -161,6 +182,7 @@ const CreateNewArea = ({ className, space, handleSend }) => {
                                                     name="image"
                                                     id="image"
                                                     type="file"
+                                                    accept="image/png, image/jpg, image/jpeg"
                                                     className="inputfile"
                                                     onChange={imageChange}
                                                 />
@@ -212,6 +234,7 @@ const CreateNewArea = ({ className, space, handleSend }) => {
                                                     id="banner"
                                                     type="file"
                                                     className="inputfile"
+                                                    accept="image/png, image/jpg, image/jpeg"
                                                     onChange={bannerChange}
                                                 />
                                                 {selectedBanner && (
