@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 import stepsData from "../../data/steps.json";
 import Steps from "@components/steps";
 import CreateCollectionArea from "@containers/create-collection";
-import { toSlug } from "@utils/methods";
+import slugify from "slugify";
 import { formatDate } from "@utils/date";
 
 const CreateNewArea = ({ className, space, handleSend }) => {
@@ -26,7 +26,7 @@ const CreateNewArea = ({ className, space, handleSend }) => {
     const router = useRouter();
 
     const slug = useMemo(() => {
-        return selectedJson ? toSlug(selectedJson["name"]) : "";
+        return selectedJson ? slugify(selectedJson["name"]) : "";
     }, [selectedJson]);
 
     const {
@@ -366,8 +366,8 @@ const CreateNewArea = ({ className, space, handleSend }) => {
                                                                 selectedJson[
                                                                     "mint-royalties"
                                                                 ].rates || []
-                                                            ).map((royalty) => (
-                                                                <tr>
+                                                            ).map((royalty, i) => (
+                                                                <tr id={`i${i}`}>
                                                                     <td>
                                                                         {
                                                                             royalty.description
@@ -436,8 +436,8 @@ const CreateNewArea = ({ className, space, handleSend }) => {
                                                                     "premint-whitelist"
                                                                 ] || []
                                                             ).map(
-                                                                (whiteItem) => (
-                                                                    <tr>
+                                                                (whiteItem,j) => (
+                                                                    <tr id={`j${j}`}>
                                                                         <td className="py-2">
                                                                             <small>
                                                                                 {
