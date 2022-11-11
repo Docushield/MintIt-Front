@@ -86,12 +86,40 @@ const CreateNewArea = ({ className, space, handleSend }) => {
             const reader = new FileReader();
             reader.addEventListener("load", (event) => {
                 const input_json = JSON.parse(event.target.result);
+                const inValid_mint_starts = isNaN(
+                    Date.parse(input_json["mint-starts"])
+                );
+                const inValid_premint_ends = isNaN(
+                    Date.parse(input_json["premint-ends"])
+                );
+                const inValid_reveal_at = isNaN(
+                    Date.parse(input_json["reveal-at"])
+                );
+                let all_hashes = [];
+                for (const token of input_json["token-list"]) {
+                    all_hashes.push(token.hash);
+                }
+                const inValid_hashes =
+                    new Set(all_hashes).size !== all_hashes.length;
                 if (!input_json.creator || !input_json.name) {
                     toast(
                         "Invalid file, this file is not valid for creating collection."
                     );
                     return;
                 }
+                if (
+                    inValid_mint_starts ||
+                    inValid_premint_ends ||
+                    inValid_reveal_at
+                ) {
+                    toast("Invalid Date Format, Please check date formats.");
+                    return;
+                }
+                if (inValid_hashes) {
+                    toast("Duplicate Token Hashes, Please check Token Hashes.");
+                    return;
+                }
+
                 setSelectedJson(input_json);
                 setIsPreview(true);
             });
