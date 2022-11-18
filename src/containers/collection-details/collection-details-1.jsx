@@ -8,6 +8,7 @@ import Button from "@components/ui/button";
 import Product from "@components/product/layout-01";
 import { formatDate } from "@utils/date";
 import Nav from "react-bootstrap/Nav";
+import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import {
     setCurrentCollection,
@@ -19,14 +20,32 @@ import TabContent from "react-bootstrap/TabContent";
 import TabContainer from "react-bootstrap/TabContainer";
 import TabPane from "react-bootstrap/TabPane";
 import Pagination from "@components/pagination-02";
+const baseURL = process.env.NEXT_PUBLIC_API_URL || "https://the-backend.fly.dev";
 
 const getIndex = (token) => token.index || token["mint-index"].int;
 
+const checkStatus = async () => {
+    const response = await fetch(`${baseURL}/api/collections/get-status`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+        },
+    });
+    if (response.status == 400) {
+        return false;
+    } else if (response.status == 200) {
+        const resJson = await response.json();
+        console.log(resJson);
+        return resJson.minting;
+    }
+};
+
 const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
     const sorted_tokens = tokens.sort((a, b) => getIndex(a) - getIndex(b));
-
     const POSTS_PER_PAGE = 12;
     const [currentPage, setCurrentPage] = useState(1);
+    const [disableBTN, setBisableBTN] = useState(false);
     const [all_tokens, setAllTokens] = useState(
         sorted_tokens.slice(0, POSTS_PER_PAGE)
     );
@@ -49,10 +68,19 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
         dispatch(setCurrentCollection(data));
     }, [data]);
 
-    const onMint = () => {
+    const onMint = async () => {
+        setBisableBTN(true);
+        let status = await checkStatus();
+        if (!status) {
+            toast.error("Minting is disabled for a while, try again later.");
+            setBisableBTN(false);
+            return;
+        }
         if (connected) {
+            setBisableBTN(false);
             dispatch(toggleMintConfirmDialog());
         } else {
+            setBisableBTN(false);
             dispatch(toggleConnectWalletDialog());
         }
     };
@@ -136,6 +164,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                             <Button
                                                 onClick={onMint}
                                                 className="mt--15"
+                                                disabled={disableBTN}
                                             >
                                                 Mint Now
                                             </Button>
