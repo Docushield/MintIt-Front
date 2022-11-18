@@ -34,7 +34,6 @@ export async function getServerSideProps(context) {
 
     try {
         const token = cookies["token"];
-
         const response = await fetch(`${baseURL}/api/collections/${slug}`, {
             method: "GET",
             headers: {
