@@ -20,7 +20,8 @@ import TabContent from "react-bootstrap/TabContent";
 import TabContainer from "react-bootstrap/TabContainer";
 import TabPane from "react-bootstrap/TabPane";
 import Pagination from "@components/pagination-02";
-const baseURL = process.env.NEXT_PUBLIC_API_URL || "https://the-backend.fly.dev";
+const baseURL =
+    process.env.NEXT_PUBLIC_API_URL || "https://the-backend.fly.dev";
 
 const getIndex = (token) => token.index || token["mint-index"].int;
 
@@ -36,12 +37,37 @@ const checkStatus = async () => {
         return false;
     } else if (response.status == 200) {
         const resJson = await response.json();
-        console.log(resJson);
         return resJson.minting;
     }
 };
 
-const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
+const countTokens = async (slug, account) => {
+    const response = await fetch(
+        `http://localhost:8080/api/collections/profile/count-tokens`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+            },
+            body: JSON.stringify({ slug: slug, account: account }),
+        }
+    );
+    if (response.status == 400) {
+        return 0;
+    } else if (response.status == 200) {
+        const resJson = await response.json();
+        return resJson;
+    }
+};
+
+const CollectionDetailsIntroArea = ({
+    className,
+    space,
+    data,
+    tokens,
+    account,
+}) => {
     const sorted_tokens = tokens.sort((a, b) => getIndex(a) - getIndex(b));
     const POSTS_PER_PAGE = 12;
     const [currentPage, setCurrentPage] = useState(1);
@@ -70,7 +96,11 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
 
     const onMint = async () => {
         setBisableBTN(true);
+        //checks if minting is allowed by admin
         let status = await checkStatus();
+        //checks if user can mint more tokens
+        let total = await countTokens(data.slug, account);
+        console.log("Tokens already minted by this account = " + total);
         if (!status) {
             toast.error("Minting is disabled for a while, try again later.");
             setBisableBTN(false);
@@ -382,6 +412,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
 CollectionDetailsIntroArea.propTypes = {
     className: PropTypes.string,
     space: PropTypes.oneOf([1]),
+    account: PropTypes.string,
     data: PropTypes.shape({
         bannerImageUrl: PropTypes.string,
         createdAt: PropTypes.string,
