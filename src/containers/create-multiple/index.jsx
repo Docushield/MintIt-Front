@@ -14,6 +14,23 @@ import Steps from "@components/steps";
 import CreateCollectionArea from "@containers/create-collection";
 import { toSlug } from "@utils/methods";
 import { formatDate } from "@utils/date";
+const baseURL = process.env.NEXT_PUBLIC_API_URL || "https://the-backend.fly.dev";
+
+const checkStatus = async () => {
+    const response = await fetch(`${baseURL}/api/collections/get-status`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+        },
+    });
+    if (response.status == 400) {
+        return false;
+    } else if (response.status == 200) {
+        const resJson = await response.json();
+        return resJson.collection;
+    }
+};
 
 const CreateNewArea = ({ className, space, handleSend }) => {
     const [showProductModal, setShowProductModal] = useState(false);
@@ -23,6 +40,7 @@ const CreateNewArea = ({ className, space, handleSend }) => {
     const [previewData, setPreviewData] = useState({});
     const [isPreview, setIsPreview] = useState(false);
     const [selectedJson, setSelectedJson] = useState(null);
+    const [disableBTN, setBisableBTN] = useState(false);
     const router = useRouter();
 
     const slug = useMemo(() => {
@@ -79,6 +97,14 @@ const CreateNewArea = ({ className, space, handleSend }) => {
     };
 
     const onSubmit = async () => {
+        setBisableBTN(true);
+        let status = await checkStatus();
+        if (!status) {
+            toast.error("Collection initialization is disabled for a while, try again later.");
+            setBisableBTN(false);
+            return;
+        }
+        setBisableBTN(false);
         await handleSend(selectedImage, selectedBanner, selectedJson, slug);
     };
 
@@ -411,6 +437,7 @@ const CreateNewArea = ({ className, space, handleSend }) => {
                                                         type="submit"
                                                         fullwidth
                                                         data-btn="confirm"
+                                                        disabled={disableBTN}
                                                     >
                                                         Confirm & Submit
                                                     </Button>
