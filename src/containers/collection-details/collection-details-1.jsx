@@ -43,7 +43,7 @@ const checkStatus = async () => {
 
 const countTokens = async (slug, account) => {
     const response = await fetch(
-        `http://localhost:8080/api/collections/profile/count-tokens`,
+        `${baseURL}/api/collections/profile/count-tokens`,
         {
             method: "POST",
             headers: {
@@ -99,12 +99,26 @@ const CollectionDetailsIntroArea = ({
         //checks if minting is allowed by admin
         let status = await checkStatus();
         //checks if user can mint more tokens
-        let total = await countTokens(data.slug, account);
-        console.log("Tokens already minted by this account = " + total);
+        let account_total = await countTokens(data.slug, account);
+        console.log(
+            "token by this K = " +
+                account_total +
+                "and limit is = " +
+                data.mintingLimit
+        );
         if (!status) {
             toast.error("Minting is disabled for a while, try again later.");
             setBisableBTN(false);
             return;
+        }
+        if (data.mintingLimit != null) {
+            if (account_total >= data.mintingLimit) {
+                toast.error(
+                    `Sorry, You can only mint ${data.mintingLimit} tokens for this collection.`
+                );
+                setBisableBTN(false);
+                return;
+            }
         }
         if (connected) {
             setBisableBTN(false);
