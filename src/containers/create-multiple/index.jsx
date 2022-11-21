@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import { useMemo, useState } from "react";
-import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { useForm } from "react-hook-form";
@@ -11,7 +10,6 @@ import ErrorText from "@ui/error-text";
 import { toast } from "react-toastify";
 import stepsData from "../../data/steps.json";
 import Steps from "@components/steps";
-import CreateCollectionArea from "@containers/create-collection";
 import slugify from "slugify";
 import { formatDate } from "@utils/date";
 const baseURL = process.env.NEXT_PUBLIC_API_URL || "https://the-backend.fly.dev";
@@ -36,12 +34,11 @@ const CreateNewArea = ({ className, space, handleSend }) => {
     const [showProductModal, setShowProductModal] = useState(false);
     const [selectedImage, setSelectedImage] = useState();
     const [selectedBanner, setSelectedBanner] = useState();
-    const [hasImageError, setHasImageError] = useState(false);
+    const [limit, setLimit] = useState();
     const [previewData, setPreviewData] = useState({});
     const [isPreview, setIsPreview] = useState(false);
     const [selectedJson, setSelectedJson] = useState(null);
     const [disableBTN, setBisableBTN] = useState(false);
-    const router = useRouter();
 
     const slug = useMemo(() => {
         return selectedJson ? slugify(selectedJson["name"]) : "";
@@ -64,19 +61,33 @@ const CreateNewArea = ({ className, space, handleSend }) => {
     // This function will be triggered when the file field change
     const imageChange = (e) => {
         if (e.target.files && e.target.files.length > 0) {
-            setSelectedImage(e.target.files[0]);
-        }
-    };
-
-    const logoChange = (e) => {
-        if (e.target.files && e.target.files.length > 0) {
-            setSelectedLogo(e.target.files[0]);
+            const profile = e.target.files[0];
+            console.log(profile.type);
+            if (
+                profile.type !== "image/jpeg" &&
+                profile.type !== "image/png" &&
+                profile.type !== "image/jpg"
+            ) {
+                toast("Invalid file type, select valid image file.");
+                return;
+            }
+            setSelectedImage(profile);
         }
     };
 
     const bannerChange = (e) => {
         if (e.target.files && e.target.files.length > 0) {
-            setSelectedBanner(e.target.files[0]);
+            const banner = e.target.files[0];
+            console.log(banner.type);
+            if (
+                banner.type !== "image/jpeg" &&
+                banner.type !== "image/png" &&
+                banner.type !== "image/jpg"
+            ) {
+                toast("Invalid file type, select valid image file.");
+                return;
+            }
+            setSelectedBanner(banner);
         }
     };
 
@@ -84,12 +95,47 @@ const CreateNewArea = ({ className, space, handleSend }) => {
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0];
             if (file.type !== "application/json") {
-                toast("File type is mismatched for JSON files.");
+                toast("Invalid file type, select valid JSON file.");
                 return;
             }
             const reader = new FileReader();
             reader.addEventListener("load", (event) => {
-                setSelectedJson(JSON.parse(event.target.result));
+                const input_json = JSON.parse(event.target.result);
+                const inValid_mint_starts = isNaN(
+                    Date.parse(input_json["mint-starts"])
+                );
+                const inValid_premint_ends = isNaN(
+                    Date.parse(input_json["premint-ends"])
+                );
+                const inValid_reveal_at = isNaN(
+                    Date.parse(input_json["reveal-at"])
+                );
+                let all_hashes = [];
+                for (const token of input_json["token-list"]) {
+                    all_hashes.push(token.hash);
+                }
+                const inValid_hashes =
+                    new Set(all_hashes).size !== all_hashes.length;
+                if (!input_json.creator || !input_json.name) {
+                    toast(
+                        "Invalid file, this file is not valid for creating collection."
+                    );
+                    return;
+                }
+                if (
+                    inValid_mint_starts ||
+                    inValid_premint_ends ||
+                    inValid_reveal_at
+                ) {
+                    toast("Invalid Date Format, Please check date formats.");
+                    return;
+                }
+                if (inValid_hashes) {
+                    toast("Duplicate Token Hashes, Please check Token Hashes.");
+                    return;
+                }
+
+                setSelectedJson(input_json);
                 setIsPreview(true);
             });
             reader.readAsText(file);
@@ -97,6 +143,13 @@ const CreateNewArea = ({ className, space, handleSend }) => {
     };
 
     const onSubmit = async () => {
+        await handleSend(
+            selectedImage,
+            selectedBanner,
+            selectedJson,
+            slug,
+            limit
+        );
         setBisableBTN(true);
         let status = await checkStatus();
         if (!status) {
@@ -171,14 +224,38 @@ const CreateNewArea = ({ className, space, handleSend }) => {
                             {isPreview && (
                                 <div className="col-lg-8 mx-auto">
                                     <div className="form-wrapper-one">
+                                        <div className="upload-area mb--50">
+                                            <div className="upload-formate mb--30">
+                                                <h6 className="title">
+                                                    Enter Minting Limit
+                                                </h6>
+                                                <p className="formate">
+                                                    To allow one account to mint
+                                                    limited NFTs
+                                                </p>
+                                            </div>
+                                            <input
+                                                id="contact-name"
+                                                type="number"
+                                                value={limit}
+                                                onChange={(e) => {
+                                                    setLimit(e.target.value);
+                                                }}
+                                            />
+                                            {!limit && (
+                                                <ErrorText>
+                                                    Minting Limit is required
+                                                </ErrorText>
+                                            )}
+                                        </div>
                                         <div className="upload-area mb--20">
                                             <div className="upload-formate mb--30">
                                                 <h6 className="title">
                                                     Upload image
                                                 </h6>
                                                 <p className="formate">
-                                                    Drag or choose your iimage
-                                                    to upload
+                                                    Drag or choose your image to
+                                                    upload
                                                 </p>
                                             </div>
 
@@ -187,6 +264,7 @@ const CreateNewArea = ({ className, space, handleSend }) => {
                                                     name="image"
                                                     id="image"
                                                     type="file"
+                                                    accept="image/png, image/jpg, image/jpeg"
                                                     className="inputfile"
                                                     onChange={imageChange}
                                                 />
@@ -238,6 +316,7 @@ const CreateNewArea = ({ className, space, handleSend }) => {
                                                     id="banner"
                                                     type="file"
                                                     className="inputfile"
+                                                    accept="image/png, image/jpg, image/jpeg"
                                                     onChange={bannerChange}
                                                 />
                                                 {selectedBanner && (
