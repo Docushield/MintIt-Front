@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import { useMemo, useState } from "react";
-import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { useForm } from "react-hook-form";
@@ -11,7 +10,6 @@ import ErrorText from "@ui/error-text";
 import { toast } from "react-toastify";
 import stepsData from "../../data/steps.json";
 import Steps from "@components/steps";
-import CreateCollectionArea from "@containers/create-collection";
 import { toSlug } from "@utils/methods";
 import { formatDate } from "@utils/date";
 
@@ -19,12 +17,10 @@ const CreateNewArea = ({ className, space, handleSend }) => {
     const [showProductModal, setShowProductModal] = useState(false);
     const [selectedImage, setSelectedImage] = useState();
     const [selectedBanner, setSelectedBanner] = useState();
-    const [hasImageError, setHasImageError] = useState(false);
+    const [limit, setLimit] = useState();
     const [previewData, setPreviewData] = useState({});
     const [isPreview, setIsPreview] = useState(false);
     const [selectedJson, setSelectedJson] = useState(null);
-    const router = useRouter();
-
     const slug = useMemo(() => {
         return selectedJson ? toSlug(selectedJson["name"]) : "";
     }, [selectedJson]);
@@ -128,7 +124,13 @@ const CreateNewArea = ({ className, space, handleSend }) => {
     };
 
     const onSubmit = async () => {
-        await handleSend(selectedImage, selectedBanner, selectedJson, slug);
+        await handleSend(
+            selectedImage,
+            selectedBanner,
+            selectedJson,
+            slug,
+            limit
+        );
     };
 
     return (
@@ -194,14 +196,38 @@ const CreateNewArea = ({ className, space, handleSend }) => {
                             {isPreview && (
                                 <div className="col-lg-8 mx-auto">
                                     <div className="form-wrapper-one">
+                                        <div className="upload-area mb--50">
+                                            <div className="upload-formate mb--30">
+                                                <h6 className="title">
+                                                    Enter Minting Limit
+                                                </h6>
+                                                <p className="formate">
+                                                    To allow one account to mint
+                                                    limited NFTs
+                                                </p>
+                                            </div>
+                                            <input
+                                                id="contact-name"
+                                                type="number"
+                                                value={limit}
+                                                onChange={(e) => {
+                                                    setLimit(e.target.value);
+                                                }}
+                                            />
+                                            {!limit && (
+                                                <ErrorText>
+                                                    Minting Limit is required
+                                                </ErrorText>
+                                            )}
+                                        </div>
                                         <div className="upload-area mb--20">
                                             <div className="upload-formate mb--30">
                                                 <h6 className="title">
                                                     Upload image
                                                 </h6>
                                                 <p className="formate">
-                                                    Drag or choose your iimage
-                                                    to upload
+                                                    Drag or choose your image to
+                                                    upload
                                                 </p>
                                             </div>
 

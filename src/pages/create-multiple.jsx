@@ -49,7 +49,8 @@ const CreateMultiple = () => {
         selectedImage,
         selectedBanner,
         selectedJson,
-        slug
+        slug,
+        limit
     ) => {
         if (!selectedImage) {
             toast.error("Please select the image to upload");
@@ -61,6 +62,10 @@ const CreateMultiple = () => {
         }
         if (!selectedJson) {
             toast.error("Please select the json to upload");
+        }
+        if (!limit) {
+            toast.error("Please enter minting limit");
+            return;
         }
         setJson(selectedJson);
         setUploading(true);
@@ -90,6 +95,7 @@ const CreateMultiple = () => {
             form.append("slug", slug);
             form.append("collection_image", selectedImage);
             form.append("collection_banner", selectedBanner);
+            form.append("minting_limit", limit);
             setStatus("Creating a new collection...");
             const response = await apiPost("collections", form, {
                 "x-auth-token": token,
