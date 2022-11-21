@@ -8,7 +8,7 @@ import Breadcrumb from "@components/breadcrumb";
 import CollectionDetailsIntroArea from "@containers/collection-details/collection-details-1";
 import { pactLocalFetch } from "@utils/pactLocalFetch";
 
-const CollectionDetails = ({ collection, slug, tokens }) => {
+const CollectionDetails = ({ collection, slug, tokens, account }) => {
     return (
         <Wrapper>
             <SEO pageTitle="Collection Details" />
@@ -19,7 +19,11 @@ const CollectionDetails = ({ collection, slug, tokens }) => {
                     pageTitle1=""
                     currentPage="Collection Details"
                 />
-                <CollectionDetailsIntroArea data={collection} tokens={tokens} />
+                <CollectionDetailsIntroArea
+                    data={collection}
+                    tokens={tokens}
+                    account={account}
+                />
             </main>
             <Footer />
         </Wrapper>
@@ -31,10 +35,10 @@ export async function getServerSideProps(context) {
     const slug = context.params.slug;
     const baseURL = process.env.NEXT_PUBLIC_API_URL;
     const smartContract = process.env.NEXT_PUBLIC_CONTRACT;
+    const userAccount = cookies["userAccount"];
 
     try {
         const token = cookies["token"];
-
         const response = await fetch(`${baseURL}/api/collections/${slug}`, {
             method: "GET",
             headers: {
@@ -59,6 +63,7 @@ export async function getServerSideProps(context) {
                 collection: response,
                 tokens: tokens,
                 className: "template-color-1",
+                account: userAccount,
             },
         };
     } catch (error) {
@@ -67,6 +72,7 @@ export async function getServerSideProps(context) {
                 error: error.message,
                 tokens: [],
                 className: "template-color-1",
+                account: userAccount,
             },
         };
     }

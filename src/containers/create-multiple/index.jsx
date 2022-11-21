@@ -10,8 +10,25 @@ import ErrorText from "@ui/error-text";
 import { toast } from "react-toastify";
 import stepsData from "../../data/steps.json";
 import Steps from "@components/steps";
-import { toSlug } from "@utils/methods";
+import slugify from "slugify";
 import { formatDate } from "@utils/date";
+const baseURL = process.env.NEXT_PUBLIC_API_URL || "https://the-backend.fly.dev";
+
+const checkStatus = async () => {
+    const response = await fetch(`${baseURL}/api/collections/get-status`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+        },
+    });
+    if (response.status == 400) {
+        return false;
+    } else if (response.status == 200) {
+        const resJson = await response.json();
+        return resJson.collection;
+    }
+};
 
 const CreateNewArea = ({ className, space, handleSend }) => {
     const [showProductModal, setShowProductModal] = useState(false);
@@ -21,8 +38,10 @@ const CreateNewArea = ({ className, space, handleSend }) => {
     const [previewData, setPreviewData] = useState({});
     const [isPreview, setIsPreview] = useState(false);
     const [selectedJson, setSelectedJson] = useState(null);
+    const [disableBTN, setBisableBTN] = useState(false);
+
     const slug = useMemo(() => {
-        return selectedJson ? toSlug(selectedJson["name"]) : "";
+        return selectedJson ? slugify(selectedJson["name"]) : "";
     }, [selectedJson]);
 
     const {
@@ -131,6 +150,15 @@ const CreateNewArea = ({ className, space, handleSend }) => {
             slug,
             limit
         );
+        setBisableBTN(true);
+        let status = await checkStatus();
+        if (!status) {
+            toast.error("Collection initialization is disabled for a while, try again later.");
+            setBisableBTN(false);
+            return;
+        }
+        setBisableBTN(false);
+        await handleSend(selectedImage, selectedBanner, selectedJson, slug);
     };
 
     return (
@@ -443,8 +471,8 @@ const CreateNewArea = ({ className, space, handleSend }) => {
                                                                 selectedJson[
                                                                     "mint-royalties"
                                                                 ].rates || []
-                                                            ).map((royalty) => (
-                                                                <tr>
+                                                            ).map((royalty, i) => (
+                                                                <tr id={`i${i}`}>
                                                                     <td>
                                                                         {
                                                                             royalty.description
@@ -488,6 +516,7 @@ const CreateNewArea = ({ className, space, handleSend }) => {
                                                         type="submit"
                                                         fullwidth
                                                         data-btn="confirm"
+                                                        disabled={disableBTN}
                                                     >
                                                         Confirm & Submit
                                                     </Button>
@@ -513,8 +542,8 @@ const CreateNewArea = ({ className, space, handleSend }) => {
                                                                     "premint-whitelist"
                                                                 ] || []
                                                             ).map(
-                                                                (whiteItem) => (
-                                                                    <tr>
+                                                                (whiteItem,j) => (
+                                                                    <tr id={`j${j}`}>
                                                                         <td className="py-2">
                                                                             <small>
                                                                                 {

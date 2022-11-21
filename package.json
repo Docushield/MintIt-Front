@@ -51,13 +51,14 @@
         "remark": "^14.0.2",
         "remark-html": "^15.0.1",
         "sal.js": "^0.8.5",
-        "sass": "^1.45.0"
+        "sass": "^1.45.0",
+        "slugify": "^1.6.5"
     },
     "devDependencies": {
         "@babel/core": "^7.16.0",
         "@babel/eslint-parser": "^7.16.3",
         "@babel/preset-react": "^7.16.0",
-        "@netlify/plugin-nextjs": "^4.21.1",
+        "@netlify/plugin-nextjs": "^4.29.1",
         "@next/eslint-plugin-next": "^12.0.10",
         "autoprefixer": "^10.4.8",
         "eslint": "8.4.1",

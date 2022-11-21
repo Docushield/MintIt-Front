@@ -429,7 +429,7 @@
     "ufo" "^0.8.0"
     "unstorage" "^0.6.0"
 
-"@netlify/plugin-nextjs@^4.21.1":
+"@netlify/plugin-nextjs@^4.29.1":
   "integrity" "sha512-XJO5maoNQIVSe8Pqpr+tZwFSFttetWeTxcCJcUE/KSJbyBwemBxkgus3uMO5lqXNx4cj2UoFUCfprHoEMLNUEg=="
   "resolved" "https://registry.npmjs.org/@netlify/plugin-nextjs/-/plugin-nextjs-4.29.1.tgz"
   "version" "4.29.1"
