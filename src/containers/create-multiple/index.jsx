@@ -170,13 +170,13 @@ const CreateNewArea = ({ className, space, handleSend }) => {
             return;
         }
         setBisableBTN(false);
-        // await handleSend(
-        //     selectedImage,
-        //     selectedBanner,
-        //     selectedJson,
-        //     slug,
-        //     limit
-        // );
+        await handleSend(
+            selectedImage,
+            selectedBanner,
+            selectedJson,
+            slug,
+            limit
+        );
     };
 
     return (
