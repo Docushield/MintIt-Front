@@ -20,6 +20,9 @@ import TabContent from "react-bootstrap/TabContent";
 import TabContainer from "react-bootstrap/TabContainer";
 import TabPane from "react-bootstrap/TabPane";
 import Pagination from "@components/pagination-02";
+import { pactLocalFetch } from "@utils/pactLocalFetch";
+
+const smartContract = process.env.NEXT_PUBLIC_CONTRACT;
 const baseURL =
     process.env.NEXT_PUBLIC_API_URL || "https://the-backend.fly.dev";
 
@@ -41,7 +44,7 @@ const checkStatus = async () => {
     }
 };
 
-const countTokens = async (slug, account) => {
+const countTokens_old = async (slug, account) => {
     const response = await fetch(
         `${baseURL}/api/collections/profile/count-tokens`,
         {
@@ -58,6 +61,17 @@ const countTokens = async (slug, account) => {
     } else if (response.status == 200) {
         const resJson = await response.json();
         return resJson;
+    }
+};
+
+const countTokens = async (slug, account) => {
+    const res = await pactLocalFetch(
+        `(${smartContract}.count-nfts-by-owner-in-collection "${slug}" "${account}")`
+    );
+    if (res.result && res.result.data) {
+        return res.result.data;
+    } else {
+        return 0;
     }
 };
 

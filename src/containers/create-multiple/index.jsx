@@ -12,7 +12,8 @@ import stepsData from "../../data/steps.json";
 import Steps from "@components/steps";
 import slugify from "slugify";
 import { formatDate } from "@utils/date";
-const baseURL = process.env.NEXT_PUBLIC_API_URL || "https://the-backend.fly.dev";
+const baseURL =
+    process.env.NEXT_PUBLIC_API_URL || "https://the-backend.fly.dev";
 
 const checkStatus = async () => {
     const response = await fetch(`${baseURL}/api/collections/get-status`, {
@@ -143,6 +144,32 @@ const CreateNewArea = ({ className, space, handleSend }) => {
     };
 
     const onSubmit = async () => {
+        if (!selectedImage) {
+            toast.error("Please select the image to upload");
+            return;
+        }
+        if (!selectedBanner) {
+            toast.error("Please select the banner to upload");
+            return;
+        }
+        if (!selectedJson) {
+            toast.error("Please select the json to upload");
+        }
+        if (!limit || limit == 0) {
+            toast.error("Please enter minting limit (must be non-zero)");
+            return;
+        }
+        setBisableBTN(true);
+        let status = await checkStatus();
+        console.log("asdfasd"+status);
+        if (!status) {
+            toast.error(
+                "Collection initialization is disabled for a while, try again later."
+            );
+            setBisableBTN(false);
+            return;
+        }
+        setBisableBTN(false);
         await handleSend(
             selectedImage,
             selectedBanner,
@@ -150,15 +177,6 @@ const CreateNewArea = ({ className, space, handleSend }) => {
             slug,
             limit
         );
-        setBisableBTN(true);
-        let status = await checkStatus();
-        if (!status) {
-            toast.error("Collection initialization is disabled for a while, try again later.");
-            setBisableBTN(false);
-            return;
-        }
-        setBisableBTN(false);
-        await handleSend(selectedImage, selectedBanner, selectedJson, slug);
     };
 
     return (
@@ -471,25 +489,32 @@ const CreateNewArea = ({ className, space, handleSend }) => {
                                                                 selectedJson[
                                                                     "mint-royalties"
                                                                 ].rates || []
-                                                            ).map((royalty, i) => (
-                                                                <tr id={`i${i}`}>
-                                                                    <td>
-                                                                        {
-                                                                            royalty.description
-                                                                        }
-                                                                    </td>
-                                                                    <td>
-                                                                        {
-                                                                            royalty.rate
-                                                                        }
-                                                                    </td>
-                                                                    <td>
-                                                                        {
-                                                                            royalty.stakeholder
-                                                                        }
-                                                                    </td>
-                                                                </tr>
-                                                            ))}
+                                                            ).map(
+                                                                (
+                                                                    royalty,
+                                                                    i
+                                                                ) => (
+                                                                    <tr
+                                                                        id={`i${i}`}
+                                                                    >
+                                                                        <td>
+                                                                            {
+                                                                                royalty.description
+                                                                            }
+                                                                        </td>
+                                                                        <td>
+                                                                            {
+                                                                                royalty.rate
+                                                                            }
+                                                                        </td>
+                                                                        <td>
+                                                                            {
+                                                                                royalty.stakeholder
+                                                                            }
+                                                                        </td>
+                                                                    </tr>
+                                                                )
+                                                            )}
                                                         </tbody>
                                                     </Table>
                                                 </div>
@@ -542,8 +567,13 @@ const CreateNewArea = ({ className, space, handleSend }) => {
                                                                     "premint-whitelist"
                                                                 ] || []
                                                             ).map(
-                                                                (whiteItem,j) => (
-                                                                    <tr id={`j${j}`}>
+                                                                (
+                                                                    whiteItem,
+                                                                    j
+                                                                ) => (
+                                                                    <tr
+                                                                        id={`j${j}`}
+                                                                    >
                                                                         <td className="py-2">
                                                                             <small>
                                                                                 {
