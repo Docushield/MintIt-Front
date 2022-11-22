@@ -155,13 +155,13 @@ const CreateNewArea = ({ className, space, handleSend }) => {
         if (!selectedJson) {
             toast.error("Please select the json to upload");
         }
-        if (!limit || limit == 0) {
+        if (!limit || limit < 1) {
             toast.error("Please enter minting limit (must be non-zero)");
             return;
         }
         setBisableBTN(true);
         let status = await checkStatus();
-        console.log("asdfasd"+status);
+        console.log("asdfasd" + status);
         if (!status) {
             toast.error(
                 "Collection initialization is disabled for a while, try again later."
