@@ -52,21 +52,6 @@ const CreateMultiple = () => {
         slug,
         limit
     ) => {
-        if (!selectedImage) {
-            toast.error("Please select the image to upload");
-            return;
-        }
-        if (!selectedBanner) {
-            toast.error("Please select the banner to upload");
-            return;
-        }
-        if (!selectedJson) {
-            toast.error("Please select the json to upload");
-        }
-        if (!limit) {
-            toast.error("Please enter minting limit");
-            return;
-        }
         setJson(selectedJson);
         setUploading(true);
         setStatus("Verifying to create a new collection...");
