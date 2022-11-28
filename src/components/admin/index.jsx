@@ -2,6 +2,7 @@ import { useState } from "react";
 import Button from "@ui/button";
 
 const AdminLogin = ({ status }) => {
+    console.log(status);
     const [user, setUser] = useState("");
     const [pass, setPass] = useState("");
     const [token, setToken] = useState("");
