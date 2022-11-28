@@ -107,7 +107,7 @@ const TokenDetailsArea = ({
                                     </div>
                                 </Button>
                             </h6>
-                            <Button onClick={onSale}>{userAccount == product["current-owner"] ? "Sale NFT Now" : "Purchase NFT"}</Button>
+                            {/* <Button onClick={onSale}>{userAccount == product["current-owner"] ? "Sale NFT Now" : "Purchase NFT"}</Button> */}
                             <div className="catagory-collection items-center">
                                 {/*                             <div className="mx-2">
                                 <Button

@@ -1,17 +1,17 @@
 import { useState } from "react";
 import Button from "@ui/button";
 
-const AdminLogin = () => {
+const AdminLogin = ({ status }) => {
     const [user, setUser] = useState("");
     const [pass, setPass] = useState("");
     const [token, setToken] = useState("");
     const [error, setError] = useState("");
     const [error2, setError2] = useState("");
-    const [checkM, setCheckM] = useState(false);
-    const [checkC, setCheckC] = useState(false);
+    const [checkM, setCheckM] = useState(status.minting);
+    const [checkC, setCheckC] = useState(status.collection);
     const [disableB, setdisableB] = useState(false);
-    const baseURL = process.env.NEXT_PUBLIC_API_URL || "https://the-backend.fly.dev";
-
+    const baseURL =
+        process.env.NEXT_PUBLIC_API_URL || "https://the-backend.fly.dev";
     const onSubmit = async () => {
         if (user == "" || pass == "") {
             setError("please provide username and password.");
@@ -50,7 +50,11 @@ const AdminLogin = () => {
                     "Content-Type": "application/json",
                     Accept: "application/json",
                 },
-                body: JSON.stringify({ collection: checkC, minting: checkM,token: token}),
+                body: JSON.stringify({
+                    collection: checkC,
+                    minting: checkM,
+                    token: token,
+                }),
             }
         );
         if (response.status == 400) {
@@ -83,7 +87,7 @@ const AdminLogin = () => {
                             name="theme-switch"
                             checked={checkM}
                             className="theme-switch__input"
-                            onChange={()=> setCheckM(!checkM)}
+                            onChange={() => setCheckM(!checkM)}
                         />
                         <label
                             htmlFor="themeSwitch"
@@ -103,7 +107,7 @@ const AdminLogin = () => {
                                 checked={checkC}
                                 name="theme-switch"
                                 className="theme-switch__input"
-                                onChange={()=> setCheckC(!checkC)}
+                                onChange={() => setCheckC(!checkC)}
                             />
                             <label
                                 htmlFor="themeSwitch1"

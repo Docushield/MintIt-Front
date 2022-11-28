@@ -45,6 +45,11 @@ export async function getServerSideProps(context) {
                 "x-auth-token": token,
             },
         }).then((res) => res.json());
+        if (response.error) {
+            return {
+                notFound: true,
+            };
+        }
         const res = await pactLocalFetch(
             `(${smartContract}.get-nft-collection "${response.name}")`
         );
