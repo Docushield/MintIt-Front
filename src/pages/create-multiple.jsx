@@ -9,7 +9,7 @@ import Breadcrumb from "@components/breadcrumb";
 import CreateMultipleArea from "@containers/create-multiple";
 import CreateCollectionProgressArea from "@containers/create-collection-progress";
 import { toast } from "react-toastify";
-import { toSlug } from "@utils/methods";
+import slugify from "slugify";
 
 export async function getStaticProps() {
     return { props: { className: "template-color-1" } };
@@ -159,7 +159,7 @@ const CreateMultiple = () => {
                 ) : (
                     <CreateCollectionProgressArea
                         name={json.name}
-                        slug={toSlug(json.name)}
+                        slug={slugify(json.name)}
                         error={isError}
                         status={status}
                         success={isSuccess}
