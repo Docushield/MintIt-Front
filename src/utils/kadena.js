@@ -54,10 +54,17 @@ export const connectXWallet = async () => {
 
     const { kadena } = window;
 
-    await kadena.request({
+    var connectx = await kadena.request({
         method: "kda_connect",
         networkId,
     });
+
+    console.log(connectx);
+
+    if (connectx.status == "fail") {
+        toast.error("Invalid network selected.");
+        throw new Error("Invalid xwallet response");
+    }
 
     const xwalletResp = await window.kadena.request({
         method: "kda_getSelectedAccount",
