@@ -44,12 +44,7 @@ export const sign = async (provider, signingObject) => {
 };
 
 export const connectXWallet = async () => {
-    const kdaEnvironment = {
-        networkId: process.env.NEXT_PUBLIC_NETWORK_ID,
-        chainId: process.env.NEXT_PUBLIC_CHAIN_ID,
-    };
-
-    const { networkId, chainId } = kdaEnvironment;
+    const networkId = process.env.NEXT_PUBLIC_NETWORK_ID;
 
     if (!window.kadena || !window.kadena.isKadena) {
         console.log("No xwallet installed");
@@ -74,14 +69,16 @@ export const connectXWallet = async () => {
         throw new Error("Invalid xwallet response");
     }
 
-    if (xwalletResp.chainId !== chainId) {
-        toast.error(
-            `Wrong chain ${xwalletResp.chainId}, please open chain ${chainId}`
-        );
-        throw new Error(
-            `Wrong chain ${xwalletResp.chainId}, please open chain ${chainId}`
-        );
-    }
+    //we don't need to check which chain id is open, as in new version of x-wallet
+    // if (xwalletResp.chainId !== chainId) {
+    //     toast.error(
+    //         `Wrong chain ${xwalletResp.chainId}, please open chain ${chainId}`
+    //     );
+    //     throw new Error(
+    //         `Wrong chain ${xwalletResp.chainId}, please open chain ${chainId}`
+    //     );
+    // }
+
     return xwalletResp;
 };
 

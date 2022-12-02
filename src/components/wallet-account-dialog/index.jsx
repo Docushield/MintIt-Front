@@ -20,17 +20,14 @@ const WalletAccountDialog = ({ onChangeWallet }) => {
         dispatch(toggleWalletAccountDialog());
     };
 
-    const kdaEnvironment = {
-        networkId: process.env.NEXT_PUBLIC_NETWORK_ID,
-        chainId: process.env.NEXT_PUBLIC_CHAIN_ID,
-    };
+    const networkId =  process.env.NEXT_PUBLIC_NETWORK_ID;
 
     const disconnectWallet = async () => {
         console.log("Disconnect Wallet.");
         dispatch(setDisconnected());
         await window.kadena.request({
             method: "kda_disconnect",
-            networkId: kdaEnvironment.networkId,
+            networkId: networkId,
         });
         destroyCookie(null, "userAccount");
         destroyCookie(null, "walletName");
