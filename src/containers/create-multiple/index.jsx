@@ -135,7 +135,8 @@ const CreateNewArea = ({ className, space, handleSend }) => {
                     toast("Duplicate Token Hashes, Please check Token Hashes.");
                     return;
                 }
-
+                setLimit(input_json["size"]);
+                console.log(input_json["size"]);
                 setSelectedJson(input_json);
                 setIsPreview(true);
             });
@@ -249,13 +250,15 @@ const CreateNewArea = ({ className, space, handleSend }) => {
                                                 </h6>
                                                 <p className="formate">
                                                     To allow one account to mint
-                                                    limited NFTs
+                                                    limited NFTs ( By default max
+                                                    limit is total supply ).
                                                 </p>
                                             </div>
                                             <input
                                                 id="contact-name"
                                                 type="number"
                                                 value={limit}
+                                                onWheel={(e) => e.target.blur()}
                                                 onChange={(e) => {
                                                     setLimit(e.target.value);
                                                 }}
