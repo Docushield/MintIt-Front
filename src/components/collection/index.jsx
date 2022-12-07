@@ -107,23 +107,14 @@ Collection.propTypes = {
     title: PropTypes.string.isRequired,
     total_item: PropTypes.number.isRequired,
     path: PropTypes.string.isRequired,
-    image: PropTypes.shape({
-        src: PropTypes.oneOfType([PropTypes.shape(), PropTypes.string])
-            .isRequired,
-        alt: PropTypes.string,
-    }).isRequired,
+    image: PropTypes.string,
     thumbnails: PropTypes.arrayOf(
         PropTypes.shape({
-            src: PropTypes.oneOfType([PropTypes.shape(), PropTypes.string])
-                .isRequired,
+            src: PropTypes.oneOfType([PropTypes.shape(), PropTypes.string]),
             alt: PropTypes.string,
-        }).isRequired
-    ).isRequired,
-    profile_image: PropTypes.shape({
-        src: PropTypes.oneOfType([PropTypes.shape(), PropTypes.string])
-            .isRequired,
-        alt: PropTypes.string,
-    }).isRequired,
+        })
+    ),
+    profile_image: PropTypes.string,
     live_date: PropTypes.string,
 };
 

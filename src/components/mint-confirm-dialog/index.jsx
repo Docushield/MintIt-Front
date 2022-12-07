@@ -4,9 +4,18 @@ import Modal from "react-bootstrap/Modal";
 import Pact from "pact-lang-api";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { signXWallet, signZelcore } from "@utils/kadena";
+import { sign } from "@utils/kadena";
 import { toggleMintConfirmDialog } from "../../store/collection.module";
-import { ZELCORE } from "../../constants/kadena";
+import { pactLocalFetch } from "@utils/pactLocalFetch";
+import { baseSignInObject } from "src/lib/constants";
+import {
+    ALPHA_CREATOR_PASS,
+    DOC_BOND,
+    DOC_ACCOUNT,
+    DOC_BOND_TOKEN_NAME,
+} from "src/constants/token";
+
+const CONTRACT_NAME = "free.doc-nft-mint";
 
 const MintConfirmDialog = () => {
     const dispatch = useDispatch();
@@ -14,14 +23,10 @@ const MintConfirmDialog = () => {
     const current = useSelector((state) => state.collection.current);
     const account = useSelector((state) => state.wallet.account);
     const wallet = useSelector((state) => state.wallet.walletName);
+
     const [isMinting, setIsMinting] = useState(false);
     const [pending, setPending] = useState(false);
     const [mintStatus, setMintStatus] = useState("");
-    const CONTRACT_NAME = "free.doc-nft-mint";
-    const pactChainId = process.env.NEXT_PUBLIC_CHAIN_ID;
-    const pactGasLimit = 150000;
-    const pactGasPrice = 0.00000001;
-    const pactNetworkId = process.env.NEXT_PUBLIC_NETWORK_ID;
 
     const host = `${process.env.chainAPI}/chainweb/0.0/${process.env.networkId}/chain/${process.env.chainId}/pact`;
 
@@ -31,79 +36,32 @@ const MintConfirmDialog = () => {
         dispatch(toggleMintConfirmDialog());
     };
 
-    const prepareLocal = (pactCod) => {
-        let command = Pact.api.prepareExecCmd(
-            [],
-            new Date().toISOString(),
-            pactCod,
-            {},
-            Pact.lang.mkMeta(
-                "",
-                pactChainId,
-                pactGasPrice,
-                pactGasLimit,
-                Math.floor(Date.now() / 1000),
-                86400
-            ),
-            pactNetworkId
-        );
-        return command;
-    };
     //get price for nft token
     const get_NFT_WL_price = async (tokenName) => {
         let pactCode = `(${CONTRACT_NAME}.get-mint-price-wl "${tokenName}")`;
-        const command = await prepareLocal(pactCode);
-        const result = await executeLocal(command);
-        return result;
+        const res = await pactLocalFetch(pactCode);
+        return res.result.data;
     };
 
     //get price for nft token
     const get_NFT_price = async (contractName, tokenName) => {
         let pactCode = `(${contractName}.get-mint-price "${tokenName}" "${account}")`;
-        const command = await prepareLocal(pactCode);
-        const result = await executeLocal(command);
-        return result;
+        const res = await pactLocalFetch(pactCode);
+        return res.result.data;
     };
 
     //checks if account is Active and White Listed
     const check_WLA_Account = async (tokenName) => {
         let pactCode = `(${CONTRACT_NAME}.is-active-wl-account "${tokenName}" "${account}")`;
-        const command = await prepareLocal(pactCode);
-        const result = await executeLocal(command);
-        return result;
+        const res = await pactLocalFetch(pactCode);
+        return res.result.data;
     };
 
     //checks if account is able for Token sale may be
     const check_WL_Sale = async (tokenName) => {
         let pactCode = `(${CONTRACT_NAME}.is-wl-sale "${tokenName}")`;
-        const command = await prepareLocal(pactCode);
-        const result = await executeLocal(command);
-        return result;
-    };
-    const executeLocal = async (command) => {
-        const response = await fetch(`${host}/api/v1/local`, {
-            method: "POST",
-            mode: "cors",
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-            },
-            redirect: "follow",
-            referrerPolicy: "no-referrer",
-            body: JSON.stringify(command),
-        });
-
-        const respObject = await response.json();
-        console.log(respObject);
-
-        if (
-            !respObject ||
-            !respObject.result ||
-            respObject.result.status !== "success"
-        )
-            return null;
-
-        return respObject.result.data;
+        const res = await pactLocalFetch(pactCode);
+        return res.result.data;
     };
 
     const onMint = async () => {
@@ -112,14 +70,9 @@ const MintConfirmDialog = () => {
         }
         let cmd = {};
         let userPubKey = "";
-        if (
-            current.name === "Alpha Creator Pass" ||
-            current.name === "Doc Bond"
-        ) {
-            const DOC_ACCOUNT =
-                "k:4159aa0d1f1e6c119c532d9286746274c3cc46dadd50ffc486a38de502ad6855";
-            let tokenName = "mintit-creator-access-pass";
-            if (current.name === "Doc Bond") tokenName = "doc-bond-nft";
+        if (current.name === ALPHA_CREATOR_PASS || current.name === DOC_BOND) {
+            let tokenName = ALPHA_CREATOR_PASS_TOKEN_NAME;
+            if (current.name === DOC_BOND) tokenName = DOC_BOND_TOKEN_NAME;
             const isSaleWL = await check_WL_Sale(tokenName);
             let price = 0;
 
@@ -254,10 +207,10 @@ const MintConfirmDialog = () => {
                     account,
                     caps: caps,
                     pactCode: `(${deployedContract}.mint-nft {
-                'account: "${account}",
-                'guard: (read-msg 'user-ks),
-                'collection-name: "${current.name}"
-            })`,
+                                    'account: "${account}",
+                                    'guard: (read-msg 'user-ks),
+                                    'collection-name: "${current.name}"
+                                })`,
                     envData: {
                         "user-ks": {
                             keys: [userPubKey],
@@ -271,33 +224,21 @@ const MintConfirmDialog = () => {
         // This is what we already have in the wallet connect part
 
         const signingObject = {
+            ...baseSignInObject,
             sender: cmd.account,
-            chainId: pactChainId,
-            gasPrice: 0.00000001,
-            gasLimit: 150000,
-            ttl: 28800,
             caps: cmd.caps,
             pactCode: cmd.pactCode,
             envData: cmd.envData,
-            networkId: pactNetworkId,
             signingPubKey: userPubKey,
         };
 
         // Sign in xwallet (we can use our sign functions)
-
         setIsMinting(true);
         setMintStatus("Minting...");
         try {
-            let signedCmd;
-
-            if (wallet === ZELCORE) {
-                signedCmd = await signZelcore(signingObject);
-            } else {
-                signedCmd = (await signXWallet(signingObject)).signedCmd;
-            }
+            const signedCmd = await sign(wallet, signingObject);
 
             // Send TX
-
             const { requestKeys } = await fetch(`${host}/api/v1/send`, {
                 body: JSON.stringify({ cmds: [signedCmd] }),
                 method: "POST",

@@ -9,7 +9,7 @@ import Breadcrumb from "@components/breadcrumb";
 import CreateMultipleArea from "@containers/create-multiple";
 import CreateCollectionProgressArea from "@containers/create-collection-progress";
 import { toast } from "react-toastify";
-import { toSlug } from "@utils/methods";
+import slugify from "slugify";
 
 export async function getStaticProps() {
     return { props: { className: "template-color-1" } };
@@ -49,19 +49,9 @@ const CreateMultiple = () => {
         selectedImage,
         selectedBanner,
         selectedJson,
-        slug
+        slug,
+        limit
     ) => {
-        if (!selectedImage) {
-            toast.error("Please select the image to upload");
-            return;
-        }
-        if (!selectedBanner) {
-            toast.error("Please select the banner to upload");
-            return;
-        }
-        if (!selectedJson) {
-            toast.error("Please select the json to upload");
-        }
         setJson(selectedJson);
         setUploading(true);
         setStatus("Verifying to create a new collection...");
@@ -90,6 +80,7 @@ const CreateMultiple = () => {
             form.append("slug", slug);
             form.append("collection_image", selectedImage);
             form.append("collection_banner", selectedBanner);
+            form.append("minting_limit", limit);
             setStatus("Creating a new collection...");
             const response = await apiPost("collections", form, {
                 "x-auth-token": token,
@@ -168,7 +159,7 @@ const CreateMultiple = () => {
                 ) : (
                     <CreateCollectionProgressArea
                         name={json.name}
-                        slug={toSlug(json.name)}
+                        slug={slugify(json.name)}
                         error={isError}
                         status={status}
                         success={isSuccess}
