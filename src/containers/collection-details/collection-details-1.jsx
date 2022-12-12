@@ -82,7 +82,6 @@ const CollectionDetailsIntroArea = ({
     tokens,
     account,
 }) => {
-    console.log(data);
     const sorted_tokens = tokens.sort((a, b) => getIndex(a) - getIndex(b));
     const POSTS_PER_PAGE = 15;
     const [currentPage, setCurrentPage] = useState(1);
