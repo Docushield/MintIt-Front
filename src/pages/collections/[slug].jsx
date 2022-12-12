@@ -45,6 +45,7 @@ export async function getServerSideProps(context) {
                 "x-auth-token": token,
             },
         }).then((res) => res.json());
+        console.log(response);
         if (response.error) {
             return {
                 notFound: true,
@@ -72,6 +73,7 @@ export async function getServerSideProps(context) {
             },
         };
     } catch (error) {
+        console.log(error);
         return {
             props: {
                 error: error.message,
