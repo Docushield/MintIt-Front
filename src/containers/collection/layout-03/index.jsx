@@ -3,8 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import Collection from "@components/collection";
-import Pagination from "@components/pagination-02";
-import ProductFilter from "@components/product-filter/layout-01";
+import ReactPaginate from "react-paginate";
 import CategoryFilter from "@components/category-filter";
 import { fetchAPI } from "@utils/fetchAPI";
 import { CollectionType, SectionTitleType } from "@utils/types";
@@ -28,11 +27,9 @@ const CollectionArea = ({ className, space, id, data }) => {
     const itemsToFilter = [...(data.collections || [])];
     const [collections, setCollections] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const numberOfPages = Math.ceil(
-        (data.count) / POSTS_PER_PAGE
-    );
-    const paginationHandler = async (page) => {
-        setCurrentPage(page);
+    const numberOfPages = Math.ceil((data.count) / POSTS_PER_PAGE);
+    const handlePageClick = (event) => {
+        setCurrentPage(event.selected+1);
     };
     const [state, dispatch] = useReducer(reducer, {
         filterToggle: false,
@@ -102,7 +99,6 @@ const CollectionArea = ({ className, space, id, data }) => {
                 data.cookies
             );
             setCollections(res.response);
-            console.log(res.response);
         }
     }, [currentPage, data.collections]);
 
@@ -111,13 +107,7 @@ const CollectionArea = ({ className, space, id, data }) => {
     }, [currentPage, creatorHandler]);
 
     return (
-        <div
-            className={clsx(
-                "rn-collection-area",
-                className
-            )}
-            id={id}
-        >
+        <div className={clsx("rn-collection-area", className)} id={id}>
             <div className="container pt-5">
                 {data?.section_title && (
                     <h2 className="text-center my-5">
@@ -135,24 +125,24 @@ const CollectionArea = ({ className, space, id, data }) => {
                 /> */}
                 <div className="row g-5">
                     {collections.map((collection) => (
-                            <div
-                                key={collection.id}
-                                className="col-lg-6 col-xl-3 col-md-6 col-sm-6 col-12"
-                            >
-                                <Collection
-                                    title={collection.name}
-                                    total_item={collection.size}
-                                    path={`/collections/${collection.slug}`}
-                                    minted={collection.numMinted}
-                                    image={collection.imageUrl}
-                                    logo={collection.logoUrl}
-                                    thumbnails={collection.thumbnails}
-                                    profile_image={collection.bannerImageUrl}
-                                    live_date={collection.live_date}
-                                    isVideo={collection.isVideo}
-                                />
-                            </div>
-                        ))}
+                        <div
+                            key={collection.id}
+                            className="col-lg-6 col-xl-3 col-md-6 col-sm-6 col-12"
+                        >
+                            <Collection
+                                title={collection.name}
+                                total_item={collection.size}
+                                path={`/collections/${collection.slug}`}
+                                minted={collection.numMinted}
+                                image={collection.imageUrl}
+                                logo={collection.logoUrl}
+                                thumbnails={collection.thumbnails}
+                                profile_image={collection.bannerImageUrl}
+                                live_date={collection.live_date}
+                                isVideo={collection.isVideo}
+                            />
+                        </div>
+                    ))}
                 </div>
                 <div className="row">
                     <div
@@ -161,11 +151,28 @@ const CollectionArea = ({ className, space, id, data }) => {
                         data-sal-delay="950"
                         data-sal-duration="800"
                     >
-                        <Pagination
-                            currentPage={currentPage}
-                            numberOfPages={numberOfPages}
-                            onClick={paginationHandler}
-                        />
+                        <nav
+                            className={clsx("pagination-wrapper", className)}
+                            aria-label="Page navigation example"
+                        >
+                            <ReactPaginate
+                                breakLabel={
+                                    <i className="feather-more-horizontal" />
+                                }
+                                nextLabel="Next"
+                                onPageChange={handlePageClick}
+                                pageCount={numberOfPages}
+                                previousLabel="Previous"
+                                pageClassName="page-item"
+                                activeLinkClassName="active"
+                                disabledLinkClassName="disabled"
+                                previousLinkClassName="page-item prev"
+                                nextLinkClassName="page-item next"
+                                breakLinkClassName="disabled"
+                                className="pagination"
+                                renderOnZeroPageCount={null}
+                            />
+                        </nav>
                     </div>
                 </div>
             </div>

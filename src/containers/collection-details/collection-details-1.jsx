@@ -19,8 +19,8 @@ import WalletAddress from "@components/wallet-address";
 import TabContent from "react-bootstrap/TabContent";
 import TabContainer from "react-bootstrap/TabContainer";
 import TabPane from "react-bootstrap/TabPane";
-import Pagination from "@components/pagination-02";
 import { pactLocalFetch } from "@utils/pactLocalFetch";
+import ReactPaginate from "react-paginate";
 
 const smartContract = process.env.NEXT_PUBLIC_CONTRACT;
 const baseURL =
@@ -44,26 +44,6 @@ const checkStatus = async () => {
     }
 };
 
-const countTokens_old = async (slug, account) => {
-    const response = await fetch(
-        `${baseURL}/api/collections/profile/count-tokens`,
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-            },
-            body: JSON.stringify({ slug: slug, account: account }),
-        }
-    );
-    if (response.status == 400) {
-        return 0;
-    } else if (response.status == 200) {
-        const resJson = await response.json();
-        return resJson;
-    }
-};
-
 const countTokens = async (slug, account) => {
     const res = await pactLocalFetch(
         `(${smartContract}.count-nfts-by-owner-in-collection "${slug}" "${account}")`
@@ -82,20 +62,6 @@ const CollectionDetailsIntroArea = ({
     tokens,
     account,
 }) => {
-    const sorted_tokens = tokens.sort((a, b) => getIndex(a) - getIndex(b));
-    const POSTS_PER_PAGE = 15;
-    const [currentPage, setCurrentPage] = useState(1);
-    const [disableBTN, setBisableBTN] = useState(false);
-    const [all_tokens, setAllTokens] = useState(
-        sorted_tokens.slice(0, POSTS_PER_PAGE)
-    );
-    const numberOfPages = Math.ceil(sorted_tokens.length / POSTS_PER_PAGE);
-    const paginationHandler = (page) => {
-        setCurrentPage(page);
-        const start = (page - 1) * POSTS_PER_PAGE;
-        setAllTokens(sorted_tokens.slice(start, start + POSTS_PER_PAGE));
-    };
-
     const dispatch = useDispatch();
     const connected = useSelector((state) => state.wallet.connected);
     const [isShareModalOpen, setIsShareModalOpen] = useState(false);
@@ -104,6 +70,20 @@ const CollectionDetailsIntroArea = ({
     const revealTime = new Date(data["reveal-at"]).toLocaleString();
     const premintTime = new Date(data["premint-ends"]).toLocaleString();
 
+    const sorted_tokens = tokens.sort((a, b) => getIndex(a) - getIndex(b));
+    const POSTS_PER_PAGE = 21;
+    const [disableBTN, setBisableBTN] = useState(false);
+    const [all_tokens, setAllTokens] = useState(
+        sorted_tokens.slice(0, POSTS_PER_PAGE)
+    );
+
+    const numberOfPages = Math.ceil(sorted_tokens.length / POSTS_PER_PAGE);
+
+    const handlePageClick = (event) => {
+        const start = event.selected * POSTS_PER_PAGE;
+        setAllTokens(sorted_tokens.slice(start, start + POSTS_PER_PAGE));
+    };
+
     useEffect(() => {
         dispatch(setCurrentCollection(data));
     }, [data]);
@@ -111,13 +91,13 @@ const CollectionDetailsIntroArea = ({
     const onMint = async () => {
         setBisableBTN(true);
         //checks if user can mint more tokens
-         let account_total = await countTokens(data.name, account);
-         console.log(
-             "token by this K = " +
-                 account_total +
-                 "and limit is = " +
-                 data.mintingLimit
-         );
+        let account_total = await countTokens(data.name, account);
+        console.log(
+            "token by this K = " +
+                account_total +
+                "and limit is = " +
+                data.mintingLimit
+        );
 
         //checks if minting is allowed by admin
         let status = await checkStatus();
@@ -126,15 +106,15 @@ const CollectionDetailsIntroArea = ({
             setBisableBTN(false);
             return;
         }
-         if (data.mintingLimit != null) {
-             if (account_total >= data.mintingLimit) {
-                 toast.error(
-                     `Sorry, You can only mint ${data.mintingLimit} tokens for this collection.`
-                 );
-                 setBisableBTN(false);
-                 return;
-             }
-         }
+        if (data.mintingLimit != null) {
+            if (account_total >= data.mintingLimit) {
+                toast.error(
+                    `Sorry, You can only mint ${data.mintingLimit} tokens for this collection.`
+                );
+                setBisableBTN(false);
+                return;
+            }
+        }
         if (connected) {
             setBisableBTN(false);
             dispatch(toggleMintConfirmDialog());
@@ -379,7 +359,7 @@ const CollectionDetailsIntroArea = ({
                                         {all_tokens.map((prod) => (
                                             <div
                                                 key={prod.id}
-                                                className="col-5 col-lg-4 col-md-3 col-sm-4 col-6 my-3"
+                                                className="col-xl-4 col-lg-4 col-md-6 col-sm-12 my-4"
                                             >
                                                 <Product
                                                     overlay
@@ -419,11 +399,31 @@ const CollectionDetailsIntroArea = ({
                                     </div>
                                 )}
                             </div>
-                            <Pagination
-                                currentPage={currentPage}
-                                numberOfPages={numberOfPages}
-                                onClick={paginationHandler}
-                            />
+                            <nav
+                                className={clsx(
+                                    "pagination-wrapper",
+                                    className
+                                )}
+                                aria-label="Page navigation example"
+                            >
+                                <ReactPaginate
+                                    breakLabel={
+                                        <i className="feather-more-horizontal" />
+                                    }
+                                    nextLabel="Next"
+                                    onPageChange={handlePageClick}
+                                    pageCount={numberOfPages}
+                                    previousLabel="Previous"
+                                    pageClassName="page-item"
+                                    activeLinkClassName="active"
+                                    disabledLinkClassName="disabled"
+                                    previousLinkClassName="page-item prev"
+                                    nextLinkClassName="page-item next"
+                                    breakLinkClassName="disabled"
+                                    className="pagination"
+                                    renderOnZeroPageCount={null}
+                                />
+                            </nav>
                         </TabPane>
                         <TabPane eventKey="nav-sale">
                             <div className="row text-center">

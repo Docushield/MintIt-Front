@@ -15,7 +15,7 @@ import { useSelector, useDispatch } from "react-redux";
 import FilterButton from "@ui/filter-button";
 import { slideToggle } from "@utils/methods";
 import Mint from "@components/constant-collections";
-import Pagination from "@components/pagination-02";
+import ReactPaginate from "react-paginate";
 
 function reducer(state, action) {
     switch (action.type) {
@@ -31,15 +31,13 @@ function reducer(state, action) {
 }
 
 const DublicateCollectionArea = ({ className, data }) => {
-    const POSTS_PER_PAGE = 15;
-    const [currentPage, setCurrentPage] = useState(1);
+    const POSTS_PER_PAGE = 21;
     const [myTokens, setMyTokens] = useState(
         data.products.slice(0, POSTS_PER_PAGE)
     );
     const numberOfPages = Math.ceil(data.products.length / POSTS_PER_PAGE);
-    const paginationHandler = (page) => {
-        setCurrentPage(page);
-        const start = (page - 1) * POSTS_PER_PAGE;
+    const paginationHandler = (event) => {
+        const start = event.selected * POSTS_PER_PAGE;
         setMyTokens(data.products.slice(start, start + POSTS_PER_PAGE));
     };
 
@@ -111,7 +109,7 @@ const DublicateCollectionArea = ({ className, data }) => {
                                         className="nav nav-tabs"
                                         id="nav-tab"
                                         role="tablist"
-                                        style={{width: "100%"}}
+                                        style={{ width: "100%" }}
                                     >
                                         {/* <Nav.Link
                                             as="button"
@@ -170,7 +168,7 @@ const DublicateCollectionArea = ({ className, data }) => {
                                 {myTokens?.map((prod) => (
                                     <div
                                         key={prod.id}
-                                        className="col-5 col-lg-4 col-md-6 col-sm-6 col-12"
+                                        className="col-lg-4 col-md-6 col-sm-6 col-12"
                                     >
                                         <Product
                                             overlay
@@ -233,11 +231,26 @@ const DublicateCollectionArea = ({ className, data }) => {
                     </TabContent>
                 </div>
             </TabContainer>
-            <Pagination
-                currentPage={currentPage}
-                numberOfPages={numberOfPages}
-                onClick={paginationHandler}
-            />
+            <nav
+                className={clsx("pagination-wrapper", className)}
+                aria-label="Page navigation example"
+            >
+                <ReactPaginate
+                    breakLabel={<i className="feather-more-horizontal" />}
+                    nextLabel="Next"
+                    onPageChange={paginationHandler}
+                    pageCount={numberOfPages}
+                    previousLabel="Previous"
+                    pageClassName="page-item"
+                    activeLinkClassName="active"
+                    disabledLinkClassName="disabled"
+                    previousLinkClassName="page-item prev"
+                    nextLinkClassName="page-item next"
+                    breakLinkClassName="disabled"
+                    className="pagination"
+                    renderOnZeroPageCount={null}
+                />
+            </nav>
         </div>
     );
 };
