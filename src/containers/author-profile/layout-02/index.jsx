@@ -31,7 +31,7 @@ function reducer(state, action) {
 }
 
 const DublicateCollectionArea = ({ className, data }) => {
-    const POSTS_PER_PAGE = 6;
+    const POSTS_PER_PAGE = 15;
     const [currentPage, setCurrentPage] = useState(1);
     const [myTokens, setMyTokens] = useState(
         data.products.slice(0, POSTS_PER_PAGE)
