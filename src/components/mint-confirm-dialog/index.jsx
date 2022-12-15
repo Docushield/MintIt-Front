@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Pact from "pact-lang-api";
@@ -18,6 +19,7 @@ import {
 const CONTRACT_NAME = "free.doc-nft-mint";
 
 const MintConfirmDialog = () => {
+    const router = useRouter();
     const dispatch = useDispatch();
     const show = useSelector((state) => state.collection.isMintConfirmDialog);
     const current = useSelector((state) => state.collection.current);
@@ -26,14 +28,17 @@ const MintConfirmDialog = () => {
 
     const [isMinting, setIsMinting] = useState(false);
     const [pending, setPending] = useState(false);
+    const [mintSuccess, setMintSuccess] = useState(false);
+    const [mintUnSuccess, setMintUnSuccess] = useState(false);
     const [mintStatus, setMintStatus] = useState("");
 
     const host = `${process.env.chainAPI}/chainweb/0.0/${process.env.networkId}/chain/${process.env.chainId}/pact`;
 
     const handleClose = () => {
-        setIsMinting(false);
-        setMintStatus("");
         dispatch(toggleMintConfirmDialog());
+        if (mintSuccess || mintUnSuccess) {
+            router.reload(window.location.pathname);
+        }
     };
 
     //get price for nft token
@@ -232,7 +237,7 @@ const MintConfirmDialog = () => {
             signingPubKey: userPubKey,
         };
 
-        // Sign in xwallet (we can use our sign functions)
+        // Sign in x-wallet (we can use our sign functions)
         setIsMinting(true);
         setMintStatus("Minting...");
         try {
@@ -261,8 +266,8 @@ const MintConfirmDialog = () => {
                             "Successfully minted a new token, Request Key : " +
                                 requestKeys[0]
                         );
-                        // setIsMinting(false);
                         setPending(false);
+                        setMintSuccess(true);
                     } else if (result[requestKeys[0]].result.error) {
                         clearInterval(interval);
                         toast.error(
@@ -276,7 +281,7 @@ const MintConfirmDialog = () => {
                                 result[requestKeys[0]].result.error.message
                         );
                         setPending(false);
-                        // setIsMinting(false);
+                        setMintUnSuccess(true);
                     }
                 }
             }, 1000);
@@ -286,7 +291,7 @@ const MintConfirmDialog = () => {
                 "Error occurred in minting a new token, Error: " + error
             );
             setPending(false);
-            // setIsMinting(false);
+            setMintUnSuccess(true);
         }
     };
 
@@ -309,12 +314,30 @@ const MintConfirmDialog = () => {
                             <p>{mintStatus}</p>
                         </div>
                         <div className="col-12 mt-5">
-                            <div
-                                className={
-                                    pending ? "spinner-border" : "spinner-grow"
-                                }
-                                role="status"
-                            ></div>
+                            {mintSuccess ? (
+                                <i
+                                    style={{ "font-size": "35px" }}
+                                    className="feather-check-circle"
+                                />
+                            ) : mintUnSuccess ? (
+                                <i
+                                    style={{ "font-size": "35px" }}
+                                    className="feather-x-circle"
+                                />
+                            ) : (
+                                <div
+                                    style={{
+                                        width: "2.8rem",
+                                        height: "2.8rem",
+                                    }}
+                                    className={
+                                        pending
+                                            ? "spinner-border"
+                                            : "spinner-grow"
+                                    }
+                                    role="status"
+                                ></div>
+                            )}
                         </div>
                     </div>
                 ) : (
