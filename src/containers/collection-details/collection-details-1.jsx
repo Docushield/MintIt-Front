@@ -111,13 +111,13 @@ const CollectionDetailsIntroArea = ({
     const onMint = async () => {
         setBisableBTN(true);
         //checks if user can mint more tokens
-        // let account_total = await countTokens(data.slug, account);
-        // console.log(
-        //     "token by this K = " +
-        //         account_total +
-        //         "and limit is = " +
-        //         data.mintingLimit
-        // );
+         let account_total = await countTokens(data.slug, account);
+         console.log(
+             "token by this K = " +
+                 account_total +
+                 "and limit is = " +
+                 data.mintingLimit
+         );
 
         //checks if minting is allowed by admin
         let status = await checkStatus();
@@ -126,15 +126,15 @@ const CollectionDetailsIntroArea = ({
             setBisableBTN(false);
             return;
         }
-        // if (data.mintingLimit != null) {
-        //     if (account_total >= data.mintingLimit) {
-        //         toast.error(
-        //             `Sorry, You can only mint ${data.mintingLimit} tokens for this collection.`
-        //         );
-        //         setBisableBTN(false);
-        //         return;
-        //     }
-        // }
+         if (data.mintingLimit != null) {
+             if (account_total >= data.mintingLimit) {
+                 toast.error(
+                     `Sorry, You can only mint ${data.mintingLimit} tokens for this collection.`
+                 );
+                 setBisableBTN(false);
+                 return;
+             }
+         }
         if (connected) {
             setBisableBTN(false);
             dispatch(toggleMintConfirmDialog());
