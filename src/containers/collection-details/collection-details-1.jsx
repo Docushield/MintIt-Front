@@ -111,7 +111,7 @@ const CollectionDetailsIntroArea = ({
     const onMint = async () => {
         setBisableBTN(true);
         //checks if user can mint more tokens
-         let account_total = await countTokens(data.slug, account);
+         let account_total = await countTokens(data.name, account);
          console.log(
              "token by this K = " +
                  account_total +
