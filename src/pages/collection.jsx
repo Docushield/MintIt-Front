@@ -12,7 +12,13 @@ import { docbondCollection } from "./collections/docbond";
 export async function getServerSideProps(context) {
     const cookies = parseCookies(context);
 
-    const res = await fetchAPI("api/collections", cookies);
+    {
+        /* since the post per page is 20 and we have acp, doc
+         * passing 18 as limit.
+         * */
+    }
+    const res = await fetchAPI("api/collections?limit=18", cookies);
+    const countRes = await fetchAPI("api/collections?count=true", cookies);
 
     if (res.response.error || res.error) {
         return {
@@ -20,28 +26,36 @@ export async function getServerSideProps(context) {
                 error: res.response.error || res.error,
                 className: "template-color-1",
                 collections: [acpCollection, docbondCollection],
+                count:
+                    countRes && countRes.response && countRes.response.count
+                        ? countRes.response.count
+                        : 0,
+                cookies,
             },
         };
     }
 
     return {
         props: {
-            collections: res.response
-                .concat(acpCollection)
-                .concat(docbondCollection),
+            collections: [acpCollection, docbondCollection].concat(res.response),
             className: "template-color-1",
+            count:
+                countRes && countRes.response && countRes.response.count
+                    ? countRes.response.count
+                    : res.response.length,
+            cookies,
         },
     };
 }
 
-const Collection = ({ collections }) => {
+const Collection = ({ collections, count, cookies }) => {
     return (
         <Wrapper>
             <SEO pageTitle="Discover Collections" />
             <Header />
             <main id="main-content">
                 <Breadcrumb
-                    pageTitle="Discover Collections"
+                    pageTitle="Collection"
                     pageTitle1=""
                     currentPage="Collection"
                 />
@@ -51,6 +65,8 @@ const Collection = ({ collections }) => {
                         section_title: {
                             title: "Discover Collections",
                         },
+                        count: count,
+                        cookies,
                     }}
                 />
             </main>

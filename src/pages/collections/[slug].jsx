@@ -8,7 +8,7 @@ import Breadcrumb from "@components/breadcrumb";
 import CollectionDetailsIntroArea from "@containers/collection-details/collection-details-1";
 import { pactLocalFetch } from "@utils/pactLocalFetch";
 
-const CollectionDetails = ({ collection, slug, tokens }) => {
+const CollectionDetails = ({ collection, slug, tokens, account }) => {
     return (
         <Wrapper>
             <SEO pageTitle="Collection Details" />
@@ -19,7 +19,11 @@ const CollectionDetails = ({ collection, slug, tokens }) => {
                     pageTitle1=""
                     currentPage="Collection Details"
                 />
-                <CollectionDetailsIntroArea data={collection} tokens={tokens} />
+                <CollectionDetailsIntroArea
+                    data={collection}
+                    tokens={tokens}
+                    account={account}
+                />
             </main>
             <Footer />
         </Wrapper>
@@ -31,16 +35,22 @@ export async function getServerSideProps(context) {
     const slug = context.params.slug;
     const baseURL = process.env.NEXT_PUBLIC_API_URL;
     const smartContract = process.env.NEXT_PUBLIC_CONTRACT;
+    const userAccount = cookies["userAccount"];
 
     try {
         const token = cookies["token"];
-
         const response = await fetch(`${baseURL}/api/collections/${slug}`, {
             method: "GET",
             headers: {
                 "x-auth-token": token,
             },
         }).then((res) => res.json());
+        console.log(response);
+        if (response.error) {
+            return {
+                notFound: true,
+            };
+        }
         const res = await pactLocalFetch(
             `(${smartContract}.get-nft-collection "${response.name}")`
         );
@@ -51,24 +61,25 @@ export async function getServerSideProps(context) {
         const pactCode = `(${smartContract}.search-nfts-by-collection "${response.name}")`;
         let tokens = [];
         const fetchRes = await pactLocalFetch(pactCode);
-        console.log(JSON.stringify(fetchRes));
         if (fetchRes !== null) {
             tokens = fetchRes.result.data;
         }
-        console.log(tokens);
         return {
             props: {
                 collection: response,
                 tokens: tokens,
                 className: "template-color-1",
+                account: userAccount,
             },
         };
     } catch (error) {
+        console.log(error);
         return {
             props: {
                 error: error.message,
                 tokens: [],
                 className: "template-color-1",
+                account: userAccount,
             },
         };
     }

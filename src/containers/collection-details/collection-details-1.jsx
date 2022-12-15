@@ -7,6 +7,8 @@ import ShareModal from "@components/modals/share-modal";
 import Button from "@components/ui/button";
 import Product from "@components/product/layout-01";
 import { formatDate } from "@utils/date";
+import Nav from "react-bootstrap/Nav";
+import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import {
     setCurrentCollection,
@@ -14,11 +16,86 @@ import {
 } from "src/store/collection.module";
 import { toggleConnectWalletDialog } from "src/store/wallet.module";
 import WalletAddress from "@components/wallet-address";
+import TabContent from "react-bootstrap/TabContent";
+import TabContainer from "react-bootstrap/TabContainer";
+import TabPane from "react-bootstrap/TabPane";
+import Pagination from "@components/pagination-02";
+import { pactLocalFetch } from "@utils/pactLocalFetch";
+
+const smartContract = process.env.NEXT_PUBLIC_CONTRACT;
+const baseURL =
+    process.env.NEXT_PUBLIC_API_URL || "https://the-backend.fly.dev";
 
 const getIndex = (token) => token.index || token["mint-index"].int;
 
-const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
-    tokens = tokens.sort((a, b) => getIndex(a) - getIndex(b));
+const checkStatus = async () => {
+    const response = await fetch(`${baseURL}/api/collections/get-status`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+        },
+    });
+    if (response.status == 400) {
+        return false;
+    } else if (response.status == 200) {
+        const resJson = await response.json();
+        return resJson.minting;
+    }
+};
+
+const countTokens_old = async (slug, account) => {
+    const response = await fetch(
+        `${baseURL}/api/collections/profile/count-tokens`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+            },
+            body: JSON.stringify({ slug: slug, account: account }),
+        }
+    );
+    if (response.status == 400) {
+        return 0;
+    } else if (response.status == 200) {
+        const resJson = await response.json();
+        return resJson;
+    }
+};
+
+const countTokens = async (slug, account) => {
+    const res = await pactLocalFetch(
+        `(${smartContract}.count-nfts-by-owner-in-collection "${slug}" "${account}")`
+    );
+    if (res.result && res.result.data) {
+        return res.result.data;
+    } else {
+        return 0;
+    }
+};
+
+const CollectionDetailsIntroArea = ({
+    className,
+    space,
+    data,
+    tokens,
+    account,
+}) => {
+    const sorted_tokens = tokens.sort((a, b) => getIndex(a) - getIndex(b));
+    const POSTS_PER_PAGE = 15;
+    const [currentPage, setCurrentPage] = useState(1);
+    const [disableBTN, setBisableBTN] = useState(false);
+    const [all_tokens, setAllTokens] = useState(
+        sorted_tokens.slice(0, POSTS_PER_PAGE)
+    );
+    const numberOfPages = Math.ceil(sorted_tokens.length / POSTS_PER_PAGE);
+    const paginationHandler = (page) => {
+        setCurrentPage(page);
+        const start = (page - 1) * POSTS_PER_PAGE;
+        setAllTokens(sorted_tokens.slice(start, start + POSTS_PER_PAGE));
+    };
+
     const dispatch = useDispatch();
     const connected = useSelector((state) => state.wallet.connected);
     const [isShareModalOpen, setIsShareModalOpen] = useState(false);
@@ -31,10 +108,38 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
         dispatch(setCurrentCollection(data));
     }, [data]);
 
-    const onMint = () => {
+    const onMint = async () => {
+        setBisableBTN(true);
+        //checks if user can mint more tokens
+         let account_total = await countTokens(data.name, account);
+         console.log(
+             "token by this K = " +
+                 account_total +
+                 "and limit is = " +
+                 data.mintingLimit
+         );
+
+        //checks if minting is allowed by admin
+        let status = await checkStatus();
+        if (!status) {
+            toast.error("Minting is disabled for a while, try again later.");
+            setBisableBTN(false);
+            return;
+        }
+         if (data.mintingLimit != null) {
+             if (account_total >= data.mintingLimit) {
+                 toast.error(
+                     `Sorry, You can only mint ${data.mintingLimit} tokens for this collection.`
+                 );
+                 setBisableBTN(false);
+                 return;
+             }
+         }
         if (connected) {
+            setBisableBTN(false);
             dispatch(toggleMintConfirmDialog());
         } else {
+            setBisableBTN(false);
             dispatch(toggleConnectWalletDialog());
         }
     };
@@ -110,12 +215,19 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <Button
-                                            onClick={onMint}
-                                            className="mt--15"
-                                        >
-                                            Mint Now
-                                        </Button>
+                                        {data.size == data.numMinted ? (
+                                            <Button className="mt--15">
+                                                Sold Out
+                                            </Button>
+                                        ) : (
+                                            <Button
+                                                onClick={onMint}
+                                                className="mt--15"
+                                                disabled={disableBTN}
+                                            >
+                                                Mint Now
+                                            </Button>
+                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -155,9 +267,12 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                                     <div className="col-md-6">
                                         <div className="status-box">
                                             <div>Price</div>
-                                            <div>{currentTime < premintTime
+                                            <div>
+                                                {currentTime < premintTime
                                                     ? data["premint-price"]
-                                                    : data["mint-price"]} KDA</div>
+                                                    : data["mint-price"]}{" "}
+                                                KDA
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="col-md-6">
@@ -228,48 +343,97 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
                     </Button>
                 )}
             </div>
-            <div className="container my-4">
-                <div className="row">
-                    {tokens?.length > 0 ? (
-                        <>
-                            {tokens.map((prod) => (
-                                <div
-                                    key={prod.id}
-                                    className="col-5 col-lg-4 col-md-3 col-sm-4 col-6 my-3"
-                                >
-                                    <Product
-                                        overlay
-                                        title={prod["collection-name"]}
-                                        slug={data.slug}
-                                        hash={
-                                            prod["content-hash"] || prod["hash"]
-                                        }
-                                        image={{
-                                            src: prod.revealed
-                                                ? `https://ipfs.io/ipfs/${prod["content-uri"].data}`
-                                                : "/images/collection/placeholder.png",
-                                        }}
-                                        //dummy data
-                                        price={{
-                                            amount: "",
-                                            currency: "KDA",
-                                        }}
-                                        revealed={prod.revealed}
-                                        index={
-                                            prod.index ||
-                                            (prod["mint-index"]
-                                                ? prod["mint-index"].int
-                                                : "")
-                                        }
-                                    />
-                                </div>
-                            ))}
-                        </>
-                    ) : (
-                        <p>No tokens to show</p>
-                    )}
+            <TabContainer defaultActiveKey="nav-all">
+                <div className="container">
+                    <div className="row g-5 d-flex">
+                        <div className="col-12">
+                            <div className="tab-wrapper-one">
+                                <nav className="tab-button-one">
+                                    <Nav
+                                        className="nav nav-tabs"
+                                        id="nav-tab"
+                                        role="tablist"
+                                    >
+                                        <Nav.Link
+                                            as="button"
+                                            eventKey="nav-all"
+                                        >
+                                            All Minted NFTs
+                                        </Nav.Link>
+                                        <Nav.Link
+                                            as="button"
+                                            eventKey="nav-sale"
+                                        >
+                                            NFTs For Sale
+                                        </Nav.Link>
+                                    </Nav>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <TabContent className="tab-content rn-bid-content">
+                        <TabPane eventKey="nav-all">
+                            <div className="row">
+                                {all_tokens?.length > 0 ? (
+                                    <>
+                                        {all_tokens.map((prod) => (
+                                            <div
+                                                key={prod.id}
+                                                className="col-5 col-lg-4 col-md-3 col-sm-4 col-6 my-3"
+                                            >
+                                                <Product
+                                                    overlay
+                                                    title={
+                                                        prod["collection-name"]
+                                                    }
+                                                    slug={data.slug}
+                                                    hash={
+                                                        prod["content-hash"] ||
+                                                        prod["hash"]
+                                                    }
+                                                    image={{
+                                                        src: prod.revealed
+                                                            ? `https://ipfs.io/ipfs/${prod["content-uri"].data}`
+                                                            : "/images/collection/placeholder.png",
+                                                    }}
+                                                    //dummy data
+                                                    price={{
+                                                        amount: "",
+                                                        currency: "KDA",
+                                                    }}
+                                                    revealed={prod.revealed}
+                                                    index={
+                                                        prod.index ||
+                                                        (prod["mint-index"]
+                                                            ? prod["mint-index"]
+                                                                  .int
+                                                            : "")
+                                                    }
+                                                />
+                                            </div>
+                                        ))}
+                                    </>
+                                ) : (
+                                    <div className="row text-center">
+                                        <p>No tokens to show</p>
+                                    </div>
+                                )}
+                            </div>
+                            <Pagination
+                                currentPage={currentPage}
+                                numberOfPages={numberOfPages}
+                                onClick={paginationHandler}
+                            />
+                        </TabPane>
+                        <TabPane eventKey="nav-sale">
+                            <div className="row text-center">
+                                {/* show token for sale here */}
+                                <p>No tokens to show</p>
+                            </div>
+                        </TabPane>
+                    </TabContent>
                 </div>
-            </div>
+            </TabContainer>
         </>
     );
 };
@@ -277,6 +441,7 @@ const CollectionDetailsIntroArea = ({ className, space, data, tokens }) => {
 CollectionDetailsIntroArea.propTypes = {
     className: PropTypes.string,
     space: PropTypes.oneOf([1]),
+    account: PropTypes.string,
     data: PropTypes.shape({
         bannerImageUrl: PropTypes.string,
         createdAt: PropTypes.string,

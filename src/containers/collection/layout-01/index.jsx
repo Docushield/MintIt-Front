@@ -31,7 +31,7 @@ const TopCollectionArea = ({ className, id, space, data }) => (
                         data-sal="slide-up"
                         data-sal-duration="800"
                     >
-                        <Anchor className="btn-transparent" path="/mint">
+                        <Anchor className="btn-transparent" path="/collection">
                             VIEW ALL
                             <i className="feather feather-arrow-right" />
                         </Anchor>
@@ -40,11 +40,7 @@ const TopCollectionArea = ({ className, id, space, data }) => (
             </div>
             {data?.collections && (
                 <div className="row g-5">
-                    {/* must be updated when applying status condition at backend server */}
-                    {/* {data.collections.map((collection) => ( */}
-                    {data.collections
-                        .filter((collection) => collection.status == "success")
-                        .map((collection) => (
+                    {data.collections.map((collection) => (
                             <div
                                 key={collection.id}
                                 data-sal="slide-up"

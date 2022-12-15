@@ -42,7 +42,6 @@ export async function getStaticProps() {
     });
 
     const respObject = await response.json();
-    console.log(respObject);
 
     if (
         !respObject ||
@@ -66,7 +65,7 @@ export async function getStaticProps() {
 }
 
 export const acpCollection = {
-    id: "60ad94a1-176f-4f01-a4aa-7b1e14031b27",
+    id: "60ad94a1-176f-4f01-a4aa-7b1e14031b27-1",
     creator:
         "k:4159aa0d1f1e6c119c532d9286746274c3cc46dadd50ffc486a38de502ad6855",
     description:

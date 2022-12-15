@@ -13,7 +13,7 @@ const SectionTitle = ({ title, className, disableAnimation, ...restProps }) => (
 );
 
 SectionTitle.propTypes = {
-    title: PropTypes.string.isRequired,
+    title: PropTypes.string,
     subtitle: PropTypes.string,
     className: PropTypes.string,
     disableAnimation: PropTypes.bool,

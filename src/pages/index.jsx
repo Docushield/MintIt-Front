@@ -18,14 +18,11 @@ import { docbondCollection } from "./collections/docbond";
 
 // Demo data
 import homepageData from "../data/homepages/homepage.json";
-import sellerData from "../data/sellers.json";
-import productData from "../data/categories.json";
-import Mint from "@components/constant-collections";
 
 export async function getServerSideProps(context) {
     const cookies = parseCookies(context);
 
-    const res = await fetchAPI("api/collections", cookies);
+    const res = await fetchAPI("api/collections?limit=6", cookies);
 
     if ((res.response && res.response.error) || res.error) {
         return {
@@ -39,9 +36,7 @@ export async function getServerSideProps(context) {
 
     return {
         props: {
-            collections: res.response
-                .concat(acpCollection)
-                .concat(docbondCollection),
+            collections: [acpCollection, docbondCollection].concat(res.response),
             className: "template-color-1 with-particles",
         },
     };
