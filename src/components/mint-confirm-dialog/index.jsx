@@ -13,6 +13,7 @@ import {
     DOC_BOND,
     DOC_ACCOUNT,
     DOC_BOND_TOKEN_NAME,
+    ALPHA_CREATOR_PASS_TOKEN_NAME,
 } from "src/constants/token";
 
 const CONTRACT_NAME = "free.doc-nft-mint";
