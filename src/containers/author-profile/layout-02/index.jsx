@@ -33,13 +33,22 @@ function reducer(state, action) {
 
 const DublicateCollectionArea = ({ className, data }) => {
     const POSTS_PER_PAGE = 21;
-    const [myTokens, setMyTokens] = useState(
+    const [mintitTokens, setMintitTokens] = useState(
         data.products.slice(0, POSTS_PER_PAGE)
     );
-    const numberOfPages = Math.ceil(data.products.length / POSTS_PER_PAGE);
-    const paginationHandler = (event) => {
+    const mintitTokensPages = Math.ceil(data.products.length / POSTS_PER_PAGE);
+    const mintitPagesHandler = (event) => {
         const start = event.selected * POSTS_PER_PAGE;
-        setMyTokens(data.products.slice(start, start + POSTS_PER_PAGE));
+        setMintitTokens(data.products.slice(start, start + POSTS_PER_PAGE));
+    };
+
+    const [marmaladeTokens, setMarmaladeTokens] = useState(
+        data.others.slice(0, POSTS_PER_PAGE)
+    );
+    const marmaladeTokensPages = Math.ceil(data.others.length / POSTS_PER_PAGE);
+    const marmaladePagesHandler = (event) => {
+        const start = event.selected * POSTS_PER_PAGE;
+        setMarmaladeTokens(data.others.slice(start, start + POSTS_PER_PAGE));
     };
 
     // NOTE : below commented code can be used for filtering and sorting
@@ -137,9 +146,9 @@ const DublicateCollectionArea = ({ className, data }) => {
                     </div>
                     <TabContent className="tab-content rn-bid-content">
                         <TabPane eventKey="nav-others">
-                            <div className="row g-5 d-flex">
-                                {data.others.length > 0 ? (
-                                    data.others?.map((prod, i) => (
+                            {marmaladeTokens.length > 0 ? (
+                                <div className="row g-5 d-flex">
+                                    {marmaladeTokens?.map((prod, i) => (
                                         <div
                                             key={i}
                                             className="col-5 col-lg-4 col-md-6 col-sm-6 col-12"
@@ -184,80 +193,104 @@ const DublicateCollectionArea = ({ className, data }) => {
                                                 </div>
                                             </div>
                                         </div>
-                                    ))
-                                ) : (
-                                    <div className="row text-center mt-5 pt-5">
-                                        <p>No Tokens to show</p>
-                                    </div>
-                                )}
-                            </div>
+                                    ))}
+                                    <nav
+                                        className={clsx(
+                                            "pagination-wrapper",
+                                            className
+                                        )}
+                                        aria-label="Page navigation example"
+                                    >
+                                        <ReactPaginate
+                                            breakLabel={
+                                                <i className="feather-more-horizontal" />
+                                            }
+                                            nextLabel="Next"
+                                            onPageChange={marmaladePagesHandler}
+                                            pageCount={marmaladeTokensPages}
+                                            previousLabel="Previous"
+                                            pageClassName="page-item"
+                                            activeLinkClassName="active"
+                                            disabledLinkClassName="disabled"
+                                            previousLinkClassName="page-item prev"
+                                            nextLinkClassName="page-item next"
+                                            breakLinkClassName="disabled"
+                                            className="pagination"
+                                            renderOnZeroPageCount={null}
+                                        />
+                                    </nav>
+                                </div>
+                            ) : (
+                                <div className="row text-center mt-5 pt-5">
+                                    <p>No Tokens to show</p>
+                                </div>
+                            )}
                         </TabPane>
                         <TabPane eventKey="nav-owned">
-                            {myTokens.length > 0 ? (
+                            {mintitTokens.length > 0 ? (
                                 <div className="row g-5 d-flex">
-                                    {myTokens?.map(
-                                        (prod) => (
-                                            console.log(),
-                                            (
-                                                <div
-                                                    key={prod.id}
-                                                    className="col-5 col-lg-4 col-md-6 col-sm-6 col-12"
-                                                >
-                                                    <Product
-                                                        overlay
-                                                        placeBid
-                                                        title={
-                                                            prod[
-                                                                "collection-name"
-                                                            ]
-                                                        }
-                                                        slug={prod[
-                                                            "collection-name"
-                                                        ]
-                                                            .replace(/ /g, "-")
-                                                            .toLowerCase()}
-                                                        hash={
-                                                            prod["content-hash"]
-                                                        }
-                                                        latestBid={
-                                                            prod.latestBid
-                                                        }
-                                                        //dummy data
-                                                        price={{
-                                                            amount: "",
-                                                            currency: "KDA",
-                                                        }}
-                                                        likeCount={
-                                                            prod.likeCount
-                                                        }
-                                                        auction_date={
-                                                            prod.auction_date
-                                                        }
-                                                        image={{
-                                                            src: prod.revealed
-                                                                ? `https://ipfs.io/ipfs/${prod["content-uri"].data}`
-                                                                : "/images/collection/placeholder.png",
-                                                        }}
-                                                        authors={prod.authors}
-                                                        bitCount={prod.bitCount}
-                                                        index={
-                                                            prod.index ||
-                                                            (prod["mint-index"]
-                                                                ? prod[
-                                                                      "mint-index"
-                                                                  ].int
-                                                                : "")
-                                                        }
-                                                    />
-                                                </div>
-                                            )
-                                        )
-                                    )}
-                                    <Pagination
-                                        currentPage={currentPage}
-                                        numberOfPages={numberOfPages}
-                                        onClick={paginationHandler}
-                                    />
+                                    {mintitTokens?.map((prod) => (
+                                        <div
+                                            key={prod.id}
+                                            className="col-5 col-lg-4 col-md-6 col-sm-6 col-12"
+                                        >
+                                            <Product
+                                                overlay
+                                                placeBid
+                                                title={prod["collection-name"]}
+                                                slug={prod["collection-name"]
+                                                    .replace(/ /g, "-")
+                                                    .toLowerCase()}
+                                                hash={prod["content-hash"]}
+                                                latestBid={prod.latestBid}
+                                                //dummy data
+                                                price={{
+                                                    amount: "",
+                                                    currency: "KDA",
+                                                }}
+                                                likeCount={prod.likeCount}
+                                                auction_date={prod.auction_date}
+                                                image={{
+                                                    src: prod.revealed
+                                                        ? `https://ipfs.io/ipfs/${prod["content-uri"].data}`
+                                                        : "/images/collection/placeholder.png",
+                                                }}
+                                                authors={prod.authors}
+                                                bitCount={prod.bitCount}
+                                                index={
+                                                    prod.index ||
+                                                    (prod["mint-index"]
+                                                        ? prod["mint-index"].int
+                                                        : "")
+                                                }
+                                            />
+                                        </div>
+                                    ))}
+                                    <nav
+                                        className={clsx(
+                                            "pagination-wrapper",
+                                            className
+                                        )}
+                                        aria-label="Page navigation example"
+                                    >
+                                        <ReactPaginate
+                                            breakLabel={
+                                                <i className="feather-more-horizontal" />
+                                            }
+                                            nextLabel="Next"
+                                            onPageChange={mintitPagesHandler}
+                                            pageCount={mintitTokensPages}
+                                            previousLabel="Previous"
+                                            pageClassName="page-item"
+                                            activeLinkClassName="active"
+                                            disabledLinkClassName="disabled"
+                                            previousLinkClassName="page-item prev"
+                                            nextLinkClassName="page-item next"
+                                            breakLinkClassName="disabled"
+                                            className="pagination"
+                                            renderOnZeroPageCount={null}
+                                        />
+                                    </nav>
                                 </div>
                             ) : (
                                 <div className="row text-center mt-5">
@@ -292,26 +325,6 @@ const DublicateCollectionArea = ({ className, data }) => {
                     </TabContent>
                 </div>
             </TabContainer>
-            <nav
-                className={clsx("pagination-wrapper", className)}
-                aria-label="Page navigation example"
-            >
-                <ReactPaginate
-                    breakLabel={<i className="feather-more-horizontal" />}
-                    nextLabel="Next"
-                    onPageChange={paginationHandler}
-                    pageCount={numberOfPages}
-                    previousLabel="Previous"
-                    pageClassName="page-item"
-                    activeLinkClassName="active"
-                    disabledLinkClassName="disabled"
-                    previousLinkClassName="page-item prev"
-                    nextLinkClassName="page-item next"
-                    breakLinkClassName="disabled"
-                    className="pagination"
-                    renderOnZeroPageCount={null}
-                />
-            </nav>
         </div>
     );
 };
