@@ -1,5 +1,6 @@
 import React, { useRef, useReducer, useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import Image from "next/image";
 import clsx from "clsx";
 import TabContent from "react-bootstrap/TabContent";
 import TabContainer from "react-bootstrap/TabContainer";
@@ -117,92 +118,152 @@ const DublicateCollectionArea = ({ className, data }) => {
                                         >
                                             On Sale
                                         </Nav.Link> */}
-                                        {/* <Nav.Link
-                                            as="button"
-                                            eventKey="nav-owned"
-                                        >
-                                            Owned
-                                        </Nav.Link> */}
                                         <Nav.Link
                                             as="button"
                                             eventKey="nav-owned"
                                         >
                                             My NFTs
                                         </Nav.Link>
-                                        {/* <Nav.Link
+                                        <Nav.Link
                                             as="button"
-                                            eventKey="nav-liked"
+                                            eventKey="nav-others"
                                         >
-                                            Liked
-                                        </Nav.Link> */}
+                                            ACP & BOND
+                                        </Nav.Link>
                                     </Nav>
                                 </nav>
                             </div>
                         </div>
                     </div>
                     <TabContent className="tab-content rn-bid-content">
-                        {/* <TabPane className="row d-flex g-5" eventKey="nav-home">
-                            {onSaleProducts?.map((prod) => (
-                                <div
-                                    key={prod.id}
-                                    className="col-5 col-lg-4 col-md-6 col-sm-6 col-12"
-                                >
-                                    <Product
-                                        overlay
-                                        placeBid
-                                        title={prod.title}
-                                        slug={prod.slug}
-                                        latestBid={prod.latestBid}
-                                        price={prod.price}
-                                        likeCount={prod.likeCount}
-                                        auction_date={prod.auction_date}
-                                        image={prod.images?.[0]}
-                                        authors={prod.authors}
-                                        bitCount={prod.bitCount}
+                        <TabPane eventKey="nav-others">
+                            <div className="row g-5 d-flex">
+                                {data.others.length > 0 ? (
+                                    data.others?.map((prod, i) => (
+                                        <div
+                                            key={i}
+                                            className="col-5 col-lg-4 col-md-6 col-sm-6 col-12"
+                                        >
+                                            <div className="collection-wrapper">
+                                                {prod.Collection !=
+                                                "MintIt Creator Access Pass" ? (
+                                                    <div className="collection-big-thumbnail">
+                                                        <video
+                                                            style={{
+                                                                width: "100%",
+                                                                padding: "5%",
+                                                                borderRadius:
+                                                                    "10%",
+                                                            }}
+                                                            src={`https://ipfs.io/ipfs/${prod.uri.data}`}
+                                                            autoPlay
+                                                            playsInline
+                                                            muted
+                                                            loop
+                                                        />
+                                                    </div>
+                                                ) : (
+                                                    <div className="collection-big-thumbnail">
+                                                        <Image
+                                                            src={`https://ipfs.io/ipfs/${prod.uri.data}`}
+                                                            alt={"Nft_Profile"}
+                                                            width={507}
+                                                            height={339}
+                                                        />
+                                                    </div>
+                                                )}
+                                                <div className="collection-deg">
+                                                    <h6
+                                                        className="title"
+                                                        style={{
+                                                            textAlign: "center",
+                                                        }}
+                                                    >
+                                                        {prod.datum.collection}
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className="row text-center mt-5 pt-5">
+                                        <p>No Tokens to show</p>
+                                    </div>
+                                )}
+                            </div>
+                        </TabPane>
+                        <TabPane eventKey="nav-owned">
+                            {myTokens.length > 0 ? (
+                                <div className="row g-5 d-flex">
+                                    {myTokens?.map(
+                                        (prod) => (
+                                            console.log(),
+                                            (
+                                                <div
+                                                    key={prod.id}
+                                                    className="col-5 col-lg-4 col-md-6 col-sm-6 col-12"
+                                                >
+                                                    <Product
+                                                        overlay
+                                                        placeBid
+                                                        title={
+                                                            prod[
+                                                                "collection-name"
+                                                            ]
+                                                        }
+                                                        slug={prod[
+                                                            "collection-name"
+                                                        ]
+                                                            .replace(/ /g, "-")
+                                                            .toLowerCase()}
+                                                        hash={
+                                                            prod["content-hash"]
+                                                        }
+                                                        latestBid={
+                                                            prod.latestBid
+                                                        }
+                                                        //dummy data
+                                                        price={{
+                                                            amount: "",
+                                                            currency: "KDA",
+                                                        }}
+                                                        likeCount={
+                                                            prod.likeCount
+                                                        }
+                                                        auction_date={
+                                                            prod.auction_date
+                                                        }
+                                                        image={{
+                                                            src: prod.revealed
+                                                                ? `https://ipfs.io/ipfs/${prod["content-uri"].data}`
+                                                                : "/images/collection/placeholder.png",
+                                                        }}
+                                                        authors={prod.authors}
+                                                        bitCount={prod.bitCount}
+                                                        index={
+                                                            prod.index ||
+                                                            (prod["mint-index"]
+                                                                ? prod[
+                                                                      "mint-index"
+                                                                  ].int
+                                                                : "")
+                                                        }
+                                                    />
+                                                </div>
+                                            )
+                                        )
+                                    )}
+                                    <Pagination
+                                        currentPage={currentPage}
+                                        numberOfPages={numberOfPages}
+                                        onClick={paginationHandler}
                                     />
                                 </div>
-                            ))}
-                        </TabPane> */}
-                        <TabPane eventKey="nav-owned">
-                            <div className="row g-5 d-flex">
-                                {myTokens?.map((prod) => (
-                                    <div
-                                        key={prod.id}
-                                        className="col-lg-4 col-md-6 col-sm-6 col-12"
-                                    >
-                                        <Product
-                                            overlay
-                                            placeBid
-                                            title={prod["collection-name"]}
-                                            slug={prod["collection-name"]
-                                                .replace(/ /g, "-")
-                                                .toLowerCase()}
-                                            hash={prod["content-hash"]}
-                                            latestBid={prod.latestBid}
-                                            //dummy data
-                                            price={{
-                                                amount: "",
-                                                currency: "KDA",
-                                            }}
-                                            likeCount={prod.likeCount}
-                                            auction_date={prod.auction_date}
-                                            image={{
-                                                src: prod.revealed
-                                                    ? `https://ipfs.io/ipfs/${prod["content-uri"].data}`
-                                                    : "/images/collection/placeholder.png",
-                                            }}
-                                            authors={prod.authors}
-                                            bitCount={prod.bitCount}
-                                            index={
-                                                prod.index ||
-                                                (prod["mint-index"]
-                                                    ? prod["mint-index"].int
-                                                    : "")
-                                            }
-                                        />
-                                    </div>
-                                ))}
-                            </div>
+                            ) : (
+                                <div className="row text-center mt-5">
+                                    <p>No NFTs to show</p>
+                                </div>
+                            )}
                         </TabPane>
                         {/* <TabPane eventKey="nav-created">
                             <div className="row g-5 mt--0 d-flex">
