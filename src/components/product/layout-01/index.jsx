@@ -81,7 +81,7 @@ const Product = ({
                 </div>
                 <Anchor path={`/collections/${slug}/tokens/${hash}`}>
                     <span className="product-name">
-                        {title.slice(0, 14) + "..."}
+                        {title.slice(0, 20) + "..."}
                     </span>
                 </Anchor>
                 {/* <span className="latest-bid">Highest bid {latestBid}</span> */}
