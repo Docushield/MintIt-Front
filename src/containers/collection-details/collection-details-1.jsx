@@ -85,7 +85,7 @@ const CollectionDetailsIntroArea = ({
     const sorted_tokens = tokens.sort((a, b) => getIndex(a) - getIndex(b));
     const POSTS_PER_PAGE = 15;
     const [currentPage, setCurrentPage] = useState(1);
-    const [disableBTN, setBisableBTN] = useState(false);
+    const [disableBTN, setDisableBTN] = useState(false);
     const [all_tokens, setAllTokens] = useState(
         sorted_tokens.slice(0, POSTS_PER_PAGE)
     );
@@ -109,37 +109,37 @@ const CollectionDetailsIntroArea = ({
     }, [data]);
 
     const onMint = async () => {
-        setBisableBTN(true);
+        setDisableBTN(true);
         //checks if user can mint more tokens
-         let account_total = await countTokens(data.name, account);
-         console.log(
-             "token by this K = " +
-                 account_total +
-                 "and limit is = " +
-                 data.mintingLimit
-         );
+        let account_total = await countTokens(data.name, account);
+        console.log(
+            "token by this K = " +
+                account_total +
+                "and limit is = " +
+                data.mintingLimit
+        );
 
         //checks if minting is allowed by admin
         let status = await checkStatus();
         if (!status) {
             toast.error("Minting is disabled for a while, try again later.");
-            setBisableBTN(false);
+            setDisableBTN(false);
             return;
         }
-         if (data.mintingLimit != null) {
-             if (account_total >= data.mintingLimit) {
-                 toast.error(
-                     `Sorry, You can only mint ${data.mintingLimit} tokens for this collection.`
-                 );
-                 setBisableBTN(false);
-                 return;
-             }
-         }
+        if (data.mintingLimit != null) {
+            if (account_total >= data.mintingLimit) {
+                toast.error(
+                    `Sorry, You can only mint ${data.mintingLimit} tokens for this collection.`
+                );
+                setDisableBTN(false);
+                return;
+            }
+        }
         if (connected) {
-            setBisableBTN(false);
+            setDisableBTN(false);
             dispatch(toggleMintConfirmDialog());
         } else {
-            setBisableBTN(false);
+            setDisableBTN(false);
             dispatch(toggleConnectWalletDialog());
         }
     };
@@ -225,7 +225,16 @@ const CollectionDetailsIntroArea = ({
                                                 className="mt--15"
                                                 disabled={disableBTN}
                                             >
-                                                Mint Now
+                                                {disableBTN ? (
+                                                    <div
+                                                        className={
+                                                            "spinner-border"
+                                                        }
+                                                        role="status"
+                                                    ></div>
+                                                ) : (
+                                                    "Mint Now"
+                                                )}
                                             </Button>
                                         )}
                                     </div>

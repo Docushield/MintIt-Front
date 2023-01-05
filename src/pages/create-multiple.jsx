@@ -110,12 +110,12 @@ const CreateMultiple = () => {
                             toast.success(
                                 `Successfully created a collection - ${data.name}`
                             );
-                            router.push({
-                                pathname: `/collections/${slug}`,
-                            });
                             setStatus(
                                 `Successfully created a collection - ${data.name}`
                             );
+                            router.push({
+                                pathname: `/collections/${slug}`,
+                            });
                         } else if (data.status === "failure") {
                             setStatus(
                                 `Failed to create a collection: ${data.statusMessage}`
