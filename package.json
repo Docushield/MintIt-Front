@@ -39,6 +39,7 @@
         "react-hook-form": "^7.27.1",
         "react-intersection-observer": "^8.33.1",
         "react-modal-video": "^1.2.8",
+        "react-paginate": "^8.1.4",
         "react-parallax-tilt": "^1.7.34",
         "react-portal": "^4.2.2",
         "react-range": "^1.8.12",
